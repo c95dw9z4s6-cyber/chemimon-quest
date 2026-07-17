@@ -12570,5 +12570,1015 @@
       "正解です。"
     ],
     "calculation": true
+  },
+  {
+    "id": "v45-basic-half-reaction-01",
+    "q": "Fe²⁺がFe³⁺へ酸化される半反応式として正しいものはどれか。",
+    "options": [
+      "Fe²⁺ → Fe³⁺ + e⁻",
+      "Fe²⁺ + e⁻ → Fe³⁺",
+      "Fe³⁺ → Fe²⁺ + e⁻",
+      "Fe²⁺ → Fe³⁺ + 2e⁻"
+    ],
+    "answer": 0,
+    "explanation": "Feの酸化数は+2から+3へ1増えるため、電子1個を右辺へ放出します。",
+    "scope": "foundation",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "酸化還元の半反応式を原子数・電荷・電子数から判断する",
+    "estimatedSeconds": 45,
+    "similarityGroup": "redox:half-reaction:00",
+    "optionFeedback": [
+      "正解です。原子数と電荷がそろっています。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。"
+    ]
+  },
+  {
+    "id": "v45-basic-half-reaction-02",
+    "q": "Fe³⁺がFe²⁺へ還元される半反応式として正しいものはどれか。",
+    "options": [
+      "Fe³⁺ → Fe²⁺ + e⁻",
+      "Fe³⁺ + e⁻ → Fe²⁺",
+      "Fe²⁺ + e⁻ → Fe³⁺",
+      "Fe³⁺ + 2e⁻ → Fe²⁺"
+    ],
+    "answer": 1,
+    "explanation": "還元では電子を受け取るため、電子は左辺です。",
+    "scope": "foundation",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "酸化還元の半反応式を原子数・電荷・電子数から判断する",
+    "estimatedSeconds": 45,
+    "similarityGroup": "redox:half-reaction:00",
+    "optionFeedback": [
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "正解です。原子数と電荷がそろっています。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。"
+    ]
+  },
+  {
+    "id": "v45-basic-half-reaction-03",
+    "q": "ZnがZn²⁺へ酸化される半反応式として正しいものはどれか。",
+    "options": [
+      "Zn + 2e⁻ → Zn²⁺",
+      "Zn²⁺ → Zn + 2e⁻",
+      "Zn → Zn²⁺ + 2e⁻",
+      "Zn → Zn²⁺ + e⁻"
+    ],
+    "answer": 2,
+    "explanation": "Znの酸化数は0から+2へ変化するので、電子2個を放出します。",
+    "scope": "foundation",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "酸化還元の半反応式を原子数・電荷・電子数から判断する",
+    "estimatedSeconds": 45,
+    "similarityGroup": "redox:half-reaction:01",
+    "optionFeedback": [
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "正解です。原子数と電荷がそろっています。",
+      "式の原子数・電荷・電子の位置を確認してください。"
+    ]
+  },
+  {
+    "id": "v45-basic-half-reaction-04",
+    "q": "Cu²⁺がCuへ還元される半反応式として正しいものはどれか。",
+    "options": [
+      "Cu²⁺ → Cu + 2e⁻",
+      "Cu + 2e⁻ → Cu²⁺",
+      "Cu²⁺ + e⁻ → Cu",
+      "Cu²⁺ + 2e⁻ → Cu"
+    ],
+    "answer": 3,
+    "explanation": "Cu²⁺は電子2個を受け取り、単体Cuになります。",
+    "scope": "foundation",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "酸化還元の半反応式を原子数・電荷・電子数から判断する",
+    "estimatedSeconds": 45,
+    "similarityGroup": "redox:half-reaction:01",
+    "optionFeedback": [
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "正解です。原子数と電荷がそろっています。"
+    ]
+  },
+  {
+    "id": "v45-basic-half-reaction-05",
+    "q": "AlがAl³⁺へ酸化される半反応式として正しいものはどれか。",
+    "options": [
+      "Al → Al³⁺ + 3e⁻",
+      "Al + 3e⁻ → Al³⁺",
+      "Al³⁺ → Al + 3e⁻",
+      "Al → Al³⁺ + 2e⁻"
+    ],
+    "answer": 0,
+    "explanation": "Alの酸化数は0から+3へ変わるため、電子3個を放出します。",
+    "scope": "foundation",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "酸化還元の半反応式を原子数・電荷・電子数から判断する",
+    "estimatedSeconds": 45,
+    "similarityGroup": "redox:half-reaction:02",
+    "optionFeedback": [
+      "正解です。原子数と電荷がそろっています。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。"
+    ]
+  },
+  {
+    "id": "v45-basic-half-reaction-06",
+    "q": "ヨウ化物イオンがヨウ素へ酸化される半反応式として正しいものはどれか。",
+    "options": [
+      "I⁻ → I₂ + e⁻",
+      "2I⁻ → I₂ + 2e⁻",
+      "I₂ + 2e⁻ → 2I⁻",
+      "2I⁻ + 2e⁻ → I₂"
+    ],
+    "answer": 1,
+    "explanation": "I原子数を2個にそろえ、電荷を合わせるため電子2個を右辺へ置きます。",
+    "scope": "foundation",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "酸化還元の半反応式を原子数・電荷・電子数から判断する",
+    "estimatedSeconds": 45,
+    "similarityGroup": "redox:half-reaction:02",
+    "optionFeedback": [
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "正解です。原子数と電荷がそろっています。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。"
+    ]
+  },
+  {
+    "id": "v45-basic-half-reaction-07",
+    "q": "臭化物イオンが臭素へ酸化される半反応式として正しいものはどれか。",
+    "options": [
+      "Br₂ + 2e⁻ → 2Br⁻",
+      "Br⁻ → Br₂ + e⁻",
+      "2Br⁻ → Br₂ + 2e⁻",
+      "2Br⁻ + 2e⁻ → Br₂"
+    ],
+    "answer": 2,
+    "explanation": "Br⁻は酸化されてBr₂となり、電子2個を放出します。",
+    "scope": "foundation",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "酸化還元の半反応式を原子数・電荷・電子数から判断する",
+    "estimatedSeconds": 45,
+    "similarityGroup": "redox:half-reaction:03",
+    "optionFeedback": [
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "正解です。原子数と電荷がそろっています。",
+      "式の原子数・電荷・電子の位置を確認してください。"
+    ]
+  },
+  {
+    "id": "v45-basic-half-reaction-08",
+    "q": "塩素が塩化物イオンへ還元される半反応式として正しいものはどれか。",
+    "options": [
+      "2Cl⁻ → Cl₂ + 2e⁻",
+      "Cl₂ + e⁻ → Cl⁻",
+      "Cl₂ → 2Cl⁻ + 2e⁻",
+      "Cl₂ + 2e⁻ → 2Cl⁻"
+    ],
+    "answer": 3,
+    "explanation": "Cl₂は電子2個を受け取り、Cl⁻を2個生じます。",
+    "scope": "foundation",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "酸化還元の半反応式を原子数・電荷・電子数から判断する",
+    "estimatedSeconds": 45,
+    "similarityGroup": "redox:half-reaction:03",
+    "optionFeedback": [
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "正解です。原子数と電荷がそろっています。"
+    ]
+  },
+  {
+    "id": "v45-basic-half-reaction-09",
+    "q": "酸性条件でH₂O₂がH₂Oへ還元される半反応式として正しいものはどれか。",
+    "options": [
+      "H₂O₂ + 2H⁺ + 2e⁻ → 2H₂O",
+      "H₂O₂ → O₂ + 2H⁺ + 2e⁻",
+      "H₂O₂ + 2e⁻ → 2OH⁻",
+      "H₂O₂ + H⁺ + e⁻ → H₂O"
+    ],
+    "answer": 0,
+    "explanation": "酸性条件ではH⁺とH₂OでH・Oを合わせ、電子2個を左辺に置きます。",
+    "scope": "foundation",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "酸化還元の半反応式を原子数・電荷・電子数から判断する",
+    "estimatedSeconds": 45,
+    "similarityGroup": "redox:half-reaction:04",
+    "optionFeedback": [
+      "正解です。原子数と電荷がそろっています。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。"
+    ]
+  },
+  {
+    "id": "v45-basic-half-reaction-10",
+    "q": "酸性条件でH₂O₂がO₂へ酸化される半反応式として正しいものはどれか。",
+    "options": [
+      "H₂O₂ + 2H⁺ + 2e⁻ → 2H₂O",
+      "H₂O₂ → O₂ + 2H⁺ + 2e⁻",
+      "H₂O₂ + 2e⁻ → 2OH⁻",
+      "H₂O₂ → O₂ + H⁺ + e⁻"
+    ],
+    "answer": 1,
+    "explanation": "H₂O₂が酸化される場合、電子2個は右辺へ出ます。",
+    "scope": "foundation",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "酸化還元の半反応式を原子数・電荷・電子数から判断する",
+    "estimatedSeconds": 45,
+    "similarityGroup": "redox:half-reaction:04",
+    "optionFeedback": [
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "正解です。原子数と電荷がそろっています。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。"
+    ]
+  },
+  {
+    "id": "v45-basic-half-reaction-11",
+    "q": "酸性条件でMnO₄⁻がMn²⁺へ還元される半反応式として正しいものはどれか。",
+    "options": [
+      "MnO₄⁻ + 4H⁺ + 3e⁻ → MnO₂ + 2H₂O",
+      "MnO₄⁻ + 8H⁺ → Mn²⁺ + 4H₂O + 5e⁻",
+      "MnO₄⁻ + 8H⁺ + 5e⁻ → Mn²⁺ + 4H₂O",
+      "MnO₄⁻ + 4H₂O + 5e⁻ → Mn²⁺ + 8OH⁻"
+    ],
+    "answer": 2,
+    "explanation": "酸性条件でMnは+7から+2へ還元されるため、電子5個を受け取ります。",
+    "scope": "foundation",
+    "category": "redox",
+    "difficultyLevel": 3,
+    "cognitiveType": "reasoning",
+    "learningObjective": "酸化還元の半反応式を原子数・電荷・電子数から判断する",
+    "estimatedSeconds": 60,
+    "similarityGroup": "redox:half-reaction:05",
+    "optionFeedback": [
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "正解です。原子数と電荷がそろっています。",
+      "式の原子数・電荷・電子の位置を確認してください。"
+    ]
+  },
+  {
+    "id": "v45-basic-half-reaction-12",
+    "q": "酸性条件でCr₂O₇²⁻がCr³⁺へ還元される半反応式として正しいものはどれか。",
+    "options": [
+      "Cr₂O₇²⁻ + 7H₂O → 2Cr³⁺ + 14H⁺ + 6e⁻",
+      "Cr₂O₇²⁻ + 8H⁺ + 6e⁻ → 2Cr³⁺ + 4H₂O",
+      "Cr₂O₇²⁻ + 14H⁺ + 3e⁻ → 2Cr³⁺ + 7H₂O",
+      "Cr₂O₇²⁻ + 14H⁺ + 6e⁻ → 2Cr³⁺ + 7H₂O"
+    ],
+    "answer": 3,
+    "explanation": "Cr原子を2個、Oを7H₂O、Hを14H⁺で合わせ、電荷を電子6個でそろえます。",
+    "scope": "foundation",
+    "category": "redox",
+    "difficultyLevel": 3,
+    "cognitiveType": "reasoning",
+    "learningObjective": "酸化還元の半反応式を原子数・電荷・電子数から判断する",
+    "estimatedSeconds": 60,
+    "similarityGroup": "redox:half-reaction:05",
+    "optionFeedback": [
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "正解です。原子数と電荷がそろっています。"
+    ]
+  },
+  {
+    "id": "v45-basic-half-reaction-13",
+    "q": "酸性条件でNO₃⁻がNOへ還元される半反応式として正しいものはどれか。",
+    "options": [
+      "NO₃⁻ + 4H⁺ + 3e⁻ → NO + 2H₂O",
+      "NO₃⁻ + 2H⁺ + e⁻ → NO + H₂O",
+      "NO + 2H₂O → NO₃⁻ + 4H⁺ + 3e⁻",
+      "NO₃⁻ + 4H⁺ → NO + 2H₂O + 3e⁻"
+    ],
+    "answer": 0,
+    "explanation": "Nは+5から+2へ還元されるので電子3個を受け取ります。",
+    "scope": "foundation",
+    "category": "redox",
+    "difficultyLevel": 3,
+    "cognitiveType": "reasoning",
+    "learningObjective": "酸化還元の半反応式を原子数・電荷・電子数から判断する",
+    "estimatedSeconds": 60,
+    "similarityGroup": "redox:half-reaction:06",
+    "optionFeedback": [
+      "正解です。原子数と電荷がそろっています。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。"
+    ]
+  },
+  {
+    "id": "v45-basic-half-reaction-14",
+    "q": "酸性条件でO₂がH₂Oへ還元される半反応式として正しいものはどれか。",
+    "options": [
+      "O₂ + 2H⁺ + 2e⁻ → H₂O",
+      "O₂ + 4H⁺ + 4e⁻ → 2H₂O",
+      "2H₂O → O₂ + 4H⁺ + 4e⁻",
+      "O₂ + 2H₂O + 4e⁻ → 4OH⁻"
+    ],
+    "answer": 1,
+    "explanation": "O原子2個からH₂Oを2個作り、H⁺4個と電子4個で合わせます。",
+    "scope": "foundation",
+    "category": "redox",
+    "difficultyLevel": 3,
+    "cognitiveType": "reasoning",
+    "learningObjective": "酸化還元の半反応式を原子数・電荷・電子数から判断する",
+    "estimatedSeconds": 60,
+    "similarityGroup": "redox:half-reaction:06",
+    "optionFeedback": [
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "正解です。原子数と電荷がそろっています。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。"
+    ]
+  },
+  {
+    "id": "v45-basic-half-reaction-15",
+    "q": "水素イオンが水素へ還元される半反応式として正しいものはどれか。",
+    "options": [
+      "H₂ → 2H⁺ + 2e⁻",
+      "H⁺ + e⁻ → H₂",
+      "2H⁺ + 2e⁻ → H₂",
+      "2H⁺ → H₂ + 2e⁻"
+    ],
+    "answer": 2,
+    "explanation": "H⁺2個が電子2個を受け取りH₂になります。",
+    "scope": "foundation",
+    "category": "redox",
+    "difficultyLevel": 3,
+    "cognitiveType": "reasoning",
+    "learningObjective": "酸化還元の半反応式を原子数・電荷・電子数から判断する",
+    "estimatedSeconds": 60,
+    "similarityGroup": "redox:half-reaction:07",
+    "optionFeedback": [
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "正解です。原子数と電荷がそろっています。",
+      "式の原子数・電荷・電子の位置を確認してください。"
+    ]
+  },
+  {
+    "id": "v45-basic-half-reaction-16",
+    "q": "塩基性条件でMnO₄⁻がMnO₂へ還元される半反応式として正しいものはどれか。",
+    "options": [
+      "MnO₄⁻ + 8H⁺ + 5e⁻ → Mn²⁺ + 4H₂O",
+      "MnO₄⁻ + 4OH⁻ → MnO₂ + 2H₂O + 3e⁻",
+      "MnO₄⁻ + H₂O + 2e⁻ → MnO₂ + 2OH⁻",
+      "MnO₄⁻ + 2H₂O + 3e⁻ → MnO₂ + 4OH⁻"
+    ],
+    "answer": 3,
+    "explanation": "塩基性条件ではOH⁻を含めて原子数と電荷を合わせます。",
+    "scope": "foundation",
+    "category": "redox",
+    "difficultyLevel": 3,
+    "cognitiveType": "reasoning",
+    "learningObjective": "酸化還元の半反応式を原子数・電荷・電子数から判断する",
+    "estimatedSeconds": 60,
+    "similarityGroup": "redox:half-reaction:07",
+    "optionFeedback": [
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "正解です。原子数と電荷がそろっています。"
+    ]
+  },
+  {
+    "id": "v45-basic-half-reaction-17",
+    "q": "塩基性条件でClO⁻がCl⁻へ還元される半反応式として正しいものはどれか。",
+    "options": [
+      "ClO⁻ + H₂O + 2e⁻ → Cl⁻ + 2OH⁻",
+      "ClO⁻ + 2H⁺ + 2e⁻ → Cl⁻ + H₂O",
+      "ClO⁻ + H₂O → Cl⁻ + 2OH⁻ + 2e⁻",
+      "ClO⁻ + e⁻ → Cl⁻ + O²⁻"
+    ],
+    "answer": 0,
+    "explanation": "Clの酸化数は+1から−1へ下がるので電子2個を受け取ります。",
+    "scope": "foundation",
+    "category": "redox",
+    "difficultyLevel": 3,
+    "cognitiveType": "reasoning",
+    "learningObjective": "酸化還元の半反応式を原子数・電荷・電子数から判断する",
+    "estimatedSeconds": 60,
+    "similarityGroup": "redox:half-reaction:08",
+    "optionFeedback": [
+      "正解です。原子数と電荷がそろっています。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。"
+    ]
+  },
+  {
+    "id": "v45-basic-half-reaction-18",
+    "q": "塩基性条件でO₂がOH⁻へ還元される半反応式として正しいものはどれか。",
+    "options": [
+      "O₂ + 4H⁺ + 4e⁻ → 2H₂O",
+      "O₂ + 2H₂O + 4e⁻ → 4OH⁻",
+      "4OH⁻ → O₂ + 2H₂O + 4e⁻",
+      "O₂ + H₂O + 2e⁻ → 2OH⁻"
+    ],
+    "answer": 1,
+    "explanation": "O₂は電子4個を受け取り、OH⁻を4個生じます。",
+    "scope": "foundation",
+    "category": "redox",
+    "difficultyLevel": 3,
+    "cognitiveType": "reasoning",
+    "learningObjective": "酸化還元の半反応式を原子数・電荷・電子数から判断する",
+    "estimatedSeconds": 60,
+    "similarityGroup": "redox:half-reaction:08",
+    "optionFeedback": [
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "正解です。原子数と電荷がそろっています。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。"
+    ]
+  },
+  {
+    "id": "v45-basic-half-reaction-19",
+    "q": "塩基性条件でH₂O₂がOH⁻へ還元される半反応式として正しいものはどれか。",
+    "options": [
+      "H₂O₂ → O₂ + 2H⁺ + 2e⁻",
+      "H₂O₂ + 2H⁺ + 2e⁻ → 2H₂O",
+      "H₂O₂ + 2e⁻ → 2OH⁻",
+      "H₂O₂ + e⁻ → OH⁻"
+    ],
+    "answer": 2,
+    "explanation": "H₂O₂のOは−1から−2へ還元され、電子2個を受け取ります。",
+    "scope": "foundation",
+    "category": "redox",
+    "difficultyLevel": 3,
+    "cognitiveType": "reasoning",
+    "learningObjective": "酸化還元の半反応式を原子数・電荷・電子数から判断する",
+    "estimatedSeconds": 60,
+    "similarityGroup": "redox:half-reaction:09",
+    "optionFeedback": [
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "正解です。原子数と電荷がそろっています。",
+      "式の原子数・電荷・電子の位置を確認してください。"
+    ]
+  },
+  {
+    "id": "v45-basic-half-reaction-20",
+    "q": "塩基性条件でOH⁻がO₂へ酸化される半反応式として正しいものはどれか。",
+    "options": [
+      "O₂ + 2H₂O + 4e⁻ → 4OH⁻",
+      "2OH⁻ → O₂ + H₂O + 2e⁻",
+      "4OH⁻ + 4e⁻ → O₂ + 2H₂O",
+      "4OH⁻ → O₂ + 2H₂O + 4e⁻"
+    ],
+    "answer": 3,
+    "explanation": "OH⁻からO₂が生じる酸化では、電子4個が右辺です。",
+    "scope": "foundation",
+    "category": "redox",
+    "difficultyLevel": 3,
+    "cognitiveType": "reasoning",
+    "learningObjective": "酸化還元の半反応式を原子数・電荷・電子数から判断する",
+    "estimatedSeconds": 60,
+    "similarityGroup": "redox:half-reaction:09",
+    "optionFeedback": [
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "正解です。原子数と電荷がそろっています。"
+    ]
+  },
+  {
+    "id": "v45-basic-half-concept-01",
+    "q": "酸化を表す半反応式で電子e⁻は通常どちら側に書くか。",
+    "options": [
+      "生成物側",
+      "反応物側",
+      "両辺に同数",
+      "電子は書かない"
+    ],
+    "answer": 0,
+    "explanation": "酸化では電子を失うため、電子は生成物側に書きます。",
+    "scope": "foundation",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "knowledge",
+    "learningObjective": "半反応式を作る手順と電子の役割を理解する",
+    "estimatedSeconds": 35,
+    "similarityGroup": "redox:half-method:00",
+    "optionFeedback": [
+      "正解です。原子数と電荷がそろっています。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。"
+    ]
+  },
+  {
+    "id": "v45-basic-half-concept-02",
+    "q": "還元を表す半反応式で電子e⁻は通常どちら側に書くか。",
+    "options": [
+      "生成物側",
+      "反応物側",
+      "両辺に同数",
+      "電子は書かない"
+    ],
+    "answer": 1,
+    "explanation": "還元では電子を受け取るため、電子は反応物側です。",
+    "scope": "foundation",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "knowledge",
+    "learningObjective": "半反応式を作る手順と電子の役割を理解する",
+    "estimatedSeconds": 35,
+    "similarityGroup": "redox:half-method:00",
+    "optionFeedback": [
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "正解です。原子数と電荷がそろっています。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。"
+    ]
+  },
+  {
+    "id": "v45-basic-half-concept-03",
+    "q": "酸性条件で半反応式を作るとき、O原子数を合わせるため主に使う物質はどれか。",
+    "options": [
+      "H⁺",
+      "OH⁻",
+      "H₂O",
+      "e⁻"
+    ],
+    "answer": 2,
+    "explanation": "酸性条件でもO原子数はH₂Oで合わせます。",
+    "scope": "foundation",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "knowledge",
+    "learningObjective": "半反応式を作る手順と電子の役割を理解する",
+    "estimatedSeconds": 35,
+    "similarityGroup": "redox:half-method:01",
+    "optionFeedback": [
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "正解です。原子数と電荷がそろっています。",
+      "式の原子数・電荷・電子の位置を確認してください。"
+    ]
+  },
+  {
+    "id": "v45-basic-half-concept-04",
+    "q": "酸性条件で半反応式を作るとき、H原子数を合わせるため主に使う粒子はどれか。",
+    "options": [
+      "H₂O",
+      "OH⁻",
+      "e⁻",
+      "H⁺"
+    ],
+    "answer": 3,
+    "explanation": "H₂OでOを合わせた後、H⁺でH原子数を合わせます。",
+    "scope": "foundation",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "knowledge",
+    "learningObjective": "半反応式を作る手順と電子の役割を理解する",
+    "estimatedSeconds": 35,
+    "similarityGroup": "redox:half-method:01",
+    "optionFeedback": [
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "正解です。原子数と電荷がそろっています。"
+    ]
+  },
+  {
+    "id": "v45-basic-half-concept-05",
+    "q": "半反応式の最後に電荷を合わせるため加えるものはどれか。",
+    "options": [
+      "e⁻",
+      "H₂O",
+      "H⁺だけ",
+      "係数1のO₂"
+    ],
+    "answer": 0,
+    "explanation": "電子を加えて左右の総電荷を等しくします。",
+    "scope": "foundation",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "knowledge",
+    "learningObjective": "半反応式を作る手順と電子の役割を理解する",
+    "estimatedSeconds": 35,
+    "similarityGroup": "redox:half-method:02",
+    "optionFeedback": [
+      "正解です。原子数と電荷がそろっています。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。"
+    ]
+  },
+  {
+    "id": "v45-basic-half-concept-06",
+    "q": "塩基性条件の半反応式を酸性条件から直すとき、H⁺を消すため両辺に加えるものはどれか。",
+    "options": [
+      "H₂O₂",
+      "OH⁻",
+      "O₂",
+      "e⁻"
+    ],
+    "answer": 1,
+    "explanation": "H⁺と同数のOH⁻を両辺に加え、H⁺+OH⁻をH₂Oにして整理します。",
+    "scope": "foundation",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "knowledge",
+    "learningObjective": "半反応式を作る手順と電子の役割を理解する",
+    "estimatedSeconds": 35,
+    "similarityGroup": "redox:half-method:02",
+    "optionFeedback": [
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "正解です。原子数と電荷がそろっています。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。"
+    ]
+  },
+  {
+    "id": "v45-basic-half-concept-07",
+    "q": "酸化数が+2から+5へ変化する原子1個が放出する電子数は何個か。",
+    "options": [
+      "2個",
+      "5個",
+      "3個",
+      "7個"
+    ],
+    "answer": 2,
+    "explanation": "酸化数が3増えるので、電子3個を放出します。",
+    "scope": "foundation",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "knowledge",
+    "learningObjective": "半反応式を作る手順と電子の役割を理解する",
+    "estimatedSeconds": 35,
+    "similarityGroup": "redox:half-method:03",
+    "optionFeedback": [
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "正解です。原子数と電荷がそろっています。",
+      "式の原子数・電荷・電子の位置を確認してください。"
+    ]
+  },
+  {
+    "id": "v45-basic-half-concept-08",
+    "q": "酸化数が+7から+2へ変化する原子1個が受け取る電子数は何個か。",
+    "options": [
+      "2個",
+      "3個",
+      "9個",
+      "5個"
+    ],
+    "answer": 3,
+    "explanation": "酸化数が5下がるため、電子5個を受け取ります。",
+    "scope": "foundation",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "knowledge",
+    "learningObjective": "半反応式を作る手順と電子の役割を理解する",
+    "estimatedSeconds": 35,
+    "similarityGroup": "redox:half-method:03",
+    "optionFeedback": [
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "正解です。原子数と電荷がそろっています。"
+    ]
+  },
+  {
+    "id": "v45-basic-half-concept-09",
+    "q": "2つの半反応式を足し合わせる前に、最初にそろえる量はどれか。",
+    "options": [
+      "授受する電子数",
+      "H⁺の数だけ",
+      "H₂Oの数だけ",
+      "反応物の物質量すべて"
+    ],
+    "answer": 0,
+    "explanation": "酸化側が放出する電子数と還元側が受け取る電子数を最小公倍数でそろえます。",
+    "scope": "foundation",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "knowledge",
+    "learningObjective": "半反応式を作る手順と電子の役割を理解する",
+    "estimatedSeconds": 35,
+    "similarityGroup": "redox:half-method:04",
+    "optionFeedback": [
+      "正解です。原子数と電荷がそろっています。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。"
+    ]
+  },
+  {
+    "id": "v45-basic-half-concept-10",
+    "q": "半反応式が正しいかを最後に確認する項目として最も適切なものはどれか。",
+    "options": [
+      "化学式の文字数だけ",
+      "各元素の原子数と左右の総電荷",
+      "係数の合計だけ",
+      "生成物の種類数だけ"
+    ],
+    "answer": 1,
+    "explanation": "原子数だけでなく、左右の総電荷も一致している必要があります。",
+    "scope": "foundation",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "knowledge",
+    "learningObjective": "半反応式を作る手順と電子の役割を理解する",
+    "estimatedSeconds": 35,
+    "similarityGroup": "redox:half-method:04",
+    "optionFeedback": [
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "正解です。原子数と電荷がそろっています。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。"
+    ]
+  },
+  {
+    "id": "v45-basic-half-coeff-01",
+    "q": "MnO₄⁻+8H⁺+□e⁻→Mn²⁺+4H₂Oの□に入る係数はどれか。",
+    "options": [
+      "2",
+      "3",
+      "5",
+      "6"
+    ],
+    "answer": 2,
+    "explanation": "Mnは+7から+2へ変化するので電子係数は5です。",
+    "scope": "foundation",
+    "category": "redox",
+    "difficultyLevel": 3,
+    "cognitiveType": "calculation",
+    "learningObjective": "酸化数または電荷から半反応式の電子係数を決定する",
+    "estimatedSeconds": 50,
+    "similarityGroup": "redox:half-coefficient:00",
+    "optionFeedback": [
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "正解です。原子数と電荷がそろっています。",
+      "式の原子数・電荷・電子の位置を確認してください。"
+    ],
+    "calculation": true
+  },
+  {
+    "id": "v45-basic-half-coeff-02",
+    "q": "Cr₂O₇²⁻+14H⁺+□e⁻→2Cr³⁺+7H₂Oの□に入る係数はどれか。",
+    "options": [
+      "3",
+      "5",
+      "7",
+      "6"
+    ],
+    "answer": 3,
+    "explanation": "Crは2原子あり、各Crが3個ずつ電子を受け取るため合計6個です。",
+    "scope": "foundation",
+    "category": "redox",
+    "difficultyLevel": 3,
+    "cognitiveType": "calculation",
+    "learningObjective": "酸化数または電荷から半反応式の電子係数を決定する",
+    "estimatedSeconds": 50,
+    "similarityGroup": "redox:half-coefficient:00",
+    "optionFeedback": [
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "正解です。原子数と電荷がそろっています。"
+    ],
+    "calculation": true
+  },
+  {
+    "id": "v45-basic-half-coeff-03",
+    "q": "H₂O₂→O₂+2H⁺+□e⁻の□に入る係数はどれか。",
+    "options": [
+      "2",
+      "1",
+      "3",
+      "4"
+    ],
+    "answer": 0,
+    "explanation": "H₂O₂の2個のOがそれぞれ酸化数−1から0へ変わり、合計2電子を放出します。",
+    "scope": "foundation",
+    "category": "redox",
+    "difficultyLevel": 3,
+    "cognitiveType": "calculation",
+    "learningObjective": "酸化数または電荷から半反応式の電子係数を決定する",
+    "estimatedSeconds": 50,
+    "similarityGroup": "redox:half-coefficient:01",
+    "optionFeedback": [
+      "正解です。原子数と電荷がそろっています。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。"
+    ],
+    "calculation": true
+  },
+  {
+    "id": "v45-basic-half-coeff-04",
+    "q": "O₂+4H⁺+□e⁻→2H₂Oの□に入る係数はどれか。",
+    "options": [
+      "2",
+      "4",
+      "3",
+      "6"
+    ],
+    "answer": 1,
+    "explanation": "O原子2個がそれぞれ電子2個を受け取るため合計4電子です。",
+    "scope": "foundation",
+    "category": "redox",
+    "difficultyLevel": 3,
+    "cognitiveType": "calculation",
+    "learningObjective": "酸化数または電荷から半反応式の電子係数を決定する",
+    "estimatedSeconds": 50,
+    "similarityGroup": "redox:half-coefficient:01",
+    "optionFeedback": [
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "正解です。原子数と電荷がそろっています。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。"
+    ],
+    "calculation": true
+  },
+  {
+    "id": "v45-basic-half-coeff-05",
+    "q": "NO₃⁻+4H⁺+□e⁻→NO+2H₂Oの□に入る係数はどれか。",
+    "options": [
+      "1",
+      "2",
+      "3",
+      "5"
+    ],
+    "answer": 2,
+    "explanation": "Nの酸化数は+5から+2へ変化するので3電子を受け取ります。",
+    "scope": "foundation",
+    "category": "redox",
+    "difficultyLevel": 3,
+    "cognitiveType": "calculation",
+    "learningObjective": "酸化数または電荷から半反応式の電子係数を決定する",
+    "estimatedSeconds": 50,
+    "similarityGroup": "redox:half-coefficient:02",
+    "optionFeedback": [
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "正解です。原子数と電荷がそろっています。",
+      "式の原子数・電荷・電子の位置を確認してください。"
+    ],
+    "calculation": true
+  },
+  {
+    "id": "v45-basic-half-coeff-06",
+    "q": "ClO⁻+H₂O+□e⁻→Cl⁻+2OH⁻の□に入る係数はどれか。",
+    "options": [
+      "1",
+      "3",
+      "4",
+      "2"
+    ],
+    "answer": 3,
+    "explanation": "Clは+1から−1へ変化するため電子係数は2です。",
+    "scope": "foundation",
+    "category": "redox",
+    "difficultyLevel": 3,
+    "cognitiveType": "calculation",
+    "learningObjective": "酸化数または電荷から半反応式の電子係数を決定する",
+    "estimatedSeconds": 50,
+    "similarityGroup": "redox:half-coefficient:02",
+    "optionFeedback": [
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "正解です。原子数と電荷がそろっています。"
+    ],
+    "calculation": true
+  },
+  {
+    "id": "v45-basic-half-coeff-07",
+    "q": "2I⁻→I₂+□e⁻の□に入る係数はどれか。",
+    "options": [
+      "2",
+      "1",
+      "3",
+      "4"
+    ],
+    "answer": 0,
+    "explanation": "I⁻2個がそれぞれ電子1個を放出します。",
+    "scope": "foundation",
+    "category": "redox",
+    "difficultyLevel": 3,
+    "cognitiveType": "calculation",
+    "learningObjective": "酸化数または電荷から半反応式の電子係数を決定する",
+    "estimatedSeconds": 50,
+    "similarityGroup": "redox:half-coefficient:03",
+    "optionFeedback": [
+      "正解です。原子数と電荷がそろっています。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。"
+    ],
+    "calculation": true
+  },
+  {
+    "id": "v45-basic-half-coeff-08",
+    "q": "Al→Al³⁺+□e⁻の□に入る係数はどれか。",
+    "options": [
+      "1",
+      "3",
+      "2",
+      "4"
+    ],
+    "answer": 1,
+    "explanation": "Alは0から+3へ変化するため3電子を放出します。",
+    "scope": "foundation",
+    "category": "redox",
+    "difficultyLevel": 3,
+    "cognitiveType": "calculation",
+    "learningObjective": "酸化数または電荷から半反応式の電子係数を決定する",
+    "estimatedSeconds": 50,
+    "similarityGroup": "redox:half-coefficient:03",
+    "optionFeedback": [
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "正解です。原子数と電荷がそろっています。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。"
+    ],
+    "calculation": true
+  },
+  {
+    "id": "v45-basic-half-coeff-09",
+    "q": "O₂+2H₂O+□e⁻→4OH⁻の□に入る係数はどれか。",
+    "options": [
+      "2",
+      "3",
+      "4",
+      "5"
+    ],
+    "answer": 2,
+    "explanation": "左右の総電荷を−4にそろえるため電子4個が必要です。",
+    "scope": "foundation",
+    "category": "redox",
+    "difficultyLevel": 3,
+    "cognitiveType": "calculation",
+    "learningObjective": "酸化数または電荷から半反応式の電子係数を決定する",
+    "estimatedSeconds": 50,
+    "similarityGroup": "redox:half-coefficient:04",
+    "optionFeedback": [
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "正解です。原子数と電荷がそろっています。",
+      "式の原子数・電荷・電子の位置を確認してください。"
+    ],
+    "calculation": true
+  },
+  {
+    "id": "v45-basic-half-coeff-10",
+    "q": "MnO₄⁻+2H₂O+□e⁻→MnO₂+4OH⁻の□に入る係数はどれか。",
+    "options": [
+      "1",
+      "2",
+      "5",
+      "3"
+    ],
+    "answer": 3,
+    "explanation": "左辺の総電荷を−4にするため、MnO₄⁻に電子3個を加えます。",
+    "scope": "foundation",
+    "category": "redox",
+    "difficultyLevel": 3,
+    "cognitiveType": "calculation",
+    "learningObjective": "酸化数または電荷から半反応式の電子係数を決定する",
+    "estimatedSeconds": 50,
+    "similarityGroup": "redox:half-coefficient:04",
+    "optionFeedback": [
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "正解です。原子数と電荷がそろっています。"
+    ],
+    "calculation": true
   }
 ]

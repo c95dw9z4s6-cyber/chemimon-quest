@@ -8792,5 +8792,1055 @@
       "温度変化は発熱反応の平衡位置に影響します。"
     ],
     "calculation": true
+  },
+  {
+    "id": "v45-hard-half-equation-01",
+    "q": "酸性条件でS₂O₈²⁻がSO₄²⁻へ還元される半反応式として正しいものはどれか。",
+    "options": [
+      "S₂O₈²⁻ + 2e⁻ → 2SO₄²⁻",
+      "S₂O₈²⁻ → 2SO₄²⁻ + 2e⁻",
+      "S₂O₈²⁻ + e⁻ → SO₄²⁻",
+      "2SO₄²⁻ + 2e⁻ → S₂O₈²⁻"
+    ],
+    "answer": 0,
+    "scope": "foundation",
+    "stageTier": 3,
+    "category": "redox",
+    "difficulty": "入試標準・半反応式",
+    "source": "Chemion Quest v4.5独自作成（高校化学・半反応式）",
+    "hints": [
+      "O原子をH₂Oで合わせます。",
+      "酸性ならH⁺、塩基性ならOH⁻を使ってHを合わせます。",
+      "最後に電子で左右の総電荷を一致させます。"
+    ],
+    "explanation": "【半反応式】S₂O₈²⁻ + 2e⁻ → 2SO₄²⁻\n【確認】OとSの原子数は既にそろっており、左辺へ電子2個を加えると電荷も−4で一致します。",
+    "calculation": true,
+    "visual": "electrolysis",
+    "difficultyLevel": 4,
+    "cognitiveType": "reasoning",
+    "learningObjective": "複雑な半反応式を酸性・塩基性条件に応じて完成させる",
+    "estimatedSeconds": 85,
+    "similarityGroup": "redox:half-hard-equation:00",
+    "optionFeedback": [
+      "正解です。原子数と電荷がそろっています。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。"
+    ]
+  },
+  {
+    "id": "v45-hard-half-equation-02",
+    "q": "酸性条件でMnO₂がMn²⁺へ還元される半反応式として正しいものはどれか。",
+    "options": [
+      "MnO₂ + 2H⁺ + 2e⁻ → Mn²⁺ + H₂O",
+      "MnO₂ + 4H⁺ + 2e⁻ → Mn²⁺ + 2H₂O",
+      "MnO₂ + 4H⁺ → Mn²⁺ + 2H₂O + 2e⁻",
+      "Mn²⁺ + 2H₂O → MnO₂ + 4H⁺ + 2e⁻"
+    ],
+    "answer": 1,
+    "scope": "foundation",
+    "stageTier": 3,
+    "category": "redox",
+    "difficulty": "入試標準・半反応式",
+    "source": "Chemion Quest v4.5独自作成（高校化学・半反応式）",
+    "hints": [
+      "O原子をH₂Oで合わせます。",
+      "酸性ならH⁺、塩基性ならOH⁻を使ってHを合わせます。",
+      "最後に電子で左右の総電荷を一致させます。"
+    ],
+    "explanation": "【半反応式】MnO₂ + 4H⁺ + 2e⁻ → Mn²⁺ + 2H₂O\n【確認】Oを2H₂O、Hを4H⁺で合わせ、Mnの+4→+2に対応して電子2個を左辺へ置きます。",
+    "calculation": true,
+    "visual": "electrolysis",
+    "difficultyLevel": 4,
+    "cognitiveType": "reasoning",
+    "learningObjective": "複雑な半反応式を酸性・塩基性条件に応じて完成させる",
+    "estimatedSeconds": 85,
+    "similarityGroup": "redox:half-hard-equation:00",
+    "optionFeedback": [
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "正解です。原子数と電荷がそろっています。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。"
+    ]
+  },
+  {
+    "id": "v45-hard-half-equation-03",
+    "q": "酸性条件でSO₃²⁻がSO₄²⁻へ酸化される半反応式として正しいものはどれか。",
+    "options": [
+      "SO₃²⁻ + 2H⁺ + 2e⁻ → SO₄²⁻ + H₂O",
+      "SO₃²⁻ + H₂O + 2e⁻ → SO₄²⁻ + 2H⁺",
+      "SO₃²⁻ + H₂O → SO₄²⁻ + 2H⁺ + 2e⁻",
+      "SO₃²⁻ → SO₄²⁻ + 2e⁻"
+    ],
+    "answer": 2,
+    "scope": "foundation",
+    "stageTier": 3,
+    "category": "redox",
+    "difficulty": "入試標準・半反応式",
+    "source": "Chemion Quest v4.5独自作成（高校化学・半反応式）",
+    "hints": [
+      "O原子をH₂Oで合わせます。",
+      "酸性ならH⁺、塩基性ならOH⁻を使ってHを合わせます。",
+      "最後に電子で左右の総電荷を一致させます。"
+    ],
+    "explanation": "【半反応式】SO₃²⁻ + H₂O → SO₄²⁻ + 2H⁺ + 2e⁻\n【確認】OをH₂Oで補い、H⁺2個と電子2個を右辺に置くと原子数と電荷が一致します。",
+    "calculation": true,
+    "visual": "electrolysis",
+    "difficultyLevel": 4,
+    "cognitiveType": "reasoning",
+    "learningObjective": "複雑な半反応式を酸性・塩基性条件に応じて完成させる",
+    "estimatedSeconds": 85,
+    "similarityGroup": "redox:half-hard-equation:01",
+    "optionFeedback": [
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "正解です。原子数と電荷がそろっています。",
+      "式の原子数・電荷・電子の位置を確認してください。"
+    ]
+  },
+  {
+    "id": "v45-hard-half-equation-04",
+    "q": "酸性条件でC₂O₄²⁻がCO₂へ酸化される半反応式として正しいものはどれか。",
+    "options": [
+      "C₂O₄²⁻ + 2e⁻ → 2CO₂",
+      "C₂O₄²⁻ → CO₂ + 2e⁻",
+      "2CO₂ + 2e⁻ → C₂O₄²⁻",
+      "C₂O₄²⁻ → 2CO₂ + 2e⁻"
+    ],
+    "answer": 3,
+    "scope": "foundation",
+    "stageTier": 3,
+    "category": "redox",
+    "difficulty": "入試標準・半反応式",
+    "source": "Chemion Quest v4.5独自作成（高校化学・半反応式）",
+    "hints": [
+      "O原子をH₂Oで合わせます。",
+      "酸性ならH⁺、塩基性ならOH⁻を使ってHを合わせます。",
+      "最後に電子で左右の総電荷を一致させます。"
+    ],
+    "explanation": "【半反応式】C₂O₄²⁻ → 2CO₂ + 2e⁻\n【確認】C₂O₄²⁻の2個のCは+3から+4へ酸化され、合計2電子を放出します。",
+    "calculation": true,
+    "visual": "electrolysis",
+    "difficultyLevel": 4,
+    "cognitiveType": "reasoning",
+    "learningObjective": "複雑な半反応式を酸性・塩基性条件に応じて完成させる",
+    "estimatedSeconds": 85,
+    "similarityGroup": "redox:half-hard-equation:01",
+    "optionFeedback": [
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "正解です。原子数と電荷がそろっています。"
+    ]
+  },
+  {
+    "id": "v45-hard-half-equation-05",
+    "q": "酸性条件でClO₃⁻がCl⁻へ還元される半反応式として正しいものはどれか。",
+    "options": [
+      "ClO₃⁻ + 6H⁺ + 6e⁻ → Cl⁻ + 3H₂O",
+      "ClO₃⁻ + 3H⁺ + 3e⁻ → Cl⁻ + 3H₂O",
+      "ClO₃⁻ + 6H⁺ → Cl⁻ + 3H₂O + 6e⁻",
+      "ClO₃⁻ + 3H₂O + 6e⁻ → Cl⁻ + 6OH⁻"
+    ],
+    "answer": 0,
+    "scope": "foundation",
+    "stageTier": 3,
+    "category": "redox",
+    "difficulty": "入試標準・半反応式",
+    "source": "Chemion Quest v4.5独自作成（高校化学・半反応式）",
+    "hints": [
+      "O原子をH₂Oで合わせます。",
+      "酸性ならH⁺、塩基性ならOH⁻を使ってHを合わせます。",
+      "最後に電子で左右の総電荷を一致させます。"
+    ],
+    "explanation": "【半反応式】ClO₃⁻ + 6H⁺ + 6e⁻ → Cl⁻ + 3H₂O\n【確認】Clは+5から−1へ変化するため電子6個を受け取ります。",
+    "calculation": true,
+    "visual": "electrolysis",
+    "difficultyLevel": 4,
+    "cognitiveType": "reasoning",
+    "learningObjective": "複雑な半反応式を酸性・塩基性条件に応じて完成させる",
+    "estimatedSeconds": 85,
+    "similarityGroup": "redox:half-hard-equation:02",
+    "optionFeedback": [
+      "正解です。原子数と電荷がそろっています。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。"
+    ]
+  },
+  {
+    "id": "v45-hard-half-equation-06",
+    "q": "酸性条件でBrO₃⁻がBr⁻へ還元される半反応式として正しいものはどれか。",
+    "options": [
+      "BrO₃⁻ + 3H⁺ + 3e⁻ → Br⁻ + 3H₂O",
+      "BrO₃⁻ + 6H⁺ + 6e⁻ → Br⁻ + 3H₂O",
+      "BrO₃⁻ + 6H⁺ → Br⁻ + 3H₂O + 6e⁻",
+      "BrO₃⁻ + 6e⁻ → Br⁻ + 3O²⁻"
+    ],
+    "answer": 1,
+    "scope": "foundation",
+    "stageTier": 3,
+    "category": "redox",
+    "difficulty": "入試標準・半反応式",
+    "source": "Chemion Quest v4.5独自作成（高校化学・半反応式）",
+    "hints": [
+      "O原子をH₂Oで合わせます。",
+      "酸性ならH⁺、塩基性ならOH⁻を使ってHを合わせます。",
+      "最後に電子で左右の総電荷を一致させます。"
+    ],
+    "explanation": "【半反応式】BrO₃⁻ + 6H⁺ + 6e⁻ → Br⁻ + 3H₂O\n【確認】Brの酸化数+5から−1への変化に対応して電子6個が必要です。",
+    "calculation": true,
+    "visual": "electrolysis",
+    "difficultyLevel": 4,
+    "cognitiveType": "reasoning",
+    "learningObjective": "複雑な半反応式を酸性・塩基性条件に応じて完成させる",
+    "estimatedSeconds": 85,
+    "similarityGroup": "redox:half-hard-equation:02",
+    "optionFeedback": [
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "正解です。原子数と電荷がそろっています。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。"
+    ]
+  },
+  {
+    "id": "v45-hard-half-equation-07",
+    "q": "酸性条件でNO₂⁻がNO₃⁻へ酸化される半反応式として正しいものはどれか。",
+    "options": [
+      "NO₂⁻ + 2H⁺ + 2e⁻ → NO₃⁻ + H₂O",
+      "NO₂⁻ + H₂O + 2e⁻ → NO₃⁻ + 2H⁺",
+      "NO₂⁻ + H₂O → NO₃⁻ + 2H⁺ + 2e⁻",
+      "NO₂⁻ → NO₃⁻ + 2e⁻"
+    ],
+    "answer": 2,
+    "scope": "foundation",
+    "stageTier": 6,
+    "category": "redox",
+    "difficulty": "入試標準・半反応式",
+    "source": "Chemion Quest v4.5独自作成（高校化学・半反応式）",
+    "hints": [
+      "O原子をH₂Oで合わせます。",
+      "酸性ならH⁺、塩基性ならOH⁻を使ってHを合わせます。",
+      "最後に電子で左右の総電荷を一致させます。"
+    ],
+    "explanation": "【半反応式】NO₂⁻ + H₂O → NO₃⁻ + 2H⁺ + 2e⁻\n【確認】Nは+3から+5へ酸化されるため電子2個を放出します。",
+    "calculation": true,
+    "visual": "electrolysis",
+    "difficultyLevel": 4,
+    "cognitiveType": "reasoning",
+    "learningObjective": "複雑な半反応式を酸性・塩基性条件に応じて完成させる",
+    "estimatedSeconds": 85,
+    "similarityGroup": "redox:half-hard-equation:03",
+    "optionFeedback": [
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "正解です。原子数と電荷がそろっています。",
+      "式の原子数・電荷・電子の位置を確認してください。"
+    ]
+  },
+  {
+    "id": "v45-hard-half-equation-08",
+    "q": "酸性条件でSn²⁺がSn⁴⁺へ酸化される半反応式として正しいものはどれか。",
+    "options": [
+      "Sn²⁺ + 2e⁻ → Sn⁴⁺",
+      "Sn⁴⁺ → Sn²⁺ + 2e⁻",
+      "Sn²⁺ → Sn⁴⁺ + e⁻",
+      "Sn²⁺ → Sn⁴⁺ + 2e⁻"
+    ],
+    "answer": 3,
+    "scope": "foundation",
+    "stageTier": 6,
+    "category": "redox",
+    "difficulty": "入試標準・半反応式",
+    "source": "Chemion Quest v4.5独自作成（高校化学・半反応式）",
+    "hints": [
+      "O原子をH₂Oで合わせます。",
+      "酸性ならH⁺、塩基性ならOH⁻を使ってHを合わせます。",
+      "最後に電子で左右の総電荷を一致させます。"
+    ],
+    "explanation": "【半反応式】Sn²⁺ → Sn⁴⁺ + 2e⁻\n【確認】Snの酸化数が2増えるので電子2個を放出します。",
+    "calculation": true,
+    "visual": "electrolysis",
+    "difficultyLevel": 4,
+    "cognitiveType": "reasoning",
+    "learningObjective": "複雑な半反応式を酸性・塩基性条件に応じて完成させる",
+    "estimatedSeconds": 85,
+    "similarityGroup": "redox:half-hard-equation:03",
+    "optionFeedback": [
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "正解です。原子数と電荷がそろっています。"
+    ]
+  },
+  {
+    "id": "v45-hard-half-equation-09",
+    "q": "塩基性条件でCrO₄²⁻がCr(OH)₃へ還元される半反応式として正しいものはどれか。",
+    "options": [
+      "CrO₄²⁻ + 4H₂O + 3e⁻ → Cr(OH)₃ + 5OH⁻",
+      "CrO₄²⁻ + 4H⁺ + 3e⁻ → Cr(OH)₃ + H₂O",
+      "CrO₄²⁻ + H₂O + 3e⁻ → Cr(OH)₃ + OH⁻",
+      "CrO₄²⁻ + 4H₂O → Cr(OH)₃ + 5OH⁻ + 3e⁻"
+    ],
+    "answer": 0,
+    "scope": "foundation",
+    "stageTier": 6,
+    "category": "redox",
+    "difficulty": "入試標準・半反応式",
+    "source": "Chemion Quest v4.5独自作成（高校化学・半反応式）",
+    "hints": [
+      "O原子をH₂Oで合わせます。",
+      "酸性ならH⁺、塩基性ならOH⁻を使ってHを合わせます。",
+      "最後に電子で左右の総電荷を一致させます。"
+    ],
+    "explanation": "【半反応式】CrO₄²⁻ + 4H₂O + 3e⁻ → Cr(OH)₃ + 5OH⁻\n【確認】Crは+6から+3へ還元され、電子3個を受け取ります。原子数・電荷も一致します。",
+    "calculation": true,
+    "visual": "electrolysis",
+    "difficultyLevel": 4,
+    "cognitiveType": "reasoning",
+    "learningObjective": "複雑な半反応式を酸性・塩基性条件に応じて完成させる",
+    "estimatedSeconds": 85,
+    "similarityGroup": "redox:half-hard-equation:04",
+    "optionFeedback": [
+      "正解です。原子数と電荷がそろっています。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。"
+    ]
+  },
+  {
+    "id": "v45-hard-half-equation-10",
+    "q": "塩基性条件でAlがAlO₂⁻へ酸化される半反応式として正しいものはどれか。",
+    "options": [
+      "Al + 2OH⁻ → AlO₂⁻ + H₂O + e⁻",
+      "Al + 4OH⁻ → AlO₂⁻ + 2H₂O + 3e⁻",
+      "Al + 4OH⁻ + 3e⁻ → AlO₂⁻ + 2H₂O",
+      "AlO₂⁻ + 2H₂O + 3e⁻ → Al + 4OH⁻"
+    ],
+    "answer": 1,
+    "scope": "foundation",
+    "stageTier": 6,
+    "category": "redox",
+    "difficulty": "入試標準・半反応式",
+    "source": "Chemion Quest v4.5独自作成（高校化学・半反応式）",
+    "hints": [
+      "O原子をH₂Oで合わせます。",
+      "酸性ならH⁺、塩基性ならOH⁻を使ってHを合わせます。",
+      "最後に電子で左右の総電荷を一致させます。"
+    ],
+    "explanation": "【半反応式】Al + 4OH⁻ → AlO₂⁻ + 2H₂O + 3e⁻\n【確認】Alは0から+3へ酸化されるため電子3個を右辺に置きます。",
+    "calculation": true,
+    "visual": "electrolysis",
+    "difficultyLevel": 4,
+    "cognitiveType": "reasoning",
+    "learningObjective": "複雑な半反応式を酸性・塩基性条件に応じて完成させる",
+    "estimatedSeconds": 85,
+    "similarityGroup": "redox:half-hard-equation:04",
+    "optionFeedback": [
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "正解です。原子数と電荷がそろっています。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。"
+    ]
+  },
+  {
+    "id": "v45-hard-half-equation-11",
+    "q": "塩基性条件でCl₂がClO⁻へ酸化される半反応式として正しいものはどれか。",
+    "options": [
+      "Cl₂ + 2OH⁻ → 2ClO⁻ + H₂O + 2e⁻",
+      "Cl₂ + 4OH⁻ + 2e⁻ → 2ClO⁻ + 2H₂O",
+      "Cl₂ + 4OH⁻ → 2ClO⁻ + 2H₂O + 2e⁻",
+      "2ClO⁻ + 2H₂O + 2e⁻ → Cl₂ + 4OH⁻"
+    ],
+    "answer": 2,
+    "scope": "foundation",
+    "stageTier": 6,
+    "category": "redox",
+    "difficulty": "入試標準・半反応式",
+    "source": "Chemion Quest v4.5独自作成（高校化学・半反応式）",
+    "hints": [
+      "O原子をH₂Oで合わせます。",
+      "酸性ならH⁺、塩基性ならOH⁻を使ってHを合わせます。",
+      "最後に電子で左右の総電荷を一致させます。"
+    ],
+    "explanation": "【半反応式】Cl₂ + 4OH⁻ → 2ClO⁻ + 2H₂O + 2e⁻\n【確認】Clは0から+1へ酸化され、Cl原子2個で合計2電子を放出します。",
+    "calculation": true,
+    "visual": "electrolysis",
+    "difficultyLevel": 4,
+    "cognitiveType": "reasoning",
+    "learningObjective": "複雑な半反応式を酸性・塩基性条件に応じて完成させる",
+    "estimatedSeconds": 85,
+    "similarityGroup": "redox:half-hard-equation:05",
+    "optionFeedback": [
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "正解です。原子数と電荷がそろっています。",
+      "式の原子数・電荷・電子の位置を確認してください。"
+    ]
+  },
+  {
+    "id": "v45-hard-half-equation-12",
+    "q": "酸性条件でClO⁻がCl₂へ還元される半反応式として正しいものはどれか。",
+    "options": [
+      "2ClO⁻ + 4H⁺ → Cl₂ + 2H₂O + 2e⁻",
+      "Cl₂ + 2H₂O → 2ClO⁻ + 4H⁺ + 2e⁻",
+      "ClO⁻ + 2H⁺ + e⁻ → Cl₂ + H₂O",
+      "2ClO⁻ + 4H⁺ + 2e⁻ → Cl₂ + 2H₂O"
+    ],
+    "answer": 3,
+    "scope": "foundation",
+    "stageTier": 6,
+    "category": "redox",
+    "difficulty": "入試標準・半反応式",
+    "source": "Chemion Quest v4.5独自作成（高校化学・半反応式）",
+    "hints": [
+      "O原子をH₂Oで合わせます。",
+      "酸性ならH⁺、塩基性ならOH⁻を使ってHを合わせます。",
+      "最後に電子で左右の総電荷を一致させます。"
+    ],
+    "explanation": "【半反応式】2ClO⁻ + 4H⁺ + 2e⁻ → Cl₂ + 2H₂O\n【確認】Clは+1から0へ還元されるため、電子は左辺です。原子数をそろえるためClO⁻を2個使います。",
+    "calculation": true,
+    "visual": "electrolysis",
+    "difficultyLevel": 4,
+    "cognitiveType": "reasoning",
+    "learningObjective": "複雑な半反応式を酸性・塩基性条件に応じて完成させる",
+    "estimatedSeconds": 85,
+    "similarityGroup": "redox:half-hard-equation:05",
+    "optionFeedback": [
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "正解です。原子数と電荷がそろっています。"
+    ]
+  },
+  {
+    "id": "v45-hard-half-mole-01",
+    "q": "MnO₄⁻+8H⁺+5e⁻→Mn²⁺+4H₂Oに従い、MnO₄⁻ 0.0200 molが受け取る電子の物質量はどれか。",
+    "options": [
+      "0.100 mol",
+      "0.080 mol",
+      "0.090 mol",
+      "0.120 mol"
+    ],
+    "answer": 0,
+    "scope": "foundation",
+    "stageTier": 3,
+    "category": "redox",
+    "difficulty": "入試標準・量的関係",
+    "source": "Chemion Quest v4.5独自作成（高校化学・半反応式）",
+    "hints": [
+      "半反応式の電子係数を確認します。",
+      "物質量に電子係数を掛けます。",
+      "mol単位で選択肢と照合します。"
+    ],
+    "explanation": "【半反応式の係数】電子係数を使います。\n【計算】0.0200×5=0.100 mol\n【答え】0.100 mol",
+    "calculation": true,
+    "visual": "stoich",
+    "difficultyLevel": 4,
+    "cognitiveType": "calculation",
+    "learningObjective": "半反応式の電子係数から授受電子の物質量を計算する",
+    "estimatedSeconds": 75,
+    "similarityGroup": "redox:half-electron-moles:00",
+    "optionFeedback": [
+      "正解です。原子数と電荷がそろっています。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。"
+    ]
+  },
+  {
+    "id": "v45-hard-half-mole-02",
+    "q": "Cr₂O₇²⁻+14H⁺+6e⁻→2Cr³⁺+7H₂Oに従い、Cr₂O₇²⁻ 0.0150 molが受け取る電子の物質量はどれか。",
+    "options": [
+      "0.0750 mol",
+      "0.0900 mol",
+      "0.105 mol",
+      "0.120 mol"
+    ],
+    "answer": 1,
+    "scope": "foundation",
+    "stageTier": 3,
+    "category": "redox",
+    "difficulty": "入試標準・量的関係",
+    "source": "Chemion Quest v4.5独自作成（高校化学・半反応式）",
+    "hints": [
+      "半反応式の電子係数を確認します。",
+      "物質量に電子係数を掛けます。",
+      "mol単位で選択肢と照合します。"
+    ],
+    "explanation": "【半反応式の係数】電子係数を使います。\n【計算】0.0150×6=0.0900 mol\n【答え】0.0900 mol",
+    "calculation": true,
+    "visual": "stoich",
+    "difficultyLevel": 4,
+    "cognitiveType": "calculation",
+    "learningObjective": "半反応式の電子係数から授受電子の物質量を計算する",
+    "estimatedSeconds": 75,
+    "similarityGroup": "redox:half-electron-moles:00",
+    "optionFeedback": [
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "正解です。原子数と電荷がそろっています。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。"
+    ]
+  },
+  {
+    "id": "v45-hard-half-mole-03",
+    "q": "H₂O₂→O₂+2H⁺+2e⁻に従い、H₂O₂ 0.0400 molが放出する電子の物質量はどれか。",
+    "options": [
+      "0.0600 mol",
+      "0.100 mol",
+      "0.0800 mol",
+      "0.120 mol"
+    ],
+    "answer": 2,
+    "scope": "foundation",
+    "stageTier": 3,
+    "category": "redox",
+    "difficulty": "入試標準・量的関係",
+    "source": "Chemion Quest v4.5独自作成（高校化学・半反応式）",
+    "hints": [
+      "半反応式の電子係数を確認します。",
+      "物質量に電子係数を掛けます。",
+      "mol単位で選択肢と照合します。"
+    ],
+    "explanation": "【半反応式の係数】電子係数を使います。\n【計算】0.0400×2=0.0800 mol\n【答え】0.0800 mol",
+    "calculation": true,
+    "visual": "stoich",
+    "difficultyLevel": 4,
+    "cognitiveType": "calculation",
+    "learningObjective": "半反応式の電子係数から授受電子の物質量を計算する",
+    "estimatedSeconds": 75,
+    "similarityGroup": "redox:half-electron-moles:01",
+    "optionFeedback": [
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "正解です。原子数と電荷がそろっています。",
+      "式の原子数・電荷・電子の位置を確認してください。"
+    ]
+  },
+  {
+    "id": "v45-hard-half-mole-04",
+    "q": "S₂O₈²⁻+2e⁻→2SO₄²⁻に従い、S₂O₈²⁻ 0.0250 molが受け取る電子の物質量はどれか。",
+    "options": [
+      "0.0400 mol",
+      "0.0600 mol",
+      "0.0750 mol",
+      "0.0500 mol"
+    ],
+    "answer": 3,
+    "scope": "foundation",
+    "stageTier": 3,
+    "category": "redox",
+    "difficulty": "入試標準・量的関係",
+    "source": "Chemion Quest v4.5独自作成（高校化学・半反応式）",
+    "hints": [
+      "半反応式の電子係数を確認します。",
+      "物質量に電子係数を掛けます。",
+      "mol単位で選択肢と照合します。"
+    ],
+    "explanation": "【半反応式の係数】電子係数を使います。\n【計算】0.0250×2=0.0500 mol\n【答え】0.0500 mol",
+    "calculation": true,
+    "visual": "stoich",
+    "difficultyLevel": 4,
+    "cognitiveType": "calculation",
+    "learningObjective": "半反応式の電子係数から授受電子の物質量を計算する",
+    "estimatedSeconds": 75,
+    "similarityGroup": "redox:half-electron-moles:01",
+    "optionFeedback": [
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "正解です。原子数と電荷がそろっています。"
+    ]
+  },
+  {
+    "id": "v45-hard-half-mole-05",
+    "q": "Cl₂+2e⁻→2Cl⁻に従い、Cl₂ 0.0300 molが受け取る電子の物質量はどれか。",
+    "options": [
+      "0.0600 mol",
+      "0.0450 mol",
+      "0.0750 mol",
+      "0.0900 mol"
+    ],
+    "answer": 0,
+    "scope": "foundation",
+    "stageTier": 3,
+    "category": "redox",
+    "difficulty": "入試標準・量的関係",
+    "source": "Chemion Quest v4.5独自作成（高校化学・半反応式）",
+    "hints": [
+      "半反応式の電子係数を確認します。",
+      "物質量に電子係数を掛けます。",
+      "mol単位で選択肢と照合します。"
+    ],
+    "explanation": "【半反応式の係数】電子係数を使います。\n【計算】0.0300×2=0.0600 mol\n【答え】0.0600 mol",
+    "calculation": true,
+    "visual": "stoich",
+    "difficultyLevel": 4,
+    "cognitiveType": "calculation",
+    "learningObjective": "半反応式の電子係数から授受電子の物質量を計算する",
+    "estimatedSeconds": 75,
+    "similarityGroup": "redox:half-electron-moles:02",
+    "optionFeedback": [
+      "正解です。原子数と電荷がそろっています。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。"
+    ]
+  },
+  {
+    "id": "v45-hard-half-mole-06",
+    "q": "Fe²⁺→Fe³⁺+e⁻に従い、Fe²⁺ 0.0600 molが放出する電子の物質量はどれか。",
+    "options": [
+      "0.0400 mol",
+      "0.0600 mol",
+      "0.0800 mol",
+      "0.120 mol"
+    ],
+    "answer": 1,
+    "scope": "foundation",
+    "stageTier": 6,
+    "category": "redox",
+    "difficulty": "入試標準・量的関係",
+    "source": "Chemion Quest v4.5独自作成（高校化学・半反応式）",
+    "hints": [
+      "半反応式の電子係数を確認します。",
+      "物質量に電子係数を掛けます。",
+      "mol単位で選択肢と照合します。"
+    ],
+    "explanation": "【半反応式の係数】電子係数を使います。\n【計算】係数比1:1なので0.0600 molです。\n【答え】0.0600 mol",
+    "calculation": true,
+    "visual": "stoich",
+    "difficultyLevel": 4,
+    "cognitiveType": "calculation",
+    "learningObjective": "半反応式の電子係数から授受電子の物質量を計算する",
+    "estimatedSeconds": 75,
+    "similarityGroup": "redox:half-electron-moles:02",
+    "optionFeedback": [
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "正解です。原子数と電荷がそろっています。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。"
+    ]
+  },
+  {
+    "id": "v45-hard-half-mole-07",
+    "q": "Al→Al³⁺+3e⁻に従い、Al 0.0200 molが放出する電子の物質量はどれか。",
+    "options": [
+      "0.0400 mol",
+      "0.0800 mol",
+      "0.0600 mol",
+      "0.100 mol"
+    ],
+    "answer": 2,
+    "scope": "foundation",
+    "stageTier": 6,
+    "category": "redox",
+    "difficulty": "入試標準・量的関係",
+    "source": "Chemion Quest v4.5独自作成（高校化学・半反応式）",
+    "hints": [
+      "半反応式の電子係数を確認します。",
+      "物質量に電子係数を掛けます。",
+      "mol単位で選択肢と照合します。"
+    ],
+    "explanation": "【半反応式の係数】電子係数を使います。\n【計算】0.0200×3=0.0600 mol\n【答え】0.0600 mol",
+    "calculation": true,
+    "visual": "stoich",
+    "difficultyLevel": 4,
+    "cognitiveType": "calculation",
+    "learningObjective": "半反応式の電子係数から授受電子の物質量を計算する",
+    "estimatedSeconds": 75,
+    "similarityGroup": "redox:half-electron-moles:03",
+    "optionFeedback": [
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "正解です。原子数と電荷がそろっています。",
+      "式の原子数・電荷・電子の位置を確認してください。"
+    ]
+  },
+  {
+    "id": "v45-hard-half-mole-08",
+    "q": "O₂+4H⁺+4e⁻→2H₂Oに従い、O₂ 0.0250 molが受け取る電子の物質量はどれか。",
+    "options": [
+      "0.0750 mol",
+      "0.125 mol",
+      "0.150 mol",
+      "0.100 mol"
+    ],
+    "answer": 3,
+    "scope": "foundation",
+    "stageTier": 6,
+    "category": "redox",
+    "difficulty": "入試標準・量的関係",
+    "source": "Chemion Quest v4.5独自作成（高校化学・半反応式）",
+    "hints": [
+      "半反応式の電子係数を確認します。",
+      "物質量に電子係数を掛けます。",
+      "mol単位で選択肢と照合します。"
+    ],
+    "explanation": "【半反応式の係数】電子係数を使います。\n【計算】0.0250×4=0.100 mol\n【答え】0.100 mol",
+    "calculation": true,
+    "visual": "stoich",
+    "difficultyLevel": 4,
+    "cognitiveType": "calculation",
+    "learningObjective": "半反応式の電子係数から授受電子の物質量を計算する",
+    "estimatedSeconds": 75,
+    "similarityGroup": "redox:half-electron-moles:03",
+    "optionFeedback": [
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "正解です。原子数と電荷がそろっています。"
+    ]
+  },
+  {
+    "id": "v45-hard-half-mole-09",
+    "q": "H₂O₂+2H⁺+2e⁻→2H₂Oに従い、H₂O₂ 0.0500 molが受け取る電子の物質量はどれか。",
+    "options": [
+      "0.100 mol",
+      "0.0800 mol",
+      "0.120 mol",
+      "0.150 mol"
+    ],
+    "answer": 0,
+    "scope": "foundation",
+    "stageTier": 6,
+    "category": "redox",
+    "difficulty": "入試標準・量的関係",
+    "source": "Chemion Quest v4.5独自作成（高校化学・半反応式）",
+    "hints": [
+      "半反応式の電子係数を確認します。",
+      "物質量に電子係数を掛けます。",
+      "mol単位で選択肢と照合します。"
+    ],
+    "explanation": "【半反応式の係数】電子係数を使います。\n【計算】0.0500×2=0.100 mol\n【答え】0.100 mol",
+    "calculation": true,
+    "visual": "stoich",
+    "difficultyLevel": 4,
+    "cognitiveType": "calculation",
+    "learningObjective": "半反応式の電子係数から授受電子の物質量を計算する",
+    "estimatedSeconds": 75,
+    "similarityGroup": "redox:half-electron-moles:04",
+    "optionFeedback": [
+      "正解です。原子数と電荷がそろっています。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。"
+    ]
+  },
+  {
+    "id": "v45-hard-half-mole-10",
+    "q": "NO₃⁻+4H⁺+3e⁻→NO+2H₂Oに従い、NO₃⁻ 0.0400 molが受け取る電子の物質量はどれか。",
+    "options": [
+      "0.0900 mol",
+      "0.120 mol",
+      "0.150 mol",
+      "0.180 mol"
+    ],
+    "answer": 1,
+    "scope": "foundation",
+    "stageTier": 6,
+    "category": "redox",
+    "difficulty": "入試標準・量的関係",
+    "source": "Chemion Quest v4.5独自作成（高校化学・半反応式）",
+    "hints": [
+      "半反応式の電子係数を確認します。",
+      "物質量に電子係数を掛けます。",
+      "mol単位で選択肢と照合します。"
+    ],
+    "explanation": "【半反応式の係数】電子係数を使います。\n【計算】0.0400×3=0.120 mol\n【答え】0.120 mol",
+    "calculation": true,
+    "visual": "stoich",
+    "difficultyLevel": 4,
+    "cognitiveType": "calculation",
+    "learningObjective": "半反応式の電子係数から授受電子の物質量を計算する",
+    "estimatedSeconds": 75,
+    "similarityGroup": "redox:half-electron-moles:04",
+    "optionFeedback": [
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "正解です。原子数と電荷がそろっています。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。"
+    ]
+  },
+  {
+    "id": "v45-hard-half-ratio-01",
+    "q": "MnO₄⁻がMn²⁺へ還元され、Fe²⁺がFe³⁺へ酸化される酸性条件で、MnO₄⁻:Fe²⁺の係数比はどれか。",
+    "options": [
+      "1:3",
+      "2:5",
+      "1:5",
+      "5:1"
+    ],
+    "answer": 2,
+    "scope": "foundation",
+    "stageTier": 6,
+    "category": "redox",
+    "difficulty": "入試標準〜発展・半反応式",
+    "source": "Chemion Quest v4.5独自作成（高校化学・半反応式）",
+    "hints": [
+      "酸化側と還元側の半反応式を書きます。",
+      "授受する電子数の最小公倍数を求めます。",
+      "各半反応式へ必要な倍率を掛けます。"
+    ],
+    "explanation": "【電子数】酸化側と還元側の電子数をそろえます。\n【結論】MnO₄⁻は5e⁻を受け取り、Fe²⁺は1e⁻を放出するため1:5です。\n【答え】1:5",
+    "calculation": true,
+    "visual": "stoich",
+    "difficultyLevel": 5,
+    "cognitiveType": "reasoning",
+    "learningObjective": "複数の半反応式の電子数をそろえて全体の係数比を決定する",
+    "estimatedSeconds": 95,
+    "similarityGroup": "redox:half-combine-ratio:00",
+    "optionFeedback": [
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "正解です。原子数と電荷がそろっています。",
+      "式の原子数・電荷・電子の位置を確認してください。"
+    ]
+  },
+  {
+    "id": "v45-hard-half-ratio-02",
+    "q": "Cr₂O₇²⁻がCr³⁺へ還元され、Fe²⁺がFe³⁺へ酸化される酸性条件で、Cr₂O₇²⁻:Fe²⁺の係数比はどれか。",
+    "options": [
+      "1:3",
+      "2:6",
+      "6:1",
+      "1:6"
+    ],
+    "answer": 3,
+    "scope": "foundation",
+    "stageTier": 6,
+    "category": "redox",
+    "difficulty": "入試標準〜発展・半反応式",
+    "source": "Chemion Quest v4.5独自作成（高校化学・半反応式）",
+    "hints": [
+      "酸化側と還元側の半反応式を書きます。",
+      "授受する電子数の最小公倍数を求めます。",
+      "各半反応式へ必要な倍率を掛けます。"
+    ],
+    "explanation": "【電子数】酸化側と還元側の電子数をそろえます。\n【結論】Cr₂O₇²⁻は6e⁻を受け取り、Fe²⁺は1e⁻を放出するため1:6です。\n【答え】1:6",
+    "calculation": true,
+    "visual": "stoich",
+    "difficultyLevel": 5,
+    "cognitiveType": "reasoning",
+    "learningObjective": "複数の半反応式の電子数をそろえて全体の係数比を決定する",
+    "estimatedSeconds": 95,
+    "similarityGroup": "redox:half-combine-ratio:00",
+    "optionFeedback": [
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "正解です。原子数と電荷がそろっています。"
+    ]
+  },
+  {
+    "id": "v45-hard-half-ratio-03",
+    "q": "Cl₂がCl⁻へ還元され、I⁻がI₂へ酸化されるとき、Cl₂:I⁻の係数比はどれか。",
+    "options": [
+      "1:2",
+      "1:1",
+      "2:1",
+      "2:3"
+    ],
+    "answer": 0,
+    "scope": "foundation",
+    "stageTier": 6,
+    "category": "redox",
+    "difficulty": "入試標準〜発展・半反応式",
+    "source": "Chemion Quest v4.5独自作成（高校化学・半反応式）",
+    "hints": [
+      "酸化側と還元側の半反応式を書きます。",
+      "授受する電子数の最小公倍数を求めます。",
+      "各半反応式へ必要な倍率を掛けます。"
+    ],
+    "explanation": "【電子数】酸化側と還元側の電子数をそろえます。\n【結論】Cl₂は2e⁻を受け取り、I⁻2個が2e⁻を放出するため1:2です。\n【答え】1:2",
+    "calculation": true,
+    "visual": "stoich",
+    "difficultyLevel": 5,
+    "cognitiveType": "reasoning",
+    "learningObjective": "複数の半反応式の電子数をそろえて全体の係数比を決定する",
+    "estimatedSeconds": 95,
+    "similarityGroup": "redox:half-combine-ratio:01",
+    "optionFeedback": [
+      "正解です。原子数と電荷がそろっています。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。"
+    ]
+  },
+  {
+    "id": "v45-hard-half-ratio-04",
+    "q": "MnO₄⁻がMn²⁺へ還元され、H₂O₂がO₂へ酸化される酸性条件で、MnO₄⁻:H₂O₂の係数比はどれか。",
+    "options": [
+      "1:2",
+      "2:5",
+      "3:5",
+      "5:2"
+    ],
+    "answer": 1,
+    "scope": "foundation",
+    "stageTier": 6,
+    "category": "redox",
+    "difficulty": "入試標準〜発展・半反応式",
+    "source": "Chemion Quest v4.5独自作成（高校化学・半反応式）",
+    "hints": [
+      "酸化側と還元側の半反応式を書きます。",
+      "授受する電子数の最小公倍数を求めます。",
+      "各半反応式へ必要な倍率を掛けます。"
+    ],
+    "explanation": "【電子数】酸化側と還元側の電子数をそろえます。\n【結論】電子数の最小公倍数は10で、MnO₄⁻を2倍、H₂O₂を5倍します。\n【答え】2:5",
+    "calculation": true,
+    "visual": "stoich",
+    "difficultyLevel": 5,
+    "cognitiveType": "reasoning",
+    "learningObjective": "複数の半反応式の電子数をそろえて全体の係数比を決定する",
+    "estimatedSeconds": 95,
+    "similarityGroup": "redox:half-combine-ratio:01",
+    "optionFeedback": [
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "正解です。原子数と電荷がそろっています。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。"
+    ]
+  },
+  {
+    "id": "v45-hard-half-ratio-05",
+    "q": "Cr₂O₇²⁻がCr³⁺へ還元され、H₂O₂がO₂へ酸化される酸性条件で、Cr₂O₇²⁻:H₂O₂の係数比はどれか。",
+    "options": [
+      "1:2",
+      "2:3",
+      "1:3",
+      "3:1"
+    ],
+    "answer": 2,
+    "scope": "foundation",
+    "stageTier": 6,
+    "category": "redox",
+    "difficulty": "入試標準〜発展・半反応式",
+    "source": "Chemion Quest v4.5独自作成（高校化学・半反応式）",
+    "hints": [
+      "酸化側と還元側の半反応式を書きます。",
+      "授受する電子数の最小公倍数を求めます。",
+      "各半反応式へ必要な倍率を掛けます。"
+    ],
+    "explanation": "【電子数】酸化側と還元側の電子数をそろえます。\n【結論】Cr₂O₇²⁻は6e⁻、H₂O₂は2e⁻なので1:3です。\n【答え】1:3",
+    "calculation": true,
+    "visual": "stoich",
+    "difficultyLevel": 5,
+    "cognitiveType": "reasoning",
+    "learningObjective": "複数の半反応式の電子数をそろえて全体の係数比を決定する",
+    "estimatedSeconds": 95,
+    "similarityGroup": "redox:half-combine-ratio:02",
+    "optionFeedback": [
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "正解です。原子数と電荷がそろっています。",
+      "式の原子数・電荷・電子の位置を確認してください。"
+    ]
+  },
+  {
+    "id": "v45-hard-half-ratio-06",
+    "q": "O₂がH₂Oへ還元され、AlがAl³⁺へ酸化される酸性条件で、O₂:Alの係数比はどれか。",
+    "options": [
+      "1:3",
+      "2:3",
+      "4:3",
+      "3:4"
+    ],
+    "answer": 3,
+    "scope": "foundation",
+    "stageTier": 6,
+    "category": "redox",
+    "difficulty": "入試標準〜発展・半反応式",
+    "source": "Chemion Quest v4.5独自作成（高校化学・半反応式）",
+    "hints": [
+      "酸化側と還元側の半反応式を書きます。",
+      "授受する電子数の最小公倍数を求めます。",
+      "各半反応式へ必要な倍率を掛けます。"
+    ],
+    "explanation": "【電子数】酸化側と還元側の電子数をそろえます。\n【結論】電子数の最小公倍数は12で、O₂を3倍、Alを4倍します。\n【答え】3:4",
+    "calculation": true,
+    "visual": "stoich",
+    "difficultyLevel": 5,
+    "cognitiveType": "reasoning",
+    "learningObjective": "複数の半反応式の電子数をそろえて全体の係数比を決定する",
+    "estimatedSeconds": 95,
+    "similarityGroup": "redox:half-combine-ratio:02",
+    "optionFeedback": [
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "正解です。原子数と電荷がそろっています。"
+    ]
+  },
+  {
+    "id": "v45-hard-half-ratio-07",
+    "q": "S₂O₈²⁻がSO₄²⁻へ還元され、Fe²⁺がFe³⁺へ酸化されるとき、S₂O₈²⁻:Fe²⁺の係数比はどれか。",
+    "options": [
+      "1:2",
+      "1:1",
+      "2:1",
+      "2:3"
+    ],
+    "answer": 0,
+    "scope": "foundation",
+    "stageTier": 6,
+    "category": "redox",
+    "difficulty": "入試標準〜発展・半反応式",
+    "source": "Chemion Quest v4.5独自作成（高校化学・半反応式）",
+    "hints": [
+      "酸化側と還元側の半反応式を書きます。",
+      "授受する電子数の最小公倍数を求めます。",
+      "各半反応式へ必要な倍率を掛けます。"
+    ],
+    "explanation": "【電子数】酸化側と還元側の電子数をそろえます。\n【結論】S₂O₈²⁻は2e⁻を受け取り、Fe²⁺は1e⁻を放出するため1:2です。\n【答え】1:2",
+    "calculation": true,
+    "visual": "stoich",
+    "difficultyLevel": 5,
+    "cognitiveType": "reasoning",
+    "learningObjective": "複数の半反応式の電子数をそろえて全体の係数比を決定する",
+    "estimatedSeconds": 95,
+    "similarityGroup": "redox:half-combine-ratio:03",
+    "optionFeedback": [
+      "正解です。原子数と電荷がそろっています。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。"
+    ]
+  },
+  {
+    "id": "v45-hard-half-ratio-08",
+    "q": "NO₃⁻がNOへ還元され、CuがCu²⁺へ酸化される酸性条件で、NO₃⁻:Cuの係数比はどれか。",
+    "options": [
+      "1:2",
+      "2:3",
+      "3:2",
+      "3:4"
+    ],
+    "answer": 1,
+    "scope": "foundation",
+    "stageTier": 6,
+    "category": "redox",
+    "difficulty": "入試標準〜発展・半反応式",
+    "source": "Chemion Quest v4.5独自作成（高校化学・半反応式）",
+    "hints": [
+      "酸化側と還元側の半反応式を書きます。",
+      "授受する電子数の最小公倍数を求めます。",
+      "各半反応式へ必要な倍率を掛けます。"
+    ],
+    "explanation": "【電子数】酸化側と還元側の電子数をそろえます。\n【結論】NO₃⁻は3e⁻、Cuは2e⁻なので最小公倍数6より2:3です。\n【答え】2:3",
+    "calculation": true,
+    "visual": "stoich",
+    "difficultyLevel": 5,
+    "cognitiveType": "reasoning",
+    "learningObjective": "複数の半反応式の電子数をそろえて全体の係数比を決定する",
+    "estimatedSeconds": 95,
+    "similarityGroup": "redox:half-combine-ratio:03",
+    "optionFeedback": [
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "正解です。原子数と電荷がそろっています。",
+      "式の原子数・電荷・電子の位置を確認してください。",
+      "式の原子数・電荷・電子の位置を確認してください。"
+    ]
   }
 ]
