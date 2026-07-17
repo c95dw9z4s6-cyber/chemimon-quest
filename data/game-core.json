@@ -1,5 +1,5 @@
 {
-  "version": 27,
+  "version": 31,
   "tuningVersion": 26,
   "waveSystemVersion": 2,
   "saveKey": "chemionQuestSaveV4",
@@ -173,15 +173,39 @@
       "title": "難関研究区へ",
       "description": "Stage 4をクリアし、難関Stage 5を解放する。",
       "metric": "highestStageReached",
-      "threshold": 5
+      "goal": 5,
+      "category": "ステージ",
+      "unit": ""
     },
     {
       "id": "stage5_clear",
       "icon": "✈",
       "title": "五つの研究区を制覇",
       "description": "飛行型を含む難関Stage 5をクリアする。",
-      "metric": "highestStageCleared",
-      "threshold": 5
+      "metric": "stage5Clears",
+      "goal": 1,
+      "category": "ステージ",
+      "unit": "回"
+    },
+    {
+      "id": "mock_exam_clear",
+      "icon": "📘",
+      "title": "実戦問題に挑戦",
+      "category": "基本",
+      "description": "共通テスト型の実戦問題で初めて合格する。",
+      "metric": "mockExamsCompleted",
+      "goal": 1,
+      "unit": "大問"
+    },
+    {
+      "id": "mock_exam_perfect",
+      "icon": "💯",
+      "title": "資料読解・満点",
+      "category": "難",
+      "description": "共通テスト型の実戦問題で5問すべて正解する。",
+      "metric": "mockExamPerfects",
+      "goal": 1,
+      "unit": "大問"
     }
   ],
   "waves": [
@@ -200,7 +224,7 @@
       "rewardScale": 1
     },
     {
-      "name": "弱酸の登場",
+      "name": "弱酸由来イオンの登場",
       "enemies": [
         "aceticAcid",
         "nitrate",
@@ -348,7 +372,7 @@
       "rewardScale": 1.3
     },
     {
-      "name": "弱酸BOSS襲来",
+      "name": "弱酸由来BOSS襲来",
       "enemies": [
         "hydronium",
         "sodiumHydroxide",
@@ -417,7 +441,10 @@
       "unlockCost": 0,
       "upgradeBaseCost": 8,
       "chemistryClass": "weak_acid",
-      "chemistryLabel": "弱酸"
+      "chemistryLabel": "弱塩基由来",
+      "affinityTarget": "weak_base_conjugate_acid",
+      "liberationReaction": "NH₄⁺ + OH⁻ → NH₃ + H₂O",
+      "projectileLabel": "NH₄⁺"
     },
     {
       "id": "sulfate",
@@ -435,9 +462,10 @@
       "initiallyUnlocked": false,
       "unlockCost": 8,
       "upgradeBaseCost": 12,
-      "chemistryClass": "weak_base",
-      "chemistryLabel": "弱塩基",
-      "unlockAfter": "ammonium"
+      "chemistryClass": "neutral",
+      "chemistryLabel": "相性なし",
+      "unlockAfter": "ammonium",
+      "projectileLabel": "SO₄²⁻"
     },
     {
       "id": "cryolite",
@@ -459,7 +487,8 @@
       "chemistryLabel": "相性なし",
       "unlockAfter": "sulfate",
       "guard": true,
-      "damageReduction": 0.15
+      "damageReduction": 0.15,
+      "projectileLabel": "Na₃AlF₆"
     },
     {
       "id": "nitricAlly",
@@ -481,7 +510,8 @@
       "chemistryLabel": "強酸",
       "unlockAfter": "cryolite",
       "firstStrikeMultiplier": 1.6,
-      "pushback": 18
+      "pushback": 18,
+      "projectileLabel": "H⁺"
     },
     {
       "id": "sodiumHydroxideAlly",
@@ -505,7 +535,8 @@
       "healer": true,
       "healAmount": 42,
       "healInterval": 3.4,
-      "healRange": 112
+      "healRange": 112,
+      "projectileLabel": "OH⁻"
     }
   ],
   "enemies": [
@@ -523,7 +554,8 @@
       "baseWeight": 50,
       "xp": 50,
       "chemistryClass": "strong_acid",
-      "chemistryLabel": "強酸"
+      "chemistryLabel": "強酸",
+      "projectileLabel": "H⁺"
     },
     {
       "id": "nitricAcid",
@@ -539,7 +571,8 @@
       "baseWeight": 0,
       "xp": 85,
       "chemistryClass": "strong_acid",
-      "chemistryLabel": "強酸"
+      "chemistryLabel": "強酸",
+      "projectileLabel": "H⁺"
     },
     {
       "id": "sulfuricAcid",
@@ -555,7 +588,8 @@
       "baseWeight": 0,
       "xp": 120,
       "chemistryClass": "strong_acid",
-      "chemistryLabel": "強酸"
+      "chemistryLabel": "強酸",
+      "projectileLabel": "H⁺"
     },
     {
       "id": "nitrate",
@@ -571,7 +605,8 @@
       "baseWeight": 30,
       "xp": 80,
       "chemistryClass": "neutral",
-      "chemistryLabel": "相性なし"
+      "chemistryLabel": "相性なし",
+      "projectileLabel": "NO₃⁻"
     },
     {
       "id": "copperSulfate",
@@ -587,12 +622,13 @@
       "baseWeight": 8,
       "xp": 120,
       "chemistryClass": "neutral",
-      "chemistryLabel": "相性なし"
+      "chemistryLabel": "塩",
+      "projectileLabel": "CuSO₄"
     },
     {
       "id": "aceticAcid",
-      "formula": "CH₃COOH",
-      "name": "酢酸",
+      "formula": "CH₃COO⁻",
+      "name": "酢酸イオン",
       "hp": 112,
       "attack": 17,
       "speed": 10.8,
@@ -602,8 +638,11 @@
       "reward": 3,
       "baseWeight": 0,
       "xp": 70,
-      "chemistryClass": "weak_acid",
-      "chemistryLabel": "弱酸"
+      "chemistryClass": "weak_base",
+      "chemistryLabel": "弱酸由来",
+      "affinityTarget": "weak_acid_conjugate_base",
+      "liberationReaction": "CH₃COO⁻ + H⁺ → CH₃COOH",
+      "projectileLabel": "CH₃COO⁻"
     },
     {
       "id": "sodiumHydroxide",
@@ -619,12 +658,13 @@
       "baseWeight": 0,
       "xp": 110,
       "chemistryClass": "strong_base",
-      "chemistryLabel": "強塩基"
+      "chemistryLabel": "強塩基",
+      "projectileLabel": "OH⁻"
     },
     {
       "id": "ammonia",
-      "formula": "NH₃",
-      "name": "アンモニア",
+      "formula": "NH₄⁺",
+      "name": "アンモニウムイオン",
       "hp": 155,
       "attack": 21,
       "speed": 10.1,
@@ -634,15 +674,18 @@
       "reward": 2,
       "baseWeight": 0,
       "xp": 85,
-      "chemistryClass": "weak_base",
-      "chemistryLabel": "弱塩基"
+      "chemistryClass": "weak_acid",
+      "chemistryLabel": "弱塩基由来",
+      "affinityTarget": "weak_base_conjugate_acid",
+      "liberationReaction": "NH₄⁺ + OH⁻ → NH₃ + H₂O",
+      "projectileLabel": "NH₄⁺"
     },
     {
       "id": "carbonicBoss",
-      "formula": "H₂CO₃",
-      "name": "炭酸巨核",
-      "chemistryClass": "weak_acid",
-      "chemistryLabel": "弱酸",
+      "formula": "HCO₃⁻",
+      "name": "炭酸水素イオン",
+      "chemistryClass": "amphoteric",
+      "chemistryLabel": "弱酸由来",
       "hp": 720,
       "attack": 62,
       "speed": 4.2,
@@ -651,14 +694,19 @@
       "attackInterval": 2.4,
       "reward": 42,
       "xp": 70,
-      "boss": true
+      "boss": true,
+      "affinityTarget": "weak_acid_conjugate_base",
+      "liberationReaction": "HCO₃⁻ + H⁺ → CO₂ + H₂O",
+      "projectileLabel": "HCO₃⁻",
+      "role": "BOSS",
+      "bossIntro": "弱酸由来 HCO₃⁻ 炭酸水素イオン"
     }
   ],
   "stage2": {
     "id": 2,
     "name": "沈殿反応区",
     "subtitle": "異なる編成で再構築する第二研究区",
-    "description": "Stage 1の化学レベルと実績を持ち込みつつ、コイン・解放・研究強化は新しく始まります。範囲攻撃型KOHを軸に弱塩基BOSSへ対抗します。",
+    "description": "Stage 1の化学レベルと実績を持ち込みつつ、コイン・解放・研究強化は新しく始まります。範囲攻撃型KOHを軸に、弱塩基由来のBOSSへ対抗します。",
     "theme": "precipitation",
     "allyBaseLabel": "ION FORGE",
     "enemyBaseLabel": "PRECIP CORE",
@@ -666,7 +714,7 @@
     "enemyBaseHp": 1050,
     "startingEnergy": 65,
     "coinRewardMultiplier": 1.35,
-    "bossHint": "強塩基属性が有効",
+    "bossHint": "強塩基による弱塩基の遊離が有効",
     "units": [
       {
         "id": "dihydrogenPhosphateAlly",
@@ -684,8 +732,9 @@
         "initiallyUnlocked": true,
         "unlockCost": 0,
         "upgradeBaseCost": 9,
-        "chemistryClass": "weak_acid",
-        "chemistryLabel": "弱酸"
+        "chemistryClass": "amphoteric",
+        "chemistryLabel": "両性",
+        "projectileLabel": "H₂PO₄⁻"
       },
       {
         "id": "silicaAlly",
@@ -707,7 +756,8 @@
         "chemistryLabel": "相性なし",
         "unlockAfter": "dihydrogenPhosphateAlly",
         "guard": true,
-        "damageReduction": 0.15
+        "damageReduction": 0.15,
+        "projectileLabel": "SiO₂"
       },
       {
         "id": "potassiumHydroxideAlly",
@@ -729,7 +779,8 @@
         "chemistryLabel": "強塩基",
         "unlockAfter": "silicaAlly",
         "splashRadius": 58,
-        "splashFactor": 0.55
+        "splashFactor": 0.55,
+        "projectileLabel": "OH⁻"
       },
       {
         "id": "acetateAlly",
@@ -748,8 +799,11 @@
         "unlockCost": 65,
         "upgradeBaseCost": 22,
         "chemistryClass": "weak_base",
-        "chemistryLabel": "弱塩基",
-        "unlockAfter": "potassiumHydroxideAlly"
+        "chemistryLabel": "弱酸由来",
+        "unlockAfter": "potassiumHydroxideAlly",
+        "affinityTarget": "weak_acid_conjugate_base",
+        "liberationReaction": "CH₃COO⁻ + H⁺ → CH₃COOH",
+        "projectileLabel": "CH₃COO⁻"
       },
       {
         "id": "hydrobromicAlly",
@@ -771,7 +825,8 @@
         "chemistryLabel": "強酸",
         "unlockAfter": "acetateAlly",
         "firstStrikeMultiplier": 1.55,
-        "pushback": 18
+        "pushback": 18,
+        "projectileLabel": "H⁺"
       }
     ],
     "enemies": [
@@ -789,12 +844,13 @@
         "baseWeight": 50,
         "xp": 55,
         "chemistryClass": "neutral",
-        "chemistryLabel": "相性なし"
+        "chemistryLabel": "塩",
+        "projectileLabel": "KCl"
       },
       {
         "id": "formicAcid",
-        "formula": "HCOOH",
-        "name": "ギ酸",
+        "formula": "HCOO⁻",
+        "name": "ギ酸イオン",
         "hp": 120,
         "attack": 18,
         "speed": 10.8,
@@ -804,8 +860,11 @@
         "reward": 3,
         "baseWeight": 0,
         "xp": 75,
-        "chemistryClass": "weak_acid",
-        "chemistryLabel": "弱酸"
+        "chemistryClass": "weak_base",
+        "chemistryLabel": "弱酸由来",
+        "affinityTarget": "weak_acid_conjugate_base",
+        "liberationReaction": "HCOO⁻ + H⁺ → HCOOH",
+        "projectileLabel": "HCOO⁻"
       },
       {
         "id": "carbonateEnemy",
@@ -821,7 +880,10 @@
         "baseWeight": 20,
         "xp": 90,
         "chemistryClass": "weak_base",
-        "chemistryLabel": "弱塩基"
+        "chemistryLabel": "弱酸由来",
+        "affinityTarget": "weak_acid_conjugate_base",
+        "liberationReaction": "CO₃²⁻ + 2H⁺ → CO₂ + H₂O",
+        "projectileLabel": "CO₃²⁻"
       },
       {
         "id": "perchloricAcid",
@@ -837,7 +899,8 @@
         "baseWeight": 0,
         "xp": 100,
         "chemistryClass": "strong_acid",
-        "chemistryLabel": "強酸"
+        "chemistryLabel": "強酸",
+        "projectileLabel": "H⁺"
       },
       {
         "id": "bariumHydroxide",
@@ -853,7 +916,8 @@
         "baseWeight": 0,
         "xp": 122,
         "chemistryClass": "strong_base",
-        "chemistryLabel": "強塩基"
+        "chemistryLabel": "強塩基",
+        "projectileLabel": "OH⁻"
       },
       {
         "id": "ferricChloride",
@@ -869,12 +933,13 @@
         "baseWeight": 8,
         "xp": 135,
         "chemistryClass": "neutral",
-        "chemistryLabel": "相性なし"
+        "chemistryLabel": "塩",
+        "projectileLabel": "FeCl₃"
       },
       {
         "id": "hydrogenSulfide",
-        "formula": "H₂S",
-        "name": "硫化水素",
+        "formula": "HS⁻",
+        "name": "硫化水素イオン",
         "hp": 128,
         "attack": 19,
         "speed": 10.2,
@@ -884,8 +949,11 @@
         "reward": 3,
         "baseWeight": 0,
         "xp": 82,
-        "chemistryClass": "weak_acid",
-        "chemistryLabel": "弱酸"
+        "chemistryClass": "weak_base",
+        "chemistryLabel": "弱酸由来",
+        "affinityTarget": "weak_acid_conjugate_base",
+        "liberationReaction": "HS⁻ + H⁺ → H₂S",
+        "projectileLabel": "HS⁻"
       },
       {
         "id": "bicarbonateEnemy",
@@ -900,13 +968,16 @@
         "reward": 3,
         "baseWeight": 0,
         "xp": 98,
-        "chemistryClass": "weak_base",
-        "chemistryLabel": "弱塩基"
+        "chemistryClass": "amphoteric",
+        "chemistryLabel": "弱酸由来",
+        "affinityTarget": "weak_acid_conjugate_base",
+        "liberationReaction": "HCO₃⁻ + H⁺ → CO₂ + H₂O",
+        "projectileLabel": "HCO₃⁻"
       },
       {
         "id": "ethylamineBoss",
-        "formula": "C₂H₅NH₂",
-        "name": "エチルアミン巨核",
+        "formula": "C₂H₅NH₃⁺",
+        "name": "エチルアンモニウムイオン",
         "hp": 820,
         "attack": 69,
         "speed": 3.8,
@@ -916,8 +987,13 @@
         "reward": 50,
         "xp": 90,
         "boss": true,
-        "chemistryClass": "weak_base",
-        "chemistryLabel": "弱塩基"
+        "chemistryClass": "weak_acid",
+        "chemistryLabel": "弱塩基由来",
+        "affinityTarget": "weak_base_conjugate_acid",
+        "liberationReaction": "C₂H₅NH₃⁺ + OH⁻ → C₂H₅NH₂ + H₂O",
+        "projectileLabel": "C₂H₅NH₃⁺",
+        "role": "BOSS",
+        "bossIntro": "弱塩基由来 C₂H₅NH₃⁺ エチルアンモニウムイオン"
       }
     ],
     "waves": [
@@ -936,7 +1012,7 @@
         "rewardScale": 1.0
       },
       {
-        "name": "弱酸の浸入",
+        "name": "弱酸由来イオンの浸入",
         "enemies": [
           "formicAcid",
           "potassiumChloride",
@@ -1084,7 +1160,7 @@
         "rewardScale": 1.3
       },
       {
-        "name": "弱塩基BOSS襲来",
+        "name": "弱塩基由来BOSS襲来",
         "enemies": [
           "perchloricAcid",
           "bariumHydroxide",
@@ -1203,7 +1279,7 @@
     430,
     600
   ],
-  "chemistryAffinityVersion": 2,
+  "chemistryAffinityVersion": 3,
   "xpMultiplier": 10,
   "waveIntervalSeconds": 30,
   "finalWaveStartSeconds": 300,
@@ -1234,7 +1310,7 @@
     "id": 3,
     "name": "酸化還元反応区",
     "subtitle": "電子移動と二段階BOSSの第三研究区",
-    "description": "Stage 2までの共通記録を持ち込み、コイン・解放・研究は新しく開始。BOSSは撃破後に化学式と属性を変えて第二形態へ移行します。",
+    "description": "Stage 2までの共通記録を持ち込み、コイン・解放・研究は新しく開始。BOSSは第1形態の次亜塩素酸イオンが還元され、塩化物イオンの第二形態へ移行します。",
     "theme": "redox",
     "allyBaseLabel": "ELECTRON HUB",
     "enemyBaseLabel": "REDOX CORE",
@@ -1242,7 +1318,7 @@
     "enemyBaseHp": 1160,
     "startingEnergy": 65,
     "coinRewardMultiplier": 1.25,
-    "bossHint": "第1形態は強酸、第2形態は強塩基が有効",
+    "bossHint": "第1形態は強酸による弱酸の遊離が有効。第2形態は相性補正なし",
     "units": [
       {
         "id": "ironTwoAlly",
@@ -1260,8 +1336,9 @@
         "initiallyUnlocked": true,
         "unlockCost": 0,
         "upgradeBaseCost": 10,
-        "chemistryClass": "neutral",
-        "chemistryLabel": "相性なし"
+        "chemistryClass": "redox",
+        "chemistryLabel": "酸化還元",
+        "projectileLabel": "Fe²⁺"
       },
       {
         "id": "iodideAlly",
@@ -1279,9 +1356,10 @@
         "initiallyUnlocked": false,
         "unlockCost": 24,
         "upgradeBaseCost": 15,
-        "chemistryClass": "weak_base",
-        "chemistryLabel": "弱塩基",
-        "unlockAfter": "ironTwoAlly"
+        "chemistryClass": "neutral",
+        "chemistryLabel": "相性なし",
+        "unlockAfter": "ironTwoAlly",
+        "projectileLabel": "I⁻"
       },
       {
         "id": "manganeseDioxideAlly",
@@ -1299,11 +1377,12 @@
         "initiallyUnlocked": false,
         "unlockCost": 52,
         "upgradeBaseCost": 20,
-        "chemistryClass": "neutral",
-        "chemistryLabel": "相性なし",
+        "chemistryClass": "redox",
+        "chemistryLabel": "酸化還元",
         "unlockAfter": "iodideAlly",
         "guard": true,
-        "damageReduction": 0.15
+        "damageReduction": 0.15,
+        "projectileLabel": "MnO₂"
       },
       {
         "id": "sulfuricAlly3",
@@ -1325,7 +1404,8 @@
         "chemistryLabel": "強酸",
         "unlockAfter": "manganeseDioxideAlly",
         "firstStrikeMultiplier": 1.55,
-        "pushback": 18
+        "pushback": 18,
+        "projectileLabel": "H⁺"
       },
       {
         "id": "calciumHydroxideAlly",
@@ -1349,7 +1429,8 @@
         "healer": true,
         "healAmount": 52,
         "healInterval": 3.25,
-        "healRange": 122
+        "healRange": 122,
+        "projectileLabel": "OH⁻"
       }
     ],
     "enemies": [
@@ -1366,8 +1447,9 @@
         "reward": 2,
         "baseWeight": 45,
         "xp": 62,
-        "chemistryClass": "neutral",
-        "chemistryLabel": "相性なし"
+        "chemistryClass": "redox",
+        "chemistryLabel": "酸化還元",
+        "projectileLabel": "Fe³⁺"
       },
       {
         "id": "chlorineEnemy",
@@ -1382,8 +1464,9 @@
         "reward": 3,
         "baseWeight": 15,
         "xp": 78,
-        "chemistryClass": "neutral",
-        "chemistryLabel": "相性なし"
+        "chemistryClass": "redox",
+        "chemistryLabel": "酸化還元",
+        "projectileLabel": "Cl₂"
       },
       {
         "id": "peroxideEnemy",
@@ -1398,8 +1481,9 @@
         "reward": 3,
         "baseWeight": 0,
         "xp": 88,
-        "chemistryClass": "weak_acid",
-        "chemistryLabel": "弱酸"
+        "chemistryClass": "redox",
+        "chemistryLabel": "酸化還元",
+        "projectileLabel": "H₂O₂"
       },
       {
         "id": "sulfiteEnemy",
@@ -1415,7 +1499,10 @@
         "baseWeight": 12,
         "xp": 102,
         "chemistryClass": "weak_base",
-        "chemistryLabel": "弱塩基"
+        "chemistryLabel": "弱酸由来",
+        "affinityTarget": "weak_acid_conjugate_base",
+        "liberationReaction": "SO₃²⁻ + 2H⁺ → SO₂ + H₂O",
+        "projectileLabel": "SO₃²⁻"
       },
       {
         "id": "hydrochloricEnemy3",
@@ -1431,7 +1518,8 @@
         "baseWeight": 0,
         "xp": 105,
         "chemistryClass": "strong_acid",
-        "chemistryLabel": "強酸"
+        "chemistryLabel": "強酸",
+        "projectileLabel": "H⁺"
       },
       {
         "id": "hydroxideEnemy3",
@@ -1447,7 +1535,8 @@
         "baseWeight": 0,
         "xp": 128,
         "chemistryClass": "strong_base",
-        "chemistryLabel": "強塩基"
+        "chemistryLabel": "強塩基",
+        "projectileLabel": "OH⁻"
       },
       {
         "id": "copperTwoEnemy",
@@ -1462,8 +1551,9 @@
         "reward": 5,
         "baseWeight": 8,
         "xp": 145,
-        "chemistryClass": "neutral",
-        "chemistryLabel": "相性なし"
+        "chemistryClass": "redox",
+        "chemistryLabel": "酸化還元",
+        "projectileLabel": "Cu²⁺"
       },
       {
         "id": "permanganateEnemy",
@@ -1478,13 +1568,14 @@
         "reward": 4,
         "baseWeight": 0,
         "xp": 118,
-        "chemistryClass": "weak_base",
-        "chemistryLabel": "弱塩基"
+        "chemistryClass": "redox",
+        "chemistryLabel": "酸化還元",
+        "projectileLabel": "MnO₄⁻"
       },
       {
         "id": "hypochlorousBoss",
-        "formula": "HClO",
-        "name": "次亜塩素酸巨核",
+        "formula": "ClO⁻",
+        "name": "次亜塩素酸イオン",
         "hp": 900,
         "attack": 72,
         "speed": 3.6,
@@ -1494,14 +1585,14 @@
         "reward": 64,
         "xp": 120,
         "boss": true,
-        "chemistryClass": "weak_acid",
-        "chemistryLabel": "弱酸",
-        "bossIntro": "弱酸 HClO 次亜塩素酸巨核",
+        "chemistryClass": "weak_base",
+        "chemistryLabel": "弱酸由来",
+        "bossIntro": "弱酸由来 ClO⁻ 次亜塩素酸イオン",
         "phaseTwo": {
           "formula": "Cl⁻",
-          "name": "塩化物イオン暴走形態",
-          "chemistryClass": "weak_base",
-          "chemistryLabel": "弱塩基",
+          "name": "塩化物イオン",
+          "chemistryClass": "neutral",
+          "chemistryLabel": "相性なし",
           "hp": 1180,
           "attack": 88,
           "speed": 5.2,
@@ -1510,8 +1601,13 @@
           "attackInterval": 2.15,
           "reward": 64,
           "xp": 120,
-          "transformText": "還元反応：HClO → Cl⁻　第二形態へ"
-        }
+          "transformText": "還元反応：ClO⁻ + 2H⁺ + 2e⁻ → Cl⁻ + H₂O",
+          "projectileLabel": "Cl⁻"
+        },
+        "affinityTarget": "weak_acid_conjugate_base",
+        "liberationReaction": "ClO⁻ + H⁺ → HClO",
+        "projectileLabel": "ClO⁻",
+        "role": "BOSS"
       }
     ],
     "waves": [
@@ -1826,7 +1922,7 @@
     "enemyBaseHp": 1260,
     "startingEnergy": 65,
     "coinRewardMultiplier": 1.2,
-    "bossHint": "強酸属性が有効",
+    "bossHint": "強酸による弱酸の遊離が有効",
     "units": [
       {
         "id": "hydrochloricAlly4",
@@ -1845,7 +1941,8 @@
         "unlockCost": 0,
         "upgradeBaseCost": 11,
         "chemistryClass": "strong_acid",
-        "chemistryLabel": "強酸"
+        "chemistryLabel": "強酸",
+        "projectileLabel": "H⁺"
       },
       {
         "id": "ammoniaAlly4",
@@ -1865,7 +1962,8 @@
         "upgradeBaseCost": 17,
         "chemistryClass": "weak_base",
         "chemistryLabel": "弱塩基",
-        "unlockAfter": "hydrochloricAlly4"
+        "unlockAfter": "hydrochloricAlly4",
+        "projectileLabel": "NH₃"
       },
       {
         "id": "sulfuricAlly4",
@@ -1887,7 +1985,8 @@
         "chemistryLabel": "強酸",
         "unlockAfter": "ammoniaAlly4",
         "guard": true,
-        "damageReduction": 0.15
+        "damageReduction": 0.15,
+        "projectileLabel": "H⁺"
       },
       {
         "id": "sodiumHydroxideAlly4",
@@ -1909,7 +2008,8 @@
         "chemistryLabel": "強塩基",
         "unlockAfter": "sulfuricAlly4",
         "splashRadius": 62,
-        "splashFactor": 0.55
+        "splashFactor": 0.55,
+        "projectileLabel": "OH⁻"
       },
       {
         "id": "waterAlly4",
@@ -1933,7 +2033,8 @@
         "healer": true,
         "healAmount": 58,
         "healInterval": 3.1,
-        "healRange": 128
+        "healRange": 128,
+        "projectileLabel": "H₂O"
       }
     ],
     "enemies": [
@@ -1950,13 +2051,14 @@
         "reward": 2,
         "baseWeight": 42,
         "xp": 68,
-        "chemistryClass": "neutral",
-        "chemistryLabel": "相性なし"
+        "chemistryClass": "acidic_oxide",
+        "chemistryLabel": "酸性酸化物",
+        "projectileLabel": "CO₂"
       },
       {
         "id": "aceticAcidEnemy4",
-        "formula": "CH₃COOH",
-        "name": "酢酸",
+        "formula": "CH₃COO⁻",
+        "name": "酢酸イオン",
         "hp": 148,
         "attack": 23,
         "speed": 10.8,
@@ -1966,8 +2068,11 @@
         "reward": 3,
         "baseWeight": 14,
         "xp": 88,
-        "chemistryClass": "weak_acid",
-        "chemistryLabel": "弱酸"
+        "chemistryClass": "weak_base",
+        "chemistryLabel": "弱酸由来",
+        "affinityTarget": "weak_acid_conjugate_base",
+        "liberationReaction": "CH₃COO⁻ + H⁺ → CH₃COOH",
+        "projectileLabel": "CH₃COO⁻"
       },
       {
         "id": "carbonateEnemy4",
@@ -1983,7 +2088,10 @@
         "baseWeight": 15,
         "xp": 105,
         "chemistryClass": "weak_base",
-        "chemistryLabel": "弱塩基"
+        "chemistryLabel": "弱酸由来",
+        "affinityTarget": "weak_acid_conjugate_base",
+        "liberationReaction": "CO₃²⁻ + 2H⁺ → CO₂ + H₂O",
+        "projectileLabel": "CO₃²⁻"
       },
       {
         "id": "nitricAcidEnemy4",
@@ -1999,7 +2107,8 @@
         "baseWeight": 0,
         "xp": 116,
         "chemistryClass": "strong_acid",
-        "chemistryLabel": "強酸"
+        "chemistryLabel": "強酸",
+        "projectileLabel": "H⁺"
       },
       {
         "id": "potassiumHydroxideEnemy4",
@@ -2015,7 +2124,8 @@
         "baseWeight": 0,
         "xp": 136,
         "chemistryClass": "strong_base",
-        "chemistryLabel": "強塩基"
+        "chemistryLabel": "強塩基",
+        "projectileLabel": "OH⁻"
       },
       {
         "id": "sodiumChlorideEnemy4",
@@ -2031,7 +2141,8 @@
         "baseWeight": 8,
         "xp": 155,
         "chemistryClass": "neutral",
-        "chemistryLabel": "相性なし"
+        "chemistryLabel": "塩",
+        "projectileLabel": "NaCl"
       },
       {
         "id": "sulfurDioxideEnemy4",
@@ -2046,8 +2157,9 @@
         "reward": 4,
         "baseWeight": 0,
         "xp": 126,
-        "chemistryClass": "weak_acid",
-        "chemistryLabel": "弱酸"
+        "chemistryClass": "acidic_oxide",
+        "chemistryLabel": "酸性酸化物",
+        "projectileLabel": "SO₂"
       },
       {
         "id": "ammoniumEnemy4",
@@ -2063,12 +2175,15 @@
         "baseWeight": 0,
         "xp": 124,
         "chemistryClass": "weak_acid",
-        "chemistryLabel": "弱酸"
+        "chemistryLabel": "弱塩基由来",
+        "affinityTarget": "weak_base_conjugate_acid",
+        "liberationReaction": "NH₄⁺ + OH⁻ → NH₃ + H₂O",
+        "projectileLabel": "NH₄⁺"
       },
       {
         "id": "carbonicBoss4",
-        "formula": "H₂CO₃",
-        "name": "炭酸圧縮巨核",
+        "formula": "HCO₃⁻",
+        "name": "炭酸水素イオン",
         "hp": 1120,
         "attack": 86,
         "speed": 3.4,
@@ -2078,9 +2193,13 @@
         "reward": 78,
         "xp": 145,
         "boss": true,
-        "chemistryClass": "weak_acid",
-        "chemistryLabel": "弱酸",
-        "bossIntro": "弱酸 H₂CO₃ 炭酸圧縮巨核"
+        "chemistryClass": "amphoteric",
+        "chemistryLabel": "弱酸由来",
+        "bossIntro": "弱酸由来 HCO₃⁻ 炭酸水素イオン",
+        "affinityTarget": "weak_acid_conjugate_base",
+        "liberationReaction": "HCO₃⁻ + H⁺ → CO₂ + H₂O",
+        "projectileLabel": "HCO₃⁻",
+        "role": "BOSS"
       }
     ],
     "waves": [
@@ -2099,7 +2218,7 @@
         "rewardScale": 1.0
       },
       {
-        "name": "弱酸蒸気の流入",
+        "name": "弱酸由来イオンの流入",
         "enemies": [
           "aceticAcidEnemy4",
           "carbonDioxideEnemy4",
@@ -2310,7 +2429,7 @@
     "enemyBaseHp": 1500,
     "startingEnergy": 72,
     "coinRewardMultiplier": 1.35,
-    "bossHint": "第1形態は強酸が有効。第2形態は飛行するため対空ユニットが重要",
+    "bossHint": "第1形態は酸化還元BOSSで相性補正なし。第2形態は飛行するため対空ユニットが重要",
     "milestone": true,
     "difficultyLabel": "難関・MILESTONE",
     "units": [
@@ -2330,9 +2449,10 @@
         "initiallyUnlocked": true,
         "unlockCost": 0,
         "upgradeBaseCost": 12,
-        "chemistryClass": "weak_base",
-        "chemistryLabel": "弱塩基",
-        "antiAir": true
+        "chemistryClass": "neutral",
+        "chemistryLabel": "相性なし",
+        "antiAir": true,
+        "projectileLabel": "Cl⁻"
       },
       {
         "id": "aluminumHydroxideAlly5",
@@ -2350,11 +2470,12 @@
         "initiallyUnlocked": false,
         "unlockCost": 44,
         "upgradeBaseCost": 20,
-        "chemistryClass": "weak_base",
-        "chemistryLabel": "弱塩基",
+        "chemistryClass": "amphoteric",
+        "chemistryLabel": "両性",
         "unlockAfter": "chlorideAlly5",
         "guard": true,
-        "damageReduction": 0.18
+        "damageReduction": 0.18,
+        "projectileLabel": "Al(OH)₃"
       },
       {
         "id": "nitricAcidAlly5",
@@ -2376,12 +2497,13 @@
         "chemistryLabel": "強酸",
         "unlockAfter": "aluminumHydroxideAlly5",
         "firstStrikeMultiplier": 1.7,
-        "pushback": 21
+        "pushback": 21,
+        "projectileLabel": "H⁺"
       },
       {
         "id": "sodiumCarbonateAlly5",
-        "formula": "Na₂CO₃",
-        "name": "炭酸ナトリウム",
+        "formula": "Ba(OH)₂",
+        "name": "水酸化バリウム",
         "role": "対空範囲反応型",
         "cost": 48,
         "hp": 138,
@@ -2399,7 +2521,8 @@
         "unlockAfter": "nitricAcidAlly5",
         "splashRadius": 76,
         "splashFactor": 0.55,
-        "antiAir": true
+        "antiAir": true,
+        "projectileLabel": "OH⁻"
       },
       {
         "id": "sulfurDioxideAlly5",
@@ -2417,22 +2540,23 @@
         "initiallyUnlocked": false,
         "unlockCost": 158,
         "upgradeBaseCost": 30,
-        "chemistryClass": "weak_acid",
-        "chemistryLabel": "弱酸",
+        "chemistryClass": "acidic_oxide",
+        "chemistryLabel": "酸性酸化物",
         "unlockAfter": "sodiumCarbonateAlly5",
         "flying": true,
         "antiAir": true,
         "selfDamagePerSecond": 0.0125,
         "airVulnerability": 1.8,
         "baseDamageMultiplier": 0.55,
-        "flightHeight": 48
+        "flightHeight": 48,
+        "projectileLabel": "SO₂"
       }
     ],
     "enemies": [
       {
         "id": "ammoniumInfantryEnemy5",
         "formula": "NH₄⁺",
-        "name": "アンモニウム歩兵",
+        "name": "アンモニウムイオン",
         "role": "歩兵型",
         "hp": 176,
         "attack": 28,
@@ -2444,12 +2568,15 @@
         "baseWeight": 34,
         "xp": 94,
         "chemistryClass": "weak_acid",
-        "chemistryLabel": "弱酸"
+        "chemistryLabel": "弱塩基由来",
+        "affinityTarget": "weak_base_conjugate_acid",
+        "liberationReaction": "NH₄⁺ + OH⁻ → NH₃ + H₂O",
+        "projectileLabel": "NH₄⁺"
       },
       {
         "id": "acetateArcherEnemy5",
         "formula": "CH₃COO⁻",
-        "name": "酢酸イオン射手",
+        "name": "酢酸イオン",
         "role": "弓兵型",
         "hp": 132,
         "attack": 42,
@@ -2461,13 +2588,16 @@
         "baseWeight": 18,
         "xp": 112,
         "chemistryClass": "weak_base",
-        "chemistryLabel": "弱塩基",
-        "antiAir": true
+        "chemistryLabel": "弱酸由来",
+        "antiAir": true,
+        "affinityTarget": "weak_acid_conjugate_base",
+        "liberationReaction": "CH₃COO⁻ + H⁺ → CH₃COOH",
+        "projectileLabel": "CH₃COO⁻"
       },
       {
         "id": "silicaGuardEnemy5",
         "formula": "SiO₂",
-        "name": "二酸化ケイ素防壁",
+        "name": "二酸化ケイ素",
         "role": "盾兵型",
         "hp": 430,
         "attack": 24,
@@ -2481,12 +2611,13 @@
         "chemistryClass": "neutral",
         "chemistryLabel": "相性なし",
         "guard": true,
-        "damageReduction": 0.17
+        "damageReduction": 0.17,
+        "projectileLabel": "SiO₂"
       },
       {
         "id": "hydrochloricAssaultEnemy5",
         "formula": "HCl",
-        "name": "塩酸強襲体",
+        "name": "塩酸",
         "role": "強襲型",
         "hp": 152,
         "attack": 68,
@@ -2500,12 +2631,13 @@
         "chemistryClass": "strong_acid",
         "chemistryLabel": "強酸",
         "firstStrikeMultiplier": 1.55,
-        "pushback": 16
+        "pushback": 16,
+        "projectileLabel": "H⁺"
       },
       {
         "id": "sodiumHydroxideSplashEnemy5",
         "formula": "NaOH",
-        "name": "水酸化ナトリウム散布体",
+        "name": "水酸化ナトリウム",
         "role": "範囲反応型",
         "hp": 198,
         "attack": 38,
@@ -2520,12 +2652,13 @@
         "chemistryLabel": "強塩基",
         "splashRadius": 64,
         "splashFactor": 0.45,
-        "antiAir": true
+        "antiAir": true,
+        "projectileLabel": "OH⁻"
       },
       {
         "id": "waterHealerEnemy5",
         "formula": "H₂O",
-        "name": "水和支援体",
+        "name": "水",
         "role": "回復型",
         "hp": 164,
         "attack": 12,
@@ -2540,12 +2673,13 @@
         "chemistryLabel": "相性なし",
         "healer": true,
         "healAmount": 28,
-        "healRange": 112
+        "healRange": 112,
+        "projectileLabel": "H₂O"
       },
       {
         "id": "carbonDioxideFlyingEnemy5",
         "formula": "CO₂",
-        "name": "二酸化炭素飛行体",
+        "name": "二酸化炭素",
         "role": "飛行型",
         "hp": 116,
         "attack": 38,
@@ -2556,18 +2690,19 @@
         "reward": 5,
         "baseWeight": 8,
         "xp": 126,
-        "chemistryClass": "neutral",
-        "chemistryLabel": "相性なし",
+        "chemistryClass": "acidic_oxide",
+        "chemistryLabel": "酸性酸化物",
         "flying": true,
         "antiAir": true,
         "selfDamagePerSecond": 0.006,
         "airVulnerability": 1.75,
-        "flightHeight": 46
+        "flightHeight": 46,
+        "projectileLabel": "CO₂"
       },
       {
         "id": "ammoniaFlyingEnemy5",
-        "formula": "NH₃",
-        "name": "アンモニア飛行射手",
+        "formula": "NH₄⁺",
+        "name": "アンモニウムイオン",
         "role": "飛行弓兵型",
         "hp": 138,
         "attack": 46,
@@ -2578,18 +2713,21 @@
         "reward": 6,
         "baseWeight": 5,
         "xp": 146,
-        "chemistryClass": "weak_base",
-        "chemistryLabel": "弱塩基",
+        "chemistryClass": "weak_acid",
+        "chemistryLabel": "弱塩基由来",
         "flying": true,
         "antiAir": true,
         "selfDamagePerSecond": 0.004,
         "airVulnerability": 1.8,
-        "flightHeight": 52
+        "flightHeight": 52,
+        "affinityTarget": "weak_base_conjugate_acid",
+        "liberationReaction": "NH₄⁺ + OH⁻ → NH₃ + H₂O",
+        "projectileLabel": "NH₄⁺"
       },
       {
         "id": "chlorineFlyingEnemy5",
         "formula": "Cl₂",
-        "name": "塩素飛行強襲体",
+        "name": "塩素",
         "role": "飛行強襲型",
         "hp": 188,
         "attack": 62,
@@ -2600,19 +2738,20 @@
         "reward": 7,
         "baseWeight": 3,
         "xp": 168,
-        "chemistryClass": "neutral",
-        "chemistryLabel": "相性なし",
+        "chemistryClass": "redox",
+        "chemistryLabel": "酸化還元",
         "flying": true,
         "antiAir": true,
         "selfDamagePerSecond": 0.0035,
         "airVulnerability": 1.7,
         "flightHeight": 56,
-        "firstStrikeMultiplier": 1.35
+        "firstStrikeMultiplier": 1.35,
+        "projectileLabel": "Cl₂"
       },
       {
         "id": "hydrogenPeroxideBoss5",
         "formula": "H₂O₂",
-        "name": "過酸化水素統合巨核",
+        "name": "過酸化水素",
         "role": "BOSS",
         "hp": 1420,
         "attack": 92,
@@ -2624,14 +2763,14 @@
         "baseWeight": 0,
         "xp": 190,
         "boss": true,
-        "chemistryClass": "weak_acid",
-        "chemistryLabel": "弱酸",
-        "bossIntro": "難関BOSS 弱酸 H₂O₂ 過酸化水素統合巨核",
+        "chemistryClass": "redox",
+        "chemistryLabel": "酸化還元",
+        "bossIntro": "酸化還元 H₂O₂ 過酸化水素",
         "guard": true,
         "damageReduction": 0.1,
         "phaseTwo": {
           "formula": "O₂",
-          "name": "酸素・飛行暴走形態",
+          "name": "酸素",
           "role": "飛行BOSS",
           "hp": 1180,
           "attack": 108,
@@ -2648,8 +2787,10 @@
           "selfDamagePerSecond": 0.0015,
           "airVulnerability": 1.55,
           "flightHeight": 60,
-          "transformText": "2H₂O₂ → 2H₂O + O₂｜酸素飛行形態へ移行"
-        }
+          "transformText": "分解反応：2H₂O₂ → 2H₂O + O₂",
+          "projectileLabel": "O₂"
+        },
+        "projectileLabel": "H₂O₂"
       }
     ],
     "waves": [
