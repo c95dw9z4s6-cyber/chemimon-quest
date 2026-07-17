@@ -1,0 +1,25 @@
+{
+  "version": "3.7",
+  "releaseDate": "2026-07-17",
+  "saveVersion": 27,
+  "releaseName": "開発効率化アップデート",
+  "noticeTitle": "開発・検査・配布作業を自動化",
+  "noticeBody": "ゲーム内容とセーブ仕様は維持したまま、問題データを通常問題・難問・ゲーム設定へ分離しました。バージョン反映、構文・問題・PWA・出題分散の検査、READMEと引き継ぎ文書の生成、配布用ZIP作成を1コマンドで実行できる開発基盤を追加しました。",
+  "historySummary": "ゲーム内容を変えず、開発用の問題データ分離とリリース自動化を実施。config/release.jsonを基準に版表記・version.json・Service Worker・README・引き継ぎ文書を同期し、build・validate・releaseの各スクリプトとGitHub Actionsの同期検査を追加。",
+  "releaseNotes": [
+    "通常問題、難問、ゲーム設定をdataフォルダーのJSONへ分離しました。",
+    "config/release.jsonの1か所を基準に、ゲーム画面、version.json、Service Worker、README、引き継ぎ文書へ版情報を自動反映します。",
+    "npm run releaseで、生成・構文検査・問題検査・出題分散試験・配布フォルダー・ZIP作成まで一括実行します。",
+    "生成済みファイルと開発元データの不一致をGitHub Actionsで検出し、検査に失敗した版は公開しません。",
+    "ゲーム内容、基本問題320問、難問182問、内部セーブバージョン27、Firebase、ランキング、PWA、必須更新を維持しました。"
+  ],
+  "expectedCounts": {
+    "basic": 320,
+    "hard": 182
+  },
+  "questionHistory": {
+    "exact": 30,
+    "near": 20,
+    "family": 8
+  }
+}
