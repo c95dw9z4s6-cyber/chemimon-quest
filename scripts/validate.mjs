@@ -99,7 +99,7 @@ if (dataMatch) {
     assert(Array.isArray(q.optionFeedback) && q.optionFeedback.length === 4, `${q.pool}[${i}] optionFeedback must have 4 entries`);
     if (q.pool === 'hard') {
       assert(q.id === undefined || (typeof q.id === 'string' && q.id.length > 0), `hard[${i}] invalid id`);
-      assert(Number.isInteger(q.stageTier) && q.stageTier >= 1 && q.stageTier <= 5, `hard[${i}] invalid stageTier`);
+      assert(Number.isInteger(q.stageTier) && q.stageTier >= 1 && q.stageTier <= 7, `hard[${i}] invalid stageTier`);
       assert(typeof q.source === 'string' && q.source.trim().length > 0, `hard[${i}] missing source`);
     }
   }
@@ -190,6 +190,14 @@ assert(requestRules.includes('allow delete: if request.auth != null;'), 'univers
 for (const file of ['src/styles/core.css','src/styles/release.css','src/scripts/game-runtime.js','src/scripts/online-runtime.js','src/scripts/pwa-runtime.js','config/features.json']) {
   assert(fs.existsSync(path.join(projectRoot, file)), `missing modular source: ${file}`);
 }
+
+
+  const stage8 = sourceData.stage8;
+  const stage8Boss = stage8?.enemies?.find((enemy) => enemy.boss);
+  assert(stage8?.id === 8 && stage8?.waves?.length === 11, 'Stage 8 must have 11 waves');
+  assert(stage8Boss?.wipeAlliesOnArrival === true && !stage8Boss?.phaseTwo, 'Stage 8 boss special arrival/no-phase rule missing');
+  assert(stage8Boss?.hp <= 500 && stage8Boss?.speed > 48, 'Stage 8 boss HP/speed tuning is invalid');
+  assert(sourceData.maxEnergyCapacityLevel === 12 && sourceData.maxEnergy + sourceData.energyCapacityPerLevel * 11 === 265, 'Energy capacity must reach Lv.12/max265');
 
 for (const file of ['manifest.webmanifest', 'version.json', 'sw.js', 'icons/icon-192.png', 'icons/icon-512.png', 'icons/icon-maskable-512.png', 'icons/apple-touch-icon.png']) {
   assert(fs.existsSync(path.join(projectRoot, file)), `missing PWA asset: ${file}`);

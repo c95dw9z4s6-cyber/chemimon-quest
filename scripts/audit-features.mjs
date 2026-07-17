@@ -35,7 +35,14 @@ const checks = {
   'request-universal-management': !fs.readFileSync(path.join(projectRoot,'src/scripts/online-runtime.js'),'utf8').includes('requestAdmins') && fs.readFileSync(path.join(projectRoot,'firestore.rules'),'utf8').includes('allow delete: if request.auth != null;'),
   'flying-render-offset': runtime.includes('const FLYING_EXTRA_RENDER_OFFSET = 42'),
   'stage5-achievement-repair': runtime.includes("case 'stage5Clears': return cumulativeStats.stage5Clears") && runtime.includes('cumulativeStats.stage5Clears = Math.max(1'),
-  'summon-cooldown-sync': runtime.includes('function summonCooldownRemaining(unitId)') && runtime.includes('SUMMON_UI_REFRESH_INTERVAL = 0.1')
+  'summon-cooldown-sync': runtime.includes('function summonCooldownRemaining(unitId)') && runtime.includes('SUMMON_UI_REFRESH_INTERVAL = 0.1'),
+  'half-reaction-expansion': readJson('data/basic-questions.json').filter((q)=>String(q.id).startsWith('v45-basic-half-')).length === 40 && readJson('data/hard-questions.json').filter((q)=>String(q.id).startsWith('v45-hard-half-')).length === 30,
+  'flying-no-self-damage': !runtime.includes('ally.hp -= ally.maxHp * ally.selfDamagePerSecond') && !runtime.includes('enemy.hp -= enemy.maxHp * enemy.selfDamagePerSecond') && !JSON.stringify(core).includes('selfDamagePerSecond'),
+  'stage6-weak-acid-liberation': core.stage6?.id === 6 && core.stage6?.units?.[4]?.chemistryClass === 'strong_acid' && core.stage6?.enemies?.every((enemy)=>enemy.affinityTarget === 'weak_acid_conjugate_base') && runtime.includes('function updateBossSummonAbility'),
+  'stage7-weak-base-liberation': core.stage7?.id === 7 && core.stage7?.units?.[4]?.chemistryClass === 'strong_base' && core.stage7?.enemies?.every((enemy)=>enemy.affinityTarget === 'weak_base_conjugate_acid') && runtime.includes('Math.max(7, cumulativeStats.highestStageReached || 1)'),
+  'stage8-energy-ambush': core.stage8?.id === 8 && core.stage8?.enemies?.find((enemy)=>enemy.boss)?.wipeAlliesOnArrival === true && runtime.includes('function beginBossAnnihilationSequence') && runtime.includes('allies = []'),
+  'energy-capacity-lv12': core.maxEnergyCapacityLevel === 12 && core.maxEnergy + core.energyCapacityPerLevel * 11 === 265 && runtime.includes('function maxEnergyCapacityLevel()'),
+  'complete-update-history': ['v3.9','v3.95','v4.0','v4.1','v4.2','v4.3','v4.4','v4.45'].every((version)=>runtime.includes(`['${version}'`) && runtime.includes(`{version:'${version}'`))
 };
 
 const rows = features.map((feature) => ({ ...feature, pass: Boolean(checks[feature.id]) }));
@@ -60,6 +67,9 @@ const lines = [
   '- v4.3では、弱酸・弱塩基そのものを遊離対象にしていた相性を廃止し、弱酸由来陰イオン・弱塩基由来陽イオンへ対象を修正しました。',
   '- v4.4では、要望管理、飛行表示、Stage 5実績、再生産クールタイムの4点を修正しました。',
   '- v4.45では、requestAdmins方式を廃止し、ログイン済みの全ユーザーが全要望を管理できる方式へ変更しました。',
+  '- v4.5では、半反応式70問、飛行型自傷廃止、Stage 6、欠落アップデート履歴を追加しました。',
+  '- v4.6では、Stage 6の塩基版として弱塩基由来陽イオン100％のStage 7を追加しました。',
+  '- v5.0では、全味方消去後にEnergyから再展開するStage 8と、Energy上限Lv.12を追加しました。',
   '',
   '## 注意',
   '',

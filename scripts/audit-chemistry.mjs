@@ -57,7 +57,7 @@ function balanced(reaction) {
 function allEntities() {
   const stages = [
     { id: 1, units: core.units, enemies: core.enemies },
-    core.stage2, core.stage3, core.stage4, core.stage5
+    core.stage2, core.stage3, core.stage4, core.stage5, core.stage6, core.stage7, core.stage8
   ];
   const rows = [];
   for (const stage of stages) {
@@ -114,6 +114,19 @@ assert(stage5Boss?.chemistryClass === 'redox' && !stage5Boss?.affinityTarget, 'H
 assert(stage5Boss?.phaseTwo?.transformText === '分解反応：2H₂O₂ → 2H₂O + O₂', 'H₂O₂の分解反応式が不正確です');
 assert(balanced('2H₂O₂ → 2H₂O + O₂'), 'H₂O₂分解式の原子数が不整合です');
 
+const stage6 = core.stage6;
+assert(stage6?.enemies?.length >= 9, 'Stage 6 enemies are missing');
+assert(stage6?.enemies?.every((enemy) => enemy.affinityTarget === 'weak_acid_conjugate_base'), 'Stage 6 enemies must all be weak-acid-derived conjugate bases');
+assert(stage6?.units?.[4]?.chemistryClass === 'strong_acid', 'Stage 6 fifth unit must be a strong acid');
+const stage7 = core.stage7;
+assert(stage7?.enemies?.length >= 9, 'Stage 7 enemies are missing');
+assert(stage7?.enemies?.every((enemy) => enemy.affinityTarget === 'weak_base_conjugate_acid'), 'Stage 7 enemies must all be weak-base-derived conjugate acids');
+assert(stage7?.units?.[4]?.chemistryClass === 'strong_base', 'Stage 7 fifth unit must be a strong base');
+assert(!JSON.stringify(core).includes('selfDamagePerSecond'), 'Flying self-damage remains in chemistry/game data');
+const stage8Boss = core.stage8?.enemies?.find((enemy) => enemy.boss);
+assert(stage8Boss?.formula === 'O₃' && stage8Boss?.name === 'オゾン', 'Stage 8 BOSSの化学式・正式名称が不正確です');
+assert(stage8Boss?.chemistryClass === 'redox' && !stage8Boss?.affinityTarget, 'Stage 8 BOSSは酸化還元属性・遊離補正なしである必要があります');
+
 const corruptedPattern = /(pH|pOH|Q|H⁺|OH⁻|電子|係数比[^。\n]*)のモル質量|反応したHClのモル質量/u;
 for (const q of hard) {
   const text = [q.explanation, ...(q.hints || [])].join('\n');
@@ -133,7 +146,7 @@ const report = [
   `- 難問の破損解説修正対象: 12問`,
   `- 必須検査: ${failures.length ? '不合格' : '合格'}`,
   '',
-  '## v4.3での化学ルール',
+  '## v4.6で維持・追加した化学ルール',
   '',
   '- 強酸は「弱酸の塩に由来する陰イオン」にのみ1.4倍。弱酸そのものは対象外です。',
   '- 強塩基は「弱塩基の塩に由来する陽イオン」にのみ1.4倍。弱塩基そのものは対象外です。',
@@ -141,6 +154,10 @@ const report = [
   '- H₂O₂は酸化還元属性とし、強酸の有利対象から外しました。',
   '- ClO⁻からCl⁻への第二形態変化は、酸性条件での還元半反応として表示します。',
   '- 中和・酸塩基反応の表示は演出であり、追加ダメージはありません。',
+  '- Stage 6の敵はすべて弱酸由来陰イオンで、強酸による弱酸の遊離相性と一致します。',
+  '- Stage 7の敵はすべて弱塩基由来陽イオンで、強塩基による弱塩基の遊離相性と一致します。',
+  '- 半反応式の追加問題は原子数・電荷・電子数をそろえて監査します。',
+  '- Stage 8のO₃は酸化還元属性とし、全味方消去や速度はゲーム上の役割で、実際の化学的性質を示さないと明記します。',
   '',
   '## 表示方針',
   '',

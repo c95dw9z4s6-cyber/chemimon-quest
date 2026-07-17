@@ -50,5 +50,37 @@ test(online.includes('createRequestManagementNotice') && online.includes("delete
 test(rules.includes('validRequestStatusUpdate') && rules.includes('allow update: if request.auth != null && validRequestStatusUpdate()'),'universal request update rule missing');
 test(rules.includes('allow delete: if request.auth != null;'),'universal request delete rule missing');
 
+
+const stage6=core.stage6;
+test(stage6?.id===6 && stage6.units?.length===5 && stage6.enemies?.length>=9,'Stage 6 data missing');
+test(stage6?.units?.[4]?.chemistryClass==='strong_acid','Stage 6 fifth unit must be strong acid');
+test(stage6?.enemies?.every((enemy)=>enemy.affinityTarget==='weak_acid_conjugate_base'),'Stage 6 enemies must all be weak-acid-derived targets');
+test(stage6?.enemies?.find((enemy)=>enemy.boss)?.bossSummonPool?.length>=3,'Stage 6 boss summon ability missing');
+test(runtime.includes('Math.max(6, cumulativeStats.highestStageReached || 1)'),'Stage 5-cleared old saves do not unlock Stage 6');
+const stage7=core.stage7;
+test(stage7?.id===7 && stage7.units?.length===5 && stage7.enemies?.length>=9,'Stage 7 data missing');
+test(stage7?.units?.[4]?.chemistryClass==='strong_base','Stage 7 fifth unit must be strong base');
+test(stage7?.enemies?.every((enemy)=>enemy.affinityTarget==='weak_base_conjugate_acid'),'Stage 7 enemies must all be weak-base-derived targets');
+test(stage7?.enemies?.find((enemy)=>enemy.boss)?.bossSummonPool?.length>=3,'Stage 7 boss summon ability missing');
+test(runtime.includes('Math.max(7, cumulativeStats.highestStageReached || 1)'),'Stage 6-cleared old saves do not unlock Stage 7');
+test(!JSON.stringify(core).includes('selfDamagePerSecond'),'flying self-damage remains in game data');
+test(!runtime.includes('ally.hp -= ally.maxHp * ally.selfDamagePerSecond') && !runtime.includes('enemy.hp -= enemy.maxHp * enemy.selfDamagePerSecond'),'flying self-damage runtime remains');
+const basicHalf=JSON.parse(fs.readFileSync(path.join(projectRoot,'data/basic-questions.json'),'utf8')).filter((q)=>String(q.id).startsWith('v45-basic-half-'));
+const hardHalf=JSON.parse(fs.readFileSync(path.join(projectRoot,'data/hard-questions.json'),'utf8')).filter((q)=>String(q.id).startsWith('v45-hard-half-'));
+test(basicHalf.length===40 && hardHalf.length===30,'half-reaction question expansion count mismatch');
+test(['v3.9','v3.95','v4.0','v4.1','v4.2','v4.3','v4.4','v4.45','v4.5'].every((version)=>runtime.includes(`['${version}'`) && runtime.includes(`{version:'${version}'`)),'missing in-game update notice/history entries');
+
+const stage8=core.stage8;
+const stage8Boss=stage8?.enemies?.find((enemy)=>enemy.boss);
+const maxAssaultSpeed=Math.max(...[core.units,core.stage2?.units,core.stage3?.units,core.stage4?.units,core.stage5?.units,core.stage6?.units,core.stage7?.units,stage8?.units].flat().filter((unit)=>/強襲/.test(unit?.role||'')).map((unit)=>Number(unit.speed)||0));
+test(stage8?.id===8 && stage8.units?.length===5 && stage8.enemies?.length>=9,'Stage 8 data missing');
+test(stage8Boss?.wipeAlliesOnArrival===true && !stage8Boss?.phaseTwo,'Stage 8 boss must wipe allies and have no second phase');
+test(stage8Boss?.hp<=500,'Stage 8 boss HP must stay in normal-enemy range');
+test(stage8Boss?.speed>maxAssaultSpeed,'Stage 8 boss must be faster than max assault unit');
+test(runtime.includes('function beginBossAnnihilationSequence') && runtime.includes('allies = []'),'Stage 8 annihilation cinematic missing');
+test(runtime.includes('for (const unit of D.units) summonTimers[unit.id] = 0'),'Stage 8 ambush must reset summon cooldowns for immediate redeployment');
+test(core.maxEnergyCapacityLevel===12 && core.maxEnergy+core.energyCapacityPerLevel*11===265,'Energy capacity Lv.12/max265 missing');
+test(runtime.includes('Math.max(8, cumulativeStats.highestStageReached || 1)'),'Stage 7-cleared old saves do not unlock Stage 8');
+
 if (failures.length) { console.error('Feature regression tests failed:'); failures.forEach((x)=>console.error(`- ${x}`)); process.exit(1); }
 console.log('Feature regression tests passed.');
