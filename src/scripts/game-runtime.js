@@ -42,7 +42,10 @@
     2: D.stage2,
     3: D.stage3,
     4: D.stage4,
-    5: D.stage5
+    5: D.stage5,
+    6: D.stage6,
+    7: D.stage7,
+    8: D.stage8
   };
 
   let currentStageId = 1;
@@ -422,6 +425,85 @@
     return true;
   }
 
+
+  function beginBossAnnihilationSequence(enemy, definition) {
+    if (!enemy?.wipeAlliesOnArrival || enemy.ambushIntroCompleted || enemy.phaseTransitioning || bossPhaseTransitionActive) return false;
+    const reducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+    const wipeAt = reducedMotion ? 420 : 1050;
+    const arrivalAt = reducedMotion ? 1050 : 2550;
+    const resumeAt = reducedMotion ? 2450 : 5250;
+
+    enemy.phaseTransitioning = true;
+    enemy.attackTimer = Math.max(enemy.attackTimer, 9);
+    bossPhaseTransitionEnemy = enemy;
+    bossPhaseTransitionActive = true;
+    paused = true;
+    document.body.classList.add('boss-phase-transition');
+    if ($('pauseBtn')) $('pauseBtn').disabled = true;
+    hideBossArrivalEffect();
+    focusBattleEntity(enemy, 12, true);
+
+    const fx = $('bossPhaseFx');
+    if ($('bossPhaseFrom')) $('bossPhaseFrom').textContent = 'ALLY UNITS';
+    if ($('bossPhaseTo')) $('bossPhaseTo').textContent = '0';
+    if ($('bossPhaseName')) $('bossPhaseName').textContent = enemy.ambushIntroTitle || '戦線崩壊';
+    if ($('bossPhaseReaction')) $('bossPhaseReaction').textContent = enemy.ambushIntroText || '味方ユニット全消失';
+    if (fx) {
+      const xPercent = clamp((finiteNumber(enemy.x, cv.width * .82) / cv.width) * 100, 12, 88);
+      const yPercent = clamp((entityVisualY(enemy) / cv.height) * 100, 18, 86);
+      fx.style.setProperty('--phase-x', `${xPercent.toFixed(2)}%`);
+      fx.style.setProperty('--phase-y', `${yPercent.toFixed(2)}%`);
+      fx.hidden = false;
+      fx.classList.remove('is-active', 'is-transformed');
+      void fx.offsetWidth;
+      fx.classList.add('is-active');
+    }
+    showMessage('特殊BOSS反応を検出――全戦闘を停止します。', reducedMotion ? 2.2 : 4.5);
+    playSound('phaseShift');
+    updateHud(); renderUnitButtons(); renderUpgradePanel(); updatePauseButton();
+
+    scheduleBossPhaseStep(() => {
+      if (!bossPhaseTransitionActive || bossPhaseTransitionEnemy !== enemy || !enemies.includes(enemy)) return clearBossPhaseTransition({ resume: true });
+      const defeatedCount = allies.filter((ally) => ally.hp > 0).length;
+      for (const ally of allies) {
+        spawnImpactBurst(ally.x, entityVisualY(ally), '#d9d1ff', 1.8);
+        combatEffects.push({ x: ally.x, y: entityVisualY(ally) - ally.radius - 18, text: '戦線崩壊', color: '#f1e8ff', kind: 'transform', life: 1.5, maxLife: 1.5, particles: [] });
+      }
+      runStats.alliesDefeated += defeatedCount;
+      allies = [];
+      projectiles = [];
+      for (const unit of D.units) summonTimers[unit.id] = 0;
+      summonUiRefreshTimer = 0;
+      battleInspectorKey = '';
+      enemy.ambushIntroCompleted = true;
+      fx?.classList.add('is-transformed');
+      playSound('transform');
+      showMessage(`味方ユニット${defeatedCount}体が消失。蓄積Energyから戦線を再構築してください。`, reducedMotion ? 1.8 : 3.5);
+      $('waveBannerTitle').textContent = 'ALLIED LINE COLLAPSED';
+      $('waveBannerSub').textContent = `残存Energy ${Math.floor(energy)} / ${currentMaxEnergy()}｜再展開準備`;
+      $('waveBanner').hidden = false;
+      waveBannerTimer = reducedMotion ? 2.0 : 5.2;
+    }, wipeAt);
+
+    scheduleBossPhaseStep(() => {
+      if (!bossPhaseTransitionActive || bossPhaseTransitionEnemy !== enemy || !enemies.includes(enemy)) return clearBossPhaseTransition({ resume: true });
+      if (fx) { fx.classList.remove('is-active', 'is-transformed'); fx.hidden = true; }
+      triggerBossArrivalEffect(enemy, definition || { formula: enemy.formula, name: enemy.name });
+      showMessage(`⚠ 高速BOSS出現：${enemy.formula} ${enemy.name}｜速度${formatStat(enemy.speed, 1)}`, reducedMotion ? 1.8 : 3.6);
+    }, arrivalAt);
+
+    scheduleBossPhaseStep(() => {
+      if (!bossPhaseTransitionActive || bossPhaseTransitionEnemy !== enemy) return;
+      hideBossArrivalEffect();
+      enemy.phaseTransitioning = false;
+      enemy.attackTimer = Math.max(enemy.attackTimer, .8);
+      clearBossPhaseTransition({ resume: true });
+      showMessage(`BOSS戦開始。Energy ${Math.floor(energy)}を使って直ちに再展開してください。`, 3.2);
+      saveGame({ silent: true });
+    }, resumeAt);
+    return true;
+  }
+
   function updateSoundButtons() {
     const label = soundEnabled ? '🔊 効果音 ON' : '🔇 消音中';
     const top = $('soundBtn');
@@ -567,6 +649,9 @@
       stage3Clears: 0,
       stage4Clears: 0,
       stage5Clears: 0,
+      stage6Clears: 0,
+      stage7Clears: 0,
+      stage8Clears: 0,
       mockExamsCompleted: 0,
       mockExamPerfects: 0
     };
@@ -722,6 +807,10 @@
     return true;
   }
 
+  function maxEnergyCapacityLevel() {
+    return Math.max(1, Math.floor(finiteNumber(D.maxEnergyCapacityLevel, D.maxUpgradeLevel)));
+  }
+
   function currentMaxEnergy() {
     return D.maxEnergy + D.energyCapacityPerLevel * (energyCapacityLevel - 1);
   }
@@ -743,7 +832,7 @@
   }
 
   function energyCapacityUpgradeCost() {
-    if (energyCapacityLevel >= D.maxUpgradeLevel) return null;
+    if (energyCapacityLevel >= maxEnergyCapacityLevel()) return null;
     return D.energyCapacityUpgradeCosts[energyCapacityLevel - 1];
   }
 
@@ -875,7 +964,7 @@
 
   function isPerfectResearchReady() {
     return level >= D.maxLevel
-      && energyCapacityLevel >= D.maxUpgradeLevel
+      && energyCapacityLevel >= maxEnergyCapacityLevel()
       && D.units.every((unit) => unitUpgradeLevel(unit.id) >= D.maxUpgradeLevel);
   }
 
@@ -1199,7 +1288,7 @@
     return {
       coins: Math.max(0, Math.floor(finiteNumber(coins, 0))),
       unlocked: [...(unlocked || new Set(initialUnlockedIds()))],
-      energyCapacityLevel: clamp(Math.floor(finiteNumber(energyCapacityLevel, 1)), 1, D.maxUpgradeLevel),
+      energyCapacityLevel: clamp(Math.floor(finiteNumber(energyCapacityLevel, 1)), 1, maxEnergyCapacityLevel()),
       unitUpgradeLevels: { ...defaultUnitUpgradeLevels(), ...(unitUpgradeLevels || {}) }
     };
   }
@@ -1214,7 +1303,7 @@
     const loadedUnlocked = Array.isArray(saved?.unlocked) ? saved.unlocked.filter((id) => validIds.has(id)) : [];
     unlocked = new Set([...initialUnlockedIds(), ...loadedUnlocked]);
     coins = Math.max(0, Math.floor(finiteNumber(saved?.coins, 0)));
-    energyCapacityLevel = clamp(Math.floor(finiteNumber(saved?.energyCapacityLevel, 1)), 1, D.maxUpgradeLevel);
+    energyCapacityLevel = clamp(Math.floor(finiteNumber(saved?.energyCapacityLevel, 1)), 1, maxEnergyCapacityLevel());
     unitUpgradeLevels = defaultUnitUpgradeLevels();
     for (const unit of D.units) {
       unitUpgradeLevels[unit.id] = clamp(Math.floor(finiteNumber(saved?.unitUpgradeLevels?.[unit.id], 1)), 1, D.maxUpgradeLevel);
@@ -1383,7 +1472,7 @@
         <span class="stage-card-status">${status}</span>
         <h3>${stage.name}</h3>
         <p>${stage.description}</p>
-        <div class="stage-card-meta"><span>ユニット ${stage.units.length}体</span><span>全${stage.waves.length}WAVE</span><span>${stage.difficultyLabel || '通常'}</span><span>${saved ? `所持 ${saved.coins || 0} COIN` : '新規進行'}</span></div>`;
+        <div class="stage-card-meta"><span>ユニット ${stage.units.length}体</span><span>全${stage.waves.length}WAVE</span><span>${stage.difficultyLabel || '通常'}</span><span>${stage.enemyAttributeSummary || (saved ? `所持 ${saved.coins || 0} COIN` : '新規進行')}</span></div>`;
       button.addEventListener('click', () => switchStage(stage.id));
       area.appendChild(button);
     }
@@ -2318,8 +2407,8 @@
 
   function requestEnergyCapacityUpgrade() {
     if (paused || gameStatus !== 'playing') return;
-    if (energyCapacityLevel >= D.maxUpgradeLevel) {
-      showMessage('エナジー上限は最大Lv.10です。');
+    if (energyCapacityLevel >= maxEnergyCapacityLevel()) {
+      showMessage(`エナジー上限は最大Lv.${maxEnergyCapacityLevel()}です。`);
       return;
     }
     const cost = energyCapacityUpgradeCost();
@@ -2439,7 +2528,6 @@
       flying: Boolean(stats.flying),
       antiAir: Boolean(stats.antiAir || stats.flying || /弓兵|速射|範囲/.test(stats.role || '')),
       flightHeight: Math.max(34, finiteNumber(stats.flightHeight, 46)),
-      selfDamagePerSecond: Math.max(0, finiteNumber(stats.selfDamagePerSecond, 0)),
       airVulnerability: Math.max(1, finiteNumber(stats.airVulnerability, 1.7)),
       baseDamageMultiplier: clamp(finiteNumber(stats.baseDamageMultiplier, 1), 0.1, 1),
       guard: Boolean(stats.guard),
@@ -2489,7 +2577,6 @@
       flying: Boolean(enemy.flying),
       antiAir: Boolean(enemy.antiAir || enemy.flying || /弓兵|速射|範囲/.test(enemy.role || '')),
       flightHeight: Math.max(34, finiteNumber(enemy.flightHeight, 46)),
-      selfDamagePerSecond: Math.max(0, finiteNumber(enemy.selfDamagePerSecond, 0)),
       airVulnerability: Math.max(1, finiteNumber(enemy.airVulnerability, 1.7)),
       baseDamageMultiplier: clamp(finiteNumber(enemy.baseDamageMultiplier, 1), 0.1, 1),
       healer: Boolean(enemy.healer),
@@ -2502,6 +2589,18 @@
       firstStrikeMultiplier: Math.max(1, finiteNumber(enemy.firstStrikeMultiplier, 1)),
       firstStrikeReady: finiteNumber(enemy.firstStrikeMultiplier, 1) > 1,
       pushback: Math.max(0, finiteNumber(enemy.pushback, 0)),
+      bossSummonInterval: Math.max(0, finiteNumber(enemy.bossSummonInterval, 0)),
+      bossSummonTimer: Math.max(0, finiteNumber(enemy.bossSummonInterval, 0)),
+      bossSummonWarning: Math.max(0, finiteNumber(enemy.bossSummonWarning, 2)),
+      bossSummonPending: false,
+      bossSummonPendingTimer: 0,
+      bossSummonCount: Math.max(0, Math.floor(finiteNumber(enemy.bossSummonCount, 0))),
+      bossSummonPool: Array.isArray(enemy.bossSummonPool) ? [...enemy.bossSummonPool] : [],
+      wipeAlliesOnArrival: Boolean(enemy.wipeAlliesOnArrival),
+      ambushIntroCompleted: !enemy.wipeAlliesOnArrival,
+      ambushIntroTitle: String(enemy.ambushIntroTitle || '戦線崩壊'),
+      ambushIntroText: String(enemy.ambushIntroText || '味方ユニット全消失'),
+      recommendedStoredEnergy: Math.max(0, finiteNumber(enemy.recommendedStoredEnergy, 0)),
       attackFlash: 0,
       hitFlash: 0
     };
@@ -2523,7 +2622,6 @@
     enemy.flying = Boolean(phase.flying);
     enemy.antiAir = Boolean(phase.antiAir || phase.flying || /弓兵|速射|範囲/.test(phase.role || ''));
     enemy.flightHeight = Math.max(34, finiteNumber(phase.flightHeight, enemy.flightHeight || 46));
-    enemy.selfDamagePerSecond = Math.max(0, finiteNumber(phase.selfDamagePerSecond, 0));
     enemy.airVulnerability = Math.max(1, finiteNumber(phase.airVulnerability, enemy.airVulnerability || 1.7));
     enemy.baseDamageMultiplier = clamp(finiteNumber(phase.baseDamageMultiplier, enemy.baseDamageMultiplier || 1), 0.1, 1);
     enemy.guard = Boolean(phase.guard);
@@ -2571,12 +2669,16 @@
     enemies.push(spawnedEnemy);
     if (spawnedEnemy.boss) {
       focusBattleEntity(spawnedEnemy, 8, true);
-      showMessage(`⚠ BOSS出現：${definition.bossIntro || `${definition.chemistryLabel} ${definition.formula} ${definition.name}`}`, 4.5);
-      triggerBossArrivalEffect(spawnedEnemy, definition);
-      $('waveBannerTitle').textContent = definition.phaseTwo ? 'TWO-PHASE BOSS' : 'BOSS WAVE';
-      $('waveBannerSub').textContent = `${definition.chemistryLabel} ${definition.formula}｜${currentStageDefinition().bossHint}`;
-      $('waveBanner').hidden = false;
-      waveBannerTimer = 4.5;
+      if (spawnedEnemy.wipeAlliesOnArrival) {
+        beginBossAnnihilationSequence(spawnedEnemy, definition);
+      } else {
+        showMessage(`⚠ BOSS出現：${definition.bossIntro || `${definition.chemistryLabel} ${definition.formula} ${definition.name}`}`, 4.5);
+        triggerBossArrivalEffect(spawnedEnemy, definition);
+        $('waveBannerTitle').textContent = definition.phaseTwo ? 'TWO-PHASE BOSS' : 'BOSS WAVE';
+        $('waveBannerSub').textContent = `${definition.chemistryLabel} ${definition.formula}｜${currentStageDefinition().bossHint}`;
+        $('waveBanner').hidden = false;
+        waveBannerTimer = 4.5;
+      }
     }
     nextWaveEnemyIndex += 1;
 
@@ -2936,7 +3038,6 @@
 
   function updateAlly(ally, dt) {
     if (ally.hp <= 0) return;
-    if (ally.flying && ally.selfDamagePerSecond > 0) ally.hp -= ally.maxHp * ally.selfDamagePerSecond * dt;
     if (ally.hp <= 0) return;
     ally.attackTimer = Math.max(0, ally.attackTimer - dt);
     if (ally.healer) {
@@ -2996,11 +3097,61 @@
     ally.x = Math.min(BASE.enemyX - BASE.radius - ally.radius, ally.x + ally.speed * dt);
   }
 
+  function triggerBossMinionSummon(enemy) {
+    if (!enemy?.boss || !enemy.bossSummonPool?.length || enemy.bossSummonCount <= 0) return;
+    const available = Math.max(0, D.maxEnemiesOnField - enemies.length);
+    const count = Math.min(available, Math.max(2, enemy.bossSummonCount - (Math.random() < .35 ? 1 : 0)));
+    let spawned = 0;
+    for (let index = 0; index < count; index += 1) {
+      const enemyId = enemy.bossSummonPool[Math.floor(Math.random() * enemy.bossSummonPool.length)];
+      const definition = D.enemies.find((candidate) => candidate.id === enemyId);
+      if (!definition) continue;
+      const minion = createEnemy(definition, enemy.waveIndex);
+      minion.x = Math.min(BASE.enemySpawnX, enemy.x + 48 + index * 24);
+      minion.y = nextLaneY(enemySpawnSerial + index);
+      enemies.push(minion);
+      spawned += 1;
+    }
+    if (spawned > 0) {
+      const weakBaseSummon = enemy.affinityTarget === 'weak_base_conjugate_acid';
+      const summonLabel = weakBaseSummon ? '弱塩基群集反応' : '弱酸群集反応';
+      const entityLabel = weakBaseSummon ? '弱塩基由来イオン' : '弱酸由来イオン';
+      const effectColor = weakBaseSummon ? '#d8c3ff' : '#d8ff9b';
+      combatEffects.push({ x: enemy.x, y: entityVisualY(enemy) - enemy.radius - 34, text: `${entityLabel}増援 ×${spawned}`, color: effectColor, kind: 'transform', life: 1.8, maxLife: 1.8, particles: [] });
+      showMessage(`${summonLabel}：${entityLabel}${spawned}体が増援として出現！`, 3.4);
+      playSound('wave');
+    }
+  }
+
+  function updateBossSummonAbility(enemy, dt) {
+    if (!enemy?.boss || !enemy.bossSummonPool?.length || enemy.hp <= 0) return;
+    if (enemy.bossSummonPending) {
+      enemy.bossSummonPendingTimer = Math.max(0, enemy.bossSummonPendingTimer - dt);
+      if (enemy.bossSummonPendingTimer <= 0) {
+        enemy.bossSummonPending = false;
+        triggerBossMinionSummon(enemy);
+        enemy.bossSummonTimer = enemy.bossSummonInterval;
+      }
+      return;
+    }
+    enemy.bossSummonTimer = Math.max(0, enemy.bossSummonTimer - dt);
+    if (enemy.bossSummonTimer <= 0 && enemies.length < D.maxEnemiesOnField - 1) {
+      enemy.bossSummonPending = true;
+      enemy.bossSummonPendingTimer = Math.max(.6, enemy.bossSummonWarning || 2);
+      const weakBaseSummon = enemy.affinityTarget === 'weak_base_conjugate_acid';
+      const summonLabel = weakBaseSummon ? '弱塩基群集反応' : '弱酸群集反応';
+      const effectColor = weakBaseSummon ? '#eadcff' : '#f5ffad';
+      combatEffects.push({ x: enemy.x, y: entityVisualY(enemy) - enemy.radius - 34, text: `${summonLabel} 予告`, color: effectColor, kind: 'transform', life: enemy.bossSummonPendingTimer, maxLife: enemy.bossSummonPendingTimer, particles: [] });
+      showMessage(`⚠ ${summonLabel}：${formatStat(enemy.bossSummonPendingTimer, 1)}秒後に増援`, 3.0);
+      playSound('transform');
+    }
+  }
+
   function updateEnemy(enemy, dt) {
     if (enemy.hp <= 0) return;
-    if (enemy.flying && enemy.selfDamagePerSecond > 0) enemy.hp -= enemy.maxHp * enemy.selfDamagePerSecond * dt;
     if (enemy.hp <= 0) return;
     enemy.attackTimer = Math.max(0, enemy.attackTimer - dt);
+    updateBossSummonAbility(enemy, dt);
     if (enemy.healer) {
       const healTarget = mostInjuredEnemyFor(enemy);
       if (healTarget && enemy.attackTimer <= 0) {
@@ -3192,8 +3343,8 @@
     $('endText').textContent = victory
       ? nextStage
         ? `Stage ${currentStageId}クリア！ Stage ${nextStage.id}「${nextStage.name}」が解放されました。化学レベル・実績・累計記録は持ち越し、次のステージのコイン・解放・研究レベルは新しく始まります。今回の撃破${runStats.enemiesDefeated}体、獲得${runStats.coinsEarned}コインです。`
-        : `Stage ${currentStageId}クリア！ 五つの研究区を制覇しました。難関Stage 5突破です。今回の撃破${runStats.enemiesDefeated}体、獲得${runStats.coinsEarned}コインです。`
-      : `Stage ${currentStageId}の第${currentWaveIndex + 1}ウェーブ、化学レベル${level}で味方拠点が破壊されました。研究支援として${defeatSupport}コインを獲得しました。今回の合計獲得は${runStats.coinsEarned}コインです。解放・強化を保ったまま再挑戦できます。`;
+        : `Stage ${currentStageId}クリア！ 現在実装されている全${Object.keys(STAGE_LIBRARY).length}研究区を制覇しました。今回の撃破${runStats.enemiesDefeated}体、獲得${runStats.coinsEarned}コインです。`
+      : `Stage ${currentStageId}の第${currentWaveIndex + 1}ウェーブ、化学レベル${level}で味方拠点が破壊されました。研究支援として${defeatSupport}コインを獲得しました。今回の合計獲得は${runStats.coinsEarned}コインです。解放・強化を保ったまま再挑戦できます。${currentStageId === 6 ? ' 攻略ヒント：敵はすべて弱酸由来です。第5ユニットの強酸と属性相性を確認してみましょう。' : currentStageId === 7 ? ' 攻略ヒント：敵はすべて弱塩基由来です。第5ユニットの強塩基と属性相性を確認してみましょう。' : currentStageId === 8 ? ' 攻略ヒント：Wave 10ではBOSS出現時に場の味方がすべて倒されます。Energy上限をLv.3以上へ拡張し、125以上を蓄えてからBOSSへ入り、直後に盾・攻撃役を再展開しましょう。' : ''}`;
     const hasNextStage = victory && Boolean(STAGE_LIBRARY[currentStageId + 1]);
     $('nextStageBtn').hidden = !hasNextStage;
     if (hasNextStage) $('nextStageBtn').textContent = `ステージ${currentStageId + 1}へ進む`;
@@ -3245,9 +3396,11 @@
     const stageThree = currentStageId === 3;
     const stageFour = currentStageId === 4;
     const stageFive = currentStageId === 5;
-    const coreColor = stageFive ? (ally ? '#ffd779' : '#ff7f6e') : stageFour ? (ally ? '#75eaff' : '#ffbf72') : stageThree ? (ally ? '#d88cff' : '#ff9f63') : stageTwo ? (ally ? '#99efa8' : '#f0cb6b') : (ally ? '#6fe6ff' : '#ff7994');
-    const darkColor = stageFive ? (ally ? '#553410' : '#5d171a') : stageFour ? (ally ? '#123e4d' : '#5a3518') : stageThree ? (ally ? '#44205a' : '#5d2c16') : stageTwo ? (ally ? '#174536' : '#59471e') : (ally ? '#123f61' : '#5a2035');
-    const panelColor = stageFive ? (ally ? '#9a6b1f' : '#9b3331') : stageFour ? (ally ? '#1f7184' : '#95602b') : stageThree ? (ally ? '#773a96' : '#984d25') : stageTwo ? (ally ? '#2c7858' : '#8b6c2d') : (ally ? '#1f6e96' : '#8a3850');
+    const stageSix = currentStageId === 6;
+    const stageSeven = currentStageId === 7;
+    const coreColor = stageSeven ? (ally ? '#c7b4ff' : '#f0a7ff') : stageSix ? (ally ? '#b8ff8a' : '#e5ff77') : stageFive ? (ally ? '#ffd779' : '#ff7f6e') : stageFour ? (ally ? '#75eaff' : '#ffbf72') : stageThree ? (ally ? '#d88cff' : '#ff9f63') : stageTwo ? (ally ? '#99efa8' : '#f0cb6b') : (ally ? '#6fe6ff' : '#ff7994');
+    const darkColor = stageSeven ? (ally ? '#2d1b58' : '#55245b') : stageSix ? (ally ? '#234914' : '#4b4d10') : stageFive ? (ally ? '#553410' : '#5d171a') : stageFour ? (ally ? '#123e4d' : '#5a3518') : stageThree ? (ally ? '#44205a' : '#5d2c16') : stageTwo ? (ally ? '#174536' : '#59471e') : (ally ? '#123f61' : '#5a2035');
+    const panelColor = stageSeven ? (ally ? '#6545a6' : '#9b4aa4') : stageSix ? (ally ? '#4b8d2b' : '#8c8c26') : stageFive ? (ally ? '#9a6b1f' : '#9b3331') : stageFour ? (ally ? '#1f7184' : '#95602b') : stageThree ? (ally ? '#773a96' : '#984d25') : stageTwo ? (ally ? '#2c7858' : '#8b6c2d') : (ally ? '#1f6e96' : '#8a3850');
 
     ctx.save();
     ctx.shadowColor = coreColor;
@@ -3288,6 +3441,18 @@
       ctx.beginPath();ctx.arc(x,272,12,Math.PI,0);ctx.stroke();
       const needle=-Math.PI*.82+hpRatio*Math.PI*.64;ctx.beginPath();ctx.moveTo(x,272);ctx.lineTo(x+Math.cos(needle)*9,272+Math.sin(needle)*9);ctx.stroke();
       for(let i=0;i<5;i+=1){ctx.beginPath();ctx.arc(x-12+i*6,307-((gameTime*7+i*8)%16),1.8,0,Math.PI*2);ctx.stroke();}
+      ctx.restore();
+    } else if (stageSeven) {
+      ctx.save(); ctx.strokeStyle=coreColor; ctx.fillStyle=coreColor; ctx.globalAlpha=.94; ctx.lineWidth=1.6;
+      ctx.beginPath(); ctx.arc(x,292,24,0,Math.PI*2); ctx.stroke();
+      for(let i=0;i<3;i+=1){const a=-gameTime*.65+i*Math.PI*2/3;ctx.beginPath();ctx.arc(x+Math.cos(a)*17,292+Math.sin(a)*17,3,0,Math.PI*2);ctx.fill();}
+      ctx.font='900 8px "Segoe UI",sans-serif';ctx.textAlign='center';ctx.fillText('OH⁻ LIBERATION',x,324);
+      ctx.restore();
+    } else if (stageSix) {
+      ctx.save(); ctx.strokeStyle=coreColor; ctx.fillStyle=coreColor; ctx.globalAlpha=.94; ctx.lineWidth=1.6;
+      ctx.beginPath(); ctx.arc(x,292,24,0,Math.PI*2); ctx.stroke();
+      for(let i=0;i<3;i+=1){const a=gameTime*.65+i*Math.PI*2/3;ctx.beginPath();ctx.arc(x+Math.cos(a)*17,292+Math.sin(a)*17,3,0,Math.PI*2);ctx.fill();}
+      ctx.font='900 8px "Segoe UI",sans-serif';ctx.textAlign='center';ctx.fillText('H⁺ LIBERATION',x,324);
       ctx.restore();
     } else if (stageFive) {
       ctx.save(); ctx.strokeStyle=coreColor; ctx.fillStyle=coreColor; ctx.globalAlpha=.94; ctx.lineWidth=1.6;
@@ -3554,23 +3719,25 @@
     const stageThree = currentStageId === 3;
     const stageFour = currentStageId === 4;
     const stageFive = currentStageId === 5;
-    sky.addColorStop(0, stageFive ? '#220c18' : stageFour ? '#061e2b' : stageThree ? '#1b0b25' : stageTwo ? '#111b18' : '#071426');
-    sky.addColorStop(.48, stageFive ? '#61231f' : stageFour ? '#0c4a5a' : stageThree ? '#3a1647' : stageTwo ? '#1c4034' : '#102b45');
-    sky.addColorStop(.74, stageFive ? '#8a5b2b' : stageFour ? '#35747c' : stageThree ? '#59323d' : stageTwo ? '#38513b' : '#16334b');
-    sky.addColorStop(.75, stageFive ? '#3d1d18' : stageFour ? '#16343d' : stageThree ? '#34211d' : stageTwo ? '#2a3021' : '#142538');
-    sky.addColorStop(1, stageFive ? '#150a12' : stageFour ? '#07161e' : stageThree ? '#150d14' : stageTwo ? '#11150e' : '#09131f');
+    const stageSix = currentStageId === 6;
+    const stageSeven = currentStageId === 7;
+    sky.addColorStop(0, stageSeven ? '#170b2c' : stageSix ? '#0b2410' : stageFive ? '#220c18' : stageFour ? '#061e2b' : stageThree ? '#1b0b25' : stageTwo ? '#111b18' : '#071426');
+    sky.addColorStop(.48, stageSeven ? '#4b2470' : stageSix ? '#255c1d' : stageFive ? '#61231f' : stageFour ? '#0c4a5a' : stageThree ? '#3a1647' : stageTwo ? '#1c4034' : '#102b45');
+    sky.addColorStop(.74, stageSeven ? '#7d4f8c' : stageSix ? '#71872b' : stageFive ? '#8a5b2b' : stageFour ? '#35747c' : stageThree ? '#59323d' : stageTwo ? '#38513b' : '#16334b');
+    sky.addColorStop(.75, stageSeven ? '#342142' : stageSix ? '#233215' : stageFive ? '#3d1d18' : stageFour ? '#16343d' : stageThree ? '#34211d' : stageTwo ? '#2a3021' : '#142538');
+    sky.addColorStop(1, stageSeven ? '#10091c' : stageSix ? '#07170b' : stageFive ? '#150a12' : stageFour ? '#07161e' : stageThree ? '#150d14' : stageTwo ? '#11150e' : '#09131f');
     ctx.fillStyle = sky;
     ctx.fillRect(0, 0, cv.width, cv.height);
 
     const glow = ctx.createRadialGradient(cv.width / 2, 130, 20, cv.width / 2, 130, 420);
-    glow.addColorStop(0, stageFive ? 'rgba(255, 194, 91, .27)' : stageFour ? 'rgba(108, 232, 255, .24)' : stageThree ? 'rgba(224, 117, 255, .22)' : stageTwo ? 'rgba(141, 231, 150, .19)' : 'rgba(73, 190, 255, .18)');
-    glow.addColorStop(1, stageFive ? 'rgba(255, 126, 92, 0)' : stageFour ? 'rgba(108, 232, 255, 0)' : stageThree ? 'rgba(224, 117, 255, 0)' : stageTwo ? 'rgba(141, 231, 150, 0)' : 'rgba(73, 190, 255, 0)');
+    glow.addColorStop(0, stageSeven ? 'rgba(211, 165, 255, .25)' : stageSix ? 'rgba(191, 255, 104, .26)' : stageFive ? 'rgba(255, 194, 91, .27)' : stageFour ? 'rgba(108, 232, 255, .24)' : stageThree ? 'rgba(224, 117, 255, .22)' : stageTwo ? 'rgba(141, 231, 150, .19)' : 'rgba(73, 190, 255, .18)');
+    glow.addColorStop(1, stageSeven ? 'rgba(211, 165, 255, 0)' : stageSix ? 'rgba(191, 255, 104, 0)' : stageFive ? 'rgba(255, 126, 92, 0)' : stageFour ? 'rgba(108, 232, 255, 0)' : stageThree ? 'rgba(224, 117, 255, 0)' : stageTwo ? 'rgba(141, 231, 150, 0)' : 'rgba(73, 190, 255, 0)');
     ctx.fillStyle = glow;
     ctx.fillRect(0, 0, cv.width, 320);
 
     ctx.save();
     ctx.globalAlpha = .17;
-    ctx.strokeStyle = stageFive ? '#ffd779' : stageFour ? '#9ff2ff' : stageThree ? '#e6a0ff' : stageTwo ? '#b9e779' : '#79cfff';
+    ctx.strokeStyle = stageSeven ? '#e6c8ff' : stageSix ? '#d9ff8b' : stageFive ? '#ffd779' : stageFour ? '#9ff2ff' : stageThree ? '#e6a0ff' : stageTwo ? '#b9e779' : '#79cfff';
     ctx.lineWidth = 1;
     for (let i = 0; i < 15; i += 1) {
       const x = (i * 79 + 31) % cv.width;
@@ -3626,6 +3793,14 @@
         ctx.beginPath(); ctx.moveTo(x - 44, 92); ctx.lineTo(x + 44, 92); ctx.stroke();
         ctx.beginPath(); ctx.arc(x, 122, 22, Math.PI, 0); ctx.stroke();
       }
+    }
+    if (stageSeven) {
+      ctx.globalAlpha=.25; ctx.strokeStyle='#e6c8ff'; ctx.fillStyle='#e6c8ff';
+      for(let i=0;i<18;i+=1){const x=(i*71-gameTime*(4+i%3))%(cv.width+80)-40;const y=62+((i*43)%210);ctx.beginPath();ctx.arc(x,y,3+(i%3),0,Math.PI*2);ctx.stroke();ctx.font='800 8px sans-serif';ctx.fillText(i%3===0?'OH⁻':'+',x+8,y-7);}
+    }
+    if (stageSix) {
+      ctx.globalAlpha=.25; ctx.strokeStyle='#d9ff8b'; ctx.fillStyle='#d9ff8b';
+      for(let i=0;i<18;i+=1){const x=(i*71+gameTime*(4+i%3))%(cv.width+80)-40;const y=62+((i*43)%210);ctx.beginPath();ctx.arc(x,y,3+(i%3),0,Math.PI*2);ctx.stroke();ctx.font='800 8px sans-serif';ctx.fillText(i%3===0?'H⁺':'−',x+8,y-7);}
     }
     if (stageFive) {
       ctx.globalAlpha = .28;
@@ -3706,7 +3881,7 @@
   }
 
   function unitRoleDescription(unit) {
-    if (unit.flying) return `飛行：近接攻撃を受けず、対空攻撃に弱い。毎秒${formatStat((unit.selfDamagePerSecond || 0) * 100, 2)}%HP減少`;
+    if (unit.flying) return '飛行：通常の地上近接攻撃を受けず、対空攻撃に弱い。時間経過による自傷ダメージはありません。';
     if (unit.healer) return '高性能単体回復：傷の深い味方1体を大きく回復';
     if (unit.guard) return `盾役：敵の攻撃を引き受け、被ダメージ${Math.round((unit.damageReduction || 0) * 100)}%軽減`;
     if (unit.splashRadius) return '集団戦：着弾地点の周囲にもダメージ';
@@ -3761,7 +3936,7 @@
       refs.level.textContent = `強化Lv.${stats.upgradeLevel}`;
       const roleTip = `<span class="role-tip">${unitRoleDescription(stats)}</span>`;
       refs.stats.innerHTML = roleTip + (stats.flying
-        ? `${stats.chemistryLabel}・飛行｜E ${summonCost} ♥${stats.hp} ⚔${Math.round(stats.attack * researchAttackMultiplier({kind:'ally',chemistryClass:stats.chemistryClass}))}<br>✈ 対空可 ◎${stats.range} 自傷${formatStat((stats.selfDamagePerSecond || 0) * 100, 2)}%/秒`
+        ? `${stats.chemistryLabel}・飛行｜E ${summonCost} ♥${stats.hp} ⚔${Math.round(stats.attack * researchAttackMultiplier({kind:'ally',chemistryClass:stats.chemistryClass}))}<br>✈ 対空可 ◎${stats.range} 自傷なし`
         : stats.healer
         ? `${stats.chemistryLabel}・単体回復｜E ${summonCost} ♥${stats.hp} <span class="healer-power-note">回復${Math.round((stats.healAmount || 0) * researchProduct('healMultiplier'))}</span><br>◎${stats.healRange} ⏱${stats.attackInterval.toFixed(2)}s 再召喚${stats.summonCooldown.toFixed(1)}s`
         : stats.splashRadius
@@ -3824,8 +3999,8 @@
     const energyCard = $('energyUpgradeCard');
     if (energyCard) {
       const cost = energyCapacityUpgradeCost();
-      $('energyUpgradeLevel').textContent = `Lv.${energyCapacityLevel} / ${D.maxUpgradeLevel}`;
-      $('energyUpgradeStats').textContent = energyCapacityLevel >= D.maxUpgradeLevel
+      $('energyUpgradeLevel').textContent = `Lv.${energyCapacityLevel} / ${maxEnergyCapacityLevel()}`;
+      $('energyUpgradeStats').textContent = energyCapacityLevel >= maxEnergyCapacityLevel()
         ? `最大エナジー ${currentMaxEnergy()}（MAX）`
         : `最大 ${currentMaxEnergy()} → ${currentMaxEnergy() + D.energyCapacityPerLevel}`;
       $('energyUpgradeBtn').textContent = cost == null ? '最大強化' : `${cost} COINで難問に挑戦`;
@@ -3902,7 +4077,11 @@
       waveIndex: entity.waveIndex,
       visualSerial: entity.visualSerial,
       firstStrikeReady: entity.firstStrikeReady,
-      bossPhase: entity.bossPhase || 1
+      bossPhase: entity.bossPhase || 1,
+      bossSummonTimer: entity.bossSummonTimer,
+      bossSummonPending: Boolean(entity.bossSummonPending),
+      bossSummonPendingTimer: entity.bossSummonPendingTimer,
+      ambushIntroCompleted: Boolean(entity.ambushIntroCompleted)
     };
   }
 
@@ -3929,6 +4108,10 @@
     enemy.y = finiteNumber(saved.y, enemy.y);
     enemy.hp = clamp(finiteNumber(saved.hp, enemy.maxHp), 0, enemy.maxHp);
     enemy.attackTimer = Math.max(0, finiteNumber(saved.attackTimer, 0) * timerFactor);
+    enemy.bossSummonTimer = Math.max(0, finiteNumber(saved.bossSummonTimer, enemy.bossSummonTimer));
+    enemy.bossSummonPending = Boolean(saved.bossSummonPending);
+    enemy.bossSummonPendingTimer = Math.max(0, finiteNumber(saved.bossSummonPendingTimer, 0));
+    if (enemy.wipeAlliesOnArrival) enemy.ambushIntroCompleted = Boolean(saved.ambushIntroCompleted);
     enemy.visualSerial = Math.max(0, Math.floor(finiteNumber(saved.visualSerial, enemy.visualSerial)));
     return enemy;
   }
@@ -4032,7 +4215,19 @@
     // Reconstruct the dedicated metric before evaluating achievements.
     if ((cumulativeStats.highestStageCleared || 0) >= 5) {
       cumulativeStats.stage5Clears = Math.max(1, cumulativeStats.stage5Clears || 0);
-      cumulativeStats.highestStageReached = Math.max(5, cumulativeStats.highestStageReached || 1);
+      // v4.5: older saves treated Stage 5 as the final stage.
+      cumulativeStats.highestStageReached = Math.max(6, cumulativeStats.highestStageReached || 1);
+    }
+    if ((cumulativeStats.highestStageCleared || 0) >= 6) {
+      cumulativeStats.stage6Clears = Math.max(1, cumulativeStats.stage6Clears || 0);
+      cumulativeStats.highestStageReached = Math.max(7, cumulativeStats.highestStageReached || 1);
+    }
+    if ((cumulativeStats.highestStageCleared || 0) >= 7) {
+      cumulativeStats.stage7Clears = Math.max(1, cumulativeStats.stage7Clears || 0);
+      cumulativeStats.highestStageReached = Math.max(8, cumulativeStats.highestStageReached || 1);
+    }
+    if ((cumulativeStats.highestStageCleared || 0) >= 8) {
+      cumulativeStats.stage8Clears = Math.max(1, cumulativeStats.stage8Clears || 0);
     }
     if ((cumulativeStats.highestStageCleared || 0) === 0 && cumulativeStats.totalClears > 0) {
       cumulativeStats.highestStageCleared = 1;
@@ -4047,7 +4242,7 @@
     energyCapacityLevel = clamp(
       Math.floor(finiteNumber(parsed.progress.energyCapacityLevel, 1)),
       1,
-      D.maxUpgradeLevel
+      maxEnergyCapacityLevel()
     );
 
     const loadedUpgradeLevels = parsed.progress.unitUpgradeLevels && typeof parsed.progress.unitUpgradeLevels === 'object'
@@ -4093,7 +4288,21 @@
     const savedStats = parsed.progress.cumulativeStats;
     if (finiteNumber(savedStats.highestStageCleared, 0) >= 5 && finiteNumber(savedStats.stage5Clears, 0) < 1) {
       savedStats.stage5Clears = 1;
-      savedStats.highestStageReached = Math.max(5, finiteNumber(savedStats.highestStageReached, 1));
+      savedStats.highestStageReached = Math.max(6, finiteNumber(savedStats.highestStageReached, 1));
+      repaired = true;
+    }
+    if (finiteNumber(savedStats.highestStageCleared, 0) >= 6) {
+      savedStats.stage6Clears = Math.max(1, finiteNumber(savedStats.stage6Clears, 0));
+      savedStats.highestStageReached = Math.max(7, finiteNumber(savedStats.highestStageReached, 1));
+      repaired = true;
+    }
+    if (finiteNumber(savedStats.highestStageCleared, 0) >= 7) {
+      savedStats.stage7Clears = Math.max(1, finiteNumber(savedStats.stage7Clears, 0));
+      savedStats.highestStageReached = Math.max(8, finiteNumber(savedStats.highestStageReached, 1));
+      repaired = true;
+    }
+    if (finiteNumber(savedStats.highestStageCleared, 0) >= 8) {
+      savedStats.stage8Clears = Math.max(1, finiteNumber(savedStats.stage8Clears, 0));
       repaired = true;
     }
     parsed.progress.mockExamProgress = normalizeMockExamProgress(parsed.progress.mockExamProgress);
@@ -4262,6 +4471,12 @@
       openResearchCardSelection(completed);
     } else if (manualPaused && gameStatus === 'playing') showPauseModal('restored');
     else if ($('pauseModal')) $('pauseModal').hidden = true;
+    const pendingAmbushBoss = enemies.find((enemy) => enemy.wipeAlliesOnArrival && !enemy.ambushIntroCompleted && enemy.hp > 0);
+    if (pendingAmbushBoss && gameStatus === 'playing') {
+      manualPaused = false;
+      resumePromptPending = false;
+      window.setTimeout(() => beginBossAnnihilationSequence(pendingAmbushBoss, D.enemies.find((item) => item.id === pendingAmbushBoss.typeId)), 120);
+    }
     updateHud();
     renderUnitButtons();
     renderUpgradePanel();
@@ -4452,6 +4667,16 @@
 
   const updateNotices = [
     __CURRENT_UPDATE_NOTICE__,
+    {version:'v4.6',title:'Stage 7・弱塩基の遊離',body:'Stage 6の塩基版として、弱塩基由来陽イオン100％のStage 7を追加しました。第5ユニットKOHの強塩基が1.4倍になり、BOSSは予告後に増援を召集します。',isNew:false},
+    {version:'v4.5',title:'半反応式・飛行型調整・Stage 6',body:'半反応式の基本40問・難問30問を追加し、飛行型の時間経過自傷を廃止しました。弱酸由来陰イオン100％のStage 6と、増援を召集するBOSSを追加しました。',isNew:false},
+    {version:'v4.45',title:'全員で要望を管理',body:'v4.4の修正を統合し、管理者登録方式を廃止しました。ログイン済みの全ユーザーが、すべての要望を実装済み／検討中へ変更し、確認後に削除できます。',isNew:false},
+    {version:'v4.4',title:'要望管理・飛行表示・進行バグ修正',body:'要望の実装済み切替と削除、飛行型の表示位置上昇、Stage 5実績の旧セーブ修復、再生産クールタイム表示と実際の召喚可否の同期を追加しました。',isNew:false},
+    {version:'v4.3',title:'化学相性と反応表記を修正',body:'弱酸・弱塩基そのものではなく、弱酸由来陰イオン・弱塩基由来陽イオンに対してのみ遊離相性が発生するよう修正しました。反応式・物質名・H₂O₂・Stage 3 BOSSも化学監査しました。',isNew:false},
+    {version:'v4.2',title:'第二形態BOSS演出',body:'第1形態撃破時に戦闘全体を停止し、専用変身演出、第二形態への変化、通常BOSS出現演出を順番に再生してから戦闘を再開するようにしました。',isNew:false},
+    {version:'v4.1',title:'BOSS出現演出',body:'全StageのBOSS出現時に、黒い圧力波、暗転、画面振動、専用表示、Web Audioによる低音を組み合わせた独自演出を追加しました。',isNew:false},
+    {version:'v4.0',title:'総合完成・問題品質アップデート',body:'基本480問・難問250問・実戦8大問40小問へ増量し、問題メタデータ・選択肢別解説・数値誤答監査を追加。過去機能監査、旧セーブ移行、開発ソース分割、自動回帰検査も行いました。',isNew:false},
+    {version:'v3.95',title:'Wave 1再開・倍速試験制限',body:'ポーズ画面から同じStageのWave 1へやり直す機能と、倍速試験の不正解後30秒間は再挑戦できない制限を追加しました。再読み込みによる回避も防止します。',isNew:false},
+    {version:'v3.9',title:'共通テスト型実戦問題',body:'共通テスト型の実戦問題を追加し、合格点、初回・再挑戦報酬、次のバトル1回だけ有効なEnergy・回復・コイン報酬を選べるようにしました。',isNew:false},
     {version:'v3.8',title:'長期記憶・出題タイミング最適化',body:'画面や操作を増やさず、問題ごとの正誤と経過時間に応じて出題優先度を調整します。誤答は約12時間後、正答は3日・7日・14日・30日・45〜60日後を目安に再出題し、同一30問・近似20問・類題8問の短時間連続防止も維持します。',isNew:false},
     {version:'v3.7',title:'開発・検査・配布作業の効率化',body:'問題データ、版情報、ゲーム本体テンプレートを分離し、1コマンドで生成・検査・配布ZIP作成まで行える開発基盤へ整理しました。プレイヤー向けのゲーム内容は変更していません。',isNew:false},
     {version:'v3.6.1',title:'旧版継続を禁止する必須アップデート',body:'新しい版を検出した場合は戦闘と画面操作を停止し、進行を保存して自動的に最新版へ切り替えるようにしました。「あとで」は廃止し、更新準備中もゲームを続けられません。オンライン中は5分ごと、画面へ戻った際は1分以上経過していれば最新版を確認します。',isNew:true},
@@ -4476,6 +4701,16 @@
   ];
   const updateHistory = [
     __CURRENT_UPDATE_HISTORY__,
+    ['v4.6','弱塩基由来陽イオン100％のStage 7「弱塩基遊離区」を追加。第5ユニットKOHの強塩基で弱塩基の遊離が発生し1.4倍。BOSSは予告後に増援を召集。'],
+    ['v4.5','半反応式の基本40問・難問30問を追加。飛行型の時間経過自傷を廃止し、弱酸由来陰イオン100％のStage 6「弱酸遊離区」を追加。BOSSは予告後に弱酸由来イオンを召集。'],
+    ['v4.45','v4.4の全修正を統合し、requestAdmins方式を廃止。匿名認証を含むログイン済みの全ユーザーが、すべての要望を実装済み／検討中へ変更し、削除できる方式へ変更。'],
+    ['v4.4','要望一覧へ実装済み切替と削除を追加。飛行型の表示位置を約1体分上へ移動し、Stage 5実績が解除されない旧セーブを自動修復。再生産クールタイムの表示と実際の召喚可否を同期。'],
+    ['v4.3','弱酸・弱塩基そのものへ遊離相性を出していた誤りを修正。強酸は弱酸由来陰イオン、強塩基は弱塩基由来陽イオンにのみ1.4倍とし、反応式・物質名・H₂O₂・Stage 3 BOSSの化学表記も監査。'],
+    ['v4.2','二段階BOSSの第1形態撃破時に戦闘全体を停止し、専用変身演出、第二形態への変化、通常BOSS出現演出を順番に再生してから戦闘を再開するシーケンスを追加。'],
+    ['v4.1','全StageのBOSS出現時に、黒い圧力波、暗転、画面振動、専用表示、Web Audioによる低音を組み合わせた独自演出を追加。'],
+    ['v4.0','基本480問・難問250問・実戦8大問40小問へ増量。問題メタデータ・選択肢別解説・数値誤答監査を追加し、過去機能の実装監査、旧セーブ移行、開発ソース分割、自動回帰検査を実施。'],
+    ['v3.95','ポーズ画面から同じStageのWave 1へやり直す機能と、倍速試験で不正解になった後30秒間再挑戦できない制限を追加。再読み込みによる回避も防止。'],
+    ['v3.9','共通テスト型の実戦問題を5大問25小問追加。3/5以上で合格し、初回・再挑戦報酬と、次のバトル1回だけ有効なEnergy・回復・コイン報酬を選べるようにしました。'],
     ['v3.8','新しい画面を増やさず、問題ごとの正誤と経過時間に基づく長期記憶向け出題を実装。誤答は約12時間後、正答は3日・7日・14日・30日・45〜60日後を目安に優先し、同一30問・近似20問・類題8問の出題分散を維持。'],
     ['v3.7','通常問題・難問・ゲーム設定・版情報・テンプレートを分離し、生成、構文検査、問題検査、出題分散試験、文書・ZIP作成を1コマンドへ統合。GitHub Actionsでも生成元と公開物の同期を検査。'],
     ['v3.6.1','更新を「あとで」にできる仕様を廃止。新版を検出するとゲーム操作をロックし、進行を保存して自動更新。更新準備中も旧版でのプレイを続けられない必須アップデート方式へ変更。'],
