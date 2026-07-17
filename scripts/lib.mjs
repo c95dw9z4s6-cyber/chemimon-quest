@@ -16,11 +16,12 @@ export function loadGameData() {
   const core = readJson('data/game-core.json');
   const quiz = readJson('data/basic-questions.json');
   const hardQuiz = readJson('data/hard-questions.json');
+  const mockExams = readJson('data/mock-exams.json');
   const config = loadReleaseConfig();
   if (core.version !== config.saveVersion) {
     throw new Error(`data/game-core.json version ${core.version} does not match config saveVersion ${config.saveVersion}`);
   }
-  return { ...core, quiz, hardQuiz };
+  return { ...core, quiz, hardQuiz, mockExams };
 }
 
 function escapeScriptJson(value) {
@@ -47,6 +48,8 @@ function renderDocTemplate(relativePath, config) {
     '__SAVE_VERSION__': config.saveVersion,
     '__BASIC_COUNT__': config.expectedCounts.basic,
     '__HARD_COUNT__': config.expectedCounts.hard,
+    '__MOCK_COUNT__': config.expectedCounts.mockExams,
+    '__MOCK_QUESTION_COUNT__': config.expectedCounts.mockQuestions,
     '__RELEASE_NOTES__': releaseNotesMarkdown(config)
   };
   for (const [token, value] of Object.entries(replacements)) text = replaceAllRequired(text, token, value);
@@ -57,6 +60,14 @@ export function renderOutputs() {
   const config = loadReleaseConfig();
   const gameData = loadGameData();
   let index = fs.readFileSync(path.join(projectRoot, 'src/index.template.html'), 'utf8');
+  const sourceFragments = {
+    '__CORE_STYLES__': fs.readFileSync(path.join(projectRoot, 'src/styles/core.css'), 'utf8').trimEnd(),
+    '__RELEASE_STYLES__': fs.readFileSync(path.join(projectRoot, 'src/styles/release.css'), 'utf8').trimEnd(),
+    '__GAME_RUNTIME__': fs.readFileSync(path.join(projectRoot, 'src/scripts/game-runtime.js'), 'utf8').trimEnd(),
+    '__ONLINE_RUNTIME__': fs.readFileSync(path.join(projectRoot, 'src/scripts/online-runtime.js'), 'utf8').trimEnd(),
+    '__PWA_RUNTIME__': fs.readFileSync(path.join(projectRoot, 'src/scripts/pwa-runtime.js'), 'utf8').trimEnd()
+  };
+  for (const [token, value] of Object.entries(sourceFragments)) index = replaceAllRequired(index, token, value);
   const notice = {
     version: `v${config.version}`,
     title: config.noticeTitle,

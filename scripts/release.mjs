@@ -42,6 +42,11 @@ for (const relative of include) {
 }
 // Generated releases must not contain old generated release folders.
 fs.rmSync(path.join(bundleFolder, 'release'), { recursive: true, force: true });
+// Exclude local Python bytecode/cache files from user-facing bundles.
+for (const entry of fs.readdirSync(path.join(bundleFolder, 'scripts'), { withFileTypes: true })) {
+  if (entry.name === '__pycache__') fs.rmSync(path.join(bundleFolder, 'scripts', entry.name), { recursive: true, force: true });
+  if (entry.isFile() && entry.name.endsWith('.pyc')) fs.rmSync(path.join(bundleFolder, 'scripts', entry.name), { force: true });
+}
 const zipPath = path.join(releaseRoot, `chemion_quest_v${slug}_bundle.zip`);
 fs.rmSync(zipPath, { force: true });
 execFileSync('python3', [path.join(projectRoot, 'scripts/make_zip.py'), bundleFolder, zipPath, bundleFolderName], { stdio: 'inherit' });

@@ -35,13 +35,21 @@ function extractFunction(name) {
 const functionNames = [
   'finiteNumber', 'availableQuestions', 'normalizeQuestionForSimilarity', 'questionKey',
   'questionSignature', 'signatureSimilarity', 'questionFamily', 'isNearRecentQuestion',
-  'chooseQuestion', 'questionCategory'
+  'normalizeSpacingData', 'spacingKey', 'spacingStateFor', 'weightedQuestionPick', 'selectSpacedQuestion',
+  'chooseQuestion', 'questionCategory', 'defaultLearningData', 'readLearningData'
 ];
 const functions = functionNames.map(extractFunction).join('\n\n');
 const D = loadGameData();
 const config = loadReleaseConfig();
 const testCode = `
 const D=${JSON.stringify(D)};
+const storage=new Map();
+const localStorage={getItem:(k)=>storage.has(k)?storage.get(k):null,setItem:(k,v)=>storage.set(k,String(v))};
+const LEARNING_KEY='chemionQuestLearningV1';
+const SPACING_HOUR=60*60*1000;
+const SPACING_DAY=24*SPACING_HOUR;
+const SPACING_CORRECT_INTERVAL_DAYS=[3,7,14,30,45,60];
+const SPACING_INCORRECT_DELAY_HOURS=12;
 let selectedScope='all';
 let currentStageId=1;
 let recentQuestionHistory=[];
@@ -65,7 +73,24 @@ for(const stage of [1,2,3,4,5])testPool(D.hardQuiz,true,stage,200);
 const synthetic=Array.from({length:48},(_,i)=>({id:'syn'+i,q:(String.fromCharCode(97+(i%26))+String.fromCharCode(97+Math.floor(i/26))).repeat(20),options:['a','b','c','d'],answer:0,scope:'foundation',similarityGroup:'g'+(i%12)}));
 recentQuestionHistory=[];currentStageId=1;const families=[];
 for(let i=0;i<120;i++){const x=chooseQuestion(synthetic,false);const family=questionFamily(x);assert(!families.slice(-FAMILY_QUESTION_HISTORY_LIMIT).includes(family),'family repeated within limit');families.push(family);}
-console.log('rotation test passed');
+
+// Spaced-selection test: overdue questions must be chosen substantially more often than future questions.
+const scheduled=Array.from({length:60},(_,i)=>({id:'sched'+i,q:'scheduled '+i,options:['a','b','c','d'],answer:0,scope:'foundation',similarityGroup:'sg'+i}));
+const now=Date.now();
+const spacing=defaultLearningData();
+for(let i=0;i<scheduled.length;i++){
+  spacing.spacing.items[spacingKey(scheduled[i],false)]={attempts:1,dueAt:i<30?now-SPACING_DAY:now+30*SPACING_DAY,lapses:0,correctStreak:1};
+}
+localStorage.setItem(LEARNING_KEY,JSON.stringify(spacing));
+let overdueChosen=0;
+for(let i=0;i<1000;i++){
+  recentQuestionHistory=[];
+  const q=chooseQuestion(scheduled,false);
+  if(Number(q.id.replace('sched',''))<30)overdueChosen++;
+}
+assert(overdueChosen>650,'overdue questions were not sufficiently prioritized: '+overdueChosen);
+console.log('rotation and spacing test passed');
+
 `;
 const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'chemion-rotation-'));
 try {
