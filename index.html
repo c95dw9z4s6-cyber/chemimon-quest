@@ -6,7 +6,15 @@
   <meta name="theme-color" content="#07182a">
   <meta name="color-scheme" content="dark">
   <meta name="description" content="化学基礎・電気分解・結晶格子をクイズで学ぶタワーディフェンスゲーム">
-  <title>Chemion Quest v3.3</title>
+  <meta name="application-name" content="Chemion Quest">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Chemion Quest">
+  <meta name="cq-app-version" content="3.6.1">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
+  <title>Chemion Quest v3.6.1</title>
   <style>
 :root {
   color-scheme: dark;
@@ -395,7 +403,7 @@ canvas { display: block; width: 100%; height: auto; }
 }
 .modal-kicker { margin-bottom: 4px; color: var(--accent); font-size: .78rem; font-weight: 900; letter-spacing: .08em; }
 .question-source { margin: 12px 0 -4px; color: #9de7ff; font-size: .82rem; line-height: 1.5; font-weight: 800; }
-.question-text { margin: 18px 0; font-size: clamp(1.08rem, 3.6vw, 1.35rem); font-weight: 800; line-height: 1.65; }
+.question-text { margin: 18px 0; font-size: clamp(1.08rem, 3.6vw, 1.35rem); font-weight: 800; line-height: 1.65; white-space: pre-line; }
 .option-grid { display: grid; gap: 9px; }
 .option-button { width: 100%; padding: 13px 14px; text-align: left; }
 .option-button.correct { border-color: var(--good); background: rgba(58, 151, 96, .22); }
@@ -793,7 +801,7 @@ body[data-stage="3"] .stage-button{border-color:#dd98ff;background:linear-gradie
 #pauseBtn.paused-state{border-color:rgba(255,215,121,.82);background:rgba(90,61,12,.62);color:#fff0b5}
 #soundBtn.muted-state{opacity:.72;border-color:rgba(168,191,208,.35)}
 .speed-card{transition:border-color .2s ease,background .2s ease,box-shadow .2s ease}.speed-card.active{border-color:rgba(255,215,121,.78);background:linear-gradient(145deg,rgba(98,64,12,.72),rgba(30,42,57,.88));box-shadow:0 0 18px rgba(255,194,83,.14)}.speed-card.tier-two{border-color:rgba(216,160,255,.85);background:linear-gradient(145deg,rgba(81,42,112,.76),rgba(30,42,57,.9));box-shadow:0 0 20px rgba(202,130,255,.2)}
-.speed-boost-note{margin:.55rem 0 0;padding:.65rem .75rem;border:1px solid rgba(255,215,121,.48);border-radius:10px;background:rgba(73,49,10,.42);color:#ffe8a8;font-weight:800;white-space:pre-line}.unit-stats .role-tip{display:block;margin-bottom:3px;color:#dff6ff;font-weight:800;font-size:.72rem;line-height:1.25}
+.speed-boost-note{margin:.55rem 0 0;padding:.65rem .75rem;border:1px solid rgba(255,215,121,.48);border-radius:10px;background:rgba(73,49,10,.42);color:#ffe8a8;font-weight:800;white-space:pre-line}.speed-research-card{margin-bottom:8px;min-height:auto}.speed-research-card.active-speed{border-color:rgba(255,215,121,.72);background:linear-gradient(145deg,rgba(98,64,12,.58),rgba(30,42,57,.9))}.speed-research-card.tier-two{border-color:rgba(216,160,255,.82);background:linear-gradient(145deg,rgba(81,42,112,.68),rgba(30,42,57,.92))}.speed-research-card .upgrade-stats{white-space:pre-line}.unit-stats .role-tip{display:block;margin-bottom:3px;color:#dff6ff;font-weight:800;font-size:.72rem;line-height:1.25}
 .pause-card{max-width:520px;text-align:center}.pause-card .pause-icon{font-size:2.7rem;line-height:1;margin:4px 0 10px}.pause-card p{color:#cfe0ec;line-height:1.7}.pause-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}.pause-actions .continue-button{grid-column:1/-1}.pause-stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:14px 0}.pause-stat-grid div{padding:9px;border:1px solid var(--line);border-radius:11px;background:rgba(7,24,41,.72)}.pause-stat-grid small,.pause-stat-grid strong{display:block}.pause-stat-grid small{color:var(--muted);font-size:.66rem;letter-spacing:.08em}.pause-stat-grid strong{margin-top:3px;font-size:.95rem}.pause-note{font-size:.78rem;color:var(--muted)!important}.sound-setting-row{display:flex;align-items:center;justify-content:space-between;gap:12px}.sound-setting-row b{font-size:.85rem}.battle-panel.sound-ready::after{content:'';position:absolute;inset:0;pointer-events:none;border-radius:inherit;box-shadow:inset 0 0 0 1px rgba(111,231,255,.08)}
 @media(max-width:620px){.pause-actions{grid-template-columns:1fr}.pause-actions .continue-button{grid-column:auto}.pause-stat-grid{grid-template-columns:1fr 1fr}.save-controls{grid-template-columns:repeat(2,minmax(0,1fr))}}
 
@@ -812,10 +820,18 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
 .research-card-modal{max-width:820px}.research-card-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:18px 0}.research-card-choice{min-height:188px;padding:18px;border:1px solid rgba(122,220,255,.36);border-radius:16px;background:linear-gradient(145deg,rgba(16,54,78,.98),rgba(8,27,45,.98));color:#f2fbff;text-align:left;cursor:pointer;transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease}.research-card-choice:hover{transform:translateY(-3px);border-color:#8feaff;box-shadow:0 14px 32px rgba(0,0,0,.28)}.research-card-choice .research-icon{display:grid;place-items:center;width:48px;height:48px;border-radius:14px;background:rgba(116,221,255,.13);border:1px solid rgba(116,221,255,.28);font-weight:900;font-size:1.05rem}.research-card-choice strong{display:block;margin:13px 0 7px;font-size:1.08rem}.research-card-choice p{margin:0;color:#c8dce8;line-height:1.65;font-size:.86rem}.research-card-choice small{display:block;margin-top:10px;color:#ffe49a;font-weight:800}.research-card-note{font-size:.78rem;color:var(--muted);line-height:1.65}.research-loadout{position:absolute;right:10px;top:54px;z-index:4;display:flex;flex-direction:column;align-items:flex-end;gap:5px;max-width:230px;pointer-events:none}.research-loadout-title{padding:4px 8px;border-radius:999px;background:rgba(2,11,20,.72);border:1px solid rgba(125,223,255,.28);font-size:8px;letter-spacing:.08em;color:#bfefff;font-weight:900}.research-loadout-chip{padding:5px 8px;border-radius:9px;background:rgba(3,16,29,.70);border:1px solid rgba(125,223,255,.26);color:#eefaff;font-size:9px;font-weight:800;backdrop-filter:blur(4px)}
 @media(max-width:760px){.research-card-grid{grid-template-columns:1fr}.research-card-choice{min-height:0}.research-loadout{max-width:180px}.research-loadout-chip{font-size:8px}}
 
+
+/* v3.6.1 mandatory PWA update UI */
+.pwa-update-banner{position:fixed;inset:0;z-index:99999;display:grid;place-items:center;width:auto;transform:none;padding:max(18px,env(safe-area-inset-top)) 18px max(18px,env(safe-area-inset-bottom));border:0;border-radius:0;background:rgba(1,7,16,.94);backdrop-filter:blur(10px);color:#eafcff}.pwa-update-banner[hidden]{display:none}.pwa-update-card{width:min(620px,100%);padding:22px;border:1px solid rgba(120,230,255,.62);border-radius:20px;background:linear-gradient(145deg,rgba(10,34,57,.99),rgba(5,16,30,.995));box-shadow:0 22px 70px rgba(0,0,0,.66),0 0 32px rgba(69,213,255,.22);text-align:center}.pwa-update-copy{display:grid;gap:7px;min-width:0}.pwa-update-copy strong{font-size:1.18rem}.pwa-update-copy span{color:#d3e8f2;font-size:.88rem;line-height:1.7}.pwa-update-actions{display:flex;justify-content:center;margin-top:16px}.pwa-update-actions button{min-width:220px}.pwa-update-actions button:disabled{opacity:.72;cursor:progress}.pwa-update-note{margin:12px 0 0;color:#ffe5a3;font-size:.74rem;line-height:1.55}.pwa-offline-banner{position:fixed;right:12px;top:max(12px,env(safe-area-inset-top));z-index:3000;padding:8px 11px;border:1px solid rgba(255,210,113,.44);border-radius:999px;background:rgba(73,49,8,.94);box-shadow:0 10px 30px rgba(0,0,0,.32);color:#ffe8a6;font-size:.74rem;font-weight:850}.pwa-offline-banner[hidden]{display:none}.pwa-info-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:12px 0}.pwa-info-card{padding:12px;border:1px solid var(--line);border-radius:13px;background:rgba(8,27,46,.78)}.pwa-info-card small,.pwa-info-card strong{display:block}.pwa-info-card small{color:var(--muted);font-size:.68rem;letter-spacing:.08em}.pwa-info-card strong{margin-top:4px;font-size:.92rem}.pwa-help{padding:12px;border:1px solid rgba(111,231,255,.22);border-radius:13px;background:rgba(9,34,53,.62);color:#cfe7f1;line-height:1.65}.pwa-view-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.pwa-view-status{min-height:1.6em;margin:10px 0 0;color:#aeeeff;white-space:pre-wrap}.pwa-installed-badge{display:inline-flex;align-items:center;gap:5px;padding:4px 8px;border-radius:999px;background:rgba(112,231,168,.14);color:#9ff4c4;font-size:.72rem;font-weight:900}body.pwa-update-required{overflow:hidden}body.pwa-update-required>*:not(#pwaUpdateBanner){pointer-events:none!important;user-select:none!important}.pwa-update-banner{pointer-events:auto!important}
+@media(max-width:620px){.pwa-update-card{padding:18px 15px}.pwa-update-actions{display:grid}.pwa-update-actions button{width:100%;min-width:0}.pwa-info-grid{grid-template-columns:1fr}.pwa-view-actions{display:grid}.pwa-view-actions button{width:100%}}
+
 </style>
 
 <style>
 /* v3.3 tutorial, transfer code, and healer clarity */
+/* v3.4 question punctuation, clear restart, and dedicated speed trial */
+/* v3.5 question rotation, expanded hard quiz, and source clarity */
+/* v3.6.1 mandatory updates and automated publication checks */
 .tutorial-overlay{position:fixed;inset:0;z-index:2600;pointer-events:none}
 .tutorial-spotlight{position:fixed;border:3px solid #8ff5ff;border-radius:16px;box-shadow:0 0 0 9999px rgba(1,7,16,.68),0 0 0 7px rgba(77,220,255,.16),0 0 26px rgba(92,229,255,.9);transition:left .2s ease,top .2s ease,width .2s ease,height .2s ease;pointer-events:none}
 .tutorial-bubble{position:fixed;width:min(360px,calc(100vw - 24px));padding:17px;border-radius:18px;background:linear-gradient(145deg,rgba(10,29,48,.98),rgba(5,15,29,.99));border:1px solid rgba(122,229,255,.5);box-shadow:0 18px 55px rgba(0,0,0,.52),0 0 28px rgba(67,212,255,.18);color:#ecfbff;pointer-events:auto}
@@ -826,6 +842,14 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
 
 </head>
 <body>
+  <div id="pwaOfflineBanner" class="pwa-offline-banner" role="status" aria-live="polite" hidden>📴 オフライン｜ゲームは続けられます</div>
+  <aside id="pwaUpdateBanner" class="pwa-update-banner" role="alertdialog" aria-modal="true" aria-labelledby="pwaUpdateTitle" aria-describedby="pwaUpdateText" hidden>
+    <div class="pwa-update-card">
+      <div class="pwa-update-copy"><strong id="pwaUpdateTitle">必須アップデートがあります</strong><span id="pwaUpdateText">現在の進行を保存し、最新版へ切り替えます。</span></div>
+      <div class="pwa-update-actions"><button id="pwaUpdateNowBtn" class="continue-button" type="button">今すぐ更新する</button></div>
+      <p class="pwa-update-note">不具合修正や公平性の維持に必要な更新です。旧版のままゲームを続けることはできません。</p>
+    </div>
+  </aside>
   <section id="mobileLaunchGate" class="mobile-launch-gate" aria-labelledby="mobileLaunchTitle">
     <div class="mobile-launch-card compact-launch">
       <p class="modal-kicker">SMARTPHONE START</p>
@@ -844,7 +868,7 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
       <div class="brand-area">
         <div class="brand-mark" aria-hidden="true">CQ</div>
         <div>
-          <h1>Chemion Quest <span>v3.3</span></h1>
+          <h1>Chemion Quest <span>v3.6.1</span></h1>
           <p class="subtitle">クイズで召喚する化学タワーディフェンス</p>
         </div>
       </div>
@@ -869,7 +893,7 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
       <div class="hud-card"><span class="hud-label">COIN</span><strong id="coins">0</strong><span class="hud-subtext">累計 <span id="totalCoinsEarned">0</span></span></div>
       <div class="hud-card"><span class="hud-label">KILLS</span><strong id="totalKills">0</strong><span class="hud-subtext">今回 <span id="runKills">0</span></span></div>
       <div class="hud-card"><span class="hud-label">TIME</span><strong><span id="gameTime">0</span>s</strong><span class="hud-subtext">戦闘時間</span></div>
-      <div id="speedCard" class="hud-card speed-card"><span class="hud-label">BATTLE SPEED</span><strong id="battleSpeed">×1.00</strong><span id="speedTime" class="hud-subtext">難問正解で5:00</span></div>
+      <div id="speedCard" class="hud-card speed-card"><span class="hud-label">BATTLE SPEED</span><strong id="battleSpeed">×1.00</strong><span id="speedTime" class="hud-subtext">倍速試験で5:00</span></div>
       <div class="hud-card"><span class="hud-label">WAVE</span><strong><span id="currentWave">1</span> / <span id="finalWave">11</span></strong><span id="wavePhase" class="hud-subtext">開始準備</span></div>
       <div id="saveStatus" class="save-status" aria-live="polite">未保存</div>
     </section>
@@ -908,6 +932,15 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
         </div>
         <p>難問正解で永続強化。不正解時は挑戦料の半分を返金。</p>
       </div>
+      <article id="speedResearchCard" class="upgrade-card speed-research-card">
+        <div class="upgrade-card-head">
+          <div><strong class="upgrade-formula">BATTLE SPEED</strong><span>倍速試験</span></div>
+          <b id="speedResearchLevel" class="upgrade-level">×1.00</b>
+        </div>
+        <p id="speedResearchStats" class="upgrade-stats">専用の難問に正解すると、戦闘中だけ5分間1.5倍速になります。</p>
+        <p class="upgrade-note">ユニット解放・強化など、ほかの難問に正解しても倍速は発動しません。</p>
+        <button id="speedResearchBtn" class="upgrade-button" type="button">難問に挑戦して1.5倍速</button>
+      </article>
       <div class="upgrade-grid">
         <article id="energyUpgradeCard" class="upgrade-card energy-upgrade-card">
           <div class="upgrade-card-head">
@@ -933,8 +966,8 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
     </section>
 
     <footer class="version-footer">
-      <strong>Chemion Quest v3.3 ヒーラー・チュートリアル・セーブコードアップデート</strong>
-      <span>戦闘は自動保存され、セーブコードで別端末へ進行を移せます。</span>
+      <strong>Chemion Quest v3.6.1 必須アップデート修正版</strong>
+      <span>オフライン起動・ホーム画面追加・安全な更新通知に対応しました。</span>
     </footer>
   </main>
 
@@ -975,6 +1008,7 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
 <button id="settingsGuideBtn" class="small-button settings-choice"><strong>❓ 遊び方</strong><span>操作・属性・ウェーブの説明</span></button>
 <button id="settingsTutorialBtn" class="small-button settings-choice"><strong>🧭 操作チュートリアル</strong><span>召喚とクイズを実際に練習</span></button>
 <button id="settingsTransferBtn" class="small-button settings-choice"><strong>🔐 セーブコード</strong><span>別端末へ進行を移す・復元する</span></button>
+<button class="small-button settings-choice" data-settings-view="app"><strong>📲 アプリ・更新</strong><span>ホーム画面追加、オフライン、最新版確認</span></button>
 <button id="settingsSoundBtn" class="small-button settings-choice"><strong>🔊 効果音</strong><span id="settingsSoundState">攻撃・召喚・正誤などの音を切り替え</span></button>
 <button id="settingsSaveBtn" class="small-button settings-choice"><strong>💾 セーブ</strong><span>現在の進行を保存</span></button>
 <button id="settingsLoadBtn" class="small-button settings-choice"><strong>📂 ロード</strong><span>保存した進行を読み込む</span></button>
@@ -1055,7 +1089,8 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
       </div>
       <details open><summary>属性と相性</summary><div class="guide-chip-row compact-chips"><span>味方の強酸→敵の弱酸：1.4倍</span><span>味方の強塩基→敵の弱塩基：1.4倍</span><span>その他：1.0倍</span><span>敵側は相性補正なし</span></div></details>
       <details><summary>ユニットとステージ進行</summary><p>ステージごとに編成・解放順・能力が変わります。同じ化学式が別ステージに登場しても、ステージ固有の別ユニットとして扱われ、レベルや解放状況は持ち越されません。前のステージの進行は保存されます。</p></details><details><summary>高性能ヒーラー</summary><p>後半で解放されるヒーラーは、傷ついた味方1体を大きく回復します。自分自身は回復せず、盾兵など最大HPの高い味方を優先しやすい単体支援型です。強化レベルに応じて回復量も伸びます。</p></details><details><summary>Stage 3以降の研究カード</summary><p>Wave 3・6・9の終了後に3枚から1枚を選び、そのバトル中だけ味方を強化します。Stage 1・2には登場しません。</p></details><details><summary>飛行型</summary><p><span class="flying-legend">✈ FLYING</span> 通常の地上近接攻撃を受けません。弓兵・速射・範囲・飛行に加え、BOSSからも攻撃を受けます。対空攻撃には弱く、飛行ユニットは時間とともにHPが減少します。</p></details><details><summary>5の倍数・難関ステージ</summary><p>Stage 5、10、15…は前後より難しい節目のステージとして表示されます。今後はStage 5が6・7より難しく、Stage 8はStage 5より難しい程度の曲線を基準に調整します。</p></details>
-      <details><summary>難問正解による倍速研究</summary><p>バトル中の解放・強化用難問に正解すると、戦闘が5分間1.5倍速になります。効果中に別の難問へ正解すると2.25倍速になりますが、残り時間は延長されません。クイズ、設定、ランキング、ポーズなどで戦闘が止まっている間は残り時間も減りません。</p></details><details><summary>学習記録・練習</summary><p>設定から学習記録、分野別練習、難問練習、間違い復習を利用できます。難問の段階ヒントはステージのコインを消費します。</p></details><details><summary>大学二次型の出題範囲</summary><p>化学基礎、電気分解、化学範囲の結晶だけです。ヘンリーの法則、蒸気圧、化学平衡、反応速度、有機化学などは出題しません。</p></details>
+      <details><summary>専用の倍速試験</summary><p>研究強化の「倍速試験」を選び、専用の難問に正解すると、戦闘が5分間1.5倍速になります。1.5倍速中にもう一度倍速試験へ正解すると2.25倍速になりますが、残り時間は延長されません。ユニット解放・強化など、ほかの難問では倍速になりません。クイズ、設定、ランキング、ポーズなどで戦闘が止まっている間は残り時間も減りません。</p></details><details><summary>学習記録・練習</summary><p>設定から学習記録、分野別練習、難問練習、間違い復習を利用できます。難問の段階ヒントはステージのコインを消費します。</p></details><details><summary>問題の重複防止と出典</summary><p>同じ問題は直近30問、文章が近い類題は直近20問、同じ計算パターンは直近8問を避けて出題します。候補が少ない場合だけ段階的に制限を緩めます。難問には「出典・参考資料」を表示し、公式公開問題は転載せず、数値・問題文・選択肢を独自に作成しています。</p></details><details><summary>大学二次型の出題範囲</summary><p>化学基礎、電気分解、化学範囲の結晶だけです。ヘンリーの法則、蒸気圧、化学平衡、反応速度、有機化学などは出題しません。</p></details>
+      <details><summary>アプリ・オフライン・更新</summary><p>設定の「アプリ・更新」からホーム画面への追加方法と最新版を確認できます。一度オンラインで読み込んだ後は、通信が切れてもゲーム本体を起動できます。ランキング・要望の閲覧と送信には通信が必要です。新しい版が準備できた場合は通知を表示し、「更新する」を押したときだけ切り替えます。</p></details>
       <details><summary>セーブとオンライン</summary><p>設定からセーブ・ロードできます。さらに「セーブコード」で別端末へゲーム進行・学習記録・復習記録を移せます。コードは暗号化されていないため他人へ送らないでください。ユーザー名は作成者へLINEで送ってください。</p></details>
       <details><summary>画面の記号</summary><p>⚔攻撃　◎射程　♥HP　➤速度　⏱攻撃間隔　●コイン　✦EXP</p></details>
       <label class="guide-check"><input id="guideDontShow" type="checkbox"> 次回から自動表示しない</label>
@@ -1101,7 +1136,7 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
       <div id="endAchievementLink" class="end-achievement-link"></div>
       <button id="endAchievementsBtn" class="small-button trophy-button end-trophy" type="button">🏆 実績を確認</button>
       <button id="nextStageBtn" class="continue-button stage-next-button" type="button" hidden>次のステージへ進む</button>
-      <button id="continuePlayBtn" class="continue-button" type="button" hidden>このまま遊び続ける</button>
+      <button id="continuePlayBtn" class="continue-button" type="button" hidden>ウェーブ1から続けて遊ぶ</button>
       <button id="retryBtn" class="small-button" type="button">同じステージを再挑戦</button>
     </div>
   </div>
@@ -10010,6 +10045,989 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
         "条件と単位を順に確認してください。",
         "条件と単位を順に確認してください。"
       ]
+    },
+    {
+      "id": "v35-s1-01",
+      "q": "0.400 mol/LのNaCl水溶液50.0 mLに水を加えて全体を200 mLにした。希釈後のモル濃度はどれか。",
+      "options": [
+        "0.0500 mol/L",
+        "0.100 mol/L",
+        "0.200 mol/L",
+        "1.60 mol/L"
+      ],
+      "answer": 1,
+      "scope": "foundation",
+      "stageTier": 1,
+      "category": "mol",
+      "difficulty": "難関",
+      "source": "文部科学省「令和7年度 高等学校卒業程度認定試験 化学基礎」公式公開ページを参考資料にした自作問題（問題文・数値・選択肢は独自）",
+      "similarityGroup": "solution_dilution",
+      "hints": [
+        "希釈の前後でNaClの物質量は変わりません。",
+        "c₁V₁=c₂V₂を使います。",
+        "体積は50.0 mLから200 mLへ4倍になっています。"
+      ],
+      "explanation": "【着眼点】希釈では溶質の物質量が保存されます。\n【計算】0.400×50.0/200=0.100 mol/L。\n【答え】0.100 mol/L",
+      "calculation": true,
+      "visual": "solution"
+    },
+    {
+      "id": "v35-s1-02",
+      "q": "Zn 6.50 gに十分な塩酸を加えた。Zn+2HCl→ZnCl₂+H₂に従うとき、標準状態で発生するH₂の体積はどれか。Znのモル質量を65.0 g/mol、標準状態における気体1 molの体積を22.4 Lとする。",
+      "options": [
+        "1.12 L",
+        "2.24 L",
+        "4.48 L",
+        "22.4 L"
+      ],
+      "answer": 1,
+      "scope": "foundation",
+      "stageTier": 1,
+      "category": "mol",
+      "difficulty": "難関",
+      "source": "文部科学省「令和7年度 高等学校卒業程度認定試験 化学基礎」公式公開ページを参考資料にした自作問題（問題文・数値・選択肢は独自）",
+      "similarityGroup": "metal_acid_gas",
+      "hints": [
+        "Znの質量をmolへ直します。",
+        "ZnとH₂の係数比は1:1です。",
+        "0.100 molの気体体積を求めます。"
+      ],
+      "explanation": "【計算】6.50÷65.0=0.100 mol。Zn:H₂=1:1なのでH₂も0.100 mol。0.100×22.4=2.24 L。\n【答え】2.24 L",
+      "calculation": true,
+      "visual": "calculation"
+    },
+    {
+      "id": "v35-s1-03",
+      "q": "0.100 mol/LのBaCl₂水溶液100 mLと0.200 mol/LのNa₂SO₄水溶液50.0 mLを混合した。Ba²⁺+SO₄²⁻→BaSO₄により生じるBaSO₄の質量はどれか。BaSO₄のモル質量を233 g/molとする。",
+      "options": [
+        "1.17 g",
+        "2.33 g",
+        "4.66 g",
+        "23.3 g"
+      ],
+      "answer": 1,
+      "scope": "foundation",
+      "stageTier": 1,
+      "category": "mol",
+      "difficulty": "難関",
+      "source": "文部科学省「令和7年度 高等学校卒業程度認定試験 化学基礎」公式公開ページを参考資料にした自作問題（問題文・数値・選択肢は独自）",
+      "similarityGroup": "precipitation_mass",
+      "hints": [
+        "Ba²⁺とSO₄²⁻の物質量を別々に求めます。",
+        "どちらも0.0100 molです。",
+        "沈殿は1:1で生じます。"
+      ],
+      "explanation": "【計算】Ba²⁺は0.100×0.100=0.0100 mol、SO₄²⁻は0.200×0.0500=0.0100 mol。BaSO₄は0.0100 mol生じ、0.0100×233=2.33 g。\n【答え】2.33 g",
+      "calculation": true,
+      "visual": "solution"
+    },
+    {
+      "id": "v35-s1-04",
+      "q": "塩素が³⁵Clと³⁷Clだけからなり、平均原子量が35.5であるとする。³⁷Clの存在比はどれか。",
+      "options": [
+        "20%",
+        "25%",
+        "50%",
+        "75%"
+      ],
+      "answer": 1,
+      "scope": "foundation",
+      "stageTier": 1,
+      "category": "matter",
+      "difficulty": "難関",
+      "source": "文部科学省「令和7年度 高等学校卒業程度認定試験 化学基礎」公式公開ページを参考資料にした自作問題（問題文・数値・選択肢は独自）",
+      "similarityGroup": "isotope_two_abundance",
+      "hints": [
+        "³⁷Clの割合をxと置きます。",
+        "35(1−x)+37x=35.5です。",
+        "2x=0.5を解きます。"
+      ],
+      "explanation": "【計算】35(1−x)+37x=35.5より35+2x=35.5、x=0.25。\n【答え】25%",
+      "calculation": true,
+      "visual": "particles"
+    },
+    {
+      "id": "v35-s1-05",
+      "q": "Mgの原子番号は12である。Mg²⁺がもつ電子数はどれか。",
+      "options": [
+        "10個",
+        "12個",
+        "14個",
+        "24個"
+      ],
+      "answer": 0,
+      "scope": "foundation",
+      "stageTier": 1,
+      "category": "matter",
+      "difficulty": "標準",
+      "source": "文部科学省「令和7年度 高等学校卒業程度認定試験 化学基礎」公式公開ページを参考資料にした自作問題（問題文・数値・選択肢は独自）",
+      "similarityGroup": "electron_count_ion",
+      "hints": [
+        "中性Mg原子の電子数は原子番号と同じです。",
+        "2価の陽イオンになると電子を2個失います。"
+      ],
+      "explanation": "中性Mgは電子を12個もちます。Mg²⁺は電子を2個失っているため、電子数は12−2=10個です。",
+      "calculation": false,
+      "visual": "particles"
+    },
+    {
+      "id": "v35-s1-06",
+      "q": "KMnO₄中のMnの酸化数はどれか。Kを+1、Oを−2とする。",
+      "options": [
+        "+2",
+        "+4",
+        "+6",
+        "+7"
+      ],
+      "answer": 3,
+      "scope": "foundation",
+      "stageTier": 1,
+      "category": "redox",
+      "difficulty": "標準",
+      "source": "文部科学省「令和7年度 高等学校卒業程度認定試験 化学基礎」公式公開ページを参考資料にした自作問題（問題文・数値・選択肢は独自）",
+      "similarityGroup": "oxidation_number_permanganate",
+      "hints": [
+        "化合物全体の酸化数の和は0です。",
+        "+1+Mn+4×(−2)=0と置きます。"
+      ],
+      "explanation": "+1+x−8=0よりx=+7です。したがってKMnO₄中のMnの酸化数は+7です。",
+      "calculation": false,
+      "visual": "redox"
+    },
+    {
+      "id": "v35-s1-07",
+      "q": "0.100 mol/LのH₂SO₄水溶液100 mLを完全に中和するために必要な0.200 mol/LのNaOH水溶液の体積はどれか。H₂SO₄は2個のH⁺を完全に放出するとする。",
+      "options": [
+        "25.0 mL",
+        "50.0 mL",
+        "100 mL",
+        "200 mL"
+      ],
+      "answer": 2,
+      "scope": "foundation",
+      "stageTier": 1,
+      "category": "acidBase",
+      "difficulty": "難関",
+      "source": "文部科学省「令和7年度 高等学校卒業程度認定試験 化学基礎」公式公開ページを参考資料にした自作問題（問題文・数値・選択肢は独自）",
+      "similarityGroup": "neutralization_volume_diprotic",
+      "hints": [
+        "H₂SO₄は0.0100 molあります。",
+        "必要なOH⁻はその2倍です。",
+        "0.0200 molを0.200 mol/Lで割ります。"
+      ],
+      "explanation": "H₂SO₄は0.100×0.100=0.0100 mol。必要なNaOHは0.0200 molなので、体積は0.0200÷0.200=0.100 L=100 mLです。",
+      "calculation": true,
+      "visual": "solution"
+    },
+    {
+      "id": "v35-s1-08",
+      "q": "NaCl 12.0 gを水に溶かして80.0 gの水溶液をつくった。この水溶液の質量パーセント濃度はどれか。",
+      "options": [
+        "6.67%",
+        "12.0%",
+        "15.0%",
+        "18.0%"
+      ],
+      "answer": 2,
+      "scope": "foundation",
+      "stageTier": 1,
+      "category": "mol",
+      "difficulty": "標準",
+      "source": "文部科学省「令和7年度 高等学校卒業程度認定試験 化学基礎」公式公開ページを参考資料にした自作問題（問題文・数値・選択肢は独自）",
+      "similarityGroup": "mass_percent_solution",
+      "hints": [
+        "質量パーセント濃度は溶質の質量÷溶液の質量×100です。",
+        "分母は水の質量ではなく水溶液80.0 gです。"
+      ],
+      "explanation": "12.0÷80.0×100=15.0%です。",
+      "calculation": true,
+      "visual": "solution"
+    },
+    {
+      "id": "v35-s2-01",
+      "q": "N₂ 0.200 molとH₂ 0.450 molを反応させた。N₂+3H₂→2NH₃に従うとき、生成できるNH₃の最大物質量はどれか。",
+      "options": [
+        "0.150 mol",
+        "0.300 mol",
+        "0.400 mol",
+        "0.650 mol"
+      ],
+      "answer": 1,
+      "scope": "foundation",
+      "stageTier": 2,
+      "category": "mol",
+      "difficulty": "難関",
+      "source": "大学入試センター「令和8年度 大学入学共通テスト 化学基礎・化学」公式公開ページを参考資料にした自作問題（問題文・数値・選択肢は独自）",
+      "similarityGroup": "limiting_ammonia",
+      "hints": [
+        "N₂ 0.200 molをすべて使うにはH₂ 0.600 molが必要です。",
+        "実際のH₂は0.450 molなのでH₂が不足します。",
+        "H₂:NH₃=3:2です。"
+      ],
+      "explanation": "H₂が限界反応物です。0.450×2/3=0.300 molのNH₃が生成します。",
+      "calculation": true,
+      "visual": "limiting"
+    },
+    {
+      "id": "v35-s2-02",
+      "q": "CaCO₃を含む試料2.50 gに0.500 mol/LのHCl 100 mLを加えた。反応後に残ったHClを0.200 mol/LのNaOH 20.0 mLで中和した。試料中のCaCO₃の質量百分率はどれか。CaCO₃のモル質量を100 g/molとする。",
+      "options": [
+        "46.0%",
+        "80.0%",
+        "92.0%",
+        "96.0%"
+      ],
+      "answer": 2,
+      "scope": "foundation",
+      "stageTier": 2,
+      "category": "acidBase",
+      "difficulty": "難関",
+      "source": "大学入試センター「令和8年度 大学入学共通テスト 化学基礎・化学」公式公開ページを参考資料にした自作問題（問題文・数値・選択肢は独自）",
+      "similarityGroup": "back_titration_carbonate",
+      "hints": [
+        "最初のHClは0.0500 molです。",
+        "残ったHClはNaOHと同じ0.00400 molです。",
+        "CaCO₃ 1 molはHCl 2 molと反応します。"
+      ],
+      "explanation": "HCl消費量は0.0500−0.00400=0.0460 mol。CaCO₃は0.0460÷2=0.0230 mol、質量2.30 g。2.30÷2.50×100=92.0%。",
+      "calculation": true,
+      "visual": "purity"
+    },
+    {
+      "id": "v35-s2-03",
+      "q": "Na₂CO₃とNaHCO₃の混合物9.50 gを完全に中和するのにHCl 0.150 molを要した。Na₂CO₃、NaHCO₃のモル質量をそれぞれ106 g/mol、84.0 g/molとする。両物質の物質量の組合せはどれか。",
+      "options": [
+        "Na₂CO₃ 0.0250 mol、NaHCO₃ 0.0750 mol",
+        "Na₂CO₃ 0.0500 mol、NaHCO₃ 0.0500 mol",
+        "Na₂CO₃ 0.0750 mol、NaHCO₃ 0.0250 mol",
+        "Na₂CO₃ 0.100 mol、NaHCO₃ 0 mol"
+      ],
+      "answer": 1,
+      "scope": "foundation",
+      "stageTier": 2,
+      "category": "acidBase",
+      "difficulty": "難関",
+      "source": "大学入試センター「令和8年度 大学入学共通テスト 化学基礎・化学」公式公開ページを参考資料にした自作問題（問題文・数値・選択肢は独自）",
+      "similarityGroup": "carbonate_mixture_titration",
+      "hints": [
+        "Na₂CO₃は1 molあたりHCl 2 mol、NaHCO₃は1 molあたりHCl 1 molを使います。",
+        "選択肢を質量とHCl量の両方で確認できます。"
+      ],
+      "explanation": "0.0500 molずつなら質量は106×0.0500+84.0×0.0500=9.50 g、HClは2×0.0500+0.0500=0.150 molとなり、両条件を満たします。",
+      "calculation": true,
+      "visual": "solution"
+    },
+    {
+      "id": "v35-s2-04",
+      "q": "Fe²⁺を含む水溶液25.0 mLを、酸性条件で0.0200 mol/LのKMnO₄水溶液により滴定したところ15.0 mLを要した。MnO₄⁻:Fe²⁺=1:5で反応するとき、Fe²⁺のモル濃度はどれか。",
+      "options": [
+        "0.0120 mol/L",
+        "0.0300 mol/L",
+        "0.0600 mol/L",
+        "0.300 mol/L"
+      ],
+      "answer": 2,
+      "scope": "foundation",
+      "stageTier": 2,
+      "category": "redox",
+      "difficulty": "難関",
+      "source": "大学入試センター「令和8年度 大学入学共通テスト 化学基礎・化学」公式公開ページを参考資料にした自作問題（問題文・数値・選択肢は独自）",
+      "similarityGroup": "permanganate_iron_titration",
+      "hints": [
+        "MnO₄⁻は0.0200×0.0150 molです。",
+        "Fe²⁺はその5倍です。",
+        "最後に25.0 mLで割ります。"
+      ],
+      "explanation": "MnO₄⁻は3.00×10⁻⁴ mol、Fe²⁺は1.50×10⁻³ mol。0.00150÷0.0250=0.0600 mol/Lです。",
+      "calculation": true,
+      "visual": "redox"
+    },
+    {
+      "id": "v35-s2-05",
+      "q": "CuSO₄·xH₂O 12.5 gを加熱すると、無水CuSO₄ 8.00 gが得られた。CuSO₄、H₂Oのモル質量をそれぞれ160 g/mol、18.0 g/molとすると、xはどれか。",
+      "options": [
+        "2",
+        "3",
+        "5",
+        "10"
+      ],
+      "answer": 2,
+      "scope": "foundation",
+      "stageTier": 2,
+      "category": "mol",
+      "difficulty": "難関",
+      "source": "大学入試センター「令和8年度 大学入学共通テスト 化学基礎・化学」公式公開ページを参考資料にした自作問題（問題文・数値・選択肢は独自）",
+      "similarityGroup": "hydrate_copper_sulfate",
+      "hints": [
+        "CuSO₄は8.00÷160=0.0500 molです。",
+        "失われた水は4.50 gです。",
+        "水の物質量をCuSO₄の物質量で割ります。"
+      ],
+      "explanation": "水は4.50÷18.0=0.250 mol。0.250÷0.0500=5より、x=5です。",
+      "calculation": true,
+      "visual": "hydrate"
+    },
+    {
+      "id": "v35-s2-06",
+      "q": "鉄の酸化物7.20 gを完全に還元するとFe 5.60 gが得られた。Fe、Oのモル質量をそれぞれ56.0 g/mol、16.0 g/molとすると、この酸化物の組成式はどれか。",
+      "options": [
+        "FeO",
+        "Fe₂O₃",
+        "Fe₃O₄",
+        "FeO₂"
+      ],
+      "answer": 0,
+      "scope": "foundation",
+      "stageTier": 2,
+      "category": "mol",
+      "difficulty": "難関",
+      "source": "大学入試センター「令和8年度 大学入学共通テスト 化学基礎・化学」公式公開ページを参考資料にした自作問題（問題文・数値・選択肢は独自）",
+      "similarityGroup": "oxide_empirical_formula",
+      "hints": [
+        "酸素の質量は7.20−5.60=1.60 gです。",
+        "FeもOも0.100 molです。"
+      ],
+      "explanation": "Feは5.60÷56.0=0.100 mol、Oは1.60÷16.0=0.100 mol。最簡比は1:1なのでFeOです。",
+      "calculation": true,
+      "visual": "calculation"
+    },
+    {
+      "id": "v35-s2-07",
+      "q": "銅が⁶³Cuと⁶⁵Cuだけからなり、平均原子量が63.6であるとする。⁶⁵Cuの存在比はどれか。",
+      "options": [
+        "20%",
+        "30%",
+        "40%",
+        "60%"
+      ],
+      "answer": 1,
+      "scope": "foundation",
+      "stageTier": 2,
+      "category": "matter",
+      "difficulty": "難関",
+      "source": "大学入試センター「令和8年度 大学入学共通テスト 化学基礎・化学」公式公開ページを参考資料にした自作問題（問題文・数値・選択肢は独自）",
+      "similarityGroup": "isotope_copper_abundance",
+      "hints": [
+        "⁶⁵Cuの割合をxと置きます。",
+        "63(1−x)+65x=63.6です。"
+      ],
+      "explanation": "63+2x=63.6よりx=0.30。したがって30%です。",
+      "calculation": true,
+      "visual": "particles"
+    },
+    {
+      "id": "v35-s2-08",
+      "q": "AgNO₃水溶液を電気分解し、1.93 Aの電流を1000秒流した。Ag⁺+e⁻→Agとし、ファラデー定数を9.65×10⁴ C/mol、Agのモル質量を108 g/molとすると、析出するAgの質量はどれか。",
+      "options": [
+        "1.08 g",
+        "2.16 g",
+        "4.32 g",
+        "10.8 g"
+      ],
+      "answer": 1,
+      "scope": "electrolysis",
+      "stageTier": 2,
+      "category": "electrolysis",
+      "difficulty": "難関",
+      "source": "大学入試センター「令和8年度 大学入学共通テスト 化学基礎・化学」公式公開ページを参考資料にした自作問題（問題文・数値・選択肢は独自）",
+      "similarityGroup": "faraday_silver_current_time",
+      "hints": [
+        "電気量Q=Itを求めます。",
+        "電子の物質量はQ/Fです。",
+        "Ag⁺と電子は1:1です。"
+      ],
+      "explanation": "Q=1.93×1000=1930 C。電子は1930÷(9.65×10⁴)=0.0200 mol。Agも0.0200 molなので2.16 gです。",
+      "calculation": true,
+      "visual": "electrolysis"
+    },
+    {
+      "id": "v35-s3-01",
+      "q": "酸性水溶液中でCr₂O₇²⁻はCr³⁺へ還元される。Cr₂O₇²⁻ 0.0100 molが受け取る電子の物質量はどれか。",
+      "options": [
+        "0.0100 mol",
+        "0.0300 mol",
+        "0.0600 mol",
+        "0.120 mol"
+      ],
+      "answer": 2,
+      "scope": "foundation",
+      "stageTier": 3,
+      "category": "redox",
+      "difficulty": "難関",
+      "source": "大学入試センター「令和8年度 大学入学共通テスト 化学基礎・化学」公式公開ページを参考資料にした自作問題（問題文・数値・選択肢は独自）",
+      "similarityGroup": "dichromate_electron_count",
+      "hints": [
+        "Crは+6から+3になります。",
+        "Cr原子は1式量中に2個あります。",
+        "Cr₂O₇²⁻ 1 molあたり電子6 molを受け取ります。"
+      ],
+      "explanation": "Cr₂O₇²⁻+14H⁺+6e⁻→2Cr³⁺+7H₂Oより、0.0100 molは電子0.0600 molを受け取ります。",
+      "calculation": true,
+      "visual": "redox"
+    },
+    {
+      "id": "v35-s3-02",
+      "q": "酸性条件で2MnO₄⁻+5H₂O₂+6H⁺→2Mn²⁺+5O₂+8H₂Oと反応する。0.0200 mol/LのKMnO₄水溶液20.0 mLがH₂O₂水溶液10.0 mLとちょうど反応した。H₂O₂のモル濃度はどれか。",
+      "options": [
+        "0.0400 mol/L",
+        "0.0800 mol/L",
+        "0.100 mol/L",
+        "0.250 mol/L"
+      ],
+      "answer": 2,
+      "scope": "foundation",
+      "stageTier": 3,
+      "category": "redox",
+      "difficulty": "難関",
+      "source": "大学入試センター「令和8年度 大学入学共通テスト 化学基礎・化学」公式公開ページを参考資料にした自作問題（問題文・数値・選択肢は独自）",
+      "similarityGroup": "permanganate_peroxide_titration",
+      "hints": [
+        "MnO₄⁻は4.00×10⁻⁴ molです。",
+        "H₂O₂はその5/2倍です。",
+        "得た物質量を0.0100 Lで割ります。"
+      ],
+      "explanation": "H₂O₂は4.00×10⁻⁴×5/2=1.00×10⁻³ mol。濃度は0.00100÷0.0100=0.100 mol/Lです。",
+      "calculation": true,
+      "visual": "redox"
+    },
+    {
+      "id": "v35-s3-03",
+      "q": "白金電極でCuSO₄水溶液を電気分解し、電子0.200 molを流した。Cuのモル質量を63.5 g/mol、標準状態における気体1 molの体積を22.4 Lとする。陰極のCu析出量と陽極のO₂体積の組合せはどれか。",
+      "options": [
+        "Cu 3.18 g、O₂ 2.24 L",
+        "Cu 6.35 g、O₂ 1.12 L",
+        "Cu 6.35 g、O₂ 2.24 L",
+        "Cu 12.7 g、O₂ 1.12 L"
+      ],
+      "answer": 1,
+      "scope": "electrolysis",
+      "stageTier": 3,
+      "category": "electrolysis",
+      "difficulty": "難関",
+      "source": "大学入試センター「令和8年度 大学入学共通テスト 化学基礎・化学」公式公開ページを参考資料にした自作問題（問題文・数値・選択肢は独自）",
+      "similarityGroup": "copper_electrolysis_mass_gas",
+      "hints": [
+        "Cu²⁺+2e⁻→Cuです。",
+        "陽極では2H₂O→O₂+4H⁺+4e⁻です。"
+      ],
+      "explanation": "電子0.200 molからCuは0.100 mol、6.35 g。O₂は0.0500 mol、1.12 Lです。",
+      "calculation": true,
+      "visual": "electrolysis"
+    },
+    {
+      "id": "v35-s3-04",
+      "q": "濃いNaCl水溶液を不活性電極で電気分解し、陽極でCl₂ 0.100 molが発生した。同温同圧で陰極に生じるH₂の物質量はどれか。",
+      "options": [
+        "0.0500 mol",
+        "0.100 mol",
+        "0.200 mol",
+        "0.400 mol"
+      ],
+      "answer": 1,
+      "scope": "electrolysis",
+      "stageTier": 3,
+      "category": "electrolysis",
+      "difficulty": "難関",
+      "source": "大学入試センター「令和8年度 大学入学共通テスト 化学基礎・化学」公式公開ページを参考資料にした自作問題（問題文・数値・選択肢は独自）",
+      "similarityGroup": "brine_gas_ratio",
+      "hints": [
+        "Cl₂ 1 molの生成で電子2 molが流れます。",
+        "H₂ 1 molの生成にも電子2 molが必要です。"
+      ],
+      "explanation": "陽極と陰極で同じ電子量が流れます。Cl₂とH₂はいずれも1 molあたり電子2 molに対応するため、H₂も0.100 molです。",
+      "calculation": true,
+      "visual": "electrolysis"
+    },
+    {
+      "id": "v35-s3-05",
+      "q": "AgNO₃水溶液とCuSO₄水溶液を直列につないで同じ電気量を流したところ、Agが10.8 g析出した。Ag、Cuのモル質量を108 g/mol、63.5 g/molとすると、Cuの析出質量はどれか。",
+      "options": [
+        "1.59 g",
+        "3.18 g",
+        "6.35 g",
+        "12.7 g"
+      ],
+      "answer": 1,
+      "scope": "electrolysis",
+      "stageTier": 3,
+      "category": "electrolysis",
+      "difficulty": "難関",
+      "source": "大学入試センター「令和8年度 大学入学共通テスト 化学基礎・化学」公式公開ページを参考資料にした自作問題（問題文・数値・選択肢は独自）",
+      "similarityGroup": "series_silver_copper_mass",
+      "hints": [
+        "Ag 10.8 gは0.100 molです。",
+        "Ag⁺は1価、Cu²⁺は2価です。",
+        "同じ0.100 molの電子ならCuは0.0500 mol析出します。"
+      ],
+      "explanation": "Ag 0.100 molの析出に電子0.100 mol。Cuは電子2 molで1 mol析出するので0.0500 mol、質量は3.175 g≈3.18 gです。",
+      "calculation": true,
+      "visual": "electrolysis"
+    },
+    {
+      "id": "v35-s3-06",
+      "q": "CuSO₄水溶液を電気分解してCu 1.27 gを析出させる。電流を2.00 A、ファラデー定数を9.65×10⁴ C/mol、Cuのモル質量を63.5 g/molとすると、必要な時間はどれか。",
+      "options": [
+        "965秒",
+        "1930秒",
+        "3860秒",
+        "7720秒"
+      ],
+      "answer": 1,
+      "scope": "electrolysis",
+      "stageTier": 3,
+      "category": "electrolysis",
+      "difficulty": "難関",
+      "source": "大学入試センター「令和8年度 大学入学共通テスト 化学基礎・化学」公式公開ページを参考資料にした自作問題（問題文・数値・選択肢は独自）",
+      "similarityGroup": "faraday_copper_time",
+      "hints": [
+        "Cuは1.27÷63.5=0.0200 molです。",
+        "必要な電子は0.0400 molです。",
+        "時間t=nF/Iです。"
+      ],
+      "explanation": "電子は0.0400 mol、電気量は3860 C。t=3860÷2.00=1930秒です。",
+      "calculation": true,
+      "visual": "electrolysis"
+    },
+    {
+      "id": "v35-s3-07",
+      "q": "ダニエル電池Zn｜Zn²⁺||Cu²⁺｜Cuを放電し、外部回路を電子0.100 molが流れた。Zn、Cuのモル質量を65.4 g/mol、63.5 g/molとする。電極の質量変化の組合せはどれか。",
+      "options": [
+        "Zn極が3.27 g減少、Cu極が3.18 g増加",
+        "Zn極が6.54 g減少、Cu極が6.35 g増加",
+        "Zn極が3.27 g増加、Cu極が3.18 g減少",
+        "両極とも質量は変化しない"
+      ],
+      "answer": 0,
+      "scope": "foundation_electrolysis",
+      "stageTier": 3,
+      "category": "electrolysis",
+      "difficulty": "難関",
+      "source": "大学入試センター「令和8年度 大学入学共通テスト 化学基礎・化学」公式公開ページを参考資料にした自作問題（問題文・数値・選択肢は独自）",
+      "similarityGroup": "daniel_mass_change",
+      "hints": [
+        "Zn→Zn²⁺+2e⁻、Cu²⁺+2e⁻→Cuです。",
+        "電子0.100 molに対し各金属は0.0500 mol変化します。"
+      ],
+      "explanation": "Znは0.0500 mol溶けて3.27 g減少し、Cuは0.0500 mol析出して3.175 g≈3.18 g増加します。",
+      "calculation": true,
+      "visual": "cell"
+    },
+    {
+      "id": "v35-s3-08",
+      "q": "鉛蓄電池の放電反応をPb+PbO₂+2H₂SO₄→2PbSO₄+2H₂Oとする。PbO₂ 0.100 molが反応したとき、消費されるH₂SO₄の物質量はどれか。",
+      "options": [
+        "0.0500 mol",
+        "0.100 mol",
+        "0.200 mol",
+        "0.400 mol"
+      ],
+      "answer": 2,
+      "scope": "foundation",
+      "stageTier": 3,
+      "category": "redox",
+      "difficulty": "標準二次",
+      "source": "大学入試センター「令和8年度 大学入学共通テスト 化学基礎・化学」公式公開ページを参考資料にした自作問題（問題文・数値・選択肢は独自）",
+      "similarityGroup": "lead_battery_stoichiometry",
+      "hints": [
+        "反応式の係数比を読み取ります。",
+        "PbO₂:H₂SO₄=1:2です。"
+      ],
+      "explanation": "係数比1:2より、PbO₂ 0.100 molに対してH₂SO₄は0.200 mol消費されます。",
+      "calculation": true,
+      "visual": "cell"
+    },
+    {
+      "id": "v35-s4-01",
+      "q": "ある金属は面心立方格子をつくり、格子定数は3.60×10⁻⁸ cmである。金属のモル質量を63.5 g/mol、Nₐ=6.02×10²³ mol⁻¹とすると、結晶の密度に最も近い値はどれか。",
+      "options": [
+        "4.52 g/cm³",
+        "7.85 g/cm³",
+        "9.04 g/cm³",
+        "18.1 g/cm³"
+      ],
+      "answer": 2,
+      "scope": "crystal",
+      "stageTier": 4,
+      "category": "crystal",
+      "difficulty": "難関",
+      "source": "大阪大学「令和8年度入試 理科（化学）」公式公開ページを参考資料にした自作問題（問題文・数値・選択肢は独自）",
+      "similarityGroup": "fcc_density",
+      "hints": [
+        "面心立方格子の単位格子には原子4個が含まれます。",
+        "単位格子の質量は4M/Nₐ、体積はa³です。"
+      ],
+      "explanation": "ρ=(4×63.5)/(6.02×10²³×(3.60×10⁻⁸)³)=約9.04 g/cm³です。",
+      "calculation": true,
+      "visual": "fcc"
+    },
+    {
+      "id": "v35-s4-02",
+      "q": "体心立方格子の格子定数が3.30×10⁻⁸ cmである。原子が体対角線上で接するとき、原子半径に最も近い値はどれか。√3=1.73とする。",
+      "options": [
+        "0.714×10⁻⁸ cm",
+        "1.43×10⁻⁸ cm",
+        "2.86×10⁻⁸ cm",
+        "5.71×10⁻⁸ cm"
+      ],
+      "answer": 1,
+      "scope": "crystal",
+      "stageTier": 4,
+      "category": "crystal",
+      "difficulty": "難関",
+      "source": "大阪大学「令和8年度入試 理科（化学）」公式公開ページを参考資料にした自作問題（問題文・数値・選択肢は独自）",
+      "similarityGroup": "bcc_radius",
+      "hints": [
+        "体対角線の長さは√3aです。",
+        "体対角線上に原子半径4個分が並びます。",
+        "r=√3a/4です。"
+      ],
+      "explanation": "r=1.73×3.30×10⁻⁸÷4=1.43×10⁻⁸ cmです。",
+      "calculation": true,
+      "visual": "bcc"
+    },
+    {
+      "id": "v35-s4-03",
+      "q": "NaCl型結晶について、Na⁺の配位数と単位格子中に含まれるNaClの組数の正しい組合せはどれか。",
+      "options": [
+        "配位数4、1組",
+        "配位数4、4組",
+        "配位数6、2組",
+        "配位数6、4組"
+      ],
+      "answer": 3,
+      "scope": "crystal",
+      "stageTier": 4,
+      "category": "crystal",
+      "difficulty": "標準二次",
+      "source": "大阪大学「令和8年度入試 理科（化学）」公式公開ページを参考資料にした自作問題（問題文・数値・選択肢は独自）",
+      "similarityGroup": "nacl_structure",
+      "hints": [
+        "NaCl型では各イオンは反対符号のイオン6個に囲まれます。",
+        "慣用単位格子にはNaClが4組含まれます。"
+      ],
+      "explanation": "NaCl型の配位数は6で、単位格子にはNaClが4組含まれます。",
+      "calculation": false,
+      "visual": "nacl"
+    },
+    {
+      "id": "v35-s4-04",
+      "q": "同じ半径の球を最密充填した面心立方格子と六方最密構造について、正しい記述はどれか。",
+      "options": [
+        "配位数も充填率も異なる",
+        "配位数は同じだが充填率は異なる",
+        "配位数は異なるが充填率は同じ",
+        "配位数も充填率も同じ"
+      ],
+      "answer": 3,
+      "scope": "crystal",
+      "stageTier": 4,
+      "category": "crystal",
+      "difficulty": "標準二次",
+      "source": "大阪大学「令和8年度入試 理科（化学）」公式公開ページを参考資料にした自作問題（問題文・数値・選択肢は独自）",
+      "similarityGroup": "close_packing_fraction",
+      "hints": [
+        "どちらも最密充填構造です。",
+        "どちらも配位数12、充填率約0.74です。"
+      ],
+      "explanation": "面心立方格子と六方最密構造は積層順序が異なりますが、配位数はともに12、充填率もともに約0.74です。",
+      "calculation": false,
+      "visual": "fcc"
+    },
+    {
+      "id": "v35-s4-05",
+      "q": "白金電極でCuSO₄水溶液を電気分解し、電子0.400 molを流した。Cuのモル質量を63.5 g/mol、標準状態における気体1 molの体積を22.4 Lとする。陰極のCu析出量と陽極のO₂体積の組合せはどれか。",
+      "options": [
+        "Cu 6.35 g、O₂ 1.12 L",
+        "Cu 12.7 g、O₂ 2.24 L",
+        "Cu 12.7 g、O₂ 4.48 L",
+        "Cu 25.4 g、O₂ 2.24 L"
+      ],
+      "answer": 1,
+      "scope": "electrolysis",
+      "stageTier": 4,
+      "category": "electrolysis",
+      "difficulty": "難関",
+      "source": "大阪大学「令和8年度入試 理科（化学）」公式公開ページを参考資料にした自作問題（問題文・数値・選択肢は独自）",
+      "similarityGroup": "copper_electrolysis_integrated",
+      "hints": [
+        "Cuは電子2 molで1 mol析出します。",
+        "O₂は電子4 molで1 mol生じます。"
+      ],
+      "explanation": "Cuは0.400÷2=0.200 molで12.7 g。O₂は0.400÷4=0.100 molで2.24 Lです。",
+      "calculation": true,
+      "visual": "electrolysis"
+    },
+    {
+      "id": "v35-s4-06",
+      "q": "MgとAlの混合物5.10 gに十分な塩酸を加えると、標準状態でH₂が5.60 L発生した。Mg、Alのモル質量を24.0 g/mol、27.0 g/mol、標準状態における気体1 molの体積を22.4 Lとする。混合物中のAlの質量はどれか。",
+      "options": [
+        "1.35 g",
+        "2.40 g",
+        "2.70 g",
+        "3.75 g"
+      ],
+      "answer": 2,
+      "scope": "foundation",
+      "stageTier": 4,
+      "category": "mol",
+      "difficulty": "難関",
+      "source": "大阪大学「令和8年度入試 理科（化学）」公式公開ページを参考資料にした自作問題（問題文・数値・選択肢は独自）",
+      "similarityGroup": "metal_mixture_hydrogen",
+      "hints": [
+        "H₂は0.250 molです。",
+        "Mgをx mol、Alをy molとすると、24x+27y=5.10です。",
+        "H₂量からx+1.5y=0.250です。"
+      ],
+      "explanation": "連立方程式24x+27y=5.10、x+1.5y=0.250を解くとx=y=0.100 mol。Alは0.100×27.0=2.70 gです。",
+      "calculation": true,
+      "visual": "limiting"
+    },
+    {
+      "id": "v35-s4-07",
+      "q": "純度80.0%のCaCO₃試料25.0 gに十分な塩酸を加えた。CO₂の実際の収率が90.0%であるとき、標準状態で得られるCO₂の体積はどれか。CaCO₃のモル質量を100 g/mol、標準状態における気体1 molの体積を22.4 Lとする。",
+      "options": [
+        "2.02 L",
+        "3.58 L",
+        "4.03 L",
+        "4.48 L"
+      ],
+      "answer": 2,
+      "scope": "foundation",
+      "stageTier": 4,
+      "category": "mol",
+      "difficulty": "難関",
+      "source": "大阪大学「令和8年度入試 理科（化学）」公式公開ページを参考資料にした自作問題（問題文・数値・選択肢は独自）",
+      "similarityGroup": "purity_yield_gas",
+      "hints": [
+        "純粋なCaCO₃は25.0×0.800=20.0 gです。",
+        "理論上のCO₂は0.200 molです。",
+        "最後に収率90.0%を掛けます。"
+      ],
+      "explanation": "CaCO₃は0.200 molなので理論体積4.48 L。実際は4.48×0.900=4.032 L≈4.03 Lです。",
+      "calculation": true,
+      "visual": "yield"
+    },
+    {
+      "id": "v35-s4-08",
+      "q": "0.200 mol/LのHCl 100 mLと0.100 mol/LのNaOH 150 mLを混合した。体積は加算できるものとし、log₁₀2=0.301とする。混合後のpHはどれか。",
+      "options": [
+        "1.00",
+        "1.70",
+        "2.00",
+        "12.3"
+      ],
+      "answer": 1,
+      "scope": "foundation",
+      "stageTier": 4,
+      "category": "acidBase",
+      "difficulty": "難関",
+      "source": "大阪大学「令和8年度入試 理科（化学）」公式公開ページを参考資料にした自作問題（問題文・数値・選択肢は独自）",
+      "similarityGroup": "strong_acid_base_ph",
+      "hints": [
+        "H⁺は0.0200 mol、OH⁻は0.0150 molです。",
+        "H⁺が0.00500 mol残り、全体積は0.250 Lです。",
+        "[H⁺]=0.0200 mol/Lです。"
+      ],
+      "explanation": "過剰H⁺は0.00500 mol、濃度は0.00500÷0.250=0.0200 mol/L。pH=−log(2.00×10⁻²)=2−0.301=1.70です。",
+      "calculation": true,
+      "visual": "solution"
+    },
+    {
+      "id": "v35-s5-01",
+      "q": "酸性条件で2MnO₄⁻+5C₂O₄²⁻+16H⁺→2Mn²⁺+10CO₂+8H₂Oと反応する。シュウ酸イオンを含む水溶液25.0 mLの滴定に0.0200 mol/LのKMnO₄水溶液25.0 mLを要した。C₂O₄²⁻のモル濃度はどれか。",
+      "options": [
+        "0.0200 mol/L",
+        "0.0400 mol/L",
+        "0.0500 mol/L",
+        "0.125 mol/L"
+      ],
+      "answer": 2,
+      "scope": "foundation",
+      "stageTier": 5,
+      "category": "redox",
+      "difficulty": "難関",
+      "source": "京都大学「令和8年度 一般選抜 理科（化学）」公式公開ページを参考資料にした自作問題（問題文・数値・選択肢は独自）",
+      "similarityGroup": "permanganate_oxalate_titration",
+      "hints": [
+        "MnO₄⁻は5.00×10⁻⁴ molです。",
+        "C₂O₄²⁻はその5/2倍です。",
+        "得た物質量を0.0250 Lで割ります。"
+      ],
+      "explanation": "C₂O₄²⁻は5.00×10⁻⁴×5/2=1.25×10⁻³ mol。濃度は1.25×10⁻³÷0.0250=0.0500 mol/Lです。",
+      "calculation": true,
+      "visual": "redox"
+    },
+    {
+      "id": "v35-s5-02",
+      "q": "AgNO₃水溶液と希硫酸を直列につないで電気分解したところ、AgNO₃水溶液側でAgが21.6 g析出した。Agのモル質量を108 g/mol、標準状態における気体1 molの体積を22.4 Lとすると、希硫酸側の陰極で生じるH₂の体積はどれか。",
+      "options": [
+        "1.12 L",
+        "2.24 L",
+        "4.48 L",
+        "8.96 L"
+      ],
+      "answer": 1,
+      "scope": "electrolysis",
+      "stageTier": 5,
+      "category": "electrolysis",
+      "difficulty": "難関",
+      "source": "京都大学「令和8年度 一般選抜 理科（化学）」公式公開ページを参考資料にした自作問題（問題文・数値・選択肢は独自）",
+      "similarityGroup": "series_silver_hydrogen_gas",
+      "hints": [
+        "Agは0.200 mol析出しています。",
+        "流れた電子は0.200 molです。",
+        "H₂は電子2 molから1 mol生じます。"
+      ],
+      "explanation": "電子0.200 molに対しH₂は0.100 mol生じるため、体積は2.24 Lです。",
+      "calculation": true,
+      "visual": "electrolysis"
+    },
+    {
+      "id": "v35-s5-03",
+      "q": "CuSO₄水溶液で面積100 cm²の板にCuめっきを行い、5.00 Aの電流を1930秒流した。電流効率を100%、ファラデー定数を9.65×10⁴ C/mol、Cuのモル質量を63.5 g/mol、密度を8.96 g/cm³とする。めっきの平均厚さに最も近い値はどれか。",
+      "options": [
+        "0.354 μm",
+        "3.54 μm",
+        "35.4 μm",
+        "354 μm"
+      ],
+      "answer": 2,
+      "scope": "electrolysis",
+      "stageTier": 5,
+      "category": "electrolysis",
+      "difficulty": "難関",
+      "source": "京都大学「令和8年度 一般選抜 理科（化学）」公式公開ページを参考資料にした自作問題（問題文・数値・選択肢は独自）",
+      "similarityGroup": "electroplating_thickness",
+      "hints": [
+        "Q=Itから電子の物質量を求めます。",
+        "Cu²⁺+2e⁻→Cuです。",
+        "体積=質量÷密度、厚さ=体積÷面積です。1 cm=10⁴ μmです。"
+      ],
+      "explanation": "Q=9650 Cで電子0.100 mol、Cuは0.0500 mol=3.175 g。体積は3.175÷8.96=0.354 cm³、厚さは0.354÷100=0.00354 cm=35.4 μmです。",
+      "calculation": true,
+      "visual": "electrolysis"
+    },
+    {
+      "id": "v35-s5-04",
+      "q": "面心立方格子をつくる金属の密度が10.5 g/cm³、格子定数が4.09×10⁻⁸ cmである。Nₐ=6.02×10²³ mol⁻¹とすると、この金属のモル質量に最も近い値はどれか。",
+      "options": [
+        "54.0 g/mol",
+        "63.5 g/mol",
+        "108 g/mol",
+        "216 g/mol"
+      ],
+      "answer": 2,
+      "scope": "crystal",
+      "stageTier": 5,
+      "category": "crystal",
+      "difficulty": "難関",
+      "source": "京都大学「令和8年度 一般選抜 理科（化学）」公式公開ページを参考資料にした自作問題（問題文・数値・選択肢は独自）",
+      "similarityGroup": "fcc_molar_mass_from_density",
+      "hints": [
+        "面心立方格子には原子4個が含まれます。",
+        "ρa³=4M/NₐよりM=ρa³Nₐ/4です。"
+      ],
+      "explanation": "M=10.5×(4.09×10⁻⁸)³×6.02×10²³÷4≈108 g/molです。",
+      "calculation": true,
+      "visual": "fcc"
+    },
+    {
+      "id": "v35-s5-05",
+      "q": "MgとAlからなる合金3.90 gに十分な塩酸を加えると、標準状態でH₂が4.48 L発生した。Mg、Alのモル質量を24.0 g/mol、27.0 g/mol、標準状態における気体1 molの体積を22.4 Lとする。合金中のAlの質量はどれか。",
+      "options": [
+        "1.20 g",
+        "1.35 g",
+        "2.40 g",
+        "2.70 g"
+      ],
+      "answer": 3,
+      "scope": "foundation",
+      "stageTier": 5,
+      "category": "mol",
+      "difficulty": "難関",
+      "source": "京都大学「令和8年度 一般選抜 理科（化学）」公式公開ページを参考資料にした自作問題（問題文・数値・選択肢は独自）",
+      "similarityGroup": "alloy_hydrogen_composition",
+      "hints": [
+        "H₂は0.200 molです。",
+        "Mgをx mol、Alをy molとすると24x+27y=3.90です。",
+        "水素量からx+1.5y=0.200です。"
+      ],
+      "explanation": "連立方程式を解くとMg 0.0500 mol、Al 0.100 mol。Alの質量は2.70 gです。",
+      "calculation": true,
+      "visual": "limiting"
+    },
+    {
+      "id": "v35-s5-06",
+      "q": "NaClとNaBrを合わせて0.100 mol含む水溶液に十分なAgNO₃水溶液を加えたところ、AgClとAgBrの沈殿が合計16.13 g生じた。AgCl、AgBrのモル質量を143.5 g/mol、188.0 g/molとする。もとのハロゲン化物中のNaBrのモル分率はどれか。",
+      "options": [
+        "20.0%",
+        "40.0%",
+        "60.0%",
+        "80.0%"
+      ],
+      "answer": 1,
+      "scope": "foundation",
+      "stageTier": 5,
+      "category": "mol",
+      "difficulty": "難関",
+      "source": "京都大学「令和8年度 一般選抜 理科（化学）」公式公開ページを参考資料にした自作問題（問題文・数値・選択肢は独自）",
+      "similarityGroup": "mixed_halide_precipitation",
+      "hints": [
+        "NaClをx mol、NaBrをy molとします。",
+        "x+y=0.100、143.5x+188.0y=16.13です。"
+      ],
+      "explanation": "連立するとx=0.0600 mol、y=0.0400 mol。NaBrのモル分率は0.0400/0.100=40.0%です。",
+      "calculation": true,
+      "visual": "solution"
+    },
+    {
+      "id": "v35-s5-07",
+      "q": "元素Xには質量数24、25、26の同位体があり、存在比はそれぞれ78.0%、10.0%、12.0%である。Xの平均原子量はどれか。",
+      "options": [
+        "24.12",
+        "24.34",
+        "24.78",
+        "25.00"
+      ],
+      "answer": 1,
+      "scope": "foundation",
+      "stageTier": 5,
+      "category": "matter",
+      "difficulty": "標準二次",
+      "source": "京都大学「令和8年度 一般選抜 理科（化学）」公式公開ページを参考資料にした自作問題（問題文・数値・選択肢は独自）",
+      "similarityGroup": "isotope_three_average",
+      "hints": [
+        "各質量数に存在比を掛けて足します。",
+        "存在比は小数に直します。"
+      ],
+      "explanation": "24×0.780+25×0.100+26×0.120=18.72+2.50+3.12=24.34です。",
+      "calculation": true,
+      "visual": "particles"
+    },
+    {
+      "id": "v35-s5-08",
+      "q": "ある鉄の酸化物11.6 gを完全に還元するとFe 8.40 gが得られた。Fe、Oのモル質量を56.0 g/mol、16.0 g/molとすると、この酸化物の組成式はどれか。",
+      "options": [
+        "FeO",
+        "Fe₂O₃",
+        "Fe₃O₄",
+        "FeO₂"
+      ],
+      "answer": 2,
+      "scope": "foundation",
+      "stageTier": 5,
+      "category": "mol",
+      "difficulty": "難関",
+      "source": "京都大学「令和8年度 一般選抜 理科（化学）」公式公開ページを参考資料にした自作問題（問題文・数値・選択肢は独自）",
+      "similarityGroup": "iron_oxide_formula",
+      "hints": [
+        "Feは8.40÷56.0=0.150 molです。",
+        "Oは(11.6−8.40)÷16.0=0.200 molです。",
+        "Fe:O=3:4に直します。"
+      ],
+      "explanation": "Feは0.150 mol、Oは0.200 mol。比は0.150:0.200=3:4なのでFe₃O₄です。",
+      "calculation": true,
+      "visual": "calculation"
     }
   ],
   "levelSystemVersion": 2,
@@ -11873,7 +12891,10 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
   const BATTLE_SPEED_DURATION = 300;
   let achievementToastTimer = 0;
   let combatEffects = [];
-  let recentQuestionKeys = [];
+  let recentQuestionHistory = [];
+  const EXACT_QUESTION_HISTORY_LIMIT = 30;
+  const NEAR_QUESTION_HISTORY_LIMIT = 20;
+  const FAMILY_QUESTION_HISTORY_LIMIT = 8;
   let achievementReturnToEnd = false;
   let battleInspectorKey = '';
   let battleInspectorPinnedUntil = 0;
@@ -12916,10 +13937,10 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
     }
   }
 
-  function applyHardQuizSpeedResult(correct, quiz) {
-    if (!quiz || quiz.mode !== 'hard' || quiz.allowOutsideGame || gameStatus !== 'playing') return '';
+  function applySpeedQuizResult(correct, quiz) {
+    if (!quiz || quiz.mode !== 'speed' || quiz.allowOutsideGame || gameStatus !== 'playing') return '';
     if (battleSpeedRemaining <= 0) {
-      if (!correct) return '';
+      if (!correct) return '倍速試験は不合格でした。通常速度のまま戦闘へ戻ります。';
       battleSpeedMultiplier = 1.5;
       battleSpeedRemaining = BATTLE_SPEED_DURATION;
       playSound('speed');
@@ -12963,7 +13984,7 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
     $('gameTime').textContent = Math.floor(gameTime);
     const speed = activeBattleSpeed();
     if ($('battleSpeed')) $('battleSpeed').textContent = `×${speed.toFixed(2)}`;
-    if ($('speedTime')) $('speedTime').textContent = battleSpeedRemaining > 0 ? `残り ${formatBattleSpeedTime(battleSpeedRemaining)}` : '難問正解で5:00';
+    if ($('speedTime')) $('speedTime').textContent = battleSpeedRemaining > 0 ? `残り ${formatBattleSpeedTime(battleSpeedRemaining)}` : '倍速試験で5:00';
     if ($('speedCard')) {
       $('speedCard').classList.toggle('active', battleSpeedRemaining > 0);
       $('speedCard').classList.toggle('tier-two', speed >= 2.25);
@@ -13001,7 +14022,78 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
     return set.filter((question) => scopeOf(question) !== 'theory');
   }
 
-  function questionKey(question) { return question?.q || JSON.stringify(question); }
+  function normalizeQuestionForSimilarity(value) {
+    return String(value || '')
+      .normalize('NFKC')
+      .toLowerCase()
+      .replace(/[0-9０-９₀-₉⁰¹²³⁴⁵⁶⁷⁸⁹]+(?:[.,．][0-9０-９]+)?/g, '#')
+      .replace(/[\s　、。．，,.・:：;；!?！？「」『』（）()\[\]{}]/g, '')
+      .replace(/mol\/l/g, '濃度')
+      .replace(/標準状態における気体#molの体積を#lとする/g, '標準状態気体');
+  }
+
+  function questionKey(question) {
+    return question?.id || normalizeQuestionForSimilarity(question?.q) || JSON.stringify(question);
+  }
+
+  function questionSignature(question) {
+    const normalized = normalizeQuestionForSimilarity(question?.q);
+    const grams = new Set();
+    if (normalized.length < 3) {
+      if (normalized) grams.add(normalized);
+      return grams;
+    }
+    for (let index = 0; index <= normalized.length - 3; index += 1) grams.add(normalized.slice(index, index + 3));
+    return grams;
+  }
+
+  function signatureSimilarity(left, right) {
+    if (!left?.size || !right?.size) return 0;
+    let overlap = 0;
+    const smaller = left.size <= right.size ? left : right;
+    const larger = left.size <= right.size ? right : left;
+    smaller.forEach((token) => { if (larger.has(token)) overlap += 1; });
+    return overlap / (left.size + right.size - overlap);
+  }
+
+  function questionFamily(question) {
+    if (question?.similarityGroup) return String(question.similarityGroup);
+    const text = normalizeQuestionForSimilarity(`${question?.q || ''} ${question?.explanation || ''}`);
+    const category = questionCategory(question);
+    const rules = [
+      ['isotope_abundance', /同位体|平均原子量|存在比/],
+      ['particle_count', /原子の個数|分子の個数|粒子数|アボガドロ/],
+      ['solution_dilution', /希釈|水を加えて全体|c₁v₁|濃度.*体積/],
+      ['neutralization', /中和|hcl.*naoh|h₂so₄.*naoh|酸.*塩基/],
+      ['strong_ph', /ph|水素イオン濃度|oh⁻濃度/],
+      ['precipitation', /沈殿|agcl|agbr|baso₄/],
+      ['gas_stoichiometry', /標準状態.*体積|発生する.*h₂|発生する.*co₂/],
+      ['limiting_reagent', /限界反応物|先に使い切|最大.*生成|混合物.*塩酸/],
+      ['purity_yield', /純度|収率|質量百分率/],
+      ['hydrate', /結晶水|·xh₂o|無水.*加熱/],
+      ['empirical_formula', /組成式|酸化物.*還元/],
+      ['oxidation_number', /酸化数/],
+      ['redox_titration', /滴定.*mno₄|kmno₄.*滴定|cr₂o₇|c₂o₄/],
+      ['half_reaction', /半反応式|受け取る電子|失う電子/],
+      ['daniel_cell', /ダニエル電池|zn｜zn|zn極.*cu極/],
+      ['lead_battery', /鉛蓄電池|pbo₂|pbso₄/],
+      ['electrolysis_mass', /電気分解.*析出|析出.*電気量|ファラデー/],
+      ['electrolysis_gas', /電気分解.*h₂|電気分解.*o₂|陽極.*cl₂|陰極.*h₂/],
+      ['series_electrolysis', /直列.*電気分解|同じ電気量/],
+      ['fcc', /面心立方|fcc/],
+      ['bcc', /体心立方|bcc/],
+      ['hcp', /六方最密|最密充填/],
+      ['nacl_crystal', /nacl型|塩化ナトリウム型/],
+      ['unit_cell_density', /格子定数.*密度|密度.*格子定数|単位格子.*密度/]
+    ];
+    const matched = rules.find(([, pattern]) => pattern.test(text));
+    return `${category}:${matched ? matched[0] : text.slice(0, 18)}`;
+  }
+
+  function isNearRecentQuestion(question, history) {
+    const signature = questionSignature(question);
+    return history.some((entry) => signatureSimilarity(signature, entry.signature) >= 0.56);
+  }
 
   function chooseQuestion(set, isHard) {
     let filtered = availableQuestions(set);
@@ -13010,13 +14102,25 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
       const stageMatched = filtered.filter((question) => !question.stageTier || question.stageTier === difficultyTier);
       if (stageMatched.length) filtered = stageMatched;
     }
-    let pool = filtered.length ? filtered : set;
-    const freshPool = pool.filter((question) => !recentQuestionKeys.includes(questionKey(question)));
-    if (freshPool.length) pool = freshPool;
+    const basePool = filtered.length ? filtered : set;
+    const exactHistory = recentQuestionHistory.slice(-EXACT_QUESTION_HISTORY_LIMIT);
+    const nearHistory = recentQuestionHistory.slice(-NEAR_QUESTION_HISTORY_LIMIT);
+    const familyHistory = recentQuestionHistory.slice(-FAMILY_QUESTION_HISTORY_LIMIT);
+    const exactKeys = new Set(exactHistory.map((entry) => entry.key));
+    const recentFamilies = new Set(familyHistory.map((entry) => entry.family));
+
+    const strictPool = basePool.filter((question) => {
+      const key = questionKey(question);
+      if (exactKeys.has(key)) return false;
+      if (recentFamilies.has(questionFamily(question))) return false;
+      return !isNearRecentQuestion(question, nearHistory);
+    });
+    const noNearPool = basePool.filter((question) => !exactKeys.has(questionKey(question)) && !isNearRecentQuestion(question, nearHistory));
+    const noExactPool = basePool.filter((question) => !exactKeys.has(questionKey(question)));
+    const pool = strictPool.length ? strictPool : noNearPool.length ? noNearPool : noExactPool.length ? noExactPool : basePool;
     const question = pool[Math.floor(Math.random() * pool.length)];
-    const key = questionKey(question);
-    recentQuestionKeys.push(key);
-    if (recentQuestionKeys.length > 10) recentQuestionKeys.shift();
+    recentQuestionHistory.push({ key: questionKey(question), family: questionFamily(question), signature: questionSignature(question) });
+    if (recentQuestionHistory.length > EXACT_QUESTION_HISTORY_LIMIT) recentQuestionHistory.shift();
     return question;
   }
 
@@ -13030,6 +14134,13 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
     return String(value ?? '')
       .replace(/\b(\d+(?:\.\d+)?)[eE]([+-]?\d+)\b/g, (_, coefficient, exponent) => `${coefficient}×10${toSuperscriptExponent(exponent)}`)
       .replace(/([A-Za-z0-9₀-₉⁺⁻²³⁴⁵⁶⁷⁸⁹\)])([。．、，])/g, '$1\u00A0$2');
+  }
+
+  function formatQuestionText(value) {
+    return formatChemicalText(value)
+      .replace(/(^|[。\n])([^。\n]*→[^。\n]*?)\u00A0?。(?=\S)/g, '$1$2\n')
+      .replace(/([A-Za-z][A-Za-z₀-₉⁺⁻²³⁴⁵⁶⁷⁸⁹()]*[₀-₉])\u00A0。(?=\S)/g, '$1\n')
+      .replace(/([A-Za-z][A-Za-z₀-₉⁺⁻²³⁴⁵⁶⁷⁸⁹()]*[₀-₉])\u00A0。$/g, '$1');
   }
 
   function questionCategory(question) {
@@ -13067,7 +14178,7 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
     data.totalAttempts += 1;
     if (correct) data.totalCorrect += 1;
     if (mode === 'summon') { data.summonAttempts += 1; if (correct) data.summonCorrect += 1; }
-    if (mode === 'hard') { data.hardAttempts += 1; if (correct) data.hardCorrect += 1; }
+    if (mode === 'hard' || mode === 'speed') { data.hardAttempts += 1; if (correct) data.hardCorrect += 1; }
     if (mode === 'practice' || mode === 'review') { data.practiceAttempts += 1; if (correct) data.practiceCorrect += 1; }
     data.currentStreak = correct ? data.currentStreak + 1 : 0;
     data.bestStreak = Math.max(data.bestStreak, data.currentStreak);
@@ -13103,7 +14214,7 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
   }
 
   function snapshotQuestion(question) {
-    return { q: question.q, options: question.options, answer: question.answer, explanation: question.explanation, source: question.source || '', scope: question.scope || 'foundation', category: questionCategory(question), difficulty: question.difficulty || '', stageTier: question.stageTier || null, calculation: Boolean(question.calculation), visual: question.visual || null, hints: Array.isArray(question.hints) ? question.hints : [], feedback: Array.isArray(question.feedback) ? question.feedback : [] };
+    return { id: question.id || '', q: question.q, options: question.options, answer: question.answer, explanation: question.explanation, source: question.source || '', scope: question.scope || 'foundation', category: questionCategory(question), difficulty: question.difficulty || '', stageTier: question.stageTier || null, similarityGroup: question.similarityGroup || '', calculation: Boolean(question.calculation), visual: question.visual || null, hints: Array.isArray(question.hints) ? question.hints : [], feedback: Array.isArray(question.feedback) ? question.feedback : [] };
   }
 
   function addReviewItem(question, selectedIndex) {
@@ -13369,14 +14480,14 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
     $('modalTitle').textContent = title || '化学クイズ';
     const sourceElement = $('questionSource');
     if (question.source) {
-      const meta = [question.source, question.difficulty ? `難易度：${question.difficulty}` : '', CATEGORY_LABELS[questionCategory(question)]].filter(Boolean);
+      const meta = [`出典・参考資料：${question.source}`, question.difficulty ? `難易度：${question.difficulty}` : '', CATEGORY_LABELS[questionCategory(question)]].filter(Boolean);
       sourceElement.textContent = formatChemicalText(meta.join('｜'));
       sourceElement.hidden = false;
     } else {
       sourceElement.textContent = '';
       sourceElement.hidden = true;
     }
-    $('qtext').textContent = formatChemicalText(question.q);
+    $('qtext').textContent = formatQuestionText(question.q);
     $('calculationHint').hidden = true;
     $('visualAid').hidden = true;
     $('visualAid').innerHTML = '';
@@ -13415,7 +14526,7 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
     });
 
     recordLearningResult(question, correct, mode);
-    const speedBoostMessage = applyHardQuizSpeedResult(correct, activeQuiz);
+    const speedBoostMessage = applySpeedQuizResult(correct, activeQuiz);
     if ($('speedBoostNote')) {
       $('speedBoostNote').textContent = speedBoostMessage;
       $('speedBoostNote').hidden = !speedBoostMessage;
@@ -13543,6 +14654,28 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
         } else {
           const refund = refundFailedResearch(unit.unlockCost);
           showMessage(`解放失敗。${refund}コイン返金され、実質${unit.unlockCost - refund}コインの消費です。`, 3.5);
+        }
+      }
+    });
+  }
+
+  function requestBattleSpeedChallenge() {
+    if (paused || gameStatus !== 'playing') return;
+    if (battleSpeedRemaining > 0 && battleSpeedMultiplier >= 2.25) {
+      showMessage(`現在2.25倍速です。残り${formatBattleSpeedTime(battleSpeedRemaining)}です。`, 3.2);
+      return;
+    }
+    const targetSpeed = battleSpeedRemaining > 0 ? 2.25 : 1.5;
+    openQuiz(chooseQuestion(D.hardQuiz, true), {
+      isHard: true,
+      mode: 'speed',
+      kicker: '倍速試験｜専用難問',
+      title: `正解で${targetSpeed.toFixed(2)}倍速`,
+      onComplete: (correct) => {
+        if (correct) {
+          showMessage(`${targetSpeed.toFixed(2)}倍速で戦闘を再開します。`, 3.4);
+        } else {
+          showMessage('倍速試験は不合格でした。現在の戦闘速度を維持します。', 3.4);
         }
       }
     });
@@ -14392,6 +15525,7 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
     $('nextStageBtn').hidden = !hasNextStage;
     if (hasNextStage) $('nextStageBtn').textContent = `ステージ${currentStageId + 1}へ進む`;
     $('continuePlayBtn').hidden = !victory;
+    $('retryBtn').hidden = victory;
     $('endAchievementLink').textContent = newlyUnlocked.length > 0
       ? `🏆 新規達成：${newlyUnlocked.map((achievement) => achievement.title).join('・')}`
       : victory && runStats.alliesDefeated === 0
@@ -14404,19 +15538,8 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
   function continueAfterClear() {
     if (gameStatus !== 'victory') return;
     $('endModal').hidden = true;
-    gameStatus = 'playing';
-    manualPaused = false;
-    resumePromptPending = false;
-    paused = false;
-    endlessMode = true;
-    endlessWaveTimer = 3;
-    endlessWaveNumber = 0;
-    enemyBaseHp = D.enemyBaseHp;
-    enemies = [];
-    currentWaveIndex = D.waves.length - 1;
-    wavePhase = 'endless';
-    lastTimestamp = performance.now();
-    showMessage('継続プレイ開始。30秒ごとに敵が追加されます。', 4.2);
+    resetStage({ keepProgress: true });
+    showMessage('同じステージを第1ウェーブから開始しました。解放・強化・コインは引き継がれます。', 4.2);
     saveGame({ silent: true });
   }
 
@@ -14993,6 +16116,23 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
   }
 
   function renderUpgradePanel() {
+    const speedResearchCard = $('speedResearchCard');
+    if (speedResearchCard) {
+      const speed = activeBattleSpeed();
+      const tierTwo = battleSpeedRemaining > 0 && battleSpeedMultiplier >= 2.25;
+      const tierOne = battleSpeedRemaining > 0 && battleSpeedMultiplier >= 1.5 && !tierTwo;
+      $('speedResearchLevel').textContent = `×${speed.toFixed(2)}`;
+      $('speedResearchStats').textContent = tierTwo
+        ? `残り ${formatBattleSpeedTime(battleSpeedRemaining)}｜現在の最大速度です。`
+        : tierOne
+          ? `残り ${formatBattleSpeedTime(battleSpeedRemaining)}｜正解で2.25倍速（残り時間は延長なし）`
+          : '専用の難問に正解すると、戦闘中だけ5分間1.5倍速になります。';
+      $('speedResearchBtn').textContent = tierTwo ? '2.25倍速中' : tierOne ? '難問に挑戦して2.25倍速' : '難問に挑戦して1.5倍速';
+      $('speedResearchBtn').disabled = paused || gameStatus !== 'playing' || tierTwo;
+      speedResearchCard.classList.toggle('active-speed', tierOne || tierTwo);
+      speedResearchCard.classList.toggle('tier-two', tierTwo);
+    }
+
     const energyCard = $('energyUpgradeCard');
     if (energyCard) {
       const cost = energyCapacityUpgradeCost();
@@ -15031,6 +16171,7 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
   }
 
   function buildUpgradePanel() {
+    $('speedResearchBtn').onclick = requestBattleSpeedChallenge;
     $('energyUpgradeBtn').onclick = requestEnergyCapacityUpgrade;
     const area = $('unitUpgrades');
     area.innerHTML = '';
@@ -15379,6 +16520,7 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
       $('nextStageBtn').hidden = !hasNextStage;
       if (hasNextStage) $('nextStageBtn').textContent = `ステージ${currentStageId + 1}へ進む`;
       $('continuePlayBtn').hidden = !victory;
+      $('retryBtn').hidden = victory;
       $('endModal').hidden = false;
     }
 
@@ -15568,7 +16710,11 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
   }
 
   const updateNotices = [
-    {version:'v3.3',title:'ヒーラー強化・操作チュートリアル・セーブコード',body:'後半解放の味方ヒーラーを高性能な単体回復型へ再設計し、強化レベルで回復量も伸びるようにしました。BOSSは飛行型へ攻撃可能になりました。初回はスキップ可能な実操作チュートリアルを表示し、設定から再受講できます。セーブコードで別端末へ進行・学習記録・復習記録を移行できます。',isNew:true},
+    {version:'v3.6.1',title:'旧版継続を禁止する必須アップデート',body:'新しい版を検出した場合は戦闘と画面操作を停止し、進行を保存して自動的に最新版へ切り替えるようにしました。「あとで」は廃止し、更新準備中もゲームを続けられません。オンライン中は5分ごと、画面へ戻った際は1分以上経過していれば最新版を確認します。',isNew:true},
+    {version:'v3.6',title:'公開安定化・PWA・更新通知',body:'Webアプリ用マニフェストとService Workerを追加し、一度オンラインで読み込んだ後はオフラインでもゲーム本体を起動できるようにしました。対応ブラウザーではホーム画面へ追加できます。GitHub Actions用の自動検査・公開ワークフローも同梱しました。'},
+    {version:'v3.5',title:'同じ・似た問題の連続防止と難問40問追加',body:'同一問題は直近30問、文章が近い類題は直近20問、同じ計算パターンは直近8問を避けて抽選します。候補が不足した場合だけ段階的に制限を緩めます。難問を142問から182問へ増やし、追加問題は公式公開ページを参考資料として確認した上で本文・数値・選択肢を独自作成しました。難問画面には「出典・参考資料」を明記します。',isNew:true},
+    {version:'v3.4',title:'問題表示・クリア後再挑戦・専用倍速試験',body:'化学式直後の句点が元素記号に見える問題を防ぐため、問題文では化学式・反応式の直後を改行区切りにしました。ステージクリア後の継続プレイは場のユニットを残さず、第1ウェーブから再開します。倍速はユニット解放・強化などの難問では自動発動せず、研究強化の専用「倍速試験」に正解した場合だけ発動します。',isNew:false},
+    {version:'v3.3',title:'ヒーラー強化・操作チュートリアル・セーブコード',body:'後半解放の味方ヒーラーを高性能な単体回復型へ再設計し、強化レベルで回復量も伸びるようにしました。BOSSは飛行型へ攻撃可能になりました。初回はスキップ可能な実操作チュートリアルを表示し、設定から再受講できます。セーブコードで別端末へ進行・学習記録・復習記録を移行できます。',isNew:false},
     {version:'v3.2',title:'Stage 5・飛行型・難関ステージ',body:'5の倍数を難関ステージとして明示し、Stage 5「統合反応・飛行研究区」を追加。飛行・歩兵・弓兵・盾兵・強襲・範囲・回復と全属性の敵が登場します。飛行型は近接攻撃を受けず、対空攻撃に弱く、時間とともにHPが減少します。Stage 5専用難問22問も追加しました。',isNew:true},
     {version:'v3.1',title:'倍速研究・全メニュー停止・編成バランス改善',body:'バトル中の難問正解で1.5倍速を5分間獲得し、効果中の再正解で2.25倍速へ強化。設定・ランキング・学習画面など全モーダルで戦闘と倍速残り時間を停止します。歩兵連打だけでなく、弓兵・盾兵・強襲・範囲・回復の混成編成が成立するよう全Stageを再調整しました。',isNew:true},
     {version:'v3.0',title:'Stage 4・研究カード・相性と戦場デザインを大型更新',body:'Stage 4「気体・溶液研究区」を追加。Stage 3以降はWave 3・6・9終了後に研究カードを選択できます。相性補正は味方の有利時だけになり、同じ化学式が別ステージに登場してもステージ固有の別ユニットとして成長します。問題は基本320問・難問120問へ増加し、モル質量の対象を明記しました。',isNew:true},
@@ -15585,6 +16731,10 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
     {version:'安全確認',title:'ユーザー名をLINEで送ってください',body:'登録したユーザー名、または変更後のユーザー名を作成者へLINEで送ってください。本名・学校名・SNS IDは使わないでください。',isNew:false}
   ];
   const updateHistory = [
+    ['v3.6.1','更新を「あとで」にできる仕様を廃止。新版を検出するとゲーム操作をロックし、進行を保存して自動更新。更新準備中も旧版でのプレイを続けられない必須アップデート方式へ変更。'],
+    ['v3.6','Web App Manifest、192px・512pxアイコン、Service Workerを追加してPWA化。一度オンラインで起動した後のオフライン起動、ホーム画面追加、接続状態表示に対応。GitHub ActionsでJavaScript構文・問題データ・重複ID・PWA資産を検査し、合格時のみGitHub Pagesへ公開するワークフローを同梱。'],
+    ['v3.5','同一問題を直近30問、文章が近い類題を直近20問、同じ計算パターンを直近8問から除外する段階式の出題分散を実装。難問を40問追加して142問から182問へ増量し、難問画面に出典・参考資料を明記。追加問題は公式公開ページを参考資料として確認し、本文・数値・選択肢を独自作成。'],
+    ['v3.4','問題文で化学式・反応式直後の句点を改行区切りへ変換し、H₂。がH₂Oに見える問題を防止。ステージクリア後の継続プレイを場のユニットが残るエンドレス方式から、進行を引き継いだ第1ウェーブ再挑戦へ変更。倍速は他の難問正解では発動せず、研究強化の専用倍速試験に正解した場合だけ1.5倍速・2.25倍速になる方式へ変更。'],
     ['v3.3','NaOH・Ca(OH)₂・H₂Oを後半解放の高性能単体ヒーラーへ強化し、ユニット強化で回復量も上昇するよう変更。BOSSが飛行型を攻撃可能になりました。召喚ボタン→問題回答→正解時召喚を実際に操作するスキップ可能なチュートリアルと、端末間移行用の検査付きセーブコードを追加。'],
     ['v3.2','Stage 5「統合反応・飛行研究区」、飛行型ユニット・飛行敵・敵ヒーラー・敵盾兵・敵範囲攻撃を追加。5の倍数を難関ステージとして表示し、Stage 5は全役割・全属性・二段階飛行BOSSが現れる総合戦にしました。次回v3.3では後半解放の単体回復ヒーラーを強化予定。'],
     ['v3.1','難問正解による5分間の1.5倍速、効果中の再正解による2.25倍速を追加。残り時間は戦闘進行中だけ減少し、再挑戦で延長されません。全モーダルの自動停止、Stage 1〜4の役割別ユニット調整、盾の攻撃誘導・被ダメ軽減、強襲の初撃・押し戻しを実装。'],
@@ -15608,6 +16758,7 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
     ['v1.4','歩兵・弓兵・盾兵の役割差を強化。']
   ];
 
+  window.cqPauseOverlay = pauseForOverlay;
   window.cqResumeOverlay = resumeFromOverlay;
   function openSettings() { pauseForOverlay(); $('settingsModal').hidden = false; }
   function closeSettings() { if ($('settingsModal').hidden) return; $('settingsModal').hidden = true; resumeFromOverlay(); }
@@ -15765,6 +16916,62 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
     container.append(grid);
   }
 
+  function renderAppView(container) {
+    const manager = window.ChemionPWA;
+    const state = manager?.getState?.() || {
+      currentVersion: '3.6', installed: false, installPromptReady: false,
+      serviceWorkerSupported: 'serviceWorker' in navigator,
+      controlled: Boolean(navigator.serviceWorker?.controller), online: navigator.onLine,
+      platformHint: ''
+    };
+    container.innerHTML = '<p class="modal-lead">Chemion Questをホーム画面から起動し、通信が不安定なときもゲーム本体を利用できます。ランキング・要望などのオンライン機能には通信が必要です。</p>';
+    const badge = document.createElement('div');
+    badge.className = state.installed ? 'pwa-installed-badge' : '';
+    badge.textContent = state.installed ? '✓ アプリとして起動中' : 'ブラウザーで起動中';
+    container.append(badge);
+    const grid = document.createElement('div');
+    grid.className = 'pwa-info-grid';
+    [
+      ['現在の版', `v${state.currentVersion}`],
+      ['接続', state.online ? 'オンライン' : 'オフライン'],
+      ['オフライン準備', state.controlled ? '完了' : (state.serviceWorkerSupported ? '初回準備中' : '非対応ブラウザー')],
+      ['ホーム画面', state.installed ? '追加済み・単独起動' : (state.installPromptReady ? '追加可能' : 'ブラウザーのメニューから追加')]
+    ].forEach(([label,value]) => { const card=document.createElement('div');card.className='pwa-info-card';const small=document.createElement('small');small.textContent=label;const strong=document.createElement('strong');strong.textContent=value;card.append(small,strong);grid.append(card); });
+    container.append(grid);
+    const help = document.createElement('div');
+    help.className = 'pwa-help';
+    help.innerHTML = state.platformHint || '<b>ホーム画面に追加する方法</b><br>Chrome・Edgeではアドレスバーやメニューの「インストール」「アプリをインストール」を使います。Safariでは共有メニューから「ホーム画面に追加」を選びます。';
+    container.append(help);
+    const actions = document.createElement('div');
+    actions.className = 'pwa-view-actions';
+    const install = document.createElement('button');
+    install.className = 'continue-button'; install.type='button';
+    install.textContent = state.installed ? 'ホーム画面追加済み' : 'ホーム画面へ追加';
+    install.disabled = state.installed;
+    install.addEventListener('click', async () => {
+      const message = await manager?.requestInstall?.();
+      status.textContent = message || 'ブラウザーの共有・メニューから「ホーム画面に追加」を選んでください。';
+      setTimeout(() => renderAppView(container), 700);
+    });
+    const check = document.createElement('button');
+    check.className = 'small-button'; check.type='button'; check.textContent='最新版を確認';
+    check.addEventListener('click', async () => {
+      status.textContent = '最新版を確認しています…';
+      const result = await manager?.checkForUpdates?.({ manual: true });
+      status.textContent = result || '確認が完了しました。';
+    });
+    const clear = document.createElement('button');
+    clear.className='small-button'; clear.type='button'; clear.textContent='オフラインデータを更新';
+    clear.addEventListener('click', async () => {
+      status.textContent='ゲーム本体の保存を更新しています…';
+      const result=await manager?.refreshOfflineCache?.();
+      status.textContent=result || '更新しました。';
+    });
+    actions.append(install,check,clear); container.append(actions);
+    const status = document.createElement('p'); status.className='pwa-view-status'; status.setAttribute('aria-live','polite'); status.textContent = manager?.getLastMessage?.() || '';
+    container.append(status);
+  }
+
   function showInfoView(kind) {
     $('settingsModal').hidden = true;
     $('infoModal').hidden = false;
@@ -15781,6 +16988,8 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
       $('infoKicker').textContent = 'LEARNING RECORD'; $('infoTitle').textContent = '学習記録・習熟度'; renderLearningView(container);
     } else if (kind === 'practice') {
       $('infoKicker').textContent = 'PRACTICE'; $('infoTitle').textContent = '練習モード'; renderPracticeView(container);
+    } else if (kind === 'app') {
+      $('infoKicker').textContent = 'APP & UPDATE'; $('infoTitle').textContent = 'アプリ・オフライン・更新'; renderAppView(container);
     } else {
       $('infoKicker').textContent = 'UPDATE HISTORY'; $('infoTitle').textContent = 'アップデート履歴';
       const list = document.createElement('div'); list.className = 'history-list';
@@ -15815,7 +17024,7 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
     $('settingsLoadBtn').addEventListener('click', () => { loadGame(); closeSettings(); });
     $('settingsDeleteBtn').addEventListener('click', () => { closeSettings(); deleteSave(); });
     $('settingsNicknameBtn').addEventListener('click', () => { closeSettings(); window.dispatchEvent(new CustomEvent('cq-open-profile')); });
-    document.querySelectorAll('[data-settings-view]').forEach(btn=>btn.addEventListener('click',()=>{const v=btn.dataset.settingsView;if(['notice','history','review','learning','practice'].includes(v))showInfoView(v);else if(v==='requests'){ $('settingsModal').hidden=true; window.dispatchEvent(new CustomEvent('cq-open-requests')); }else{ $('settingsModal').hidden=true; window.dispatchEvent(new CustomEvent('cq-submit-request')); }}));
+    document.querySelectorAll('[data-settings-view]').forEach(btn=>btn.addEventListener('click',()=>{const v=btn.dataset.settingsView;if(['notice','history','review','learning','practice','app'].includes(v))showInfoView(v);else if(v==='requests'){ $('settingsModal').hidden=true; window.dispatchEvent(new CustomEvent('cq-open-requests')); }else{ $('settingsModal').hidden=true; window.dispatchEvent(new CustomEvent('cq-submit-request')); }}));
     $('infoCloseBtn').addEventListener('click',()=>{$('infoModal').hidden=true;resumeFromOverlay();});
     $('infoBackBtn').addEventListener('click',closeInfoToSettings);
     $('transferCreateBtn').addEventListener('click', createTransferCode);
@@ -15985,9 +17194,216 @@ wire();initializeFirebase();
 
 </script>
   <script>
-    if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
-      window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
+  (() => {
+    'use strict';
+    const CURRENT_VERSION = '3.6.1';
+    const VERSION_CHECK_INTERVAL = 5 * 60 * 1000;
+    const VERSION_FOCUS_MIN_INTERVAL = 60 * 1000;
+    let registration = null;
+    let waitingWorker = null;
+    let deferredInstallPrompt = null;
+    let reloadAfterControllerChange = false;
+    let lastCheckAt = 0;
+    let lastMessage = '';
+    let mandatoryUpdateTimer = null;
+    let updateRequired = false;
+
+    const byId = (id) => document.getElementById(id);
+    const updateBanner = byId('pwaUpdateBanner');
+    const updateTitle = byId('pwaUpdateTitle');
+    const updateText = byId('pwaUpdateText');
+    const offlineBanner = byId('pwaOfflineBanner');
+
+    function isInstalled() {
+      return window.matchMedia?.('(display-mode: standalone)').matches || window.navigator.standalone === true;
     }
+    function platformHint() {
+      const ua = navigator.userAgent || '';
+      const ios = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+      if (ios && !isInstalled()) return '<b>iPhone・iPad</b><br>Safari下部の共有ボタン（□に↑）→「ホーム画面に追加」→「追加」を選んでください。プライベートブラウズではなく通常タブを使ってください。';
+      if (/Android/i.test(ua) && !isInstalled()) return '<b>Android</b><br>Chromeのメニューから「アプリをインストール」または「ホーム画面に追加」を選んでください。追加ボタンが使える場合は、下のボタンからも実行できます。';
+      return '<b>パソコン</b><br>Chrome・Edgeではアドレスバー右側のインストールボタン、Safariでは「ファイル」→「Dockに追加」など、ブラウザーの案内を使えます。';
+    }
+    function getState() {
+      return {
+        currentVersion: CURRENT_VERSION,
+        installed: isInstalled(),
+        installPromptReady: Boolean(deferredInstallPrompt),
+        serviceWorkerSupported: 'serviceWorker' in navigator,
+        controlled: Boolean(navigator.serviceWorker?.controller),
+        online: navigator.onLine,
+        platformHint: platformHint()
+      };
+    }
+    function setMessage(message) {
+      lastMessage = String(message || '');
+      window.dispatchEvent(new CustomEvent('cq-pwa-status', { detail: { message: lastMessage, state: getState() } }));
+      return lastMessage;
+    }
+    function updateConnectionUI() {
+      if (!offlineBanner) return;
+      offlineBanner.hidden = navigator.onLine;
+      if (!navigator.onLine) setMessage('現在オフラインです。ゲーム本体は利用できますが、ランキングと要望には接続が必要です。');
+    }
+    function lockForRequiredUpdate(versionLabel = '', preparing = false) {
+      updateRequired = true;
+      document.body.classList.add('pwa-update-required');
+      try { window.saveGame?.({ silent: true }); } catch (_) {}
+      try { window.cqPauseOverlay?.(); } catch (_) {}
+      if (!updateBanner) return;
+      updateTitle.textContent = versionLabel ? `Chemion Quest v${versionLabel}への必須更新` : '必須アップデートがあります';
+      updateText.textContent = preparing
+        ? '最新版の更新ファイルを準備しています。準備が完了すると自動で切り替わります。'
+        : '現在の進行を保存しました。旧版でのプレイを停止し、最新版へ自動的に切り替えます。';
+      const button = byId('pwaUpdateNowBtn');
+      if (button) {
+        button.disabled = preparing;
+        button.textContent = preparing ? '更新を準備中…' : '今すぐ更新する';
+      }
+      updateBanner.hidden = false;
+    }
+    function showUpdate(worker, versionLabel = '') {
+      if (worker) waitingWorker = worker;
+      lockForRequiredUpdate(versionLabel, false);
+      setMessage('必須アップデートを検出しました。旧版の操作を停止し、最新版へ切り替えます。');
+      clearTimeout(mandatoryUpdateTimer);
+      mandatoryUpdateTimer = setTimeout(() => applyWaitingUpdate(), 1200);
+    }
+    function showUpdatePreparation(versionLabel = '') {
+      lockForRequiredUpdate(versionLabel, true);
+      setMessage('公開版の更新を検出しました。更新ファイルを準備しています。');
+    }
+    function observeInstalling(worker) {
+      if (!worker) return;
+      worker.addEventListener('statechange', () => {
+        if (worker.state === 'installed' && navigator.serviceWorker.controller) showUpdate(registration?.waiting || worker);
+      });
+    }
+    async function readPublishedVersion() {
+      if (!navigator.onLine) return null;
+      try {
+        const response = await fetch(`./version.json?t=${Date.now()}`, { cache: 'no-store', headers: { 'Cache-Control': 'no-cache' } });
+        if (!response.ok) return null;
+        const data = await response.json();
+        return typeof data.version === 'string' ? data.version : null;
+      } catch { return null; }
+    }
+    async function checkForUpdates({ manual = false } = {}) {
+      if (!registration) {
+        const message = '更新機能を準備中です。公開URLをSafariまたはChromeで開いてください。';
+        return setMessage(message);
+      }
+      if (!navigator.onLine) return setMessage('オフラインのため最新版を確認できません。接続後にもう一度確認してください。');
+      lastCheckAt = Date.now();
+      try {
+        const published = await readPublishedVersion();
+        await registration.update();
+        if (registration.waiting) {
+          showUpdate(registration.waiting, published && published !== CURRENT_VERSION ? published : '');
+          return setMessage('新しいバージョンの準備が完了しました。画面下の「更新する」を押してください。');
+        }
+        if (published && published !== CURRENT_VERSION) {
+          showUpdatePreparation(published);
+          setTimeout(async () => {
+            try {
+              await registration?.update();
+              if (registration?.waiting) showUpdate(registration.waiting, published);
+              else setTimeout(() => checkForUpdates(), 1800);
+            } catch (_) {}
+          }, 900);
+          return lastMessage;
+        }
+        return setMessage(manual ? `v${CURRENT_VERSION}が現在の最新版です。` : '最新版です。');
+      } catch (error) {
+        console.warn('Chemion Quest update check failed', error);
+        if (updateRequired) return setMessage('更新の準備に失敗しました。通信を確認し、この画面の「今すぐ更新する」を押してください。');
+        return setMessage('最新版の確認に失敗しました。接続後にもう一度確認します。');
+      }
+    }
+    async function requestInstall() {
+      if (isInstalled()) return setMessage('すでにホーム画面からアプリとして起動しています。');
+      if (!deferredInstallPrompt) return setMessage('このブラウザーでは画面内ボタンを使えません。上の説明どおり、Safariの共有ボタンまたはChromeのメニューから追加してください。');
+      try {
+        deferredInstallPrompt.prompt();
+        const choice = await deferredInstallPrompt.userChoice;
+        deferredInstallPrompt = null;
+        if (choice?.outcome === 'accepted') return setMessage('ホーム画面への追加を開始しました。');
+        return setMessage('ホーム画面への追加を取り消しました。');
+      } catch {
+        return setMessage('追加画面を開けませんでした。ブラウザーのメニューから追加してください。');
+      }
+    }
+    async function refreshOfflineCache() {
+      if (!registration) return setMessage('オフライン機能を準備中です。公開URLから再読み込みしてください。');
+      if (!navigator.onLine) return setMessage('オフライン中は保存データを更新できません。通信接続後に実行してください。');
+      try {
+        const target = registration.active || navigator.serviceWorker.controller;
+        target?.postMessage?.({ type: 'REFRESH_SHELL' });
+        await registration.update();
+        return setMessage('オフライン用のゲーム本体を更新しました。');
+      } catch {
+        return setMessage('オフライン用データを更新できませんでした。通常の再読み込みを試してください。');
+      }
+    }
+    async function applyWaitingUpdate() {
+      clearTimeout(mandatoryUpdateTimer);
+      const button = byId('pwaUpdateNowBtn');
+      if (button) { button.disabled = true; button.textContent = '更新中…'; }
+      let worker = registration?.waiting || waitingWorker;
+      if (!worker) {
+        showUpdatePreparation();
+        await checkForUpdates({ manual: true });
+        worker = registration?.waiting || waitingWorker;
+        if (!worker) {
+          if (button) { button.disabled = false; button.textContent = '再試行する'; }
+          updateText.textContent = '更新ファイルをまだ取得できません。通信を確認して「再試行する」を押してください。';
+          return setMessage('更新ファイルを取得できませんでした。再試行してください。');
+        }
+      }
+      try { window.saveGame?.({ silent: true }); } catch (_) {}
+      reloadAfterControllerChange = true;
+      updateText.textContent = 'セーブしました。最新版へ切り替えています…';
+      worker.postMessage({ type: 'SKIP_WAITING' });
+      setTimeout(() => { if (reloadAfterControllerChange) location.reload(); }, 4000);
+      return setMessage('最新版へ切り替えています。');
+    }
+    async function registerServiceWorker() {
+      if (!('serviceWorker' in navigator) || !location.protocol.startsWith('http')) {
+        setMessage('この開き方ではオフライン機能を利用できません。公開URLをSafariまたはChromeで開いてください。');
+        return;
+      }
+      try {
+        registration = await navigator.serviceWorker.register('./sw.js', { scope: './', updateViaCache: 'none' });
+        if (registration.waiting) showUpdate(registration.waiting);
+        observeInstalling(registration.installing);
+        registration.addEventListener('updatefound', () => observeInstalling(registration.installing));
+        setMessage(navigator.serviceWorker.controller ? 'オフライン起動の準備が完了しています。' : 'オフライン起動を準備しました。次回の起動から利用できます。');
+        setTimeout(() => checkForUpdates(), 1600);
+      } catch (error) {
+        console.warn('Chemion Quest service worker registration failed', error);
+        if (updateRequired) setMessage('必須更新を開始できませんでした。通信を確認して再読み込みしてください。');
+        else setMessage('オフライン機能を開始できませんでした。オンラインでは通常どおり遊べます。');
+      }
+    }
+
+    window.ChemionPWA = { getState, getLastMessage: () => lastMessage, checkForUpdates, requestInstall, refreshOfflineCache };
+    window.addEventListener('beforeinstallprompt', (event) => { event.preventDefault(); deferredInstallPrompt = event; setMessage('この端末ではホーム画面へ追加できます。'); });
+    window.addEventListener('appinstalled', () => { deferredInstallPrompt = null; setMessage('ホーム画面への追加が完了しました。'); });
+    window.addEventListener('online', () => { updateConnectionUI(); setTimeout(() => checkForUpdates(), 600); });
+    window.addEventListener('offline', updateConnectionUI);
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible' && Date.now() - lastCheckAt > VERSION_FOCUS_MIN_INTERVAL) checkForUpdates();
+    });
+    navigator.serviceWorker?.addEventListener('controllerchange', () => {
+      if (!reloadAfterControllerChange) return;
+      reloadAfterControllerChange = false;
+      location.reload();
+    });
+    byId('pwaUpdateNowBtn')?.addEventListener('click', applyWaitingUpdate);
+    updateConnectionUI();
+    window.addEventListener('load', registerServiceWorker, { once: true });
+    setInterval(() => { if (navigator.onLine) checkForUpdates(); }, VERSION_CHECK_INTERVAL);
+  })();
   </script>
 </body>
 </html>
