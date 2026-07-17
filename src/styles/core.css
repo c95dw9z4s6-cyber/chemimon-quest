@@ -1044,3 +1044,9 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
 .request-admin-help p{margin:8px 0}
 .request-admin-help code{display:block;overflow-wrap:anywhere;padding:8px;border-radius:8px;background:rgba(0,0,0,.26);color:#eef8ff}
 .request-copy-admin-id{margin-top:8px}
+
+body[data-stage="6"] .battle-panel{box-shadow:0 18px 60px rgba(179,255,104,.18),0 0 0 1px rgba(220,255,125,.14)}
+body[data-stage="6"] .stage-button{border-color:#d7ff82;background:linear-gradient(180deg,#315d1d,#142c11);box-shadow:0 0 16px rgba(190,255,103,.16)}
+
+body[data-stage="7"] .battle-panel{box-shadow:0 18px 60px rgba(202,160,255,.18),0 0 0 1px rgba(230,199,255,.14)}
+body[data-stage="7"] .stage-button{border-color:#d9baff;background:linear-gradient(180deg,#4b2b77,#211334);box-shadow:0 0 16px rgba(211,171,255,.16)}
