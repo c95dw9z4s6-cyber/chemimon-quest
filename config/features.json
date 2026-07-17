@@ -1,0 +1,122 @@
+[
+  {
+    "id": "chemical-punctuation",
+    "introducedIn": "3.4",
+    "title": "化学式直後の句点分離",
+    "required": true
+  },
+  {
+    "id": "question-history",
+    "introducedIn": "3.5",
+    "title": "同一・近似・類題の連続防止",
+    "required": true
+  },
+  {
+    "id": "mandatory-update",
+    "introducedIn": "3.6.1",
+    "title": "旧版を選べない必須アップデート",
+    "required": true
+  },
+  {
+    "id": "spacing-scheduler",
+    "introducedIn": "3.8",
+    "title": "長期記憶向け出題スケジューラ",
+    "required": true
+  },
+  {
+    "id": "mock-exams",
+    "introducedIn": "3.9",
+    "title": "共通テスト型実戦問題と次回報酬",
+    "required": true
+  },
+  {
+    "id": "numeric-distractor-audit",
+    "introducedIn": "3.9",
+    "title": "小数点移動だけの誤答検査",
+    "required": true
+  },
+  {
+    "id": "pause-restart",
+    "introducedIn": "3.95",
+    "title": "ポーズからWave 1再開",
+    "required": true
+  },
+  {
+    "id": "speed-trial-cooldown",
+    "introducedIn": "3.95",
+    "title": "倍速試験の誤答後30秒制限",
+    "required": true
+  },
+  {
+    "id": "stage5-achievements",
+    "introducedIn": "4.0 audit",
+    "title": "Stage 5実績のgoal判定",
+    "required": true
+  },
+  {
+    "id": "neutralization-guide",
+    "introducedIn": "4.0 audit",
+    "title": "中和が演出のみである説明",
+    "required": true
+  },
+  {
+    "id": "save-v30-migration",
+    "introducedIn": "4.0",
+    "title": "v3.95セーブからv4.0への移行",
+    "required": true
+  },
+  {
+    "id": "modular-source",
+    "introducedIn": "4.0",
+    "title": "CSS・ゲーム・オンライン・PWAの開発ソース分割",
+    "required": true
+  },
+  {
+    "id": "boss-arrival-effect",
+    "introducedIn": "4.1",
+    "title": "ボス出現時の黒い圧力波・専用低音演出",
+    "required": true
+  },
+  {
+    "id": "boss-second-phase-cinematic",
+    "introducedIn": "4.2",
+    "title": "二段階BOSSの戦闘停止・変身・再出現シーケンス",
+    "required": true
+  },
+  {
+    "id": "chemistry-correct-affinity",
+    "introducedIn": "4.3",
+    "title": "共役酸・共役塩基に基づく遊離相性と反応式監査",
+    "required": true
+  },
+  {
+    "id": "request-status-management",
+    "introducedIn": "4.4",
+    "title": "要望の実装済み切替・削除管理",
+    "required": true
+  },
+  {
+    "id": "request-universal-management",
+    "introducedIn": "4.45",
+    "title": "全ユーザーによる全要望の状態変更・削除",
+    "required": true
+  },
+  {
+    "id": "flying-render-offset",
+    "introducedIn": "4.4",
+    "title": "飛行型を地上型より約1体分上へ表示",
+    "required": true
+  },
+  {
+    "id": "stage5-achievement-repair",
+    "introducedIn": "4.4",
+    "title": "Stage 5実績の専用記録・旧セーブ補完",
+    "required": true
+  },
+  {
+    "id": "summon-cooldown-sync",
+    "introducedIn": "4.4",
+    "title": "再生産クールタイム表示と召喚可否の同期",
+    "required": true
+  }
+]
