@@ -118,5 +118,47 @@
     "introducedIn": "4.4",
     "title": "再生産クールタイム表示と召喚可否の同期",
     "required": true
+  },
+  {
+    "id": "half-reaction-expansion",
+    "introducedIn": "4.5",
+    "title": "半反応式の基本40問・難問30問追加",
+    "required": true
+  },
+  {
+    "id": "flying-no-self-damage",
+    "introducedIn": "4.5",
+    "title": "飛行型の時間経過自傷ダメージ廃止",
+    "required": true
+  },
+  {
+    "id": "stage6-weak-acid-liberation",
+    "introducedIn": "4.5",
+    "title": "弱酸の遊離相性を使うStage 6",
+    "required": true
+  },
+  {
+    "id": "complete-update-history",
+    "introducedIn": "4.5",
+    "title": "v3.8〜v4.45の欠落アップデート履歴補完",
+    "required": true
+  },
+  {
+    "id": "stage7-weak-base-liberation",
+    "introducedIn": "4.6",
+    "title": "弱塩基の遊離相性を使うStage 7",
+    "required": true
+  },
+  {
+    "id": "stage8-energy-ambush",
+    "introducedIn": "5.0",
+    "title": "Stage 8の全味方消去・高速急襲BOSS",
+    "required": true
+  },
+  {
+    "id": "energy-capacity-lv12",
+    "introducedIn": "5.0",
+    "title": "Energy上限Lv.12・最大265への拡張",
+    "required": true
   }
 ]
