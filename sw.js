@@ -1,8 +1,8 @@
-/* Chemion Quest v4.45 service worker */
+/* Chemion Quest v5.0 service worker */
 'use strict';
 const CACHE_PREFIX = 'chemimon-quest-';
-const SHELL_CACHE = `${CACHE_PREFIX}shell-v4.45`;
-const RUNTIME_CACHE = `${CACHE_PREFIX}runtime-v4.45`;
+const SHELL_CACHE = `${CACHE_PREFIX}shell-v5.0`;
+const RUNTIME_CACHE = `${CACHE_PREFIX}runtime-v5.0`;
 const APP_SHELL = [
   './',
   './index.html',

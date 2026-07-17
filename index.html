@@ -10,11 +10,11 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Chemion Quest">
-  <meta name="cq-app-version" content="4.45">
+  <meta name="cq-app-version" content="5.0">
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
   <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
-  <title>Chemion Quest v4.45</title>
+  <title>Chemion Quest v5.0</title>
   <style>
 :root {
   color-scheme: dark;
@@ -1044,7 +1044,7 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
 @media(max-width:760px){.research-card-grid{grid-template-columns:1fr}.research-card-choice{min-height:0}.research-loadout{max-width:180px}.research-loadout-chip{font-size:8px}}
 
 
-/* v4.45 mandatory PWA update UI */
+/* v5.0 mandatory PWA update UI */
 .pwa-update-banner{position:fixed;inset:0;z-index:99999;display:grid;place-items:center;width:auto;transform:none;padding:max(18px,env(safe-area-inset-top)) 18px max(18px,env(safe-area-inset-bottom));border:0;border-radius:0;background:rgba(1,7,16,.94);backdrop-filter:blur(10px);color:#eafcff}.pwa-update-banner[hidden]{display:none}.pwa-update-card{width:min(620px,100%);padding:22px;border:1px solid rgba(120,230,255,.62);border-radius:20px;background:linear-gradient(145deg,rgba(10,34,57,.99),rgba(5,16,30,.995));box-shadow:0 22px 70px rgba(0,0,0,.66),0 0 32px rgba(69,213,255,.22);text-align:center}.pwa-update-copy{display:grid;gap:7px;min-width:0}.pwa-update-copy strong{font-size:1.18rem}.pwa-update-copy span{color:#d3e8f2;font-size:.88rem;line-height:1.7}.pwa-update-actions{display:flex;justify-content:center;margin-top:16px}.pwa-update-actions button{min-width:220px}.pwa-update-actions button:disabled{opacity:.72;cursor:progress}.pwa-update-note{margin:12px 0 0;color:#ffe5a3;font-size:.74rem;line-height:1.55}.pwa-offline-banner{position:fixed;right:12px;top:max(12px,env(safe-area-inset-top));z-index:3000;padding:8px 11px;border:1px solid rgba(255,210,113,.44);border-radius:999px;background:rgba(73,49,8,.94);box-shadow:0 10px 30px rgba(0,0,0,.32);color:#ffe8a6;font-size:.74rem;font-weight:850}.pwa-offline-banner[hidden]{display:none}.pwa-info-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:12px 0}.pwa-info-card{padding:12px;border:1px solid var(--line);border-radius:13px;background:rgba(8,27,46,.78)}.pwa-info-card small,.pwa-info-card strong{display:block}.pwa-info-card small{color:var(--muted);font-size:.68rem;letter-spacing:.08em}.pwa-info-card strong{margin-top:4px;font-size:.92rem}.pwa-help{padding:12px;border:1px solid rgba(111,231,255,.22);border-radius:13px;background:rgba(9,34,53,.62);color:#cfe7f1;line-height:1.65}.pwa-view-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.pwa-view-status{min-height:1.6em;margin:10px 0 0;color:#aeeeff;white-space:pre-wrap}.pwa-installed-badge{display:inline-flex;align-items:center;gap:5px;padding:4px 8px;border-radius:999px;background:rgba(112,231,168,.14);color:#9ff4c4;font-size:.72rem;font-weight:900}body.pwa-update-required{overflow:hidden}body.pwa-update-required>*:not(#pwaUpdateBanner){pointer-events:none!important;user-select:none!important}.pwa-update-banner{pointer-events:auto!important}
 @media(max-width:620px){.pwa-update-card{padding:18px 15px}.pwa-update-actions{display:grid}.pwa-update-actions button{width:100%;min-width:0}.pwa-info-grid{grid-template-columns:1fr}.pwa-view-actions{display:grid}.pwa-view-actions button{width:100%}}
 
@@ -1062,6 +1062,12 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
 .request-admin-help p{margin:8px 0}
 .request-admin-help code{display:block;overflow-wrap:anywhere;padding:8px;border-radius:8px;background:rgba(0,0,0,.26);color:#eef8ff}
 .request-copy-admin-id{margin-top:8px}
+
+body[data-stage="6"] .battle-panel{box-shadow:0 18px 60px rgba(179,255,104,.18),0 0 0 1px rgba(220,255,125,.14)}
+body[data-stage="6"] .stage-button{border-color:#d7ff82;background:linear-gradient(180deg,#315d1d,#142c11);box-shadow:0 0 16px rgba(190,255,103,.16)}
+
+body[data-stage="7"] .battle-panel{box-shadow:0 18px 60px rgba(202,160,255,.18),0 0 0 1px rgba(230,199,255,.14)}
+body[data-stage="7"] .stage-button{border-color:#d9baff;background:linear-gradient(180deg,#4b2b77,#211334);box-shadow:0 0 16px rgba(211,171,255,.16)}
 </style>
 
 <style>
@@ -1074,7 +1080,7 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
 /* v3.4 question punctuation, clear restart, and dedicated speed trial */
 /* v3.5 question rotation, expanded hard quiz, and source clarity */
 /* v3.9 common-test-style mock exams and distractor-quality audit */
-/* v4.45 mandatory updates and automated publication checks */
+/* v5.0 mandatory updates and automated publication checks */
 .tutorial-overlay{position:fixed;inset:0;z-index:2600;pointer-events:none}
 .tutorial-spotlight{position:fixed;border:3px solid #8ff5ff;border-radius:16px;box-shadow:0 0 0 9999px rgba(1,7,16,.68),0 0 0 7px rgba(77,220,255,.16),0 0 26px rgba(92,229,255,.9);transition:left .2s ease,top .2s ease,width .2s ease,height .2s ease;pointer-events:none}
 .tutorial-bubble{position:fixed;width:min(360px,calc(100vw - 24px));padding:17px;border-radius:18px;background:linear-gradient(145deg,rgba(10,29,48,.98),rgba(5,15,29,.99));border:1px solid rgba(122,229,255,.5);box-shadow:0 18px 55px rgba(0,0,0,.52),0 0 28px rgba(67,212,255,.18);color:#ecfbff;pointer-events:auto}
@@ -1111,7 +1117,7 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
       <div class="brand-area">
         <div class="brand-mark" aria-hidden="true">CQ</div>
         <div>
-          <h1>Chemion Quest <span>v4.45</span></h1>
+          <h1>Chemion Quest <span>v5.0</span></h1>
           <p class="subtitle">クイズで召喚する化学タワーディフェンス</p>
         </div>
       </div>
@@ -1232,7 +1238,7 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
     </section>
 
     <footer class="version-footer">
-      <strong>Chemion Quest v4.45 全員要望管理方式・v4.4統合アップデート</strong>
+      <strong>Chemion Quest v5.0 Stage 8・蓄積急襲BOSSアップデート</strong>
       <span>オフライン起動・ホーム画面追加・安全な更新通知に対応しました。</span>
     </footer>
   </main>
@@ -1353,10 +1359,10 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
         <article><b>1. 召喚</b><span>ユニットを押し、クイズ正解で召喚。</span></article>
         <article><b>2. 防衛</b><span>30秒ごとに敵が追加。5分で最終ウェーブ。</span></article>
         <article><b>3. 成長</b><span>敵撃破でコイン・EXP。難問で解放と研究。</span></article>
-        <article><b>4. クリア</b><span>敵拠点を破壊。Stage 1→2→3→4→5の順に解放。Stage 5は「5の倍数・難関」です。</span></article>
+        <article><b>4. クリア</b><span>敵拠点を破壊。Stage 1→2→3→4→5→6→7の順に解放。Stage 5は「5の倍数・難関」です。</span></article>
       </div>
       <details open><summary>属性と相性</summary><div class="guide-chip-row compact-chips"><span>味方の強酸→敵の「弱酸由来」：1.4倍</span><span>味方の強塩基→敵の「弱塩基由来」：1.4倍</span><span>弱酸・弱塩基そのものには遊離補正なし</span><span>敵側は相性補正なし</span></div><p><b>弱酸の遊離</b>は、強酸が弱酸の塩に由来する陰イオンへH⁺を与えて弱酸を生じさせる反応です。例：CH₃COO⁻ + H⁺ → CH₃COOH。<b>弱塩基の遊離</b>は、強塩基が弱塩基の塩に由来する陽イオンへ作用して弱塩基を生じさせる反応です。例：NH₄⁺ + OH⁻ → NH₃ + H₂O。</p><p>酸と塩基がぶつかると「中和」または「酸塩基反応」の演出が出ますが、現在は演出のみで、中和によるダメージ倍率の変化はありません。酸・塩基の強弱は電離の程度を表し、危険性や腐食性を直接表すものではありません。</p></details>
-      <details><summary>ユニットとステージ進行</summary><p>ステージごとに編成・解放順・能力が変わります。同じ化学式が別ステージに登場しても、ステージ固有の別ユニットとして扱われ、レベルや解放状況は持ち越されません。前のステージの進行は保存されます。</p></details><details><summary>高性能ヒーラー</summary><p>後半で解放されるヒーラーは、傷ついた味方1体を大きく回復します。自分自身は回復せず、盾兵など最大HPの高い味方を優先しやすい単体支援型です。強化レベルに応じて回復量も伸びます。</p></details><details><summary>Stage 3以降の研究カード</summary><p>Wave 3・6・9の終了後に3枚から1枚を選び、そのバトル中だけ味方を強化します。Stage 1・2には登場しません。</p></details><details><summary>飛行型</summary><p><span class="flying-legend">✈ FLYING</span> 通常の地上近接攻撃を受けません。弓兵・速射・範囲・飛行に加え、BOSSからも攻撃を受けます。対空攻撃には弱く、飛行ユニットは時間とともにHPが減少します。</p></details><details><summary>5の倍数・難関ステージ</summary><p>Stage 5、10、15…は前後より難しい節目のステージとして表示されます。今後はStage 5が6・7より難しく、Stage 8はStage 5より難しい程度の曲線を基準に調整します。</p></details>
+      <details><summary>ユニットとステージ進行</summary><p>ステージごとに編成・解放順・能力が変わります。同じ化学式が別ステージに登場しても、ステージ固有の別ユニットとして扱われ、レベルや解放状況は持ち越されません。前のステージの進行は保存されます。</p></details><details><summary>高性能ヒーラー</summary><p>後半で解放されるヒーラーは、傷ついた味方1体を大きく回復します。自分自身は回復せず、盾兵など最大HPの高い味方を優先しやすい単体支援型です。強化レベルに応じて回復量も伸びます。</p></details><details><summary>Stage 3以降の研究カード</summary><p>Wave 3・6・9の終了後に3枚から1枚を選び、そのバトル中だけ味方を強化します。Stage 1・2には登場しません。</p></details><details><summary>飛行型</summary><p><span class="flying-legend">✈ FLYING</span> 通常の地上近接攻撃を受けません。弓兵・速射・範囲・飛行に加え、BOSSからも攻撃を受けます。対空攻撃には弱い一方、v4.5以降は時間経過による自傷ダメージはありません。</p></details><details><summary>5の倍数・難関ステージ</summary><p>Stage 5、10、15…は前後より難しい節目のステージとして表示されます。今後はStage 5が6・7より難しく、Stage 8はStage 5より難しい程度の曲線を基準に調整します。</p></details><details><summary>Stage 6・弱酸の遊離</summary><p>Stage 6の敵はすべて弱酸の塩に由来する陰イオンです。第5ユニットの強酸が攻撃すると、弱酸の遊離として1.4倍になります。特別な解放イベントはなく、Stage 5クリア後に通常どおり解放されます。BOSSは予告後に弱酸由来イオンを召集します。</p></details><details><summary>Stage 7・弱塩基の遊離</summary><p>Stage 7の敵はすべて弱塩基の塩に由来する陽イオンです。第5ユニットの強塩基が攻撃すると、弱塩基の遊離として1.4倍になります。Stage 6クリア後に通常どおり解放され、BOSSは予告後に弱塩基由来イオンを召集します。</p></details><details><summary>Stage 8・蓄積急襲BOSS</summary><p>Stage 8のWave 10では、O₃ BOSSの出現演出と同時に場の味方ユニットがすべて倒されます。BOSSは第二形態を持たずHPは一般敵級ですが、移動速度60でLv.MAX強襲型の速度50を上回ります。Energy上限をLv.3以上へ拡張し、125以上を蓄えてからBOSSへ入ると、直後に盾役と攻撃役を再展開できます。全味方消去・速度・役割はゲーム上の表現であり、O₃の実際の反応速度や作用を表しません。</p></details>
       <details><summary>ポーズとウェーブ1からの再開</summary><p>戦闘中のポーズ画面から、現在の挑戦を諦めて同じステージのウェーブ1へ戻れます。場の味方・敵、ウェーブ内の進行、その挑戦中の研究カードはリセットされますが、所持コイン、解放、恒久強化、実績、学習記録は維持されます。</p></details><details><summary>専用の倍速試験</summary><p>研究強化の「倍速試験」を選び、専用の難問に正解すると、戦闘が5分間1.5倍速になります。1.5倍速中にもう一度倍速試験へ正解すると2.25倍速になりますが、残り時間は延長されません。不正解の場合は30秒間、倍速試験へ再挑戦できません。ページを再読み込みしても制限は継続します。ユニット解放・強化など、ほかの難問では倍速になりません。クイズ、設定、ランキング、ポーズなどで戦闘が止まっている間は残り時間も減りません。</p></details><details><summary>学習記録・練習</summary><p>設定から学習記録、分野別練習、難問練習、間違い復習を利用できます。難問の段階ヒントはステージのコインを消費します。</p></details><details><summary>共通テスト型・実戦問題</summary><p>Stage 1クリア後、設定の「実戦問題」から共通資料を使う5問構成の大問へ挑戦できます。3問以上正解で合格し、次のバトル1回だけ有効なボーナスを1つ選べます。</p></details><details><summary>問題の重複防止と出典</summary><p>同じ問題は直近30問、文章が近い類題は直近20問、同じ計算パターンは直近8問を避けて出題します。候補が少ない場合だけ段階的に制限を緩めます。難問には「出典・参考資料」を表示し、公式公開問題は転載せず、数値・問題文・選択肢を独自に作成しています。</p></details><details><summary>難問・大学二次型の出題範囲</summary><p>「化学基礎中心」では化学基礎に加え、電気分解と結晶を中心に出題します。「理論化学全範囲（予習）」を選ぶと、気体、蒸気圧、反応熱、反応速度、化学平衡も出題します。有機化学は現在の問題集には含まれていません。</p></details>
       <details><summary>アプリ・オフライン・更新</summary><p>設定の「アプリ・更新」からホーム画面への追加方法と最新版を確認できます。一度オンラインで読み込んだ後は、通信が切れてもゲーム本体を起動できます。ランキング・要望の閲覧と送信には通信が必要です。新しい版が準備できた場合は、セーブ後にゲーム操作を止めて必須更新します。更新取得に失敗した場合は再試行できます。</p></details>
       <details><summary>セーブとオンライン</summary><p>設定からセーブ・ロードできます。さらに「セーブコード」で別端末へゲーム進行・学習記録・復習記録を移せます。コードは暗号化されていないため他人へ送らないでください。ユーザー名は作成者へLINEで送ってください。</p></details>
@@ -1467,7 +1473,9 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
     52,
     66,
     82,
-    100
+    100,
+    122,
+    148
   ],
   "unitUpgradeHpGrowth": 0.12,
   "unitUpgradeAttackGrowth": 0.1,
@@ -1657,6 +1665,66 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
       "metric": "mockExamPerfects",
       "goal": 1,
       "unit": "大問"
+    },
+    {
+      "id": "stage6_unlocked",
+      "icon": "🧭",
+      "title": "弱酸遊離区へ",
+      "category": "ステージ",
+      "description": "Stage 5をクリアし、Stage 6を解放する。",
+      "metric": "highestStageReached",
+      "goal": 6,
+      "unit": "Stage"
+    },
+    {
+      "id": "stage6_clear",
+      "icon": "⚗️",
+      "title": "六つの研究区を制覇",
+      "category": "ステージ",
+      "description": "弱酸の遊離相性を利用できるStage 6をクリアする。",
+      "metric": "highestStageCleared",
+      "goal": 6,
+      "unit": "Stage"
+    },
+    {
+      "id": "stage7_unlocked",
+      "icon": "🧭",
+      "title": "弱塩基遊離区へ",
+      "category": "ステージ",
+      "description": "Stage 6をクリアし、Stage 7を解放する。",
+      "metric": "highestStageReached",
+      "goal": 7,
+      "unit": "Stage"
+    },
+    {
+      "id": "stage7_clear",
+      "icon": "🧪",
+      "title": "七つの研究区を制覇",
+      "category": "ステージ",
+      "description": "弱塩基の遊離相性を利用できるStage 7をクリアする。",
+      "metric": "highestStageCleared",
+      "goal": 7,
+      "unit": "Stage"
+    },
+    {
+      "id": "stage8_unlocked",
+      "icon": "⚡",
+      "title": "蓄積急襲区へ",
+      "category": "ステージ",
+      "description": "Stage 7をクリアし、Stage 8を解放する。",
+      "metric": "highestStageReached",
+      "goal": 8,
+      "unit": "Stage"
+    },
+    {
+      "id": "stage8_clear",
+      "icon": "🌪️",
+      "title": "八つの研究区を制覇",
+      "category": "難",
+      "description": "全味方消去後の高速BOSSを再展開で撃破し、Stage 8をクリアする。",
+      "metric": "highestStageCleared",
+      "goal": 8,
+      "unit": "Stage"
     }
   ],
   "waves": [
@@ -3996,7 +4064,6 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
         "unlockAfter": "sodiumCarbonateAlly5",
         "flying": true,
         "antiAir": true,
-        "selfDamagePerSecond": 0.0125,
         "airVulnerability": 1.8,
         "baseDamageMultiplier": 0.55,
         "flightHeight": 48,
@@ -4145,7 +4212,6 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
         "chemistryLabel": "酸性酸化物",
         "flying": true,
         "antiAir": true,
-        "selfDamagePerSecond": 0.006,
         "airVulnerability": 1.75,
         "flightHeight": 46,
         "projectileLabel": "CO₂"
@@ -4168,7 +4234,6 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
         "chemistryLabel": "弱塩基由来",
         "flying": true,
         "antiAir": true,
-        "selfDamagePerSecond": 0.004,
         "airVulnerability": 1.8,
         "flightHeight": 52,
         "affinityTarget": "weak_base_conjugate_acid",
@@ -4193,7 +4258,6 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
         "chemistryLabel": "酸化還元",
         "flying": true,
         "antiAir": true,
-        "selfDamagePerSecond": 0.0035,
         "airVulnerability": 1.7,
         "flightHeight": 56,
         "firstStrikeMultiplier": 1.35,
@@ -4235,7 +4299,6 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
           "chemistryLabel": "相性なし",
           "flying": true,
           "antiAir": true,
-          "selfDamagePerSecond": 0.0015,
           "airVulnerability": 1.55,
           "flightHeight": 60,
           "transformText": "分解反応：2H₂O₂ → 2H₂O + O₂",
@@ -4462,6 +4525,1616 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
     ]
   },
   "unitUpgradeHealGrowth": 0.1,
+  "stage6": {
+    "id": 6,
+    "name": "弱酸遊離区",
+    "subtitle": "相性を見抜く反応区",
+    "description": "敵はすべて弱酸の塩に由来する陰イオンです。第5ユニットの強酸を使うと「弱酸の遊離」により1.4倍。相性を使わなくても強化と編成で突破できます。",
+    "theme": "weak-acid-liberation",
+    "allyBaseLabel": "LIBERATION LAB",
+    "enemyBaseLabel": "CONJUGATE CORE",
+    "allyBaseHp": 1480,
+    "enemyBaseHp": 1760,
+    "startingEnergy": 76,
+    "coinRewardMultiplier": 1.72,
+    "bossHint": "敵は弱酸由来100％。強酸による弱酸の遊離が有効",
+    "difficultyLabel": "相性攻略",
+    "enemyAttributeSummary": "出現：弱酸由来100％",
+    "units": [
+      {
+        "id": "sodiumIonAlly6",
+        "formula": "Na⁺",
+        "name": "ナトリウムイオン",
+        "role": "歩兵型",
+        "cost": 24,
+        "hp": 132,
+        "attack": 28,
+        "speed": 14.2,
+        "range": 30,
+        "radius": 17,
+        "attackInterval": 2.35,
+        "summonCooldown": 8.4,
+        "initiallyUnlocked": true,
+        "unlockCost": 0,
+        "upgradeBaseCost": 14,
+        "chemistryClass": "neutral",
+        "chemistryLabel": "相性なし",
+        "projectileLabel": "Na⁺"
+      },
+      {
+        "id": "calciumCarbonateAlly6",
+        "formula": "CaCO₃",
+        "name": "炭酸カルシウム",
+        "role": "盾兵型",
+        "cost": 50,
+        "hp": 590,
+        "attack": 20,
+        "speed": 6.8,
+        "range": 24,
+        "radius": 30,
+        "attackInterval": 3.8,
+        "summonCooldown": 19,
+        "initiallyUnlocked": false,
+        "unlockCost": 46,
+        "upgradeBaseCost": 22,
+        "unlockAfter": "sodiumIonAlly6",
+        "chemistryClass": "neutral",
+        "chemistryLabel": "塩",
+        "guard": true,
+        "damageReduction": 0.2,
+        "projectileLabel": "CO₃²⁻"
+      },
+      {
+        "id": "chlorideArcherAlly6",
+        "formula": "Cl⁻",
+        "name": "塩化物イオン",
+        "role": "対空弓兵型",
+        "cost": 35,
+        "hp": 104,
+        "attack": 50,
+        "speed": 11.2,
+        "range": 124,
+        "radius": 17,
+        "attackInterval": 2.55,
+        "summonCooldown": 13.6,
+        "initiallyUnlocked": false,
+        "unlockCost": 84,
+        "upgradeBaseCost": 26,
+        "unlockAfter": "calciumCarbonateAlly6",
+        "chemistryClass": "neutral",
+        "chemistryLabel": "相性なし",
+        "antiAir": true,
+        "projectileLabel": "Cl⁻"
+      },
+      {
+        "id": "ammoniaHealerAlly6",
+        "formula": "NH₃",
+        "name": "アンモニア",
+        "role": "高性能単体回復型",
+        "cost": 48,
+        "hp": 128,
+        "attack": 10,
+        "speed": 10.5,
+        "range": 90,
+        "radius": 18,
+        "attackInterval": 4,
+        "summonCooldown": 18.2,
+        "initiallyUnlocked": false,
+        "unlockCost": 122,
+        "upgradeBaseCost": 29,
+        "unlockAfter": "chlorideArcherAlly6",
+        "chemistryClass": "weak_base",
+        "chemistryLabel": "弱塩基",
+        "healer": true,
+        "healAmount": 44,
+        "healRange": 128,
+        "projectileLabel": "NH₃"
+      },
+      {
+        "id": "hydrochloricAcidAlly6",
+        "formula": "HCl",
+        "name": "塩酸",
+        "role": "強酸範囲反応型",
+        "cost": 62,
+        "hp": 158,
+        "attack": 66,
+        "speed": 12,
+        "range": 94,
+        "radius": 20,
+        "attackInterval": 3,
+        "summonCooldown": 22,
+        "initiallyUnlocked": false,
+        "unlockCost": 170,
+        "upgradeBaseCost": 34,
+        "unlockAfter": "ammoniaHealerAlly6",
+        "chemistryClass": "strong_acid",
+        "chemistryLabel": "強酸",
+        "splashRadius": 74,
+        "splashFactor": 0.52,
+        "antiAir": true,
+        "projectileLabel": "H⁺"
+      }
+    ],
+    "enemies": [
+      {
+        "id": "acetateInfantryEnemy6",
+        "formula": "CH₃COO⁻",
+        "name": "酢酸イオン",
+        "role": "歩兵型",
+        "hp": 205,
+        "attack": 33,
+        "speed": 11.2,
+        "range": 29,
+        "radius": 18,
+        "attackInterval": 2.8,
+        "reward": 4,
+        "baseWeight": 30,
+        "xp": 105,
+        "chemistryClass": "weak_base",
+        "chemistryLabel": "弱酸由来",
+        "affinityTarget": "weak_acid_conjugate_base",
+        "liberationReaction": "CH₃COO⁻ + H⁺ → CH₃COOH",
+        "projectileLabel": "CH₃COO⁻"
+      },
+      {
+        "id": "formateRunnerEnemy6",
+        "formula": "HCOO⁻",
+        "name": "ギ酸イオン",
+        "role": "高速強襲型",
+        "hp": 148,
+        "attack": 49,
+        "speed": 19.2,
+        "range": 28,
+        "radius": 18,
+        "attackInterval": 2.8,
+        "reward": 5,
+        "baseWeight": 18,
+        "xp": 126,
+        "chemistryClass": "weak_base",
+        "chemistryLabel": "弱酸由来",
+        "affinityTarget": "weak_acid_conjugate_base",
+        "liberationReaction": "HCOO⁻ + H⁺ → HCOOH",
+        "projectileLabel": "HCOO⁻",
+        "firstStrikeMultiplier": 1.32,
+        "pushback": 10
+      },
+      {
+        "id": "fluorideFlyingEnemy6",
+        "formula": "F⁻",
+        "name": "フッ化物イオン",
+        "role": "飛行型",
+        "hp": 132,
+        "attack": 40,
+        "speed": 15.8,
+        "range": 96,
+        "radius": 18,
+        "attackInterval": 2.8,
+        "reward": 5,
+        "baseWeight": 13,
+        "xp": 134,
+        "chemistryClass": "weak_base",
+        "chemistryLabel": "弱酸由来",
+        "affinityTarget": "weak_acid_conjugate_base",
+        "liberationReaction": "F⁻ + H⁺ → HF",
+        "projectileLabel": "F⁻",
+        "flying": true,
+        "antiAir": true,
+        "airVulnerability": 1.75,
+        "flightHeight": 50
+      },
+      {
+        "id": "hypochloriteArcherEnemy6",
+        "formula": "ClO⁻",
+        "name": "次亜塩素酸イオン",
+        "role": "対空弓兵型",
+        "hp": 154,
+        "attack": 48,
+        "speed": 9.6,
+        "range": 116,
+        "radius": 18,
+        "attackInterval": 2.8,
+        "reward": 5,
+        "baseWeight": 14,
+        "xp": 142,
+        "chemistryClass": "weak_base",
+        "chemistryLabel": "弱酸由来",
+        "affinityTarget": "weak_acid_conjugate_base",
+        "liberationReaction": "ClO⁻ + H⁺ → HClO",
+        "projectileLabel": "ClO⁻",
+        "antiAir": true
+      },
+      {
+        "id": "hydrogenCarbonateGuardEnemy6",
+        "formula": "HCO₃⁻",
+        "name": "炭酸水素イオン",
+        "role": "盾兵型",
+        "hp": 470,
+        "attack": 25,
+        "speed": 6.4,
+        "range": 26,
+        "radius": 28,
+        "attackInterval": 3.7,
+        "reward": 7,
+        "baseWeight": 9,
+        "xp": 166,
+        "chemistryClass": "amphoteric",
+        "chemistryLabel": "弱酸由来",
+        "affinityTarget": "weak_acid_conjugate_base",
+        "liberationReaction": "HCO₃⁻ + H⁺ → CO₂ + H₂O",
+        "projectileLabel": "HCO₃⁻",
+        "guard": true,
+        "damageReduction": 0.18
+      },
+      {
+        "id": "carbonateHeavyEnemy6",
+        "formula": "CO₃²⁻",
+        "name": "炭酸イオン",
+        "role": "重装型",
+        "hp": 360,
+        "attack": 42,
+        "speed": 7.2,
+        "range": 31,
+        "radius": 25,
+        "attackInterval": 3.25,
+        "reward": 7,
+        "baseWeight": 8,
+        "xp": 164,
+        "chemistryClass": "weak_base",
+        "chemistryLabel": "弱酸由来",
+        "affinityTarget": "weak_acid_conjugate_base",
+        "liberationReaction": "CO₃²⁻ + 2H⁺ → CO₂ + H₂O",
+        "projectileLabel": "CO₃²⁻"
+      },
+      {
+        "id": "hydrogenPhosphateSupportEnemy6",
+        "formula": "HPO₄²⁻",
+        "name": "リン酸水素イオン",
+        "role": "回復型",
+        "hp": 190,
+        "attack": 14,
+        "speed": 8.2,
+        "range": 78,
+        "radius": 19,
+        "attackInterval": 4.3,
+        "reward": 6,
+        "baseWeight": 7,
+        "xp": 158,
+        "chemistryClass": "amphoteric",
+        "chemistryLabel": "弱酸由来",
+        "affinityTarget": "weak_acid_conjugate_base",
+        "liberationReaction": "HPO₄²⁻ + 2H⁺ → H₃PO₄",
+        "projectileLabel": "HPO₄²⁻",
+        "healer": true,
+        "healAmount": 32,
+        "healRange": 122
+      },
+      {
+        "id": "oxalateSplashEnemy6",
+        "formula": "C₂O₄²⁻",
+        "name": "シュウ酸イオン",
+        "role": "範囲反応型",
+        "hp": 220,
+        "attack": 43,
+        "speed": 8.6,
+        "range": 74,
+        "radius": 20,
+        "attackInterval": 3.4,
+        "reward": 6,
+        "baseWeight": 6,
+        "xp": 158,
+        "chemistryClass": "weak_base",
+        "chemistryLabel": "弱酸由来",
+        "affinityTarget": "weak_acid_conjugate_base",
+        "liberationReaction": "C₂O₄²⁻ + 2H⁺ → H₂C₂O₄",
+        "projectileLabel": "C₂O₄²⁻",
+        "splashRadius": 66,
+        "splashFactor": 0.46,
+        "antiAir": true
+      },
+      {
+        "id": "phosphateBoss6",
+        "formula": "PO₄³⁻",
+        "name": "リン酸イオン",
+        "role": "BOSS・弱酸群集型",
+        "hp": 1500,
+        "attack": 90,
+        "speed": 3.5,
+        "range": 42,
+        "radius": 40,
+        "attackInterval": 2.65,
+        "reward": 112,
+        "baseWeight": 0,
+        "xp": 230,
+        "chemistryClass": "weak_base",
+        "chemistryLabel": "弱酸由来",
+        "affinityTarget": "weak_acid_conjugate_base",
+        "liberationReaction": "PO₄³⁻ + 3H⁺ → H₃PO₄",
+        "projectileLabel": "PO₄³⁻",
+        "boss": true,
+        "bossIntro": "弱酸由来 PO₄³⁻ リン酸イオン",
+        "guard": true,
+        "damageReduction": 0.08,
+        "bossSummonInterval": 20,
+        "bossSummonWarning": 2,
+        "bossSummonCount": 3,
+        "bossSummonPool": [
+          "acetateInfantryEnemy6",
+          "formateRunnerEnemy6",
+          "fluorideFlyingEnemy6"
+        ]
+      }
+    ],
+    "waves": [
+      {
+        "name": "弱酸由来イオンを観察",
+        "enemies": [
+          "acetateInfantryEnemy6",
+          "acetateInfantryEnemy6",
+          "formateRunnerEnemy6"
+        ],
+        "spawnInterval": 5.8,
+        "hpScale": 1.02,
+        "attackScale": 1,
+        "speedScale": 1,
+        "rangeBonus": 0,
+        "intervalScale": 1,
+        "rewardScale": 1.05
+      },
+      {
+        "name": "酢酸・ギ酸由来群",
+        "enemies": [
+          "acetateInfantryEnemy6",
+          "formateRunnerEnemy6",
+          "acetateInfantryEnemy6",
+          "formateRunnerEnemy6"
+        ],
+        "spawnInterval": 5.2,
+        "hpScale": 1.08,
+        "attackScale": 1.05,
+        "speedScale": 1.01,
+        "rangeBonus": 0,
+        "intervalScale": 0.99,
+        "rewardScale": 1.08
+      },
+      {
+        "name": "弱酸由来飛行群",
+        "enemies": [
+          "fluorideFlyingEnemy6",
+          "acetateInfantryEnemy6",
+          "hypochloriteArcherEnemy6",
+          "fluorideFlyingEnemy6"
+        ],
+        "spawnInterval": 4.8,
+        "hpScale": 1.15,
+        "attackScale": 1.1,
+        "speedScale": 1.02,
+        "rangeBonus": 1,
+        "intervalScale": 0.98,
+        "rewardScale": 1.12
+      },
+      {
+        "name": "速度と射程の反応",
+        "enemies": [
+          "formateRunnerEnemy6",
+          "hypochloriteArcherEnemy6",
+          "acetateInfantryEnemy6",
+          "fluorideFlyingEnemy6",
+          "formateRunnerEnemy6"
+        ],
+        "spawnInterval": 4.25,
+        "hpScale": 1.22,
+        "attackScale": 1.16,
+        "speedScale": 1.03,
+        "rangeBonus": 2,
+        "intervalScale": 0.97,
+        "rewardScale": 1.16
+      },
+      {
+        "name": "炭酸系防衛線",
+        "enemies": [
+          "hydrogenCarbonateGuardEnemy6",
+          "carbonateHeavyEnemy6",
+          "hypochloriteArcherEnemy6",
+          "acetateInfantryEnemy6",
+          "formateRunnerEnemy6"
+        ],
+        "spawnInterval": 3.85,
+        "hpScale": 1.3,
+        "attackScale": 1.23,
+        "speedScale": 1.04,
+        "rangeBonus": 2,
+        "intervalScale": 0.96,
+        "rewardScale": 1.2
+      },
+      {
+        "name": "弱酸由来支援網",
+        "enemies": [
+          "hydrogenPhosphateSupportEnemy6",
+          "hydrogenCarbonateGuardEnemy6",
+          "hypochloriteArcherEnemy6",
+          "fluorideFlyingEnemy6",
+          "acetateInfantryEnemy6",
+          "formateRunnerEnemy6"
+        ],
+        "spawnInterval": 3.45,
+        "hpScale": 1.39,
+        "attackScale": 1.31,
+        "speedScale": 1.05,
+        "rangeBonus": 3,
+        "intervalScale": 0.95,
+        "rewardScale": 1.25
+      },
+      {
+        "name": "遊離相性の総合判断",
+        "enemies": [
+          "carbonateHeavyEnemy6",
+          "oxalateSplashEnemy6",
+          "formateRunnerEnemy6",
+          "hypochloriteArcherEnemy6",
+          "fluorideFlyingEnemy6",
+          "hydrogenPhosphateSupportEnemy6",
+          "acetateInfantryEnemy6"
+        ],
+        "spawnInterval": 3.05,
+        "hpScale": 1.49,
+        "attackScale": 1.4,
+        "speedScale": 1.06,
+        "rangeBonus": 3,
+        "intervalScale": 0.94,
+        "rewardScale": 1.3
+      },
+      {
+        "name": "高速・飛行・範囲混成",
+        "enemies": [
+          "fluorideFlyingEnemy6",
+          "oxalateSplashEnemy6",
+          "formateRunnerEnemy6",
+          "hydrogenCarbonateGuardEnemy6",
+          "hypochloriteArcherEnemy6",
+          "hydrogenPhosphateSupportEnemy6",
+          "fluorideFlyingEnemy6",
+          "carbonateHeavyEnemy6"
+        ],
+        "spawnInterval": 2.7,
+        "hpScale": 1.6,
+        "attackScale": 1.5,
+        "speedScale": 1.08,
+        "rangeBonus": 4,
+        "intervalScale": 0.92,
+        "rewardScale": 1.36
+      },
+      {
+        "name": "弱酸遊離区・臨界",
+        "enemies": [
+          "hydrogenCarbonateGuardEnemy6",
+          "hydrogenPhosphateSupportEnemy6",
+          "oxalateSplashEnemy6",
+          "carbonateHeavyEnemy6",
+          "fluorideFlyingEnemy6",
+          "hypochloriteArcherEnemy6",
+          "formateRunnerEnemy6",
+          "acetateInfantryEnemy6",
+          "oxalateSplashEnemy6"
+        ],
+        "spawnInterval": 2.38,
+        "hpScale": 1.72,
+        "attackScale": 1.61,
+        "speedScale": 1.1,
+        "rangeBonus": 5,
+        "intervalScale": 0.9,
+        "rewardScale": 1.42
+      },
+      {
+        "name": "BOSS・リン酸イオン群集",
+        "enemies": [
+          "hydrogenCarbonateGuardEnemy6",
+          "hypochloriteArcherEnemy6",
+          "fluorideFlyingEnemy6",
+          "oxalateSplashEnemy6",
+          "hydrogenPhosphateSupportEnemy6",
+          "carbonateHeavyEnemy6",
+          "phosphateBoss6"
+        ],
+        "spawnInterval": 2.15,
+        "hpScale": 1.82,
+        "attackScale": 1.72,
+        "speedScale": 1.11,
+        "rangeBonus": 5,
+        "intervalScale": 0.89,
+        "rewardScale": 1.5
+      },
+      {
+        "name": "最終・弱酸由来総力戦",
+        "enemies": [
+          "formateRunnerEnemy6",
+          "fluorideFlyingEnemy6",
+          "hydrogenCarbonateGuardEnemy6",
+          "hypochloriteArcherEnemy6",
+          "hydrogenPhosphateSupportEnemy6",
+          "oxalateSplashEnemy6",
+          "carbonateHeavyEnemy6",
+          "acetateInfantryEnemy6",
+          "fluorideFlyingEnemy6",
+          "formateRunnerEnemy6",
+          "hydrogenCarbonateGuardEnemy6",
+          "oxalateSplashEnemy6",
+          "hypochloriteArcherEnemy6",
+          "carbonateHeavyEnemy6"
+        ],
+        "spawnInterval": 1.55,
+        "hpScale": 1.98,
+        "attackScale": 1.86,
+        "speedScale": 1.13,
+        "rangeBonus": 6,
+        "intervalScale": 0.87,
+        "rewardScale": 1.62
+      }
+    ]
+  },
+  "stage7": {
+    "id": 7,
+    "name": "弱塩基遊離区",
+    "subtitle": "相性を反転する反応区",
+    "description": "敵はすべて弱塩基の塩に由来する陽イオンです。第5ユニットの強塩基を使うと「弱塩基の遊離」により1.4倍。相性を使わなくても強化と編成で突破できます。",
+    "theme": "weak-base-liberation",
+    "allyBaseLabel": "BASE LIBERATION LAB",
+    "enemyBaseLabel": "CONJUGATE ACID CORE",
+    "allyBaseHp": 1520,
+    "enemyBaseHp": 1810,
+    "startingEnergy": 78,
+    "coinRewardMultiplier": 1.76,
+    "bossHint": "敵は弱塩基由来100％。強塩基による弱塩基の遊離が有効",
+    "difficultyLabel": "相性攻略",
+    "enemyAttributeSummary": "出現：弱塩基由来100％",
+    "units": [
+      {
+        "id": "potassiumIonAlly7",
+        "formula": "K⁺",
+        "name": "カリウムイオン",
+        "role": "歩兵型",
+        "cost": 25,
+        "hp": 138,
+        "attack": 30,
+        "speed": 14.5,
+        "range": 30,
+        "radius": 17,
+        "attackInterval": 2.3,
+        "summonCooldown": 8.5,
+        "initiallyUnlocked": true,
+        "unlockCost": 0,
+        "upgradeBaseCost": 15,
+        "chemistryClass": "neutral",
+        "chemistryLabel": "相性なし",
+        "projectileLabel": "K⁺"
+      },
+      {
+        "id": "calciumSulfateAlly7",
+        "formula": "CaSO₄",
+        "name": "硫酸カルシウム",
+        "role": "盾兵型",
+        "cost": 52,
+        "hp": 610,
+        "attack": 21,
+        "speed": 6.7,
+        "range": 24,
+        "radius": 30,
+        "attackInterval": 3.85,
+        "summonCooldown": 19.2,
+        "initiallyUnlocked": false,
+        "unlockCost": 48,
+        "upgradeBaseCost": 23,
+        "unlockAfter": "potassiumIonAlly7",
+        "chemistryClass": "neutral",
+        "chemistryLabel": "塩",
+        "guard": true,
+        "damageReduction": 0.2,
+        "projectileLabel": "SO₄²⁻"
+      },
+      {
+        "id": "nitrateArcherAlly7",
+        "formula": "NO₃⁻",
+        "name": "硝酸イオン",
+        "role": "対空弓兵型",
+        "cost": 36,
+        "hp": 108,
+        "attack": 52,
+        "speed": 11,
+        "range": 126,
+        "radius": 17,
+        "attackInterval": 2.52,
+        "summonCooldown": 13.8,
+        "initiallyUnlocked": false,
+        "unlockCost": 88,
+        "upgradeBaseCost": 27,
+        "unlockAfter": "calciumSulfateAlly7",
+        "chemistryClass": "neutral",
+        "chemistryLabel": "相性なし",
+        "antiAir": true,
+        "projectileLabel": "NO₃⁻"
+      },
+      {
+        "id": "aceticAcidHealerAlly7",
+        "formula": "CH₃COOH",
+        "name": "酢酸",
+        "role": "高性能単体回復型",
+        "cost": 50,
+        "hp": 132,
+        "attack": 11,
+        "speed": 10.2,
+        "range": 92,
+        "radius": 18,
+        "attackInterval": 4,
+        "summonCooldown": 18.4,
+        "initiallyUnlocked": false,
+        "unlockCost": 128,
+        "upgradeBaseCost": 30,
+        "unlockAfter": "nitrateArcherAlly7",
+        "chemistryClass": "weak_acid",
+        "chemistryLabel": "弱酸",
+        "healer": true,
+        "healAmount": 46,
+        "healRange": 130,
+        "projectileLabel": "CH₃COOH"
+      },
+      {
+        "id": "potassiumHydroxideAlly7",
+        "formula": "KOH",
+        "name": "水酸化カリウム",
+        "role": "強塩基範囲反応型",
+        "cost": 64,
+        "hp": 164,
+        "attack": 68,
+        "speed": 11.8,
+        "range": 96,
+        "radius": 20,
+        "attackInterval": 3,
+        "summonCooldown": 22.2,
+        "initiallyUnlocked": false,
+        "unlockCost": 178,
+        "upgradeBaseCost": 35,
+        "unlockAfter": "aceticAcidHealerAlly7",
+        "chemistryClass": "strong_base",
+        "chemistryLabel": "強塩基",
+        "splashRadius": 76,
+        "splashFactor": 0.52,
+        "antiAir": true,
+        "projectileLabel": "OH⁻"
+      }
+    ],
+    "enemies": [
+      {
+        "id": "ammoniumInfantryEnemy7",
+        "formula": "NH₄⁺",
+        "name": "アンモニウムイオン",
+        "role": "歩兵型",
+        "hp": 212,
+        "attack": 34,
+        "speed": 11,
+        "range": 29,
+        "radius": 18,
+        "attackInterval": 2.8,
+        "reward": 4,
+        "baseWeight": 30,
+        "xp": 108,
+        "chemistryClass": "weak_acid",
+        "chemistryLabel": "弱塩基由来",
+        "affinityTarget": "weak_base_conjugate_acid",
+        "liberationReaction": "NH₄⁺ + OH⁻ → NH₃ + H₂O",
+        "projectileLabel": "NH₄⁺"
+      },
+      {
+        "id": "methylammoniumRunnerEnemy7",
+        "formula": "CH₃NH₃⁺",
+        "name": "メチルアンモニウムイオン",
+        "role": "高速強襲型",
+        "hp": 152,
+        "attack": 51,
+        "speed": 19,
+        "range": 28,
+        "radius": 18,
+        "attackInterval": 2.8,
+        "reward": 5,
+        "baseWeight": 18,
+        "xp": 129,
+        "chemistryClass": "weak_acid",
+        "chemistryLabel": "弱塩基由来",
+        "affinityTarget": "weak_base_conjugate_acid",
+        "liberationReaction": "CH₃NH₃⁺ + OH⁻ → CH₃NH₂ + H₂O",
+        "projectileLabel": "CH₃NH₃⁺",
+        "firstStrikeMultiplier": 1.32,
+        "pushback": 10
+      },
+      {
+        "id": "ethylammoniumFlyingEnemy7",
+        "formula": "C₂H₅NH₃⁺",
+        "name": "エチルアンモニウムイオン",
+        "role": "飛行型",
+        "hp": 138,
+        "attack": 42,
+        "speed": 15.6,
+        "range": 98,
+        "radius": 18,
+        "attackInterval": 2.8,
+        "reward": 5,
+        "baseWeight": 13,
+        "xp": 137,
+        "chemistryClass": "weak_acid",
+        "chemistryLabel": "弱塩基由来",
+        "affinityTarget": "weak_base_conjugate_acid",
+        "liberationReaction": "C₂H₅NH₃⁺ + OH⁻ → C₂H₅NH₂ + H₂O",
+        "projectileLabel": "C₂H₅NH₃⁺",
+        "flying": true,
+        "antiAir": true,
+        "airVulnerability": 1.75,
+        "flightHeight": 50
+      },
+      {
+        "id": "aniliniumArcherEnemy7",
+        "formula": "C₆H₅NH₃⁺",
+        "name": "アニリニウムイオン",
+        "role": "対空弓兵型",
+        "hp": 160,
+        "attack": 50,
+        "speed": 9.4,
+        "range": 118,
+        "radius": 18,
+        "attackInterval": 2.8,
+        "reward": 5,
+        "baseWeight": 14,
+        "xp": 145,
+        "chemistryClass": "weak_acid",
+        "chemistryLabel": "弱塩基由来",
+        "affinityTarget": "weak_base_conjugate_acid",
+        "liberationReaction": "C₆H₅NH₃⁺ + OH⁻ → C₆H₅NH₂ + H₂O",
+        "projectileLabel": "C₆H₅NH₃⁺",
+        "antiAir": true
+      },
+      {
+        "id": "dimethylammoniumGuardEnemy7",
+        "formula": "C₂H₈N⁺",
+        "name": "ジメチルアンモニウムイオン",
+        "role": "盾兵型",
+        "hp": 486,
+        "attack": 26,
+        "speed": 6.2,
+        "range": 26,
+        "radius": 28,
+        "attackInterval": 3.72,
+        "reward": 7,
+        "baseWeight": 9,
+        "xp": 169,
+        "chemistryClass": "weak_acid",
+        "chemistryLabel": "弱塩基由来",
+        "affinityTarget": "weak_base_conjugate_acid",
+        "liberationReaction": "C₂H₈N⁺ + OH⁻ → C₂H₇N + H₂O",
+        "projectileLabel": "C₂H₈N⁺",
+        "guard": true,
+        "damageReduction": 0.18
+      },
+      {
+        "id": "trimethylammoniumHeavyEnemy7",
+        "formula": "C₃H₁₀N⁺",
+        "name": "トリメチルアンモニウムイオン",
+        "role": "重装型",
+        "hp": 374,
+        "attack": 44,
+        "speed": 7,
+        "range": 31,
+        "radius": 25,
+        "attackInterval": 3.28,
+        "reward": 7,
+        "baseWeight": 8,
+        "xp": 168,
+        "chemistryClass": "weak_acid",
+        "chemistryLabel": "弱塩基由来",
+        "affinityTarget": "weak_base_conjugate_acid",
+        "liberationReaction": "C₃H₁₀N⁺ + OH⁻ → C₃H₉N + H₂O",
+        "projectileLabel": "C₃H₁₀N⁺"
+      },
+      {
+        "id": "pyridiniumSupportEnemy7",
+        "formula": "C₅H₅NH⁺",
+        "name": "ピリジニウムイオン",
+        "role": "回復型",
+        "hp": 198,
+        "attack": 15,
+        "speed": 8,
+        "range": 80,
+        "radius": 19,
+        "attackInterval": 4.3,
+        "reward": 6,
+        "baseWeight": 7,
+        "xp": 161,
+        "chemistryClass": "weak_acid",
+        "chemistryLabel": "弱塩基由来",
+        "affinityTarget": "weak_base_conjugate_acid",
+        "liberationReaction": "C₅H₅NH⁺ + OH⁻ → C₅H₅N + H₂O",
+        "projectileLabel": "C₅H₅NH⁺",
+        "healer": true,
+        "healAmount": 33,
+        "healRange": 124
+      },
+      {
+        "id": "hydroxylammoniumSplashEnemy7",
+        "formula": "NH₃OH⁺",
+        "name": "ヒドロキシルアンモニウムイオン",
+        "role": "範囲反応型",
+        "hp": 228,
+        "attack": 45,
+        "speed": 8.4,
+        "range": 76,
+        "radius": 20,
+        "attackInterval": 3.4,
+        "reward": 6,
+        "baseWeight": 6,
+        "xp": 161,
+        "chemistryClass": "weak_acid",
+        "chemistryLabel": "弱塩基由来",
+        "affinityTarget": "weak_base_conjugate_acid",
+        "liberationReaction": "NH₃OH⁺ + OH⁻ → NH₂OH + H₂O",
+        "projectileLabel": "NH₃OH⁺",
+        "splashRadius": 68,
+        "splashFactor": 0.46,
+        "antiAir": true
+      },
+      {
+        "id": "hydraziniumBoss7",
+        "formula": "N₂H₅⁺",
+        "name": "ヒドラジニウムイオン",
+        "role": "BOSS・弱塩基群集型",
+        "hp": 1540,
+        "attack": 93,
+        "speed": 3.4,
+        "range": 43,
+        "radius": 40,
+        "attackInterval": 2.68,
+        "reward": 116,
+        "baseWeight": 0,
+        "xp": 238,
+        "chemistryClass": "weak_acid",
+        "chemistryLabel": "弱塩基由来",
+        "affinityTarget": "weak_base_conjugate_acid",
+        "liberationReaction": "N₂H₅⁺ + OH⁻ → N₂H₄ + H₂O",
+        "projectileLabel": "N₂H₅⁺",
+        "boss": true,
+        "bossIntro": "弱塩基由来 N₂H₅⁺ ヒドラジニウムイオン",
+        "guard": true,
+        "damageReduction": 0.08,
+        "bossSummonInterval": 20,
+        "bossSummonWarning": 2,
+        "bossSummonCount": 3,
+        "bossSummonPool": [
+          "ammoniumInfantryEnemy7",
+          "methylammoniumRunnerEnemy7",
+          "ethylammoniumFlyingEnemy7"
+        ]
+      }
+    ],
+    "waves": [
+      {
+        "name": "弱塩基由来イオンを観察",
+        "enemies": [
+          "ammoniumInfantryEnemy7",
+          "ammoniumInfantryEnemy7",
+          "methylammoniumRunnerEnemy7"
+        ],
+        "spawnInterval": 5.8,
+        "hpScale": 1.02,
+        "attackScale": 1,
+        "speedScale": 1,
+        "rangeBonus": 0,
+        "intervalScale": 1,
+        "rewardScale": 1.05
+      },
+      {
+        "name": "アンモニウム由来群",
+        "enemies": [
+          "ammoniumInfantryEnemy7",
+          "methylammoniumRunnerEnemy7",
+          "ammoniumInfantryEnemy7",
+          "methylammoniumRunnerEnemy7"
+        ],
+        "spawnInterval": 5.2,
+        "hpScale": 1.08,
+        "attackScale": 1.05,
+        "speedScale": 1.01,
+        "rangeBonus": 0,
+        "intervalScale": 0.99,
+        "rewardScale": 1.08
+      },
+      {
+        "name": "弱塩基由来飛行群",
+        "enemies": [
+          "ethylammoniumFlyingEnemy7",
+          "ammoniumInfantryEnemy7",
+          "aniliniumArcherEnemy7",
+          "ethylammoniumFlyingEnemy7"
+        ],
+        "spawnInterval": 4.8,
+        "hpScale": 1.15,
+        "attackScale": 1.1,
+        "speedScale": 1.02,
+        "rangeBonus": 1,
+        "intervalScale": 0.98,
+        "rewardScale": 1.12
+      },
+      {
+        "name": "速度と射程の反応",
+        "enemies": [
+          "methylammoniumRunnerEnemy7",
+          "aniliniumArcherEnemy7",
+          "ammoniumInfantryEnemy7",
+          "ethylammoniumFlyingEnemy7",
+          "methylammoniumRunnerEnemy7"
+        ],
+        "spawnInterval": 4.25,
+        "hpScale": 1.22,
+        "attackScale": 1.16,
+        "speedScale": 1.03,
+        "rangeBonus": 2,
+        "intervalScale": 0.97,
+        "rewardScale": 1.16
+      },
+      {
+        "name": "アミン塩防衛線",
+        "enemies": [
+          "dimethylammoniumGuardEnemy7",
+          "trimethylammoniumHeavyEnemy7",
+          "aniliniumArcherEnemy7",
+          "ammoniumInfantryEnemy7",
+          "methylammoniumRunnerEnemy7"
+        ],
+        "spawnInterval": 3.85,
+        "hpScale": 1.3,
+        "attackScale": 1.23,
+        "speedScale": 1.04,
+        "rangeBonus": 2,
+        "intervalScale": 0.96,
+        "rewardScale": 1.2
+      },
+      {
+        "name": "弱塩基由来支援網",
+        "enemies": [
+          "pyridiniumSupportEnemy7",
+          "dimethylammoniumGuardEnemy7",
+          "aniliniumArcherEnemy7",
+          "ethylammoniumFlyingEnemy7",
+          "ammoniumInfantryEnemy7",
+          "methylammoniumRunnerEnemy7"
+        ],
+        "spawnInterval": 3.45,
+        "hpScale": 1.39,
+        "attackScale": 1.31,
+        "speedScale": 1.05,
+        "rangeBonus": 3,
+        "intervalScale": 0.95,
+        "rewardScale": 1.25
+      },
+      {
+        "name": "遊離相性の総合判断",
+        "enemies": [
+          "trimethylammoniumHeavyEnemy7",
+          "hydroxylammoniumSplashEnemy7",
+          "methylammoniumRunnerEnemy7",
+          "aniliniumArcherEnemy7",
+          "ethylammoniumFlyingEnemy7",
+          "pyridiniumSupportEnemy7",
+          "ammoniumInfantryEnemy7"
+        ],
+        "spawnInterval": 3.05,
+        "hpScale": 1.49,
+        "attackScale": 1.4,
+        "speedScale": 1.06,
+        "rangeBonus": 3,
+        "intervalScale": 0.94,
+        "rewardScale": 1.3
+      },
+      {
+        "name": "高速・飛行・範囲混成",
+        "enemies": [
+          "ethylammoniumFlyingEnemy7",
+          "hydroxylammoniumSplashEnemy7",
+          "methylammoniumRunnerEnemy7",
+          "dimethylammoniumGuardEnemy7",
+          "aniliniumArcherEnemy7",
+          "pyridiniumSupportEnemy7",
+          "ethylammoniumFlyingEnemy7",
+          "trimethylammoniumHeavyEnemy7"
+        ],
+        "spawnInterval": 2.7,
+        "hpScale": 1.6,
+        "attackScale": 1.5,
+        "speedScale": 1.08,
+        "rangeBonus": 4,
+        "intervalScale": 0.92,
+        "rewardScale": 1.36
+      },
+      {
+        "name": "弱塩基遊離区・臨界",
+        "enemies": [
+          "dimethylammoniumGuardEnemy7",
+          "pyridiniumSupportEnemy7",
+          "hydroxylammoniumSplashEnemy7",
+          "trimethylammoniumHeavyEnemy7",
+          "ethylammoniumFlyingEnemy7",
+          "aniliniumArcherEnemy7",
+          "methylammoniumRunnerEnemy7",
+          "ammoniumInfantryEnemy7",
+          "hydroxylammoniumSplashEnemy7"
+        ],
+        "spawnInterval": 2.38,
+        "hpScale": 1.72,
+        "attackScale": 1.61,
+        "speedScale": 1.1,
+        "rangeBonus": 5,
+        "intervalScale": 0.9,
+        "rewardScale": 1.42
+      },
+      {
+        "name": "BOSS・ヒドラジニウム群集",
+        "enemies": [
+          "dimethylammoniumGuardEnemy7",
+          "aniliniumArcherEnemy7",
+          "ethylammoniumFlyingEnemy7",
+          "hydroxylammoniumSplashEnemy7",
+          "pyridiniumSupportEnemy7",
+          "trimethylammoniumHeavyEnemy7",
+          "hydraziniumBoss7"
+        ],
+        "spawnInterval": 2.15,
+        "hpScale": 1.82,
+        "attackScale": 1.72,
+        "speedScale": 1.11,
+        "rangeBonus": 5,
+        "intervalScale": 0.89,
+        "rewardScale": 1.5
+      },
+      {
+        "name": "最終・弱塩基由来総力戦",
+        "enemies": [
+          "methylammoniumRunnerEnemy7",
+          "ethylammoniumFlyingEnemy7",
+          "dimethylammoniumGuardEnemy7",
+          "aniliniumArcherEnemy7",
+          "pyridiniumSupportEnemy7",
+          "hydroxylammoniumSplashEnemy7",
+          "trimethylammoniumHeavyEnemy7",
+          "ammoniumInfantryEnemy7",
+          "ethylammoniumFlyingEnemy7",
+          "methylammoniumRunnerEnemy7",
+          "dimethylammoniumGuardEnemy7",
+          "hydroxylammoniumSplashEnemy7",
+          "aniliniumArcherEnemy7",
+          "trimethylammoniumHeavyEnemy7"
+        ],
+        "spawnInterval": 1.55,
+        "hpScale": 1.98,
+        "attackScale": 1.86,
+        "speedScale": 1.13,
+        "rangeBonus": 6,
+        "intervalScale": 0.87,
+        "rewardScale": 1.62
+      }
+    ]
+  },
+  "maxEnergyCapacityLevel": 12,
+  "stage8": {
+    "id": 8,
+    "name": "蓄積急襲区",
+    "subtitle": "戦線崩壊から再展開する反応区",
+    "description": "高速敵が押し寄せる難関区。蓄積と再展開が攻略の鍵です。Wave 10の特殊BOSSに備えてEnergy上限を拡張しましょう。",
+    "theme": "redox-ambush",
+    "allyBaseLabel": "ENERGY RESERVE LAB",
+    "enemyBaseLabel": "RAPID OXIDATION CORE",
+    "allyBaseHp": 1580,
+    "enemyBaseHp": 1880,
+    "startingEnergy": 82,
+    "coinRewardMultiplier": 1.88,
+    "bossHint": "BOSS出現時に戦線が崩壊。Energy 125以上を蓄えて再展開",
+    "difficultyLabel": "難関・蓄積攻略",
+    "enemyAttributeSummary": "高速・酸化還元混成",
+    "units": [
+      {
+        "id": "ironTwoInfantryAlly8",
+        "formula": "Fe²⁺",
+        "name": "鉄(II)イオン",
+        "role": "歩兵型",
+        "cost": 28,
+        "hp": 150,
+        "attack": 34,
+        "speed": 15.2,
+        "range": 30,
+        "radius": 17,
+        "attackInterval": 2.25,
+        "summonCooldown": 8.2,
+        "initiallyUnlocked": true,
+        "unlockCost": 0,
+        "upgradeBaseCost": 15,
+        "chemistryClass": "redox",
+        "chemistryLabel": "酸化還元",
+        "projectileLabel": "e⁻"
+      },
+      {
+        "id": "zincGuardAlly8",
+        "formula": "Zn",
+        "name": "亜鉛",
+        "role": "盾兵型",
+        "cost": 52,
+        "hp": 650,
+        "attack": 22,
+        "speed": 7,
+        "range": 24,
+        "radius": 30,
+        "attackInterval": 3.65,
+        "summonCooldown": 18.8,
+        "initiallyUnlocked": false,
+        "unlockCost": 50,
+        "upgradeBaseCost": 23,
+        "unlockAfter": "ironTwoInfantryAlly8",
+        "chemistryClass": "redox",
+        "chemistryLabel": "酸化還元",
+        "guard": true,
+        "damageReduction": 0.22,
+        "projectileLabel": "Zn"
+      },
+      {
+        "id": "iodideArcherAlly8",
+        "formula": "I⁻",
+        "name": "ヨウ化物イオン",
+        "role": "対空弓兵型",
+        "cost": 36,
+        "hp": 112,
+        "attack": 58,
+        "speed": 11.4,
+        "range": 128,
+        "radius": 17,
+        "attackInterval": 2.45,
+        "summonCooldown": 13.4,
+        "initiallyUnlocked": false,
+        "unlockCost": 90,
+        "upgradeBaseCost": 27,
+        "unlockAfter": "zincGuardAlly8",
+        "chemistryClass": "redox",
+        "chemistryLabel": "酸化還元",
+        "antiAir": true,
+        "projectileLabel": "e⁻"
+      },
+      {
+        "id": "tinTwoHealerAlly8",
+        "formula": "Sn²⁺",
+        "name": "スズ(II)イオン",
+        "role": "高性能単体回復型",
+        "cost": 50,
+        "hp": 136,
+        "attack": 12,
+        "speed": 10.6,
+        "range": 92,
+        "radius": 18,
+        "attackInterval": 3.8,
+        "summonCooldown": 17.8,
+        "initiallyUnlocked": false,
+        "unlockCost": 130,
+        "upgradeBaseCost": 30,
+        "unlockAfter": "iodideArcherAlly8",
+        "chemistryClass": "redox",
+        "chemistryLabel": "酸化還元",
+        "healer": true,
+        "healAmount": 48,
+        "healRange": 130,
+        "projectileLabel": "Sn²⁺"
+      },
+      {
+        "id": "permanganateSplashAlly8",
+        "formula": "MnO₄⁻",
+        "name": "過マンガン酸イオン",
+        "role": "酸化還元範囲型",
+        "cost": 66,
+        "hp": 168,
+        "attack": 72,
+        "speed": 12,
+        "range": 98,
+        "radius": 20,
+        "attackInterval": 2.9,
+        "summonCooldown": 21.5,
+        "initiallyUnlocked": false,
+        "unlockCost": 180,
+        "upgradeBaseCost": 35,
+        "unlockAfter": "tinTwoHealerAlly8",
+        "chemistryClass": "redox",
+        "chemistryLabel": "酸化還元",
+        "splashRadius": 78,
+        "splashFactor": 0.54,
+        "antiAir": true,
+        "projectileLabel": "e⁻"
+      }
+    ],
+    "enemies": [
+      {
+        "id": "ironThreeInfantryEnemy8",
+        "formula": "Fe³⁺",
+        "name": "鉄(III)イオン",
+        "role": "歩兵型",
+        "hp": 230,
+        "attack": 38,
+        "speed": 12,
+        "range": 29,
+        "radius": 18,
+        "attackInterval": 2.65,
+        "reward": 5,
+        "baseWeight": 28,
+        "xp": 132,
+        "chemistryClass": "redox",
+        "chemistryLabel": "酸化還元",
+        "projectileLabel": "e⁻"
+      },
+      {
+        "id": "ceriumFourRunnerEnemy8",
+        "formula": "Ce⁴⁺",
+        "name": "セリウム(IV)イオン",
+        "role": "高速強襲型",
+        "hp": 165,
+        "attack": 56,
+        "speed": 21,
+        "range": 28,
+        "radius": 18,
+        "attackInterval": 2.65,
+        "reward": 6,
+        "baseWeight": 18,
+        "xp": 148,
+        "chemistryClass": "redox",
+        "chemistryLabel": "酸化還元",
+        "projectileLabel": "e⁻",
+        "firstStrikeMultiplier": 1.35,
+        "pushback": 11
+      },
+      {
+        "id": "dichromateFlyingEnemy8",
+        "formula": "Cr₂O₇²⁻",
+        "name": "二クロム酸イオン",
+        "role": "飛行型",
+        "hp": 150,
+        "attack": 47,
+        "speed": 16.6,
+        "range": 100,
+        "radius": 18,
+        "attackInterval": 2.75,
+        "reward": 6,
+        "baseWeight": 13,
+        "xp": 154,
+        "chemistryClass": "redox",
+        "chemistryLabel": "酸化還元",
+        "projectileLabel": "e⁻",
+        "flying": true,
+        "antiAir": true,
+        "airVulnerability": 1.75,
+        "flightHeight": 52
+      },
+      {
+        "id": "permanganateArcherEnemy8",
+        "formula": "MnO₄⁻",
+        "name": "過マンガン酸イオン",
+        "role": "対空弓兵型",
+        "hp": 174,
+        "attack": 55,
+        "speed": 9.8,
+        "range": 122,
+        "radius": 18,
+        "attackInterval": 2.7,
+        "reward": 6,
+        "baseWeight": 14,
+        "xp": 160,
+        "chemistryClass": "redox",
+        "chemistryLabel": "酸化還元",
+        "projectileLabel": "e⁻",
+        "antiAir": true
+      },
+      {
+        "id": "hydrogenPeroxideGuardEnemy8",
+        "formula": "H₂O₂",
+        "name": "過酸化水素",
+        "role": "盾兵型",
+        "hp": 500,
+        "attack": 29,
+        "speed": 6.5,
+        "range": 26,
+        "radius": 28,
+        "attackInterval": 3.55,
+        "reward": 8,
+        "baseWeight": 9,
+        "xp": 184,
+        "chemistryClass": "redox",
+        "chemistryLabel": "酸化還元",
+        "projectileLabel": "H₂O₂",
+        "guard": true,
+        "damageReduction": 0.2
+      },
+      {
+        "id": "tinFourHeavyEnemy8",
+        "formula": "Sn⁴⁺",
+        "name": "スズ(IV)イオン",
+        "role": "重装型",
+        "hp": 390,
+        "attack": 49,
+        "speed": 7.4,
+        "range": 31,
+        "radius": 25,
+        "attackInterval": 3.15,
+        "reward": 8,
+        "baseWeight": 8,
+        "xp": 182,
+        "chemistryClass": "redox",
+        "chemistryLabel": "酸化還元",
+        "projectileLabel": "Sn⁴⁺"
+      },
+      {
+        "id": "iodineSupportEnemy8",
+        "formula": "I₂",
+        "name": "ヨウ素",
+        "role": "回復型",
+        "hp": 210,
+        "attack": 16,
+        "speed": 8.3,
+        "range": 82,
+        "radius": 19,
+        "attackInterval": 4.2,
+        "reward": 7,
+        "baseWeight": 7,
+        "xp": 174,
+        "chemistryClass": "redox",
+        "chemistryLabel": "酸化還元",
+        "projectileLabel": "I₂",
+        "healer": true,
+        "healAmount": 36,
+        "healRange": 126
+      },
+      {
+        "id": "chlorineSplashEnemy8",
+        "formula": "Cl₂",
+        "name": "塩素",
+        "role": "範囲反応型",
+        "hp": 244,
+        "attack": 51,
+        "speed": 8.8,
+        "range": 78,
+        "radius": 20,
+        "attackInterval": 3.25,
+        "reward": 7,
+        "baseWeight": 6,
+        "xp": 176,
+        "chemistryClass": "redox",
+        "chemistryLabel": "酸化還元",
+        "projectileLabel": "Cl₂",
+        "splashRadius": 70,
+        "splashFactor": 0.48,
+        "antiAir": true
+      },
+      {
+        "id": "ozoneAmbushBoss8",
+        "formula": "O₃",
+        "name": "オゾン",
+        "role": "BOSS・超高速急襲型",
+        "hp": 420,
+        "attack": 130,
+        "speed": 60,
+        "range": 30,
+        "radius": 34,
+        "attackInterval": 2.25,
+        "reward": 128,
+        "baseWeight": 0,
+        "xp": 250,
+        "chemistryClass": "redox",
+        "chemistryLabel": "酸化還元",
+        "projectileLabel": "O₃",
+        "boss": true,
+        "bossIntro": "酸化還元 O₃ オゾン｜戦線崩壊急襲",
+        "wipeAlliesOnArrival": true,
+        "ambushIntroTitle": "戦線崩壊",
+        "ambushIntroText": "出現衝撃により味方ユニット全消失",
+        "recommendedStoredEnergy": 125,
+        "baseDamageMultiplier": 1
+      }
+    ],
+    "waves": [
+      {
+        "name": "酸化還元種を観察",
+        "enemies": [
+          "ironThreeInfantryEnemy8",
+          "ironThreeInfantryEnemy8",
+          "ceriumFourRunnerEnemy8"
+        ],
+        "spawnInterval": 5.6,
+        "hpScale": 1.05,
+        "attackScale": 1.02,
+        "speedScale": 1,
+        "rangeBonus": 0,
+        "intervalScale": 1,
+        "rewardScale": 1.08
+      },
+      {
+        "name": "電子移動の前線",
+        "enemies": [
+          "ironThreeInfantryEnemy8",
+          "ceriumFourRunnerEnemy8",
+          "permanganateArcherEnemy8",
+          "ironThreeInfantryEnemy8"
+        ],
+        "spawnInterval": 5,
+        "hpScale": 1.12,
+        "attackScale": 1.08,
+        "speedScale": 1.01,
+        "rangeBonus": 1,
+        "intervalScale": 0.99,
+        "rewardScale": 1.12
+      },
+      {
+        "name": "飛行酸化種",
+        "enemies": [
+          "dichromateFlyingEnemy8",
+          "ironThreeInfantryEnemy8",
+          "permanganateArcherEnemy8",
+          "dichromateFlyingEnemy8"
+        ],
+        "spawnInterval": 4.6,
+        "hpScale": 1.2,
+        "attackScale": 1.15,
+        "speedScale": 1.02,
+        "rangeBonus": 1,
+        "intervalScale": 0.98,
+        "rewardScale": 1.16
+      },
+      {
+        "name": "高速・長射程反応",
+        "enemies": [
+          "ceriumFourRunnerEnemy8",
+          "permanganateArcherEnemy8",
+          "ironThreeInfantryEnemy8",
+          "dichromateFlyingEnemy8",
+          "ceriumFourRunnerEnemy8"
+        ],
+        "spawnInterval": 4.1,
+        "hpScale": 1.28,
+        "attackScale": 1.22,
+        "speedScale": 1.03,
+        "rangeBonus": 2,
+        "intervalScale": 0.97,
+        "rewardScale": 1.2
+      },
+      {
+        "name": "酸化還元防衛線",
+        "enemies": [
+          "hydrogenPeroxideGuardEnemy8",
+          "tinFourHeavyEnemy8",
+          "permanganateArcherEnemy8",
+          "ironThreeInfantryEnemy8",
+          "ceriumFourRunnerEnemy8"
+        ],
+        "spawnInterval": 3.7,
+        "hpScale": 1.37,
+        "attackScale": 1.3,
+        "speedScale": 1.04,
+        "rangeBonus": 2,
+        "intervalScale": 0.96,
+        "rewardScale": 1.25
+      },
+      {
+        "name": "支援反応網",
+        "enemies": [
+          "iodineSupportEnemy8",
+          "hydrogenPeroxideGuardEnemy8",
+          "permanganateArcherEnemy8",
+          "dichromateFlyingEnemy8",
+          "ironThreeInfantryEnemy8",
+          "ceriumFourRunnerEnemy8"
+        ],
+        "spawnInterval": 3.3,
+        "hpScale": 1.47,
+        "attackScale": 1.39,
+        "speedScale": 1.05,
+        "rangeBonus": 3,
+        "intervalScale": 0.95,
+        "rewardScale": 1.3
+      },
+      {
+        "name": "酸化還元総合判断",
+        "enemies": [
+          "tinFourHeavyEnemy8",
+          "chlorineSplashEnemy8",
+          "ceriumFourRunnerEnemy8",
+          "permanganateArcherEnemy8",
+          "dichromateFlyingEnemy8",
+          "iodineSupportEnemy8",
+          "ironThreeInfantryEnemy8"
+        ],
+        "spawnInterval": 2.95,
+        "hpScale": 1.58,
+        "attackScale": 1.49,
+        "speedScale": 1.07,
+        "rangeBonus": 3,
+        "intervalScale": 0.93,
+        "rewardScale": 1.36
+      },
+      {
+        "name": "高速・飛行・範囲混成",
+        "enemies": [
+          "dichromateFlyingEnemy8",
+          "chlorineSplashEnemy8",
+          "ceriumFourRunnerEnemy8",
+          "hydrogenPeroxideGuardEnemy8",
+          "permanganateArcherEnemy8",
+          "iodineSupportEnemy8",
+          "dichromateFlyingEnemy8",
+          "tinFourHeavyEnemy8"
+        ],
+        "spawnInterval": 2.6,
+        "hpScale": 1.7,
+        "attackScale": 1.6,
+        "speedScale": 1.09,
+        "rangeBonus": 4,
+        "intervalScale": 0.91,
+        "rewardScale": 1.42
+      },
+      {
+        "name": "蓄積急襲区・臨界",
+        "enemies": [
+          "hydrogenPeroxideGuardEnemy8",
+          "iodineSupportEnemy8",
+          "chlorineSplashEnemy8",
+          "tinFourHeavyEnemy8",
+          "dichromateFlyingEnemy8",
+          "permanganateArcherEnemy8",
+          "ceriumFourRunnerEnemy8",
+          "ironThreeInfantryEnemy8",
+          "chlorineSplashEnemy8"
+        ],
+        "spawnInterval": 2.28,
+        "hpScale": 1.84,
+        "attackScale": 1.72,
+        "speedScale": 1.11,
+        "rangeBonus": 5,
+        "intervalScale": 0.89,
+        "rewardScale": 1.48
+      },
+      {
+        "name": "BOSS・オゾン急襲",
+        "enemies": [
+          "ozoneAmbushBoss8"
+        ],
+        "spawnInterval": 1,
+        "hpScale": 1,
+        "attackScale": 1,
+        "speedScale": 1,
+        "rangeBonus": 0,
+        "intervalScale": 1,
+        "rewardScale": 1.55
+      },
+      {
+        "name": "最終・酸化還元総力戦",
+        "enemies": [
+          "ceriumFourRunnerEnemy8",
+          "dichromateFlyingEnemy8",
+          "hydrogenPeroxideGuardEnemy8",
+          "permanganateArcherEnemy8",
+          "iodineSupportEnemy8",
+          "chlorineSplashEnemy8",
+          "tinFourHeavyEnemy8",
+          "ironThreeInfantryEnemy8",
+          "dichromateFlyingEnemy8",
+          "ceriumFourRunnerEnemy8",
+          "hydrogenPeroxideGuardEnemy8",
+          "chlorineSplashEnemy8",
+          "permanganateArcherEnemy8",
+          "tinFourHeavyEnemy8"
+        ],
+        "spawnInterval": 1.45,
+        "hpScale": 2.12,
+        "attackScale": 1.98,
+        "speedScale": 1.14,
+        "rangeBonus": 6,
+        "intervalScale": 0.85,
+        "rewardScale": 1.72
+      }
+    ]
+  },
   "quiz": [
     {
       "q": "次のうち純物質はどれか。",
@@ -17034,6 +18707,1016 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
         "正解です。"
       ],
       "calculation": true
+    },
+    {
+      "id": "v45-basic-half-reaction-01",
+      "q": "Fe²⁺がFe³⁺へ酸化される半反応式として正しいものはどれか。",
+      "options": [
+        "Fe²⁺ → Fe³⁺ + e⁻",
+        "Fe²⁺ + e⁻ → Fe³⁺",
+        "Fe³⁺ → Fe²⁺ + e⁻",
+        "Fe²⁺ → Fe³⁺ + 2e⁻"
+      ],
+      "answer": 0,
+      "explanation": "Feの酸化数は+2から+3へ1増えるため、電子1個を右辺へ放出します。",
+      "scope": "foundation",
+      "category": "redox",
+      "difficultyLevel": 2,
+      "cognitiveType": "reasoning",
+      "learningObjective": "酸化還元の半反応式を原子数・電荷・電子数から判断する",
+      "estimatedSeconds": 45,
+      "similarityGroup": "redox:half-reaction:00",
+      "optionFeedback": [
+        "正解です。原子数と電荷がそろっています。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。"
+      ]
+    },
+    {
+      "id": "v45-basic-half-reaction-02",
+      "q": "Fe³⁺がFe²⁺へ還元される半反応式として正しいものはどれか。",
+      "options": [
+        "Fe³⁺ → Fe²⁺ + e⁻",
+        "Fe³⁺ + e⁻ → Fe²⁺",
+        "Fe²⁺ + e⁻ → Fe³⁺",
+        "Fe³⁺ + 2e⁻ → Fe²⁺"
+      ],
+      "answer": 1,
+      "explanation": "還元では電子を受け取るため、電子は左辺です。",
+      "scope": "foundation",
+      "category": "redox",
+      "difficultyLevel": 2,
+      "cognitiveType": "reasoning",
+      "learningObjective": "酸化還元の半反応式を原子数・電荷・電子数から判断する",
+      "estimatedSeconds": 45,
+      "similarityGroup": "redox:half-reaction:00",
+      "optionFeedback": [
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "正解です。原子数と電荷がそろっています。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。"
+      ]
+    },
+    {
+      "id": "v45-basic-half-reaction-03",
+      "q": "ZnがZn²⁺へ酸化される半反応式として正しいものはどれか。",
+      "options": [
+        "Zn + 2e⁻ → Zn²⁺",
+        "Zn²⁺ → Zn + 2e⁻",
+        "Zn → Zn²⁺ + 2e⁻",
+        "Zn → Zn²⁺ + e⁻"
+      ],
+      "answer": 2,
+      "explanation": "Znの酸化数は0から+2へ変化するので、電子2個を放出します。",
+      "scope": "foundation",
+      "category": "redox",
+      "difficultyLevel": 2,
+      "cognitiveType": "reasoning",
+      "learningObjective": "酸化還元の半反応式を原子数・電荷・電子数から判断する",
+      "estimatedSeconds": 45,
+      "similarityGroup": "redox:half-reaction:01",
+      "optionFeedback": [
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "正解です。原子数と電荷がそろっています。",
+        "式の原子数・電荷・電子の位置を確認してください。"
+      ]
+    },
+    {
+      "id": "v45-basic-half-reaction-04",
+      "q": "Cu²⁺がCuへ還元される半反応式として正しいものはどれか。",
+      "options": [
+        "Cu²⁺ → Cu + 2e⁻",
+        "Cu + 2e⁻ → Cu²⁺",
+        "Cu²⁺ + e⁻ → Cu",
+        "Cu²⁺ + 2e⁻ → Cu"
+      ],
+      "answer": 3,
+      "explanation": "Cu²⁺は電子2個を受け取り、単体Cuになります。",
+      "scope": "foundation",
+      "category": "redox",
+      "difficultyLevel": 2,
+      "cognitiveType": "reasoning",
+      "learningObjective": "酸化還元の半反応式を原子数・電荷・電子数から判断する",
+      "estimatedSeconds": 45,
+      "similarityGroup": "redox:half-reaction:01",
+      "optionFeedback": [
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "正解です。原子数と電荷がそろっています。"
+      ]
+    },
+    {
+      "id": "v45-basic-half-reaction-05",
+      "q": "AlがAl³⁺へ酸化される半反応式として正しいものはどれか。",
+      "options": [
+        "Al → Al³⁺ + 3e⁻",
+        "Al + 3e⁻ → Al³⁺",
+        "Al³⁺ → Al + 3e⁻",
+        "Al → Al³⁺ + 2e⁻"
+      ],
+      "answer": 0,
+      "explanation": "Alの酸化数は0から+3へ変わるため、電子3個を放出します。",
+      "scope": "foundation",
+      "category": "redox",
+      "difficultyLevel": 2,
+      "cognitiveType": "reasoning",
+      "learningObjective": "酸化還元の半反応式を原子数・電荷・電子数から判断する",
+      "estimatedSeconds": 45,
+      "similarityGroup": "redox:half-reaction:02",
+      "optionFeedback": [
+        "正解です。原子数と電荷がそろっています。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。"
+      ]
+    },
+    {
+      "id": "v45-basic-half-reaction-06",
+      "q": "ヨウ化物イオンがヨウ素へ酸化される半反応式として正しいものはどれか。",
+      "options": [
+        "I⁻ → I₂ + e⁻",
+        "2I⁻ → I₂ + 2e⁻",
+        "I₂ + 2e⁻ → 2I⁻",
+        "2I⁻ + 2e⁻ → I₂"
+      ],
+      "answer": 1,
+      "explanation": "I原子数を2個にそろえ、電荷を合わせるため電子2個を右辺へ置きます。",
+      "scope": "foundation",
+      "category": "redox",
+      "difficultyLevel": 2,
+      "cognitiveType": "reasoning",
+      "learningObjective": "酸化還元の半反応式を原子数・電荷・電子数から判断する",
+      "estimatedSeconds": 45,
+      "similarityGroup": "redox:half-reaction:02",
+      "optionFeedback": [
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "正解です。原子数と電荷がそろっています。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。"
+      ]
+    },
+    {
+      "id": "v45-basic-half-reaction-07",
+      "q": "臭化物イオンが臭素へ酸化される半反応式として正しいものはどれか。",
+      "options": [
+        "Br₂ + 2e⁻ → 2Br⁻",
+        "Br⁻ → Br₂ + e⁻",
+        "2Br⁻ → Br₂ + 2e⁻",
+        "2Br⁻ + 2e⁻ → Br₂"
+      ],
+      "answer": 2,
+      "explanation": "Br⁻は酸化されてBr₂となり、電子2個を放出します。",
+      "scope": "foundation",
+      "category": "redox",
+      "difficultyLevel": 2,
+      "cognitiveType": "reasoning",
+      "learningObjective": "酸化還元の半反応式を原子数・電荷・電子数から判断する",
+      "estimatedSeconds": 45,
+      "similarityGroup": "redox:half-reaction:03",
+      "optionFeedback": [
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "正解です。原子数と電荷がそろっています。",
+        "式の原子数・電荷・電子の位置を確認してください。"
+      ]
+    },
+    {
+      "id": "v45-basic-half-reaction-08",
+      "q": "塩素が塩化物イオンへ還元される半反応式として正しいものはどれか。",
+      "options": [
+        "2Cl⁻ → Cl₂ + 2e⁻",
+        "Cl₂ + e⁻ → Cl⁻",
+        "Cl₂ → 2Cl⁻ + 2e⁻",
+        "Cl₂ + 2e⁻ → 2Cl⁻"
+      ],
+      "answer": 3,
+      "explanation": "Cl₂は電子2個を受け取り、Cl⁻を2個生じます。",
+      "scope": "foundation",
+      "category": "redox",
+      "difficultyLevel": 2,
+      "cognitiveType": "reasoning",
+      "learningObjective": "酸化還元の半反応式を原子数・電荷・電子数から判断する",
+      "estimatedSeconds": 45,
+      "similarityGroup": "redox:half-reaction:03",
+      "optionFeedback": [
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "正解です。原子数と電荷がそろっています。"
+      ]
+    },
+    {
+      "id": "v45-basic-half-reaction-09",
+      "q": "酸性条件でH₂O₂がH₂Oへ還元される半反応式として正しいものはどれか。",
+      "options": [
+        "H₂O₂ + 2H⁺ + 2e⁻ → 2H₂O",
+        "H₂O₂ → O₂ + 2H⁺ + 2e⁻",
+        "H₂O₂ + 2e⁻ → 2OH⁻",
+        "H₂O₂ + H⁺ + e⁻ → H₂O"
+      ],
+      "answer": 0,
+      "explanation": "酸性条件ではH⁺とH₂OでH・Oを合わせ、電子2個を左辺に置きます。",
+      "scope": "foundation",
+      "category": "redox",
+      "difficultyLevel": 2,
+      "cognitiveType": "reasoning",
+      "learningObjective": "酸化還元の半反応式を原子数・電荷・電子数から判断する",
+      "estimatedSeconds": 45,
+      "similarityGroup": "redox:half-reaction:04",
+      "optionFeedback": [
+        "正解です。原子数と電荷がそろっています。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。"
+      ]
+    },
+    {
+      "id": "v45-basic-half-reaction-10",
+      "q": "酸性条件でH₂O₂がO₂へ酸化される半反応式として正しいものはどれか。",
+      "options": [
+        "H₂O₂ + 2H⁺ + 2e⁻ → 2H₂O",
+        "H₂O₂ → O₂ + 2H⁺ + 2e⁻",
+        "H₂O₂ + 2e⁻ → 2OH⁻",
+        "H₂O₂ → O₂ + H⁺ + e⁻"
+      ],
+      "answer": 1,
+      "explanation": "H₂O₂が酸化される場合、電子2個は右辺へ出ます。",
+      "scope": "foundation",
+      "category": "redox",
+      "difficultyLevel": 2,
+      "cognitiveType": "reasoning",
+      "learningObjective": "酸化還元の半反応式を原子数・電荷・電子数から判断する",
+      "estimatedSeconds": 45,
+      "similarityGroup": "redox:half-reaction:04",
+      "optionFeedback": [
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "正解です。原子数と電荷がそろっています。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。"
+      ]
+    },
+    {
+      "id": "v45-basic-half-reaction-11",
+      "q": "酸性条件でMnO₄⁻がMn²⁺へ還元される半反応式として正しいものはどれか。",
+      "options": [
+        "MnO₄⁻ + 4H⁺ + 3e⁻ → MnO₂ + 2H₂O",
+        "MnO₄⁻ + 8H⁺ → Mn²⁺ + 4H₂O + 5e⁻",
+        "MnO₄⁻ + 8H⁺ + 5e⁻ → Mn²⁺ + 4H₂O",
+        "MnO₄⁻ + 4H₂O + 5e⁻ → Mn²⁺ + 8OH⁻"
+      ],
+      "answer": 2,
+      "explanation": "酸性条件でMnは+7から+2へ還元されるため、電子5個を受け取ります。",
+      "scope": "foundation",
+      "category": "redox",
+      "difficultyLevel": 3,
+      "cognitiveType": "reasoning",
+      "learningObjective": "酸化還元の半反応式を原子数・電荷・電子数から判断する",
+      "estimatedSeconds": 60,
+      "similarityGroup": "redox:half-reaction:05",
+      "optionFeedback": [
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "正解です。原子数と電荷がそろっています。",
+        "式の原子数・電荷・電子の位置を確認してください。"
+      ]
+    },
+    {
+      "id": "v45-basic-half-reaction-12",
+      "q": "酸性条件でCr₂O₇²⁻がCr³⁺へ還元される半反応式として正しいものはどれか。",
+      "options": [
+        "Cr₂O₇²⁻ + 7H₂O → 2Cr³⁺ + 14H⁺ + 6e⁻",
+        "Cr₂O₇²⁻ + 8H⁺ + 6e⁻ → 2Cr³⁺ + 4H₂O",
+        "Cr₂O₇²⁻ + 14H⁺ + 3e⁻ → 2Cr³⁺ + 7H₂O",
+        "Cr₂O₇²⁻ + 14H⁺ + 6e⁻ → 2Cr³⁺ + 7H₂O"
+      ],
+      "answer": 3,
+      "explanation": "Cr原子を2個、Oを7H₂O、Hを14H⁺で合わせ、電荷を電子6個でそろえます。",
+      "scope": "foundation",
+      "category": "redox",
+      "difficultyLevel": 3,
+      "cognitiveType": "reasoning",
+      "learningObjective": "酸化還元の半反応式を原子数・電荷・電子数から判断する",
+      "estimatedSeconds": 60,
+      "similarityGroup": "redox:half-reaction:05",
+      "optionFeedback": [
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "正解です。原子数と電荷がそろっています。"
+      ]
+    },
+    {
+      "id": "v45-basic-half-reaction-13",
+      "q": "酸性条件でNO₃⁻がNOへ還元される半反応式として正しいものはどれか。",
+      "options": [
+        "NO₃⁻ + 4H⁺ + 3e⁻ → NO + 2H₂O",
+        "NO₃⁻ + 2H⁺ + e⁻ → NO + H₂O",
+        "NO + 2H₂O → NO₃⁻ + 4H⁺ + 3e⁻",
+        "NO₃⁻ + 4H⁺ → NO + 2H₂O + 3e⁻"
+      ],
+      "answer": 0,
+      "explanation": "Nは+5から+2へ還元されるので電子3個を受け取ります。",
+      "scope": "foundation",
+      "category": "redox",
+      "difficultyLevel": 3,
+      "cognitiveType": "reasoning",
+      "learningObjective": "酸化還元の半反応式を原子数・電荷・電子数から判断する",
+      "estimatedSeconds": 60,
+      "similarityGroup": "redox:half-reaction:06",
+      "optionFeedback": [
+        "正解です。原子数と電荷がそろっています。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。"
+      ]
+    },
+    {
+      "id": "v45-basic-half-reaction-14",
+      "q": "酸性条件でO₂がH₂Oへ還元される半反応式として正しいものはどれか。",
+      "options": [
+        "O₂ + 2H⁺ + 2e⁻ → H₂O",
+        "O₂ + 4H⁺ + 4e⁻ → 2H₂O",
+        "2H₂O → O₂ + 4H⁺ + 4e⁻",
+        "O₂ + 2H₂O + 4e⁻ → 4OH⁻"
+      ],
+      "answer": 1,
+      "explanation": "O原子2個からH₂Oを2個作り、H⁺4個と電子4個で合わせます。",
+      "scope": "foundation",
+      "category": "redox",
+      "difficultyLevel": 3,
+      "cognitiveType": "reasoning",
+      "learningObjective": "酸化還元の半反応式を原子数・電荷・電子数から判断する",
+      "estimatedSeconds": 60,
+      "similarityGroup": "redox:half-reaction:06",
+      "optionFeedback": [
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "正解です。原子数と電荷がそろっています。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。"
+      ]
+    },
+    {
+      "id": "v45-basic-half-reaction-15",
+      "q": "水素イオンが水素へ還元される半反応式として正しいものはどれか。",
+      "options": [
+        "H₂ → 2H⁺ + 2e⁻",
+        "H⁺ + e⁻ → H₂",
+        "2H⁺ + 2e⁻ → H₂",
+        "2H⁺ → H₂ + 2e⁻"
+      ],
+      "answer": 2,
+      "explanation": "H⁺2個が電子2個を受け取りH₂になります。",
+      "scope": "foundation",
+      "category": "redox",
+      "difficultyLevel": 3,
+      "cognitiveType": "reasoning",
+      "learningObjective": "酸化還元の半反応式を原子数・電荷・電子数から判断する",
+      "estimatedSeconds": 60,
+      "similarityGroup": "redox:half-reaction:07",
+      "optionFeedback": [
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "正解です。原子数と電荷がそろっています。",
+        "式の原子数・電荷・電子の位置を確認してください。"
+      ]
+    },
+    {
+      "id": "v45-basic-half-reaction-16",
+      "q": "塩基性条件でMnO₄⁻がMnO₂へ還元される半反応式として正しいものはどれか。",
+      "options": [
+        "MnO₄⁻ + 8H⁺ + 5e⁻ → Mn²⁺ + 4H₂O",
+        "MnO₄⁻ + 4OH⁻ → MnO₂ + 2H₂O + 3e⁻",
+        "MnO₄⁻ + H₂O + 2e⁻ → MnO₂ + 2OH⁻",
+        "MnO₄⁻ + 2H₂O + 3e⁻ → MnO₂ + 4OH⁻"
+      ],
+      "answer": 3,
+      "explanation": "塩基性条件ではOH⁻を含めて原子数と電荷を合わせます。",
+      "scope": "foundation",
+      "category": "redox",
+      "difficultyLevel": 3,
+      "cognitiveType": "reasoning",
+      "learningObjective": "酸化還元の半反応式を原子数・電荷・電子数から判断する",
+      "estimatedSeconds": 60,
+      "similarityGroup": "redox:half-reaction:07",
+      "optionFeedback": [
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "正解です。原子数と電荷がそろっています。"
+      ]
+    },
+    {
+      "id": "v45-basic-half-reaction-17",
+      "q": "塩基性条件でClO⁻がCl⁻へ還元される半反応式として正しいものはどれか。",
+      "options": [
+        "ClO⁻ + H₂O + 2e⁻ → Cl⁻ + 2OH⁻",
+        "ClO⁻ + 2H⁺ + 2e⁻ → Cl⁻ + H₂O",
+        "ClO⁻ + H₂O → Cl⁻ + 2OH⁻ + 2e⁻",
+        "ClO⁻ + e⁻ → Cl⁻ + O²⁻"
+      ],
+      "answer": 0,
+      "explanation": "Clの酸化数は+1から−1へ下がるので電子2個を受け取ります。",
+      "scope": "foundation",
+      "category": "redox",
+      "difficultyLevel": 3,
+      "cognitiveType": "reasoning",
+      "learningObjective": "酸化還元の半反応式を原子数・電荷・電子数から判断する",
+      "estimatedSeconds": 60,
+      "similarityGroup": "redox:half-reaction:08",
+      "optionFeedback": [
+        "正解です。原子数と電荷がそろっています。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。"
+      ]
+    },
+    {
+      "id": "v45-basic-half-reaction-18",
+      "q": "塩基性条件でO₂がOH⁻へ還元される半反応式として正しいものはどれか。",
+      "options": [
+        "O₂ + 4H⁺ + 4e⁻ → 2H₂O",
+        "O₂ + 2H₂O + 4e⁻ → 4OH⁻",
+        "4OH⁻ → O₂ + 2H₂O + 4e⁻",
+        "O₂ + H₂O + 2e⁻ → 2OH⁻"
+      ],
+      "answer": 1,
+      "explanation": "O₂は電子4個を受け取り、OH⁻を4個生じます。",
+      "scope": "foundation",
+      "category": "redox",
+      "difficultyLevel": 3,
+      "cognitiveType": "reasoning",
+      "learningObjective": "酸化還元の半反応式を原子数・電荷・電子数から判断する",
+      "estimatedSeconds": 60,
+      "similarityGroup": "redox:half-reaction:08",
+      "optionFeedback": [
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "正解です。原子数と電荷がそろっています。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。"
+      ]
+    },
+    {
+      "id": "v45-basic-half-reaction-19",
+      "q": "塩基性条件でH₂O₂がOH⁻へ還元される半反応式として正しいものはどれか。",
+      "options": [
+        "H₂O₂ → O₂ + 2H⁺ + 2e⁻",
+        "H₂O₂ + 2H⁺ + 2e⁻ → 2H₂O",
+        "H₂O₂ + 2e⁻ → 2OH⁻",
+        "H₂O₂ + e⁻ → OH⁻"
+      ],
+      "answer": 2,
+      "explanation": "H₂O₂のOは−1から−2へ還元され、電子2個を受け取ります。",
+      "scope": "foundation",
+      "category": "redox",
+      "difficultyLevel": 3,
+      "cognitiveType": "reasoning",
+      "learningObjective": "酸化還元の半反応式を原子数・電荷・電子数から判断する",
+      "estimatedSeconds": 60,
+      "similarityGroup": "redox:half-reaction:09",
+      "optionFeedback": [
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "正解です。原子数と電荷がそろっています。",
+        "式の原子数・電荷・電子の位置を確認してください。"
+      ]
+    },
+    {
+      "id": "v45-basic-half-reaction-20",
+      "q": "塩基性条件でOH⁻がO₂へ酸化される半反応式として正しいものはどれか。",
+      "options": [
+        "O₂ + 2H₂O + 4e⁻ → 4OH⁻",
+        "2OH⁻ → O₂ + H₂O + 2e⁻",
+        "4OH⁻ + 4e⁻ → O₂ + 2H₂O",
+        "4OH⁻ → O₂ + 2H₂O + 4e⁻"
+      ],
+      "answer": 3,
+      "explanation": "OH⁻からO₂が生じる酸化では、電子4個が右辺です。",
+      "scope": "foundation",
+      "category": "redox",
+      "difficultyLevel": 3,
+      "cognitiveType": "reasoning",
+      "learningObjective": "酸化還元の半反応式を原子数・電荷・電子数から判断する",
+      "estimatedSeconds": 60,
+      "similarityGroup": "redox:half-reaction:09",
+      "optionFeedback": [
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "正解です。原子数と電荷がそろっています。"
+      ]
+    },
+    {
+      "id": "v45-basic-half-concept-01",
+      "q": "酸化を表す半反応式で電子e⁻は通常どちら側に書くか。",
+      "options": [
+        "生成物側",
+        "反応物側",
+        "両辺に同数",
+        "電子は書かない"
+      ],
+      "answer": 0,
+      "explanation": "酸化では電子を失うため、電子は生成物側に書きます。",
+      "scope": "foundation",
+      "category": "redox",
+      "difficultyLevel": 2,
+      "cognitiveType": "knowledge",
+      "learningObjective": "半反応式を作る手順と電子の役割を理解する",
+      "estimatedSeconds": 35,
+      "similarityGroup": "redox:half-method:00",
+      "optionFeedback": [
+        "正解です。原子数と電荷がそろっています。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。"
+      ]
+    },
+    {
+      "id": "v45-basic-half-concept-02",
+      "q": "還元を表す半反応式で電子e⁻は通常どちら側に書くか。",
+      "options": [
+        "生成物側",
+        "反応物側",
+        "両辺に同数",
+        "電子は書かない"
+      ],
+      "answer": 1,
+      "explanation": "還元では電子を受け取るため、電子は反応物側です。",
+      "scope": "foundation",
+      "category": "redox",
+      "difficultyLevel": 2,
+      "cognitiveType": "knowledge",
+      "learningObjective": "半反応式を作る手順と電子の役割を理解する",
+      "estimatedSeconds": 35,
+      "similarityGroup": "redox:half-method:00",
+      "optionFeedback": [
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "正解です。原子数と電荷がそろっています。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。"
+      ]
+    },
+    {
+      "id": "v45-basic-half-concept-03",
+      "q": "酸性条件で半反応式を作るとき、O原子数を合わせるため主に使う物質はどれか。",
+      "options": [
+        "H⁺",
+        "OH⁻",
+        "H₂O",
+        "e⁻"
+      ],
+      "answer": 2,
+      "explanation": "酸性条件でもO原子数はH₂Oで合わせます。",
+      "scope": "foundation",
+      "category": "redox",
+      "difficultyLevel": 2,
+      "cognitiveType": "knowledge",
+      "learningObjective": "半反応式を作る手順と電子の役割を理解する",
+      "estimatedSeconds": 35,
+      "similarityGroup": "redox:half-method:01",
+      "optionFeedback": [
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "正解です。原子数と電荷がそろっています。",
+        "式の原子数・電荷・電子の位置を確認してください。"
+      ]
+    },
+    {
+      "id": "v45-basic-half-concept-04",
+      "q": "酸性条件で半反応式を作るとき、H原子数を合わせるため主に使う粒子はどれか。",
+      "options": [
+        "H₂O",
+        "OH⁻",
+        "e⁻",
+        "H⁺"
+      ],
+      "answer": 3,
+      "explanation": "H₂OでOを合わせた後、H⁺でH原子数を合わせます。",
+      "scope": "foundation",
+      "category": "redox",
+      "difficultyLevel": 2,
+      "cognitiveType": "knowledge",
+      "learningObjective": "半反応式を作る手順と電子の役割を理解する",
+      "estimatedSeconds": 35,
+      "similarityGroup": "redox:half-method:01",
+      "optionFeedback": [
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "正解です。原子数と電荷がそろっています。"
+      ]
+    },
+    {
+      "id": "v45-basic-half-concept-05",
+      "q": "半反応式の最後に電荷を合わせるため加えるものはどれか。",
+      "options": [
+        "e⁻",
+        "H₂O",
+        "H⁺だけ",
+        "係数1のO₂"
+      ],
+      "answer": 0,
+      "explanation": "電子を加えて左右の総電荷を等しくします。",
+      "scope": "foundation",
+      "category": "redox",
+      "difficultyLevel": 2,
+      "cognitiveType": "knowledge",
+      "learningObjective": "半反応式を作る手順と電子の役割を理解する",
+      "estimatedSeconds": 35,
+      "similarityGroup": "redox:half-method:02",
+      "optionFeedback": [
+        "正解です。原子数と電荷がそろっています。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。"
+      ]
+    },
+    {
+      "id": "v45-basic-half-concept-06",
+      "q": "塩基性条件の半反応式を酸性条件から直すとき、H⁺を消すため両辺に加えるものはどれか。",
+      "options": [
+        "H₂O₂",
+        "OH⁻",
+        "O₂",
+        "e⁻"
+      ],
+      "answer": 1,
+      "explanation": "H⁺と同数のOH⁻を両辺に加え、H⁺+OH⁻をH₂Oにして整理します。",
+      "scope": "foundation",
+      "category": "redox",
+      "difficultyLevel": 2,
+      "cognitiveType": "knowledge",
+      "learningObjective": "半反応式を作る手順と電子の役割を理解する",
+      "estimatedSeconds": 35,
+      "similarityGroup": "redox:half-method:02",
+      "optionFeedback": [
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "正解です。原子数と電荷がそろっています。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。"
+      ]
+    },
+    {
+      "id": "v45-basic-half-concept-07",
+      "q": "酸化数が+2から+5へ変化する原子1個が放出する電子数は何個か。",
+      "options": [
+        "2個",
+        "5個",
+        "3個",
+        "7個"
+      ],
+      "answer": 2,
+      "explanation": "酸化数が3増えるので、電子3個を放出します。",
+      "scope": "foundation",
+      "category": "redox",
+      "difficultyLevel": 2,
+      "cognitiveType": "knowledge",
+      "learningObjective": "半反応式を作る手順と電子の役割を理解する",
+      "estimatedSeconds": 35,
+      "similarityGroup": "redox:half-method:03",
+      "optionFeedback": [
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "正解です。原子数と電荷がそろっています。",
+        "式の原子数・電荷・電子の位置を確認してください。"
+      ]
+    },
+    {
+      "id": "v45-basic-half-concept-08",
+      "q": "酸化数が+7から+2へ変化する原子1個が受け取る電子数は何個か。",
+      "options": [
+        "2個",
+        "3個",
+        "9個",
+        "5個"
+      ],
+      "answer": 3,
+      "explanation": "酸化数が5下がるため、電子5個を受け取ります。",
+      "scope": "foundation",
+      "category": "redox",
+      "difficultyLevel": 2,
+      "cognitiveType": "knowledge",
+      "learningObjective": "半反応式を作る手順と電子の役割を理解する",
+      "estimatedSeconds": 35,
+      "similarityGroup": "redox:half-method:03",
+      "optionFeedback": [
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "正解です。原子数と電荷がそろっています。"
+      ]
+    },
+    {
+      "id": "v45-basic-half-concept-09",
+      "q": "2つの半反応式を足し合わせる前に、最初にそろえる量はどれか。",
+      "options": [
+        "授受する電子数",
+        "H⁺の数だけ",
+        "H₂Oの数だけ",
+        "反応物の物質量すべて"
+      ],
+      "answer": 0,
+      "explanation": "酸化側が放出する電子数と還元側が受け取る電子数を最小公倍数でそろえます。",
+      "scope": "foundation",
+      "category": "redox",
+      "difficultyLevel": 2,
+      "cognitiveType": "knowledge",
+      "learningObjective": "半反応式を作る手順と電子の役割を理解する",
+      "estimatedSeconds": 35,
+      "similarityGroup": "redox:half-method:04",
+      "optionFeedback": [
+        "正解です。原子数と電荷がそろっています。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。"
+      ]
+    },
+    {
+      "id": "v45-basic-half-concept-10",
+      "q": "半反応式が正しいかを最後に確認する項目として最も適切なものはどれか。",
+      "options": [
+        "化学式の文字数だけ",
+        "各元素の原子数と左右の総電荷",
+        "係数の合計だけ",
+        "生成物の種類数だけ"
+      ],
+      "answer": 1,
+      "explanation": "原子数だけでなく、左右の総電荷も一致している必要があります。",
+      "scope": "foundation",
+      "category": "redox",
+      "difficultyLevel": 2,
+      "cognitiveType": "knowledge",
+      "learningObjective": "半反応式を作る手順と電子の役割を理解する",
+      "estimatedSeconds": 35,
+      "similarityGroup": "redox:half-method:04",
+      "optionFeedback": [
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "正解です。原子数と電荷がそろっています。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。"
+      ]
+    },
+    {
+      "id": "v45-basic-half-coeff-01",
+      "q": "MnO₄⁻+8H⁺+□e⁻→Mn²⁺+4H₂Oの□に入る係数はどれか。",
+      "options": [
+        "2",
+        "3",
+        "5",
+        "6"
+      ],
+      "answer": 2,
+      "explanation": "Mnは+7から+2へ変化するので電子係数は5です。",
+      "scope": "foundation",
+      "category": "redox",
+      "difficultyLevel": 3,
+      "cognitiveType": "calculation",
+      "learningObjective": "酸化数または電荷から半反応式の電子係数を決定する",
+      "estimatedSeconds": 50,
+      "similarityGroup": "redox:half-coefficient:00",
+      "optionFeedback": [
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "正解です。原子数と電荷がそろっています。",
+        "式の原子数・電荷・電子の位置を確認してください。"
+      ],
+      "calculation": true
+    },
+    {
+      "id": "v45-basic-half-coeff-02",
+      "q": "Cr₂O₇²⁻+14H⁺+□e⁻→2Cr³⁺+7H₂Oの□に入る係数はどれか。",
+      "options": [
+        "3",
+        "5",
+        "7",
+        "6"
+      ],
+      "answer": 3,
+      "explanation": "Crは2原子あり、各Crが3個ずつ電子を受け取るため合計6個です。",
+      "scope": "foundation",
+      "category": "redox",
+      "difficultyLevel": 3,
+      "cognitiveType": "calculation",
+      "learningObjective": "酸化数または電荷から半反応式の電子係数を決定する",
+      "estimatedSeconds": 50,
+      "similarityGroup": "redox:half-coefficient:00",
+      "optionFeedback": [
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "正解です。原子数と電荷がそろっています。"
+      ],
+      "calculation": true
+    },
+    {
+      "id": "v45-basic-half-coeff-03",
+      "q": "H₂O₂→O₂+2H⁺+□e⁻の□に入る係数はどれか。",
+      "options": [
+        "2",
+        "1",
+        "3",
+        "4"
+      ],
+      "answer": 0,
+      "explanation": "H₂O₂の2個のOがそれぞれ酸化数−1から0へ変わり、合計2電子を放出します。",
+      "scope": "foundation",
+      "category": "redox",
+      "difficultyLevel": 3,
+      "cognitiveType": "calculation",
+      "learningObjective": "酸化数または電荷から半反応式の電子係数を決定する",
+      "estimatedSeconds": 50,
+      "similarityGroup": "redox:half-coefficient:01",
+      "optionFeedback": [
+        "正解です。原子数と電荷がそろっています。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。"
+      ],
+      "calculation": true
+    },
+    {
+      "id": "v45-basic-half-coeff-04",
+      "q": "O₂+4H⁺+□e⁻→2H₂Oの□に入る係数はどれか。",
+      "options": [
+        "2",
+        "4",
+        "3",
+        "6"
+      ],
+      "answer": 1,
+      "explanation": "O原子2個がそれぞれ電子2個を受け取るため合計4電子です。",
+      "scope": "foundation",
+      "category": "redox",
+      "difficultyLevel": 3,
+      "cognitiveType": "calculation",
+      "learningObjective": "酸化数または電荷から半反応式の電子係数を決定する",
+      "estimatedSeconds": 50,
+      "similarityGroup": "redox:half-coefficient:01",
+      "optionFeedback": [
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "正解です。原子数と電荷がそろっています。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。"
+      ],
+      "calculation": true
+    },
+    {
+      "id": "v45-basic-half-coeff-05",
+      "q": "NO₃⁻+4H⁺+□e⁻→NO+2H₂Oの□に入る係数はどれか。",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "5"
+      ],
+      "answer": 2,
+      "explanation": "Nの酸化数は+5から+2へ変化するので3電子を受け取ります。",
+      "scope": "foundation",
+      "category": "redox",
+      "difficultyLevel": 3,
+      "cognitiveType": "calculation",
+      "learningObjective": "酸化数または電荷から半反応式の電子係数を決定する",
+      "estimatedSeconds": 50,
+      "similarityGroup": "redox:half-coefficient:02",
+      "optionFeedback": [
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "正解です。原子数と電荷がそろっています。",
+        "式の原子数・電荷・電子の位置を確認してください。"
+      ],
+      "calculation": true
+    },
+    {
+      "id": "v45-basic-half-coeff-06",
+      "q": "ClO⁻+H₂O+□e⁻→Cl⁻+2OH⁻の□に入る係数はどれか。",
+      "options": [
+        "1",
+        "3",
+        "4",
+        "2"
+      ],
+      "answer": 3,
+      "explanation": "Clは+1から−1へ変化するため電子係数は2です。",
+      "scope": "foundation",
+      "category": "redox",
+      "difficultyLevel": 3,
+      "cognitiveType": "calculation",
+      "learningObjective": "酸化数または電荷から半反応式の電子係数を決定する",
+      "estimatedSeconds": 50,
+      "similarityGroup": "redox:half-coefficient:02",
+      "optionFeedback": [
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "正解です。原子数と電荷がそろっています。"
+      ],
+      "calculation": true
+    },
+    {
+      "id": "v45-basic-half-coeff-07",
+      "q": "2I⁻→I₂+□e⁻の□に入る係数はどれか。",
+      "options": [
+        "2",
+        "1",
+        "3",
+        "4"
+      ],
+      "answer": 0,
+      "explanation": "I⁻2個がそれぞれ電子1個を放出します。",
+      "scope": "foundation",
+      "category": "redox",
+      "difficultyLevel": 3,
+      "cognitiveType": "calculation",
+      "learningObjective": "酸化数または電荷から半反応式の電子係数を決定する",
+      "estimatedSeconds": 50,
+      "similarityGroup": "redox:half-coefficient:03",
+      "optionFeedback": [
+        "正解です。原子数と電荷がそろっています。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。"
+      ],
+      "calculation": true
+    },
+    {
+      "id": "v45-basic-half-coeff-08",
+      "q": "Al→Al³⁺+□e⁻の□に入る係数はどれか。",
+      "options": [
+        "1",
+        "3",
+        "2",
+        "4"
+      ],
+      "answer": 1,
+      "explanation": "Alは0から+3へ変化するため3電子を放出します。",
+      "scope": "foundation",
+      "category": "redox",
+      "difficultyLevel": 3,
+      "cognitiveType": "calculation",
+      "learningObjective": "酸化数または電荷から半反応式の電子係数を決定する",
+      "estimatedSeconds": 50,
+      "similarityGroup": "redox:half-coefficient:03",
+      "optionFeedback": [
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "正解です。原子数と電荷がそろっています。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。"
+      ],
+      "calculation": true
+    },
+    {
+      "id": "v45-basic-half-coeff-09",
+      "q": "O₂+2H₂O+□e⁻→4OH⁻の□に入る係数はどれか。",
+      "options": [
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "answer": 2,
+      "explanation": "左右の総電荷を−4にそろえるため電子4個が必要です。",
+      "scope": "foundation",
+      "category": "redox",
+      "difficultyLevel": 3,
+      "cognitiveType": "calculation",
+      "learningObjective": "酸化数または電荷から半反応式の電子係数を決定する",
+      "estimatedSeconds": 50,
+      "similarityGroup": "redox:half-coefficient:04",
+      "optionFeedback": [
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "正解です。原子数と電荷がそろっています。",
+        "式の原子数・電荷・電子の位置を確認してください。"
+      ],
+      "calculation": true
+    },
+    {
+      "id": "v45-basic-half-coeff-10",
+      "q": "MnO₄⁻+2H₂O+□e⁻→MnO₂+4OH⁻の□に入る係数はどれか。",
+      "options": [
+        "1",
+        "2",
+        "5",
+        "3"
+      ],
+      "answer": 3,
+      "explanation": "左辺の総電荷を−4にするため、MnO₄⁻に電子3個を加えます。",
+      "scope": "foundation",
+      "category": "redox",
+      "difficultyLevel": 3,
+      "cognitiveType": "calculation",
+      "learningObjective": "酸化数または電荷から半反応式の電子係数を決定する",
+      "estimatedSeconds": 50,
+      "similarityGroup": "redox:half-coefficient:04",
+      "optionFeedback": [
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "正解です。原子数と電荷がそろっています。"
+      ],
+      "calculation": true
     }
   ],
   "hardQuiz": [
@@ -25830,6 +28513,1056 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
         "温度変化は発熱反応の平衡位置に影響します。"
       ],
       "calculation": true
+    },
+    {
+      "id": "v45-hard-half-equation-01",
+      "q": "酸性条件でS₂O₈²⁻がSO₄²⁻へ還元される半反応式として正しいものはどれか。",
+      "options": [
+        "S₂O₈²⁻ + 2e⁻ → 2SO₄²⁻",
+        "S₂O₈²⁻ → 2SO₄²⁻ + 2e⁻",
+        "S₂O₈²⁻ + e⁻ → SO₄²⁻",
+        "2SO₄²⁻ + 2e⁻ → S₂O₈²⁻"
+      ],
+      "answer": 0,
+      "scope": "foundation",
+      "stageTier": 3,
+      "category": "redox",
+      "difficulty": "入試標準・半反応式",
+      "source": "Chemion Quest v4.5独自作成（高校化学・半反応式）",
+      "hints": [
+        "O原子をH₂Oで合わせます。",
+        "酸性ならH⁺、塩基性ならOH⁻を使ってHを合わせます。",
+        "最後に電子で左右の総電荷を一致させます。"
+      ],
+      "explanation": "【半反応式】S₂O₈²⁻ + 2e⁻ → 2SO₄²⁻\n【確認】OとSの原子数は既にそろっており、左辺へ電子2個を加えると電荷も−4で一致します。",
+      "calculation": true,
+      "visual": "electrolysis",
+      "difficultyLevel": 4,
+      "cognitiveType": "reasoning",
+      "learningObjective": "複雑な半反応式を酸性・塩基性条件に応じて完成させる",
+      "estimatedSeconds": 85,
+      "similarityGroup": "redox:half-hard-equation:00",
+      "optionFeedback": [
+        "正解です。原子数と電荷がそろっています。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。"
+      ]
+    },
+    {
+      "id": "v45-hard-half-equation-02",
+      "q": "酸性条件でMnO₂がMn²⁺へ還元される半反応式として正しいものはどれか。",
+      "options": [
+        "MnO₂ + 2H⁺ + 2e⁻ → Mn²⁺ + H₂O",
+        "MnO₂ + 4H⁺ + 2e⁻ → Mn²⁺ + 2H₂O",
+        "MnO₂ + 4H⁺ → Mn²⁺ + 2H₂O + 2e⁻",
+        "Mn²⁺ + 2H₂O → MnO₂ + 4H⁺ + 2e⁻"
+      ],
+      "answer": 1,
+      "scope": "foundation",
+      "stageTier": 3,
+      "category": "redox",
+      "difficulty": "入試標準・半反応式",
+      "source": "Chemion Quest v4.5独自作成（高校化学・半反応式）",
+      "hints": [
+        "O原子をH₂Oで合わせます。",
+        "酸性ならH⁺、塩基性ならOH⁻を使ってHを合わせます。",
+        "最後に電子で左右の総電荷を一致させます。"
+      ],
+      "explanation": "【半反応式】MnO₂ + 4H⁺ + 2e⁻ → Mn²⁺ + 2H₂O\n【確認】Oを2H₂O、Hを4H⁺で合わせ、Mnの+4→+2に対応して電子2個を左辺へ置きます。",
+      "calculation": true,
+      "visual": "electrolysis",
+      "difficultyLevel": 4,
+      "cognitiveType": "reasoning",
+      "learningObjective": "複雑な半反応式を酸性・塩基性条件に応じて完成させる",
+      "estimatedSeconds": 85,
+      "similarityGroup": "redox:half-hard-equation:00",
+      "optionFeedback": [
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "正解です。原子数と電荷がそろっています。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。"
+      ]
+    },
+    {
+      "id": "v45-hard-half-equation-03",
+      "q": "酸性条件でSO₃²⁻がSO₄²⁻へ酸化される半反応式として正しいものはどれか。",
+      "options": [
+        "SO₃²⁻ + 2H⁺ + 2e⁻ → SO₄²⁻ + H₂O",
+        "SO₃²⁻ + H₂O + 2e⁻ → SO₄²⁻ + 2H⁺",
+        "SO₃²⁻ + H₂O → SO₄²⁻ + 2H⁺ + 2e⁻",
+        "SO₃²⁻ → SO₄²⁻ + 2e⁻"
+      ],
+      "answer": 2,
+      "scope": "foundation",
+      "stageTier": 3,
+      "category": "redox",
+      "difficulty": "入試標準・半反応式",
+      "source": "Chemion Quest v4.5独自作成（高校化学・半反応式）",
+      "hints": [
+        "O原子をH₂Oで合わせます。",
+        "酸性ならH⁺、塩基性ならOH⁻を使ってHを合わせます。",
+        "最後に電子で左右の総電荷を一致させます。"
+      ],
+      "explanation": "【半反応式】SO₃²⁻ + H₂O → SO₄²⁻ + 2H⁺ + 2e⁻\n【確認】OをH₂Oで補い、H⁺2個と電子2個を右辺に置くと原子数と電荷が一致します。",
+      "calculation": true,
+      "visual": "electrolysis",
+      "difficultyLevel": 4,
+      "cognitiveType": "reasoning",
+      "learningObjective": "複雑な半反応式を酸性・塩基性条件に応じて完成させる",
+      "estimatedSeconds": 85,
+      "similarityGroup": "redox:half-hard-equation:01",
+      "optionFeedback": [
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "正解です。原子数と電荷がそろっています。",
+        "式の原子数・電荷・電子の位置を確認してください。"
+      ]
+    },
+    {
+      "id": "v45-hard-half-equation-04",
+      "q": "酸性条件でC₂O₄²⁻がCO₂へ酸化される半反応式として正しいものはどれか。",
+      "options": [
+        "C₂O₄²⁻ + 2e⁻ → 2CO₂",
+        "C₂O₄²⁻ → CO₂ + 2e⁻",
+        "2CO₂ + 2e⁻ → C₂O₄²⁻",
+        "C₂O₄²⁻ → 2CO₂ + 2e⁻"
+      ],
+      "answer": 3,
+      "scope": "foundation",
+      "stageTier": 3,
+      "category": "redox",
+      "difficulty": "入試標準・半反応式",
+      "source": "Chemion Quest v4.5独自作成（高校化学・半反応式）",
+      "hints": [
+        "O原子をH₂Oで合わせます。",
+        "酸性ならH⁺、塩基性ならOH⁻を使ってHを合わせます。",
+        "最後に電子で左右の総電荷を一致させます。"
+      ],
+      "explanation": "【半反応式】C₂O₄²⁻ → 2CO₂ + 2e⁻\n【確認】C₂O₄²⁻の2個のCは+3から+4へ酸化され、合計2電子を放出します。",
+      "calculation": true,
+      "visual": "electrolysis",
+      "difficultyLevel": 4,
+      "cognitiveType": "reasoning",
+      "learningObjective": "複雑な半反応式を酸性・塩基性条件に応じて完成させる",
+      "estimatedSeconds": 85,
+      "similarityGroup": "redox:half-hard-equation:01",
+      "optionFeedback": [
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "正解です。原子数と電荷がそろっています。"
+      ]
+    },
+    {
+      "id": "v45-hard-half-equation-05",
+      "q": "酸性条件でClO₃⁻がCl⁻へ還元される半反応式として正しいものはどれか。",
+      "options": [
+        "ClO₃⁻ + 6H⁺ + 6e⁻ → Cl⁻ + 3H₂O",
+        "ClO₃⁻ + 3H⁺ + 3e⁻ → Cl⁻ + 3H₂O",
+        "ClO₃⁻ + 6H⁺ → Cl⁻ + 3H₂O + 6e⁻",
+        "ClO₃⁻ + 3H₂O + 6e⁻ → Cl⁻ + 6OH⁻"
+      ],
+      "answer": 0,
+      "scope": "foundation",
+      "stageTier": 3,
+      "category": "redox",
+      "difficulty": "入試標準・半反応式",
+      "source": "Chemion Quest v4.5独自作成（高校化学・半反応式）",
+      "hints": [
+        "O原子をH₂Oで合わせます。",
+        "酸性ならH⁺、塩基性ならOH⁻を使ってHを合わせます。",
+        "最後に電子で左右の総電荷を一致させます。"
+      ],
+      "explanation": "【半反応式】ClO₃⁻ + 6H⁺ + 6e⁻ → Cl⁻ + 3H₂O\n【確認】Clは+5から−1へ変化するため電子6個を受け取ります。",
+      "calculation": true,
+      "visual": "electrolysis",
+      "difficultyLevel": 4,
+      "cognitiveType": "reasoning",
+      "learningObjective": "複雑な半反応式を酸性・塩基性条件に応じて完成させる",
+      "estimatedSeconds": 85,
+      "similarityGroup": "redox:half-hard-equation:02",
+      "optionFeedback": [
+        "正解です。原子数と電荷がそろっています。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。"
+      ]
+    },
+    {
+      "id": "v45-hard-half-equation-06",
+      "q": "酸性条件でBrO₃⁻がBr⁻へ還元される半反応式として正しいものはどれか。",
+      "options": [
+        "BrO₃⁻ + 3H⁺ + 3e⁻ → Br⁻ + 3H₂O",
+        "BrO₃⁻ + 6H⁺ + 6e⁻ → Br⁻ + 3H₂O",
+        "BrO₃⁻ + 6H⁺ → Br⁻ + 3H₂O + 6e⁻",
+        "BrO₃⁻ + 6e⁻ → Br⁻ + 3O²⁻"
+      ],
+      "answer": 1,
+      "scope": "foundation",
+      "stageTier": 3,
+      "category": "redox",
+      "difficulty": "入試標準・半反応式",
+      "source": "Chemion Quest v4.5独自作成（高校化学・半反応式）",
+      "hints": [
+        "O原子をH₂Oで合わせます。",
+        "酸性ならH⁺、塩基性ならOH⁻を使ってHを合わせます。",
+        "最後に電子で左右の総電荷を一致させます。"
+      ],
+      "explanation": "【半反応式】BrO₃⁻ + 6H⁺ + 6e⁻ → Br⁻ + 3H₂O\n【確認】Brの酸化数+5から−1への変化に対応して電子6個が必要です。",
+      "calculation": true,
+      "visual": "electrolysis",
+      "difficultyLevel": 4,
+      "cognitiveType": "reasoning",
+      "learningObjective": "複雑な半反応式を酸性・塩基性条件に応じて完成させる",
+      "estimatedSeconds": 85,
+      "similarityGroup": "redox:half-hard-equation:02",
+      "optionFeedback": [
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "正解です。原子数と電荷がそろっています。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。"
+      ]
+    },
+    {
+      "id": "v45-hard-half-equation-07",
+      "q": "酸性条件でNO₂⁻がNO₃⁻へ酸化される半反応式として正しいものはどれか。",
+      "options": [
+        "NO₂⁻ + 2H⁺ + 2e⁻ → NO₃⁻ + H₂O",
+        "NO₂⁻ + H₂O + 2e⁻ → NO₃⁻ + 2H⁺",
+        "NO₂⁻ + H₂O → NO₃⁻ + 2H⁺ + 2e⁻",
+        "NO₂⁻ → NO₃⁻ + 2e⁻"
+      ],
+      "answer": 2,
+      "scope": "foundation",
+      "stageTier": 6,
+      "category": "redox",
+      "difficulty": "入試標準・半反応式",
+      "source": "Chemion Quest v4.5独自作成（高校化学・半反応式）",
+      "hints": [
+        "O原子をH₂Oで合わせます。",
+        "酸性ならH⁺、塩基性ならOH⁻を使ってHを合わせます。",
+        "最後に電子で左右の総電荷を一致させます。"
+      ],
+      "explanation": "【半反応式】NO₂⁻ + H₂O → NO₃⁻ + 2H⁺ + 2e⁻\n【確認】Nは+3から+5へ酸化されるため電子2個を放出します。",
+      "calculation": true,
+      "visual": "electrolysis",
+      "difficultyLevel": 4,
+      "cognitiveType": "reasoning",
+      "learningObjective": "複雑な半反応式を酸性・塩基性条件に応じて完成させる",
+      "estimatedSeconds": 85,
+      "similarityGroup": "redox:half-hard-equation:03",
+      "optionFeedback": [
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "正解です。原子数と電荷がそろっています。",
+        "式の原子数・電荷・電子の位置を確認してください。"
+      ]
+    },
+    {
+      "id": "v45-hard-half-equation-08",
+      "q": "酸性条件でSn²⁺がSn⁴⁺へ酸化される半反応式として正しいものはどれか。",
+      "options": [
+        "Sn²⁺ + 2e⁻ → Sn⁴⁺",
+        "Sn⁴⁺ → Sn²⁺ + 2e⁻",
+        "Sn²⁺ → Sn⁴⁺ + e⁻",
+        "Sn²⁺ → Sn⁴⁺ + 2e⁻"
+      ],
+      "answer": 3,
+      "scope": "foundation",
+      "stageTier": 6,
+      "category": "redox",
+      "difficulty": "入試標準・半反応式",
+      "source": "Chemion Quest v4.5独自作成（高校化学・半反応式）",
+      "hints": [
+        "O原子をH₂Oで合わせます。",
+        "酸性ならH⁺、塩基性ならOH⁻を使ってHを合わせます。",
+        "最後に電子で左右の総電荷を一致させます。"
+      ],
+      "explanation": "【半反応式】Sn²⁺ → Sn⁴⁺ + 2e⁻\n【確認】Snの酸化数が2増えるので電子2個を放出します。",
+      "calculation": true,
+      "visual": "electrolysis",
+      "difficultyLevel": 4,
+      "cognitiveType": "reasoning",
+      "learningObjective": "複雑な半反応式を酸性・塩基性条件に応じて完成させる",
+      "estimatedSeconds": 85,
+      "similarityGroup": "redox:half-hard-equation:03",
+      "optionFeedback": [
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "正解です。原子数と電荷がそろっています。"
+      ]
+    },
+    {
+      "id": "v45-hard-half-equation-09",
+      "q": "塩基性条件でCrO₄²⁻がCr(OH)₃へ還元される半反応式として正しいものはどれか。",
+      "options": [
+        "CrO₄²⁻ + 4H₂O + 3e⁻ → Cr(OH)₃ + 5OH⁻",
+        "CrO₄²⁻ + 4H⁺ + 3e⁻ → Cr(OH)₃ + H₂O",
+        "CrO₄²⁻ + H₂O + 3e⁻ → Cr(OH)₃ + OH⁻",
+        "CrO₄²⁻ + 4H₂O → Cr(OH)₃ + 5OH⁻ + 3e⁻"
+      ],
+      "answer": 0,
+      "scope": "foundation",
+      "stageTier": 6,
+      "category": "redox",
+      "difficulty": "入試標準・半反応式",
+      "source": "Chemion Quest v4.5独自作成（高校化学・半反応式）",
+      "hints": [
+        "O原子をH₂Oで合わせます。",
+        "酸性ならH⁺、塩基性ならOH⁻を使ってHを合わせます。",
+        "最後に電子で左右の総電荷を一致させます。"
+      ],
+      "explanation": "【半反応式】CrO₄²⁻ + 4H₂O + 3e⁻ → Cr(OH)₃ + 5OH⁻\n【確認】Crは+6から+3へ還元され、電子3個を受け取ります。原子数・電荷も一致します。",
+      "calculation": true,
+      "visual": "electrolysis",
+      "difficultyLevel": 4,
+      "cognitiveType": "reasoning",
+      "learningObjective": "複雑な半反応式を酸性・塩基性条件に応じて完成させる",
+      "estimatedSeconds": 85,
+      "similarityGroup": "redox:half-hard-equation:04",
+      "optionFeedback": [
+        "正解です。原子数と電荷がそろっています。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。"
+      ]
+    },
+    {
+      "id": "v45-hard-half-equation-10",
+      "q": "塩基性条件でAlがAlO₂⁻へ酸化される半反応式として正しいものはどれか。",
+      "options": [
+        "Al + 2OH⁻ → AlO₂⁻ + H₂O + e⁻",
+        "Al + 4OH⁻ → AlO₂⁻ + 2H₂O + 3e⁻",
+        "Al + 4OH⁻ + 3e⁻ → AlO₂⁻ + 2H₂O",
+        "AlO₂⁻ + 2H₂O + 3e⁻ → Al + 4OH⁻"
+      ],
+      "answer": 1,
+      "scope": "foundation",
+      "stageTier": 6,
+      "category": "redox",
+      "difficulty": "入試標準・半反応式",
+      "source": "Chemion Quest v4.5独自作成（高校化学・半反応式）",
+      "hints": [
+        "O原子をH₂Oで合わせます。",
+        "酸性ならH⁺、塩基性ならOH⁻を使ってHを合わせます。",
+        "最後に電子で左右の総電荷を一致させます。"
+      ],
+      "explanation": "【半反応式】Al + 4OH⁻ → AlO₂⁻ + 2H₂O + 3e⁻\n【確認】Alは0から+3へ酸化されるため電子3個を右辺に置きます。",
+      "calculation": true,
+      "visual": "electrolysis",
+      "difficultyLevel": 4,
+      "cognitiveType": "reasoning",
+      "learningObjective": "複雑な半反応式を酸性・塩基性条件に応じて完成させる",
+      "estimatedSeconds": 85,
+      "similarityGroup": "redox:half-hard-equation:04",
+      "optionFeedback": [
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "正解です。原子数と電荷がそろっています。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。"
+      ]
+    },
+    {
+      "id": "v45-hard-half-equation-11",
+      "q": "塩基性条件でCl₂がClO⁻へ酸化される半反応式として正しいものはどれか。",
+      "options": [
+        "Cl₂ + 2OH⁻ → 2ClO⁻ + H₂O + 2e⁻",
+        "Cl₂ + 4OH⁻ + 2e⁻ → 2ClO⁻ + 2H₂O",
+        "Cl₂ + 4OH⁻ → 2ClO⁻ + 2H₂O + 2e⁻",
+        "2ClO⁻ + 2H₂O + 2e⁻ → Cl₂ + 4OH⁻"
+      ],
+      "answer": 2,
+      "scope": "foundation",
+      "stageTier": 6,
+      "category": "redox",
+      "difficulty": "入試標準・半反応式",
+      "source": "Chemion Quest v4.5独自作成（高校化学・半反応式）",
+      "hints": [
+        "O原子をH₂Oで合わせます。",
+        "酸性ならH⁺、塩基性ならOH⁻を使ってHを合わせます。",
+        "最後に電子で左右の総電荷を一致させます。"
+      ],
+      "explanation": "【半反応式】Cl₂ + 4OH⁻ → 2ClO⁻ + 2H₂O + 2e⁻\n【確認】Clは0から+1へ酸化され、Cl原子2個で合計2電子を放出します。",
+      "calculation": true,
+      "visual": "electrolysis",
+      "difficultyLevel": 4,
+      "cognitiveType": "reasoning",
+      "learningObjective": "複雑な半反応式を酸性・塩基性条件に応じて完成させる",
+      "estimatedSeconds": 85,
+      "similarityGroup": "redox:half-hard-equation:05",
+      "optionFeedback": [
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "正解です。原子数と電荷がそろっています。",
+        "式の原子数・電荷・電子の位置を確認してください。"
+      ]
+    },
+    {
+      "id": "v45-hard-half-equation-12",
+      "q": "酸性条件でClO⁻がCl₂へ還元される半反応式として正しいものはどれか。",
+      "options": [
+        "2ClO⁻ + 4H⁺ → Cl₂ + 2H₂O + 2e⁻",
+        "Cl₂ + 2H₂O → 2ClO⁻ + 4H⁺ + 2e⁻",
+        "ClO⁻ + 2H⁺ + e⁻ → Cl₂ + H₂O",
+        "2ClO⁻ + 4H⁺ + 2e⁻ → Cl₂ + 2H₂O"
+      ],
+      "answer": 3,
+      "scope": "foundation",
+      "stageTier": 6,
+      "category": "redox",
+      "difficulty": "入試標準・半反応式",
+      "source": "Chemion Quest v4.5独自作成（高校化学・半反応式）",
+      "hints": [
+        "O原子をH₂Oで合わせます。",
+        "酸性ならH⁺、塩基性ならOH⁻を使ってHを合わせます。",
+        "最後に電子で左右の総電荷を一致させます。"
+      ],
+      "explanation": "【半反応式】2ClO⁻ + 4H⁺ + 2e⁻ → Cl₂ + 2H₂O\n【確認】Clは+1から0へ還元されるため、電子は左辺です。原子数をそろえるためClO⁻を2個使います。",
+      "calculation": true,
+      "visual": "electrolysis",
+      "difficultyLevel": 4,
+      "cognitiveType": "reasoning",
+      "learningObjective": "複雑な半反応式を酸性・塩基性条件に応じて完成させる",
+      "estimatedSeconds": 85,
+      "similarityGroup": "redox:half-hard-equation:05",
+      "optionFeedback": [
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "正解です。原子数と電荷がそろっています。"
+      ]
+    },
+    {
+      "id": "v45-hard-half-mole-01",
+      "q": "MnO₄⁻+8H⁺+5e⁻→Mn²⁺+4H₂Oに従い、MnO₄⁻ 0.0200 molが受け取る電子の物質量はどれか。",
+      "options": [
+        "0.100 mol",
+        "0.080 mol",
+        "0.090 mol",
+        "0.120 mol"
+      ],
+      "answer": 0,
+      "scope": "foundation",
+      "stageTier": 3,
+      "category": "redox",
+      "difficulty": "入試標準・量的関係",
+      "source": "Chemion Quest v4.5独自作成（高校化学・半反応式）",
+      "hints": [
+        "半反応式の電子係数を確認します。",
+        "物質量に電子係数を掛けます。",
+        "mol単位で選択肢と照合します。"
+      ],
+      "explanation": "【半反応式の係数】電子係数を使います。\n【計算】0.0200×5=0.100 mol\n【答え】0.100 mol",
+      "calculation": true,
+      "visual": "stoich",
+      "difficultyLevel": 4,
+      "cognitiveType": "calculation",
+      "learningObjective": "半反応式の電子係数から授受電子の物質量を計算する",
+      "estimatedSeconds": 75,
+      "similarityGroup": "redox:half-electron-moles:00",
+      "optionFeedback": [
+        "正解です。原子数と電荷がそろっています。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。"
+      ]
+    },
+    {
+      "id": "v45-hard-half-mole-02",
+      "q": "Cr₂O₇²⁻+14H⁺+6e⁻→2Cr³⁺+7H₂Oに従い、Cr₂O₇²⁻ 0.0150 molが受け取る電子の物質量はどれか。",
+      "options": [
+        "0.0750 mol",
+        "0.0900 mol",
+        "0.105 mol",
+        "0.120 mol"
+      ],
+      "answer": 1,
+      "scope": "foundation",
+      "stageTier": 3,
+      "category": "redox",
+      "difficulty": "入試標準・量的関係",
+      "source": "Chemion Quest v4.5独自作成（高校化学・半反応式）",
+      "hints": [
+        "半反応式の電子係数を確認します。",
+        "物質量に電子係数を掛けます。",
+        "mol単位で選択肢と照合します。"
+      ],
+      "explanation": "【半反応式の係数】電子係数を使います。\n【計算】0.0150×6=0.0900 mol\n【答え】0.0900 mol",
+      "calculation": true,
+      "visual": "stoich",
+      "difficultyLevel": 4,
+      "cognitiveType": "calculation",
+      "learningObjective": "半反応式の電子係数から授受電子の物質量を計算する",
+      "estimatedSeconds": 75,
+      "similarityGroup": "redox:half-electron-moles:00",
+      "optionFeedback": [
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "正解です。原子数と電荷がそろっています。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。"
+      ]
+    },
+    {
+      "id": "v45-hard-half-mole-03",
+      "q": "H₂O₂→O₂+2H⁺+2e⁻に従い、H₂O₂ 0.0400 molが放出する電子の物質量はどれか。",
+      "options": [
+        "0.0600 mol",
+        "0.100 mol",
+        "0.0800 mol",
+        "0.120 mol"
+      ],
+      "answer": 2,
+      "scope": "foundation",
+      "stageTier": 3,
+      "category": "redox",
+      "difficulty": "入試標準・量的関係",
+      "source": "Chemion Quest v4.5独自作成（高校化学・半反応式）",
+      "hints": [
+        "半反応式の電子係数を確認します。",
+        "物質量に電子係数を掛けます。",
+        "mol単位で選択肢と照合します。"
+      ],
+      "explanation": "【半反応式の係数】電子係数を使います。\n【計算】0.0400×2=0.0800 mol\n【答え】0.0800 mol",
+      "calculation": true,
+      "visual": "stoich",
+      "difficultyLevel": 4,
+      "cognitiveType": "calculation",
+      "learningObjective": "半反応式の電子係数から授受電子の物質量を計算する",
+      "estimatedSeconds": 75,
+      "similarityGroup": "redox:half-electron-moles:01",
+      "optionFeedback": [
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "正解です。原子数と電荷がそろっています。",
+        "式の原子数・電荷・電子の位置を確認してください。"
+      ]
+    },
+    {
+      "id": "v45-hard-half-mole-04",
+      "q": "S₂O₈²⁻+2e⁻→2SO₄²⁻に従い、S₂O₈²⁻ 0.0250 molが受け取る電子の物質量はどれか。",
+      "options": [
+        "0.0400 mol",
+        "0.0600 mol",
+        "0.0750 mol",
+        "0.0500 mol"
+      ],
+      "answer": 3,
+      "scope": "foundation",
+      "stageTier": 3,
+      "category": "redox",
+      "difficulty": "入試標準・量的関係",
+      "source": "Chemion Quest v4.5独自作成（高校化学・半反応式）",
+      "hints": [
+        "半反応式の電子係数を確認します。",
+        "物質量に電子係数を掛けます。",
+        "mol単位で選択肢と照合します。"
+      ],
+      "explanation": "【半反応式の係数】電子係数を使います。\n【計算】0.0250×2=0.0500 mol\n【答え】0.0500 mol",
+      "calculation": true,
+      "visual": "stoich",
+      "difficultyLevel": 4,
+      "cognitiveType": "calculation",
+      "learningObjective": "半反応式の電子係数から授受電子の物質量を計算する",
+      "estimatedSeconds": 75,
+      "similarityGroup": "redox:half-electron-moles:01",
+      "optionFeedback": [
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "正解です。原子数と電荷がそろっています。"
+      ]
+    },
+    {
+      "id": "v45-hard-half-mole-05",
+      "q": "Cl₂+2e⁻→2Cl⁻に従い、Cl₂ 0.0300 molが受け取る電子の物質量はどれか。",
+      "options": [
+        "0.0600 mol",
+        "0.0450 mol",
+        "0.0750 mol",
+        "0.0900 mol"
+      ],
+      "answer": 0,
+      "scope": "foundation",
+      "stageTier": 3,
+      "category": "redox",
+      "difficulty": "入試標準・量的関係",
+      "source": "Chemion Quest v4.5独自作成（高校化学・半反応式）",
+      "hints": [
+        "半反応式の電子係数を確認します。",
+        "物質量に電子係数を掛けます。",
+        "mol単位で選択肢と照合します。"
+      ],
+      "explanation": "【半反応式の係数】電子係数を使います。\n【計算】0.0300×2=0.0600 mol\n【答え】0.0600 mol",
+      "calculation": true,
+      "visual": "stoich",
+      "difficultyLevel": 4,
+      "cognitiveType": "calculation",
+      "learningObjective": "半反応式の電子係数から授受電子の物質量を計算する",
+      "estimatedSeconds": 75,
+      "similarityGroup": "redox:half-electron-moles:02",
+      "optionFeedback": [
+        "正解です。原子数と電荷がそろっています。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。"
+      ]
+    },
+    {
+      "id": "v45-hard-half-mole-06",
+      "q": "Fe²⁺→Fe³⁺+e⁻に従い、Fe²⁺ 0.0600 molが放出する電子の物質量はどれか。",
+      "options": [
+        "0.0400 mol",
+        "0.0600 mol",
+        "0.0800 mol",
+        "0.120 mol"
+      ],
+      "answer": 1,
+      "scope": "foundation",
+      "stageTier": 6,
+      "category": "redox",
+      "difficulty": "入試標準・量的関係",
+      "source": "Chemion Quest v4.5独自作成（高校化学・半反応式）",
+      "hints": [
+        "半反応式の電子係数を確認します。",
+        "物質量に電子係数を掛けます。",
+        "mol単位で選択肢と照合します。"
+      ],
+      "explanation": "【半反応式の係数】電子係数を使います。\n【計算】係数比1:1なので0.0600 molです。\n【答え】0.0600 mol",
+      "calculation": true,
+      "visual": "stoich",
+      "difficultyLevel": 4,
+      "cognitiveType": "calculation",
+      "learningObjective": "半反応式の電子係数から授受電子の物質量を計算する",
+      "estimatedSeconds": 75,
+      "similarityGroup": "redox:half-electron-moles:02",
+      "optionFeedback": [
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "正解です。原子数と電荷がそろっています。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。"
+      ]
+    },
+    {
+      "id": "v45-hard-half-mole-07",
+      "q": "Al→Al³⁺+3e⁻に従い、Al 0.0200 molが放出する電子の物質量はどれか。",
+      "options": [
+        "0.0400 mol",
+        "0.0800 mol",
+        "0.0600 mol",
+        "0.100 mol"
+      ],
+      "answer": 2,
+      "scope": "foundation",
+      "stageTier": 6,
+      "category": "redox",
+      "difficulty": "入試標準・量的関係",
+      "source": "Chemion Quest v4.5独自作成（高校化学・半反応式）",
+      "hints": [
+        "半反応式の電子係数を確認します。",
+        "物質量に電子係数を掛けます。",
+        "mol単位で選択肢と照合します。"
+      ],
+      "explanation": "【半反応式の係数】電子係数を使います。\n【計算】0.0200×3=0.0600 mol\n【答え】0.0600 mol",
+      "calculation": true,
+      "visual": "stoich",
+      "difficultyLevel": 4,
+      "cognitiveType": "calculation",
+      "learningObjective": "半反応式の電子係数から授受電子の物質量を計算する",
+      "estimatedSeconds": 75,
+      "similarityGroup": "redox:half-electron-moles:03",
+      "optionFeedback": [
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "正解です。原子数と電荷がそろっています。",
+        "式の原子数・電荷・電子の位置を確認してください。"
+      ]
+    },
+    {
+      "id": "v45-hard-half-mole-08",
+      "q": "O₂+4H⁺+4e⁻→2H₂Oに従い、O₂ 0.0250 molが受け取る電子の物質量はどれか。",
+      "options": [
+        "0.0750 mol",
+        "0.125 mol",
+        "0.150 mol",
+        "0.100 mol"
+      ],
+      "answer": 3,
+      "scope": "foundation",
+      "stageTier": 6,
+      "category": "redox",
+      "difficulty": "入試標準・量的関係",
+      "source": "Chemion Quest v4.5独自作成（高校化学・半反応式）",
+      "hints": [
+        "半反応式の電子係数を確認します。",
+        "物質量に電子係数を掛けます。",
+        "mol単位で選択肢と照合します。"
+      ],
+      "explanation": "【半反応式の係数】電子係数を使います。\n【計算】0.0250×4=0.100 mol\n【答え】0.100 mol",
+      "calculation": true,
+      "visual": "stoich",
+      "difficultyLevel": 4,
+      "cognitiveType": "calculation",
+      "learningObjective": "半反応式の電子係数から授受電子の物質量を計算する",
+      "estimatedSeconds": 75,
+      "similarityGroup": "redox:half-electron-moles:03",
+      "optionFeedback": [
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "正解です。原子数と電荷がそろっています。"
+      ]
+    },
+    {
+      "id": "v45-hard-half-mole-09",
+      "q": "H₂O₂+2H⁺+2e⁻→2H₂Oに従い、H₂O₂ 0.0500 molが受け取る電子の物質量はどれか。",
+      "options": [
+        "0.100 mol",
+        "0.0800 mol",
+        "0.120 mol",
+        "0.150 mol"
+      ],
+      "answer": 0,
+      "scope": "foundation",
+      "stageTier": 6,
+      "category": "redox",
+      "difficulty": "入試標準・量的関係",
+      "source": "Chemion Quest v4.5独自作成（高校化学・半反応式）",
+      "hints": [
+        "半反応式の電子係数を確認します。",
+        "物質量に電子係数を掛けます。",
+        "mol単位で選択肢と照合します。"
+      ],
+      "explanation": "【半反応式の係数】電子係数を使います。\n【計算】0.0500×2=0.100 mol\n【答え】0.100 mol",
+      "calculation": true,
+      "visual": "stoich",
+      "difficultyLevel": 4,
+      "cognitiveType": "calculation",
+      "learningObjective": "半反応式の電子係数から授受電子の物質量を計算する",
+      "estimatedSeconds": 75,
+      "similarityGroup": "redox:half-electron-moles:04",
+      "optionFeedback": [
+        "正解です。原子数と電荷がそろっています。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。"
+      ]
+    },
+    {
+      "id": "v45-hard-half-mole-10",
+      "q": "NO₃⁻+4H⁺+3e⁻→NO+2H₂Oに従い、NO₃⁻ 0.0400 molが受け取る電子の物質量はどれか。",
+      "options": [
+        "0.0900 mol",
+        "0.120 mol",
+        "0.150 mol",
+        "0.180 mol"
+      ],
+      "answer": 1,
+      "scope": "foundation",
+      "stageTier": 6,
+      "category": "redox",
+      "difficulty": "入試標準・量的関係",
+      "source": "Chemion Quest v4.5独自作成（高校化学・半反応式）",
+      "hints": [
+        "半反応式の電子係数を確認します。",
+        "物質量に電子係数を掛けます。",
+        "mol単位で選択肢と照合します。"
+      ],
+      "explanation": "【半反応式の係数】電子係数を使います。\n【計算】0.0400×3=0.120 mol\n【答え】0.120 mol",
+      "calculation": true,
+      "visual": "stoich",
+      "difficultyLevel": 4,
+      "cognitiveType": "calculation",
+      "learningObjective": "半反応式の電子係数から授受電子の物質量を計算する",
+      "estimatedSeconds": 75,
+      "similarityGroup": "redox:half-electron-moles:04",
+      "optionFeedback": [
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "正解です。原子数と電荷がそろっています。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。"
+      ]
+    },
+    {
+      "id": "v45-hard-half-ratio-01",
+      "q": "MnO₄⁻がMn²⁺へ還元され、Fe²⁺がFe³⁺へ酸化される酸性条件で、MnO₄⁻:Fe²⁺の係数比はどれか。",
+      "options": [
+        "1:3",
+        "2:5",
+        "1:5",
+        "5:1"
+      ],
+      "answer": 2,
+      "scope": "foundation",
+      "stageTier": 6,
+      "category": "redox",
+      "difficulty": "入試標準〜発展・半反応式",
+      "source": "Chemion Quest v4.5独自作成（高校化学・半反応式）",
+      "hints": [
+        "酸化側と還元側の半反応式を書きます。",
+        "授受する電子数の最小公倍数を求めます。",
+        "各半反応式へ必要な倍率を掛けます。"
+      ],
+      "explanation": "【電子数】酸化側と還元側の電子数をそろえます。\n【結論】MnO₄⁻は5e⁻を受け取り、Fe²⁺は1e⁻を放出するため1:5です。\n【答え】1:5",
+      "calculation": true,
+      "visual": "stoich",
+      "difficultyLevel": 5,
+      "cognitiveType": "reasoning",
+      "learningObjective": "複数の半反応式の電子数をそろえて全体の係数比を決定する",
+      "estimatedSeconds": 95,
+      "similarityGroup": "redox:half-combine-ratio:00",
+      "optionFeedback": [
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "正解です。原子数と電荷がそろっています。",
+        "式の原子数・電荷・電子の位置を確認してください。"
+      ]
+    },
+    {
+      "id": "v45-hard-half-ratio-02",
+      "q": "Cr₂O₇²⁻がCr³⁺へ還元され、Fe²⁺がFe³⁺へ酸化される酸性条件で、Cr₂O₇²⁻:Fe²⁺の係数比はどれか。",
+      "options": [
+        "1:3",
+        "2:6",
+        "6:1",
+        "1:6"
+      ],
+      "answer": 3,
+      "scope": "foundation",
+      "stageTier": 6,
+      "category": "redox",
+      "difficulty": "入試標準〜発展・半反応式",
+      "source": "Chemion Quest v4.5独自作成（高校化学・半反応式）",
+      "hints": [
+        "酸化側と還元側の半反応式を書きます。",
+        "授受する電子数の最小公倍数を求めます。",
+        "各半反応式へ必要な倍率を掛けます。"
+      ],
+      "explanation": "【電子数】酸化側と還元側の電子数をそろえます。\n【結論】Cr₂O₇²⁻は6e⁻を受け取り、Fe²⁺は1e⁻を放出するため1:6です。\n【答え】1:6",
+      "calculation": true,
+      "visual": "stoich",
+      "difficultyLevel": 5,
+      "cognitiveType": "reasoning",
+      "learningObjective": "複数の半反応式の電子数をそろえて全体の係数比を決定する",
+      "estimatedSeconds": 95,
+      "similarityGroup": "redox:half-combine-ratio:00",
+      "optionFeedback": [
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "正解です。原子数と電荷がそろっています。"
+      ]
+    },
+    {
+      "id": "v45-hard-half-ratio-03",
+      "q": "Cl₂がCl⁻へ還元され、I⁻がI₂へ酸化されるとき、Cl₂:I⁻の係数比はどれか。",
+      "options": [
+        "1:2",
+        "1:1",
+        "2:1",
+        "2:3"
+      ],
+      "answer": 0,
+      "scope": "foundation",
+      "stageTier": 6,
+      "category": "redox",
+      "difficulty": "入試標準〜発展・半反応式",
+      "source": "Chemion Quest v4.5独自作成（高校化学・半反応式）",
+      "hints": [
+        "酸化側と還元側の半反応式を書きます。",
+        "授受する電子数の最小公倍数を求めます。",
+        "各半反応式へ必要な倍率を掛けます。"
+      ],
+      "explanation": "【電子数】酸化側と還元側の電子数をそろえます。\n【結論】Cl₂は2e⁻を受け取り、I⁻2個が2e⁻を放出するため1:2です。\n【答え】1:2",
+      "calculation": true,
+      "visual": "stoich",
+      "difficultyLevel": 5,
+      "cognitiveType": "reasoning",
+      "learningObjective": "複数の半反応式の電子数をそろえて全体の係数比を決定する",
+      "estimatedSeconds": 95,
+      "similarityGroup": "redox:half-combine-ratio:01",
+      "optionFeedback": [
+        "正解です。原子数と電荷がそろっています。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。"
+      ]
+    },
+    {
+      "id": "v45-hard-half-ratio-04",
+      "q": "MnO₄⁻がMn²⁺へ還元され、H₂O₂がO₂へ酸化される酸性条件で、MnO₄⁻:H₂O₂の係数比はどれか。",
+      "options": [
+        "1:2",
+        "2:5",
+        "3:5",
+        "5:2"
+      ],
+      "answer": 1,
+      "scope": "foundation",
+      "stageTier": 6,
+      "category": "redox",
+      "difficulty": "入試標準〜発展・半反応式",
+      "source": "Chemion Quest v4.5独自作成（高校化学・半反応式）",
+      "hints": [
+        "酸化側と還元側の半反応式を書きます。",
+        "授受する電子数の最小公倍数を求めます。",
+        "各半反応式へ必要な倍率を掛けます。"
+      ],
+      "explanation": "【電子数】酸化側と還元側の電子数をそろえます。\n【結論】電子数の最小公倍数は10で、MnO₄⁻を2倍、H₂O₂を5倍します。\n【答え】2:5",
+      "calculation": true,
+      "visual": "stoich",
+      "difficultyLevel": 5,
+      "cognitiveType": "reasoning",
+      "learningObjective": "複数の半反応式の電子数をそろえて全体の係数比を決定する",
+      "estimatedSeconds": 95,
+      "similarityGroup": "redox:half-combine-ratio:01",
+      "optionFeedback": [
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "正解です。原子数と電荷がそろっています。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。"
+      ]
+    },
+    {
+      "id": "v45-hard-half-ratio-05",
+      "q": "Cr₂O₇²⁻がCr³⁺へ還元され、H₂O₂がO₂へ酸化される酸性条件で、Cr₂O₇²⁻:H₂O₂の係数比はどれか。",
+      "options": [
+        "1:2",
+        "2:3",
+        "1:3",
+        "3:1"
+      ],
+      "answer": 2,
+      "scope": "foundation",
+      "stageTier": 6,
+      "category": "redox",
+      "difficulty": "入試標準〜発展・半反応式",
+      "source": "Chemion Quest v4.5独自作成（高校化学・半反応式）",
+      "hints": [
+        "酸化側と還元側の半反応式を書きます。",
+        "授受する電子数の最小公倍数を求めます。",
+        "各半反応式へ必要な倍率を掛けます。"
+      ],
+      "explanation": "【電子数】酸化側と還元側の電子数をそろえます。\n【結論】Cr₂O₇²⁻は6e⁻、H₂O₂は2e⁻なので1:3です。\n【答え】1:3",
+      "calculation": true,
+      "visual": "stoich",
+      "difficultyLevel": 5,
+      "cognitiveType": "reasoning",
+      "learningObjective": "複数の半反応式の電子数をそろえて全体の係数比を決定する",
+      "estimatedSeconds": 95,
+      "similarityGroup": "redox:half-combine-ratio:02",
+      "optionFeedback": [
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "正解です。原子数と電荷がそろっています。",
+        "式の原子数・電荷・電子の位置を確認してください。"
+      ]
+    },
+    {
+      "id": "v45-hard-half-ratio-06",
+      "q": "O₂がH₂Oへ還元され、AlがAl³⁺へ酸化される酸性条件で、O₂:Alの係数比はどれか。",
+      "options": [
+        "1:3",
+        "2:3",
+        "4:3",
+        "3:4"
+      ],
+      "answer": 3,
+      "scope": "foundation",
+      "stageTier": 6,
+      "category": "redox",
+      "difficulty": "入試標準〜発展・半反応式",
+      "source": "Chemion Quest v4.5独自作成（高校化学・半反応式）",
+      "hints": [
+        "酸化側と還元側の半反応式を書きます。",
+        "授受する電子数の最小公倍数を求めます。",
+        "各半反応式へ必要な倍率を掛けます。"
+      ],
+      "explanation": "【電子数】酸化側と還元側の電子数をそろえます。\n【結論】電子数の最小公倍数は12で、O₂を3倍、Alを4倍します。\n【答え】3:4",
+      "calculation": true,
+      "visual": "stoich",
+      "difficultyLevel": 5,
+      "cognitiveType": "reasoning",
+      "learningObjective": "複数の半反応式の電子数をそろえて全体の係数比を決定する",
+      "estimatedSeconds": 95,
+      "similarityGroup": "redox:half-combine-ratio:02",
+      "optionFeedback": [
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "正解です。原子数と電荷がそろっています。"
+      ]
+    },
+    {
+      "id": "v45-hard-half-ratio-07",
+      "q": "S₂O₈²⁻がSO₄²⁻へ還元され、Fe²⁺がFe³⁺へ酸化されるとき、S₂O₈²⁻:Fe²⁺の係数比はどれか。",
+      "options": [
+        "1:2",
+        "1:1",
+        "2:1",
+        "2:3"
+      ],
+      "answer": 0,
+      "scope": "foundation",
+      "stageTier": 6,
+      "category": "redox",
+      "difficulty": "入試標準〜発展・半反応式",
+      "source": "Chemion Quest v4.5独自作成（高校化学・半反応式）",
+      "hints": [
+        "酸化側と還元側の半反応式を書きます。",
+        "授受する電子数の最小公倍数を求めます。",
+        "各半反応式へ必要な倍率を掛けます。"
+      ],
+      "explanation": "【電子数】酸化側と還元側の電子数をそろえます。\n【結論】S₂O₈²⁻は2e⁻を受け取り、Fe²⁺は1e⁻を放出するため1:2です。\n【答え】1:2",
+      "calculation": true,
+      "visual": "stoich",
+      "difficultyLevel": 5,
+      "cognitiveType": "reasoning",
+      "learningObjective": "複数の半反応式の電子数をそろえて全体の係数比を決定する",
+      "estimatedSeconds": 95,
+      "similarityGroup": "redox:half-combine-ratio:03",
+      "optionFeedback": [
+        "正解です。原子数と電荷がそろっています。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。"
+      ]
+    },
+    {
+      "id": "v45-hard-half-ratio-08",
+      "q": "NO₃⁻がNOへ還元され、CuがCu²⁺へ酸化される酸性条件で、NO₃⁻:Cuの係数比はどれか。",
+      "options": [
+        "1:2",
+        "2:3",
+        "3:2",
+        "3:4"
+      ],
+      "answer": 1,
+      "scope": "foundation",
+      "stageTier": 6,
+      "category": "redox",
+      "difficulty": "入試標準〜発展・半反応式",
+      "source": "Chemion Quest v4.5独自作成（高校化学・半反応式）",
+      "hints": [
+        "酸化側と還元側の半反応式を書きます。",
+        "授受する電子数の最小公倍数を求めます。",
+        "各半反応式へ必要な倍率を掛けます。"
+      ],
+      "explanation": "【電子数】酸化側と還元側の電子数をそろえます。\n【結論】NO₃⁻は3e⁻、Cuは2e⁻なので最小公倍数6より2:3です。\n【答え】2:3",
+      "calculation": true,
+      "visual": "stoich",
+      "difficultyLevel": 5,
+      "cognitiveType": "reasoning",
+      "learningObjective": "複数の半反応式の電子数をそろえて全体の係数比を決定する",
+      "estimatedSeconds": 95,
+      "similarityGroup": "redox:half-combine-ratio:03",
+      "optionFeedback": [
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "正解です。原子数と電荷がそろっています。",
+        "式の原子数・電荷・電子の位置を確認してください。",
+        "式の原子数・電荷・電子の位置を確認してください。"
+      ]
     }
   ],
   "mockExams": [
@@ -26729,7 +30462,10 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
     2: D.stage2,
     3: D.stage3,
     4: D.stage4,
-    5: D.stage5
+    5: D.stage5,
+    6: D.stage6,
+    7: D.stage7,
+    8: D.stage8
   };
 
   let currentStageId = 1;
@@ -27109,6 +30845,85 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
     return true;
   }
 
+
+  function beginBossAnnihilationSequence(enemy, definition) {
+    if (!enemy?.wipeAlliesOnArrival || enemy.ambushIntroCompleted || enemy.phaseTransitioning || bossPhaseTransitionActive) return false;
+    const reducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+    const wipeAt = reducedMotion ? 420 : 1050;
+    const arrivalAt = reducedMotion ? 1050 : 2550;
+    const resumeAt = reducedMotion ? 2450 : 5250;
+
+    enemy.phaseTransitioning = true;
+    enemy.attackTimer = Math.max(enemy.attackTimer, 9);
+    bossPhaseTransitionEnemy = enemy;
+    bossPhaseTransitionActive = true;
+    paused = true;
+    document.body.classList.add('boss-phase-transition');
+    if ($('pauseBtn')) $('pauseBtn').disabled = true;
+    hideBossArrivalEffect();
+    focusBattleEntity(enemy, 12, true);
+
+    const fx = $('bossPhaseFx');
+    if ($('bossPhaseFrom')) $('bossPhaseFrom').textContent = 'ALLY UNITS';
+    if ($('bossPhaseTo')) $('bossPhaseTo').textContent = '0';
+    if ($('bossPhaseName')) $('bossPhaseName').textContent = enemy.ambushIntroTitle || '戦線崩壊';
+    if ($('bossPhaseReaction')) $('bossPhaseReaction').textContent = enemy.ambushIntroText || '味方ユニット全消失';
+    if (fx) {
+      const xPercent = clamp((finiteNumber(enemy.x, cv.width * .82) / cv.width) * 100, 12, 88);
+      const yPercent = clamp((entityVisualY(enemy) / cv.height) * 100, 18, 86);
+      fx.style.setProperty('--phase-x', `${xPercent.toFixed(2)}%`);
+      fx.style.setProperty('--phase-y', `${yPercent.toFixed(2)}%`);
+      fx.hidden = false;
+      fx.classList.remove('is-active', 'is-transformed');
+      void fx.offsetWidth;
+      fx.classList.add('is-active');
+    }
+    showMessage('特殊BOSS反応を検出――全戦闘を停止します。', reducedMotion ? 2.2 : 4.5);
+    playSound('phaseShift');
+    updateHud(); renderUnitButtons(); renderUpgradePanel(); updatePauseButton();
+
+    scheduleBossPhaseStep(() => {
+      if (!bossPhaseTransitionActive || bossPhaseTransitionEnemy !== enemy || !enemies.includes(enemy)) return clearBossPhaseTransition({ resume: true });
+      const defeatedCount = allies.filter((ally) => ally.hp > 0).length;
+      for (const ally of allies) {
+        spawnImpactBurst(ally.x, entityVisualY(ally), '#d9d1ff', 1.8);
+        combatEffects.push({ x: ally.x, y: entityVisualY(ally) - ally.radius - 18, text: '戦線崩壊', color: '#f1e8ff', kind: 'transform', life: 1.5, maxLife: 1.5, particles: [] });
+      }
+      runStats.alliesDefeated += defeatedCount;
+      allies = [];
+      projectiles = [];
+      for (const unit of D.units) summonTimers[unit.id] = 0;
+      summonUiRefreshTimer = 0;
+      battleInspectorKey = '';
+      enemy.ambushIntroCompleted = true;
+      fx?.classList.add('is-transformed');
+      playSound('transform');
+      showMessage(`味方ユニット${defeatedCount}体が消失。蓄積Energyから戦線を再構築してください。`, reducedMotion ? 1.8 : 3.5);
+      $('waveBannerTitle').textContent = 'ALLIED LINE COLLAPSED';
+      $('waveBannerSub').textContent = `残存Energy ${Math.floor(energy)} / ${currentMaxEnergy()}｜再展開準備`;
+      $('waveBanner').hidden = false;
+      waveBannerTimer = reducedMotion ? 2.0 : 5.2;
+    }, wipeAt);
+
+    scheduleBossPhaseStep(() => {
+      if (!bossPhaseTransitionActive || bossPhaseTransitionEnemy !== enemy || !enemies.includes(enemy)) return clearBossPhaseTransition({ resume: true });
+      if (fx) { fx.classList.remove('is-active', 'is-transformed'); fx.hidden = true; }
+      triggerBossArrivalEffect(enemy, definition || { formula: enemy.formula, name: enemy.name });
+      showMessage(`⚠ 高速BOSS出現：${enemy.formula} ${enemy.name}｜速度${formatStat(enemy.speed, 1)}`, reducedMotion ? 1.8 : 3.6);
+    }, arrivalAt);
+
+    scheduleBossPhaseStep(() => {
+      if (!bossPhaseTransitionActive || bossPhaseTransitionEnemy !== enemy) return;
+      hideBossArrivalEffect();
+      enemy.phaseTransitioning = false;
+      enemy.attackTimer = Math.max(enemy.attackTimer, .8);
+      clearBossPhaseTransition({ resume: true });
+      showMessage(`BOSS戦開始。Energy ${Math.floor(energy)}を使って直ちに再展開してください。`, 3.2);
+      saveGame({ silent: true });
+    }, resumeAt);
+    return true;
+  }
+
   function updateSoundButtons() {
     const label = soundEnabled ? '🔊 効果音 ON' : '🔇 消音中';
     const top = $('soundBtn');
@@ -27254,6 +31069,9 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
       stage3Clears: 0,
       stage4Clears: 0,
       stage5Clears: 0,
+      stage6Clears: 0,
+      stage7Clears: 0,
+      stage8Clears: 0,
       mockExamsCompleted: 0,
       mockExamPerfects: 0
     };
@@ -27409,6 +31227,10 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
     return true;
   }
 
+  function maxEnergyCapacityLevel() {
+    return Math.max(1, Math.floor(finiteNumber(D.maxEnergyCapacityLevel, D.maxUpgradeLevel)));
+  }
+
   function currentMaxEnergy() {
     return D.maxEnergy + D.energyCapacityPerLevel * (energyCapacityLevel - 1);
   }
@@ -27430,7 +31252,7 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
   }
 
   function energyCapacityUpgradeCost() {
-    if (energyCapacityLevel >= D.maxUpgradeLevel) return null;
+    if (energyCapacityLevel >= maxEnergyCapacityLevel()) return null;
     return D.energyCapacityUpgradeCosts[energyCapacityLevel - 1];
   }
 
@@ -27562,7 +31384,7 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
 
   function isPerfectResearchReady() {
     return level >= D.maxLevel
-      && energyCapacityLevel >= D.maxUpgradeLevel
+      && energyCapacityLevel >= maxEnergyCapacityLevel()
       && D.units.every((unit) => unitUpgradeLevel(unit.id) >= D.maxUpgradeLevel);
   }
 
@@ -27886,7 +31708,7 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
     return {
       coins: Math.max(0, Math.floor(finiteNumber(coins, 0))),
       unlocked: [...(unlocked || new Set(initialUnlockedIds()))],
-      energyCapacityLevel: clamp(Math.floor(finiteNumber(energyCapacityLevel, 1)), 1, D.maxUpgradeLevel),
+      energyCapacityLevel: clamp(Math.floor(finiteNumber(energyCapacityLevel, 1)), 1, maxEnergyCapacityLevel()),
       unitUpgradeLevels: { ...defaultUnitUpgradeLevels(), ...(unitUpgradeLevels || {}) }
     };
   }
@@ -27901,7 +31723,7 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
     const loadedUnlocked = Array.isArray(saved?.unlocked) ? saved.unlocked.filter((id) => validIds.has(id)) : [];
     unlocked = new Set([...initialUnlockedIds(), ...loadedUnlocked]);
     coins = Math.max(0, Math.floor(finiteNumber(saved?.coins, 0)));
-    energyCapacityLevel = clamp(Math.floor(finiteNumber(saved?.energyCapacityLevel, 1)), 1, D.maxUpgradeLevel);
+    energyCapacityLevel = clamp(Math.floor(finiteNumber(saved?.energyCapacityLevel, 1)), 1, maxEnergyCapacityLevel());
     unitUpgradeLevels = defaultUnitUpgradeLevels();
     for (const unit of D.units) {
       unitUpgradeLevels[unit.id] = clamp(Math.floor(finiteNumber(saved?.unitUpgradeLevels?.[unit.id], 1)), 1, D.maxUpgradeLevel);
@@ -28070,7 +31892,7 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
         <span class="stage-card-status">${status}</span>
         <h3>${stage.name}</h3>
         <p>${stage.description}</p>
-        <div class="stage-card-meta"><span>ユニット ${stage.units.length}体</span><span>全${stage.waves.length}WAVE</span><span>${stage.difficultyLabel || '通常'}</span><span>${saved ? `所持 ${saved.coins || 0} COIN` : '新規進行'}</span></div>`;
+        <div class="stage-card-meta"><span>ユニット ${stage.units.length}体</span><span>全${stage.waves.length}WAVE</span><span>${stage.difficultyLabel || '通常'}</span><span>${stage.enemyAttributeSummary || (saved ? `所持 ${saved.coins || 0} COIN` : '新規進行')}</span></div>`;
       button.addEventListener('click', () => switchStage(stage.id));
       area.appendChild(button);
     }
@@ -29005,8 +32827,8 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
 
   function requestEnergyCapacityUpgrade() {
     if (paused || gameStatus !== 'playing') return;
-    if (energyCapacityLevel >= D.maxUpgradeLevel) {
-      showMessage('エナジー上限は最大Lv.10です。');
+    if (energyCapacityLevel >= maxEnergyCapacityLevel()) {
+      showMessage(`エナジー上限は最大Lv.${maxEnergyCapacityLevel()}です。`);
       return;
     }
     const cost = energyCapacityUpgradeCost();
@@ -29126,7 +32948,6 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
       flying: Boolean(stats.flying),
       antiAir: Boolean(stats.antiAir || stats.flying || /弓兵|速射|範囲/.test(stats.role || '')),
       flightHeight: Math.max(34, finiteNumber(stats.flightHeight, 46)),
-      selfDamagePerSecond: Math.max(0, finiteNumber(stats.selfDamagePerSecond, 0)),
       airVulnerability: Math.max(1, finiteNumber(stats.airVulnerability, 1.7)),
       baseDamageMultiplier: clamp(finiteNumber(stats.baseDamageMultiplier, 1), 0.1, 1),
       guard: Boolean(stats.guard),
@@ -29176,7 +32997,6 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
       flying: Boolean(enemy.flying),
       antiAir: Boolean(enemy.antiAir || enemy.flying || /弓兵|速射|範囲/.test(enemy.role || '')),
       flightHeight: Math.max(34, finiteNumber(enemy.flightHeight, 46)),
-      selfDamagePerSecond: Math.max(0, finiteNumber(enemy.selfDamagePerSecond, 0)),
       airVulnerability: Math.max(1, finiteNumber(enemy.airVulnerability, 1.7)),
       baseDamageMultiplier: clamp(finiteNumber(enemy.baseDamageMultiplier, 1), 0.1, 1),
       healer: Boolean(enemy.healer),
@@ -29189,6 +33009,18 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
       firstStrikeMultiplier: Math.max(1, finiteNumber(enemy.firstStrikeMultiplier, 1)),
       firstStrikeReady: finiteNumber(enemy.firstStrikeMultiplier, 1) > 1,
       pushback: Math.max(0, finiteNumber(enemy.pushback, 0)),
+      bossSummonInterval: Math.max(0, finiteNumber(enemy.bossSummonInterval, 0)),
+      bossSummonTimer: Math.max(0, finiteNumber(enemy.bossSummonInterval, 0)),
+      bossSummonWarning: Math.max(0, finiteNumber(enemy.bossSummonWarning, 2)),
+      bossSummonPending: false,
+      bossSummonPendingTimer: 0,
+      bossSummonCount: Math.max(0, Math.floor(finiteNumber(enemy.bossSummonCount, 0))),
+      bossSummonPool: Array.isArray(enemy.bossSummonPool) ? [...enemy.bossSummonPool] : [],
+      wipeAlliesOnArrival: Boolean(enemy.wipeAlliesOnArrival),
+      ambushIntroCompleted: !enemy.wipeAlliesOnArrival,
+      ambushIntroTitle: String(enemy.ambushIntroTitle || '戦線崩壊'),
+      ambushIntroText: String(enemy.ambushIntroText || '味方ユニット全消失'),
+      recommendedStoredEnergy: Math.max(0, finiteNumber(enemy.recommendedStoredEnergy, 0)),
       attackFlash: 0,
       hitFlash: 0
     };
@@ -29210,7 +33042,6 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
     enemy.flying = Boolean(phase.flying);
     enemy.antiAir = Boolean(phase.antiAir || phase.flying || /弓兵|速射|範囲/.test(phase.role || ''));
     enemy.flightHeight = Math.max(34, finiteNumber(phase.flightHeight, enemy.flightHeight || 46));
-    enemy.selfDamagePerSecond = Math.max(0, finiteNumber(phase.selfDamagePerSecond, 0));
     enemy.airVulnerability = Math.max(1, finiteNumber(phase.airVulnerability, enemy.airVulnerability || 1.7));
     enemy.baseDamageMultiplier = clamp(finiteNumber(phase.baseDamageMultiplier, enemy.baseDamageMultiplier || 1), 0.1, 1);
     enemy.guard = Boolean(phase.guard);
@@ -29258,12 +33089,16 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
     enemies.push(spawnedEnemy);
     if (spawnedEnemy.boss) {
       focusBattleEntity(spawnedEnemy, 8, true);
-      showMessage(`⚠ BOSS出現：${definition.bossIntro || `${definition.chemistryLabel} ${definition.formula} ${definition.name}`}`, 4.5);
-      triggerBossArrivalEffect(spawnedEnemy, definition);
-      $('waveBannerTitle').textContent = definition.phaseTwo ? 'TWO-PHASE BOSS' : 'BOSS WAVE';
-      $('waveBannerSub').textContent = `${definition.chemistryLabel} ${definition.formula}｜${currentStageDefinition().bossHint}`;
-      $('waveBanner').hidden = false;
-      waveBannerTimer = 4.5;
+      if (spawnedEnemy.wipeAlliesOnArrival) {
+        beginBossAnnihilationSequence(spawnedEnemy, definition);
+      } else {
+        showMessage(`⚠ BOSS出現：${definition.bossIntro || `${definition.chemistryLabel} ${definition.formula} ${definition.name}`}`, 4.5);
+        triggerBossArrivalEffect(spawnedEnemy, definition);
+        $('waveBannerTitle').textContent = definition.phaseTwo ? 'TWO-PHASE BOSS' : 'BOSS WAVE';
+        $('waveBannerSub').textContent = `${definition.chemistryLabel} ${definition.formula}｜${currentStageDefinition().bossHint}`;
+        $('waveBanner').hidden = false;
+        waveBannerTimer = 4.5;
+      }
     }
     nextWaveEnemyIndex += 1;
 
@@ -29623,7 +33458,6 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
 
   function updateAlly(ally, dt) {
     if (ally.hp <= 0) return;
-    if (ally.flying && ally.selfDamagePerSecond > 0) ally.hp -= ally.maxHp * ally.selfDamagePerSecond * dt;
     if (ally.hp <= 0) return;
     ally.attackTimer = Math.max(0, ally.attackTimer - dt);
     if (ally.healer) {
@@ -29683,11 +33517,61 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
     ally.x = Math.min(BASE.enemyX - BASE.radius - ally.radius, ally.x + ally.speed * dt);
   }
 
+  function triggerBossMinionSummon(enemy) {
+    if (!enemy?.boss || !enemy.bossSummonPool?.length || enemy.bossSummonCount <= 0) return;
+    const available = Math.max(0, D.maxEnemiesOnField - enemies.length);
+    const count = Math.min(available, Math.max(2, enemy.bossSummonCount - (Math.random() < .35 ? 1 : 0)));
+    let spawned = 0;
+    for (let index = 0; index < count; index += 1) {
+      const enemyId = enemy.bossSummonPool[Math.floor(Math.random() * enemy.bossSummonPool.length)];
+      const definition = D.enemies.find((candidate) => candidate.id === enemyId);
+      if (!definition) continue;
+      const minion = createEnemy(definition, enemy.waveIndex);
+      minion.x = Math.min(BASE.enemySpawnX, enemy.x + 48 + index * 24);
+      minion.y = nextLaneY(enemySpawnSerial + index);
+      enemies.push(minion);
+      spawned += 1;
+    }
+    if (spawned > 0) {
+      const weakBaseSummon = enemy.affinityTarget === 'weak_base_conjugate_acid';
+      const summonLabel = weakBaseSummon ? '弱塩基群集反応' : '弱酸群集反応';
+      const entityLabel = weakBaseSummon ? '弱塩基由来イオン' : '弱酸由来イオン';
+      const effectColor = weakBaseSummon ? '#d8c3ff' : '#d8ff9b';
+      combatEffects.push({ x: enemy.x, y: entityVisualY(enemy) - enemy.radius - 34, text: `${entityLabel}増援 ×${spawned}`, color: effectColor, kind: 'transform', life: 1.8, maxLife: 1.8, particles: [] });
+      showMessage(`${summonLabel}：${entityLabel}${spawned}体が増援として出現！`, 3.4);
+      playSound('wave');
+    }
+  }
+
+  function updateBossSummonAbility(enemy, dt) {
+    if (!enemy?.boss || !enemy.bossSummonPool?.length || enemy.hp <= 0) return;
+    if (enemy.bossSummonPending) {
+      enemy.bossSummonPendingTimer = Math.max(0, enemy.bossSummonPendingTimer - dt);
+      if (enemy.bossSummonPendingTimer <= 0) {
+        enemy.bossSummonPending = false;
+        triggerBossMinionSummon(enemy);
+        enemy.bossSummonTimer = enemy.bossSummonInterval;
+      }
+      return;
+    }
+    enemy.bossSummonTimer = Math.max(0, enemy.bossSummonTimer - dt);
+    if (enemy.bossSummonTimer <= 0 && enemies.length < D.maxEnemiesOnField - 1) {
+      enemy.bossSummonPending = true;
+      enemy.bossSummonPendingTimer = Math.max(.6, enemy.bossSummonWarning || 2);
+      const weakBaseSummon = enemy.affinityTarget === 'weak_base_conjugate_acid';
+      const summonLabel = weakBaseSummon ? '弱塩基群集反応' : '弱酸群集反応';
+      const effectColor = weakBaseSummon ? '#eadcff' : '#f5ffad';
+      combatEffects.push({ x: enemy.x, y: entityVisualY(enemy) - enemy.radius - 34, text: `${summonLabel} 予告`, color: effectColor, kind: 'transform', life: enemy.bossSummonPendingTimer, maxLife: enemy.bossSummonPendingTimer, particles: [] });
+      showMessage(`⚠ ${summonLabel}：${formatStat(enemy.bossSummonPendingTimer, 1)}秒後に増援`, 3.0);
+      playSound('transform');
+    }
+  }
+
   function updateEnemy(enemy, dt) {
     if (enemy.hp <= 0) return;
-    if (enemy.flying && enemy.selfDamagePerSecond > 0) enemy.hp -= enemy.maxHp * enemy.selfDamagePerSecond * dt;
     if (enemy.hp <= 0) return;
     enemy.attackTimer = Math.max(0, enemy.attackTimer - dt);
+    updateBossSummonAbility(enemy, dt);
     if (enemy.healer) {
       const healTarget = mostInjuredEnemyFor(enemy);
       if (healTarget && enemy.attackTimer <= 0) {
@@ -29879,8 +33763,8 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
     $('endText').textContent = victory
       ? nextStage
         ? `Stage ${currentStageId}クリア！ Stage ${nextStage.id}「${nextStage.name}」が解放されました。化学レベル・実績・累計記録は持ち越し、次のステージのコイン・解放・研究レベルは新しく始まります。今回の撃破${runStats.enemiesDefeated}体、獲得${runStats.coinsEarned}コインです。`
-        : `Stage ${currentStageId}クリア！ 五つの研究区を制覇しました。難関Stage 5突破です。今回の撃破${runStats.enemiesDefeated}体、獲得${runStats.coinsEarned}コインです。`
-      : `Stage ${currentStageId}の第${currentWaveIndex + 1}ウェーブ、化学レベル${level}で味方拠点が破壊されました。研究支援として${defeatSupport}コインを獲得しました。今回の合計獲得は${runStats.coinsEarned}コインです。解放・強化を保ったまま再挑戦できます。`;
+        : `Stage ${currentStageId}クリア！ 現在実装されている全${Object.keys(STAGE_LIBRARY).length}研究区を制覇しました。今回の撃破${runStats.enemiesDefeated}体、獲得${runStats.coinsEarned}コインです。`
+      : `Stage ${currentStageId}の第${currentWaveIndex + 1}ウェーブ、化学レベル${level}で味方拠点が破壊されました。研究支援として${defeatSupport}コインを獲得しました。今回の合計獲得は${runStats.coinsEarned}コインです。解放・強化を保ったまま再挑戦できます。${currentStageId === 6 ? ' 攻略ヒント：敵はすべて弱酸由来です。第5ユニットの強酸と属性相性を確認してみましょう。' : currentStageId === 7 ? ' 攻略ヒント：敵はすべて弱塩基由来です。第5ユニットの強塩基と属性相性を確認してみましょう。' : currentStageId === 8 ? ' 攻略ヒント：Wave 10ではBOSS出現時に場の味方がすべて倒されます。Energy上限をLv.3以上へ拡張し、125以上を蓄えてからBOSSへ入り、直後に盾・攻撃役を再展開しましょう。' : ''}`;
     const hasNextStage = victory && Boolean(STAGE_LIBRARY[currentStageId + 1]);
     $('nextStageBtn').hidden = !hasNextStage;
     if (hasNextStage) $('nextStageBtn').textContent = `ステージ${currentStageId + 1}へ進む`;
@@ -29932,9 +33816,11 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
     const stageThree = currentStageId === 3;
     const stageFour = currentStageId === 4;
     const stageFive = currentStageId === 5;
-    const coreColor = stageFive ? (ally ? '#ffd779' : '#ff7f6e') : stageFour ? (ally ? '#75eaff' : '#ffbf72') : stageThree ? (ally ? '#d88cff' : '#ff9f63') : stageTwo ? (ally ? '#99efa8' : '#f0cb6b') : (ally ? '#6fe6ff' : '#ff7994');
-    const darkColor = stageFive ? (ally ? '#553410' : '#5d171a') : stageFour ? (ally ? '#123e4d' : '#5a3518') : stageThree ? (ally ? '#44205a' : '#5d2c16') : stageTwo ? (ally ? '#174536' : '#59471e') : (ally ? '#123f61' : '#5a2035');
-    const panelColor = stageFive ? (ally ? '#9a6b1f' : '#9b3331') : stageFour ? (ally ? '#1f7184' : '#95602b') : stageThree ? (ally ? '#773a96' : '#984d25') : stageTwo ? (ally ? '#2c7858' : '#8b6c2d') : (ally ? '#1f6e96' : '#8a3850');
+    const stageSix = currentStageId === 6;
+    const stageSeven = currentStageId === 7;
+    const coreColor = stageSeven ? (ally ? '#c7b4ff' : '#f0a7ff') : stageSix ? (ally ? '#b8ff8a' : '#e5ff77') : stageFive ? (ally ? '#ffd779' : '#ff7f6e') : stageFour ? (ally ? '#75eaff' : '#ffbf72') : stageThree ? (ally ? '#d88cff' : '#ff9f63') : stageTwo ? (ally ? '#99efa8' : '#f0cb6b') : (ally ? '#6fe6ff' : '#ff7994');
+    const darkColor = stageSeven ? (ally ? '#2d1b58' : '#55245b') : stageSix ? (ally ? '#234914' : '#4b4d10') : stageFive ? (ally ? '#553410' : '#5d171a') : stageFour ? (ally ? '#123e4d' : '#5a3518') : stageThree ? (ally ? '#44205a' : '#5d2c16') : stageTwo ? (ally ? '#174536' : '#59471e') : (ally ? '#123f61' : '#5a2035');
+    const panelColor = stageSeven ? (ally ? '#6545a6' : '#9b4aa4') : stageSix ? (ally ? '#4b8d2b' : '#8c8c26') : stageFive ? (ally ? '#9a6b1f' : '#9b3331') : stageFour ? (ally ? '#1f7184' : '#95602b') : stageThree ? (ally ? '#773a96' : '#984d25') : stageTwo ? (ally ? '#2c7858' : '#8b6c2d') : (ally ? '#1f6e96' : '#8a3850');
 
     ctx.save();
     ctx.shadowColor = coreColor;
@@ -29975,6 +33861,18 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
       ctx.beginPath();ctx.arc(x,272,12,Math.PI,0);ctx.stroke();
       const needle=-Math.PI*.82+hpRatio*Math.PI*.64;ctx.beginPath();ctx.moveTo(x,272);ctx.lineTo(x+Math.cos(needle)*9,272+Math.sin(needle)*9);ctx.stroke();
       for(let i=0;i<5;i+=1){ctx.beginPath();ctx.arc(x-12+i*6,307-((gameTime*7+i*8)%16),1.8,0,Math.PI*2);ctx.stroke();}
+      ctx.restore();
+    } else if (stageSeven) {
+      ctx.save(); ctx.strokeStyle=coreColor; ctx.fillStyle=coreColor; ctx.globalAlpha=.94; ctx.lineWidth=1.6;
+      ctx.beginPath(); ctx.arc(x,292,24,0,Math.PI*2); ctx.stroke();
+      for(let i=0;i<3;i+=1){const a=-gameTime*.65+i*Math.PI*2/3;ctx.beginPath();ctx.arc(x+Math.cos(a)*17,292+Math.sin(a)*17,3,0,Math.PI*2);ctx.fill();}
+      ctx.font='900 8px "Segoe UI",sans-serif';ctx.textAlign='center';ctx.fillText('OH⁻ LIBERATION',x,324);
+      ctx.restore();
+    } else if (stageSix) {
+      ctx.save(); ctx.strokeStyle=coreColor; ctx.fillStyle=coreColor; ctx.globalAlpha=.94; ctx.lineWidth=1.6;
+      ctx.beginPath(); ctx.arc(x,292,24,0,Math.PI*2); ctx.stroke();
+      for(let i=0;i<3;i+=1){const a=gameTime*.65+i*Math.PI*2/3;ctx.beginPath();ctx.arc(x+Math.cos(a)*17,292+Math.sin(a)*17,3,0,Math.PI*2);ctx.fill();}
+      ctx.font='900 8px "Segoe UI",sans-serif';ctx.textAlign='center';ctx.fillText('H⁺ LIBERATION',x,324);
       ctx.restore();
     } else if (stageFive) {
       ctx.save(); ctx.strokeStyle=coreColor; ctx.fillStyle=coreColor; ctx.globalAlpha=.94; ctx.lineWidth=1.6;
@@ -30241,23 +34139,25 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
     const stageThree = currentStageId === 3;
     const stageFour = currentStageId === 4;
     const stageFive = currentStageId === 5;
-    sky.addColorStop(0, stageFive ? '#220c18' : stageFour ? '#061e2b' : stageThree ? '#1b0b25' : stageTwo ? '#111b18' : '#071426');
-    sky.addColorStop(.48, stageFive ? '#61231f' : stageFour ? '#0c4a5a' : stageThree ? '#3a1647' : stageTwo ? '#1c4034' : '#102b45');
-    sky.addColorStop(.74, stageFive ? '#8a5b2b' : stageFour ? '#35747c' : stageThree ? '#59323d' : stageTwo ? '#38513b' : '#16334b');
-    sky.addColorStop(.75, stageFive ? '#3d1d18' : stageFour ? '#16343d' : stageThree ? '#34211d' : stageTwo ? '#2a3021' : '#142538');
-    sky.addColorStop(1, stageFive ? '#150a12' : stageFour ? '#07161e' : stageThree ? '#150d14' : stageTwo ? '#11150e' : '#09131f');
+    const stageSix = currentStageId === 6;
+    const stageSeven = currentStageId === 7;
+    sky.addColorStop(0, stageSeven ? '#170b2c' : stageSix ? '#0b2410' : stageFive ? '#220c18' : stageFour ? '#061e2b' : stageThree ? '#1b0b25' : stageTwo ? '#111b18' : '#071426');
+    sky.addColorStop(.48, stageSeven ? '#4b2470' : stageSix ? '#255c1d' : stageFive ? '#61231f' : stageFour ? '#0c4a5a' : stageThree ? '#3a1647' : stageTwo ? '#1c4034' : '#102b45');
+    sky.addColorStop(.74, stageSeven ? '#7d4f8c' : stageSix ? '#71872b' : stageFive ? '#8a5b2b' : stageFour ? '#35747c' : stageThree ? '#59323d' : stageTwo ? '#38513b' : '#16334b');
+    sky.addColorStop(.75, stageSeven ? '#342142' : stageSix ? '#233215' : stageFive ? '#3d1d18' : stageFour ? '#16343d' : stageThree ? '#34211d' : stageTwo ? '#2a3021' : '#142538');
+    sky.addColorStop(1, stageSeven ? '#10091c' : stageSix ? '#07170b' : stageFive ? '#150a12' : stageFour ? '#07161e' : stageThree ? '#150d14' : stageTwo ? '#11150e' : '#09131f');
     ctx.fillStyle = sky;
     ctx.fillRect(0, 0, cv.width, cv.height);
 
     const glow = ctx.createRadialGradient(cv.width / 2, 130, 20, cv.width / 2, 130, 420);
-    glow.addColorStop(0, stageFive ? 'rgba(255, 194, 91, .27)' : stageFour ? 'rgba(108, 232, 255, .24)' : stageThree ? 'rgba(224, 117, 255, .22)' : stageTwo ? 'rgba(141, 231, 150, .19)' : 'rgba(73, 190, 255, .18)');
-    glow.addColorStop(1, stageFive ? 'rgba(255, 126, 92, 0)' : stageFour ? 'rgba(108, 232, 255, 0)' : stageThree ? 'rgba(224, 117, 255, 0)' : stageTwo ? 'rgba(141, 231, 150, 0)' : 'rgba(73, 190, 255, 0)');
+    glow.addColorStop(0, stageSeven ? 'rgba(211, 165, 255, .25)' : stageSix ? 'rgba(191, 255, 104, .26)' : stageFive ? 'rgba(255, 194, 91, .27)' : stageFour ? 'rgba(108, 232, 255, .24)' : stageThree ? 'rgba(224, 117, 255, .22)' : stageTwo ? 'rgba(141, 231, 150, .19)' : 'rgba(73, 190, 255, .18)');
+    glow.addColorStop(1, stageSeven ? 'rgba(211, 165, 255, 0)' : stageSix ? 'rgba(191, 255, 104, 0)' : stageFive ? 'rgba(255, 126, 92, 0)' : stageFour ? 'rgba(108, 232, 255, 0)' : stageThree ? 'rgba(224, 117, 255, 0)' : stageTwo ? 'rgba(141, 231, 150, 0)' : 'rgba(73, 190, 255, 0)');
     ctx.fillStyle = glow;
     ctx.fillRect(0, 0, cv.width, 320);
 
     ctx.save();
     ctx.globalAlpha = .17;
-    ctx.strokeStyle = stageFive ? '#ffd779' : stageFour ? '#9ff2ff' : stageThree ? '#e6a0ff' : stageTwo ? '#b9e779' : '#79cfff';
+    ctx.strokeStyle = stageSeven ? '#e6c8ff' : stageSix ? '#d9ff8b' : stageFive ? '#ffd779' : stageFour ? '#9ff2ff' : stageThree ? '#e6a0ff' : stageTwo ? '#b9e779' : '#79cfff';
     ctx.lineWidth = 1;
     for (let i = 0; i < 15; i += 1) {
       const x = (i * 79 + 31) % cv.width;
@@ -30313,6 +34213,14 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
         ctx.beginPath(); ctx.moveTo(x - 44, 92); ctx.lineTo(x + 44, 92); ctx.stroke();
         ctx.beginPath(); ctx.arc(x, 122, 22, Math.PI, 0); ctx.stroke();
       }
+    }
+    if (stageSeven) {
+      ctx.globalAlpha=.25; ctx.strokeStyle='#e6c8ff'; ctx.fillStyle='#e6c8ff';
+      for(let i=0;i<18;i+=1){const x=(i*71-gameTime*(4+i%3))%(cv.width+80)-40;const y=62+((i*43)%210);ctx.beginPath();ctx.arc(x,y,3+(i%3),0,Math.PI*2);ctx.stroke();ctx.font='800 8px sans-serif';ctx.fillText(i%3===0?'OH⁻':'+',x+8,y-7);}
+    }
+    if (stageSix) {
+      ctx.globalAlpha=.25; ctx.strokeStyle='#d9ff8b'; ctx.fillStyle='#d9ff8b';
+      for(let i=0;i<18;i+=1){const x=(i*71+gameTime*(4+i%3))%(cv.width+80)-40;const y=62+((i*43)%210);ctx.beginPath();ctx.arc(x,y,3+(i%3),0,Math.PI*2);ctx.stroke();ctx.font='800 8px sans-serif';ctx.fillText(i%3===0?'H⁺':'−',x+8,y-7);}
     }
     if (stageFive) {
       ctx.globalAlpha = .28;
@@ -30393,7 +34301,7 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
   }
 
   function unitRoleDescription(unit) {
-    if (unit.flying) return `飛行：近接攻撃を受けず、対空攻撃に弱い。毎秒${formatStat((unit.selfDamagePerSecond || 0) * 100, 2)}%HP減少`;
+    if (unit.flying) return '飛行：通常の地上近接攻撃を受けず、対空攻撃に弱い。時間経過による自傷ダメージはありません。';
     if (unit.healer) return '高性能単体回復：傷の深い味方1体を大きく回復';
     if (unit.guard) return `盾役：敵の攻撃を引き受け、被ダメージ${Math.round((unit.damageReduction || 0) * 100)}%軽減`;
     if (unit.splashRadius) return '集団戦：着弾地点の周囲にもダメージ';
@@ -30448,7 +34356,7 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
       refs.level.textContent = `強化Lv.${stats.upgradeLevel}`;
       const roleTip = `<span class="role-tip">${unitRoleDescription(stats)}</span>`;
       refs.stats.innerHTML = roleTip + (stats.flying
-        ? `${stats.chemistryLabel}・飛行｜E ${summonCost} ♥${stats.hp} ⚔${Math.round(stats.attack * researchAttackMultiplier({kind:'ally',chemistryClass:stats.chemistryClass}))}<br>✈ 対空可 ◎${stats.range} 自傷${formatStat((stats.selfDamagePerSecond || 0) * 100, 2)}%/秒`
+        ? `${stats.chemistryLabel}・飛行｜E ${summonCost} ♥${stats.hp} ⚔${Math.round(stats.attack * researchAttackMultiplier({kind:'ally',chemistryClass:stats.chemistryClass}))}<br>✈ 対空可 ◎${stats.range} 自傷なし`
         : stats.healer
         ? `${stats.chemistryLabel}・単体回復｜E ${summonCost} ♥${stats.hp} <span class="healer-power-note">回復${Math.round((stats.healAmount || 0) * researchProduct('healMultiplier'))}</span><br>◎${stats.healRange} ⏱${stats.attackInterval.toFixed(2)}s 再召喚${stats.summonCooldown.toFixed(1)}s`
         : stats.splashRadius
@@ -30511,8 +34419,8 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
     const energyCard = $('energyUpgradeCard');
     if (energyCard) {
       const cost = energyCapacityUpgradeCost();
-      $('energyUpgradeLevel').textContent = `Lv.${energyCapacityLevel} / ${D.maxUpgradeLevel}`;
-      $('energyUpgradeStats').textContent = energyCapacityLevel >= D.maxUpgradeLevel
+      $('energyUpgradeLevel').textContent = `Lv.${energyCapacityLevel} / ${maxEnergyCapacityLevel()}`;
+      $('energyUpgradeStats').textContent = energyCapacityLevel >= maxEnergyCapacityLevel()
         ? `最大エナジー ${currentMaxEnergy()}（MAX）`
         : `最大 ${currentMaxEnergy()} → ${currentMaxEnergy() + D.energyCapacityPerLevel}`;
       $('energyUpgradeBtn').textContent = cost == null ? '最大強化' : `${cost} COINで難問に挑戦`;
@@ -30589,7 +34497,11 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
       waveIndex: entity.waveIndex,
       visualSerial: entity.visualSerial,
       firstStrikeReady: entity.firstStrikeReady,
-      bossPhase: entity.bossPhase || 1
+      bossPhase: entity.bossPhase || 1,
+      bossSummonTimer: entity.bossSummonTimer,
+      bossSummonPending: Boolean(entity.bossSummonPending),
+      bossSummonPendingTimer: entity.bossSummonPendingTimer,
+      ambushIntroCompleted: Boolean(entity.ambushIntroCompleted)
     };
   }
 
@@ -30616,6 +34528,10 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
     enemy.y = finiteNumber(saved.y, enemy.y);
     enemy.hp = clamp(finiteNumber(saved.hp, enemy.maxHp), 0, enemy.maxHp);
     enemy.attackTimer = Math.max(0, finiteNumber(saved.attackTimer, 0) * timerFactor);
+    enemy.bossSummonTimer = Math.max(0, finiteNumber(saved.bossSummonTimer, enemy.bossSummonTimer));
+    enemy.bossSummonPending = Boolean(saved.bossSummonPending);
+    enemy.bossSummonPendingTimer = Math.max(0, finiteNumber(saved.bossSummonPendingTimer, 0));
+    if (enemy.wipeAlliesOnArrival) enemy.ambushIntroCompleted = Boolean(saved.ambushIntroCompleted);
     enemy.visualSerial = Math.max(0, Math.floor(finiteNumber(saved.visualSerial, enemy.visualSerial)));
     return enemy;
   }
@@ -30719,7 +34635,19 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
     // Reconstruct the dedicated metric before evaluating achievements.
     if ((cumulativeStats.highestStageCleared || 0) >= 5) {
       cumulativeStats.stage5Clears = Math.max(1, cumulativeStats.stage5Clears || 0);
-      cumulativeStats.highestStageReached = Math.max(5, cumulativeStats.highestStageReached || 1);
+      // v4.5: older saves treated Stage 5 as the final stage.
+      cumulativeStats.highestStageReached = Math.max(6, cumulativeStats.highestStageReached || 1);
+    }
+    if ((cumulativeStats.highestStageCleared || 0) >= 6) {
+      cumulativeStats.stage6Clears = Math.max(1, cumulativeStats.stage6Clears || 0);
+      cumulativeStats.highestStageReached = Math.max(7, cumulativeStats.highestStageReached || 1);
+    }
+    if ((cumulativeStats.highestStageCleared || 0) >= 7) {
+      cumulativeStats.stage7Clears = Math.max(1, cumulativeStats.stage7Clears || 0);
+      cumulativeStats.highestStageReached = Math.max(8, cumulativeStats.highestStageReached || 1);
+    }
+    if ((cumulativeStats.highestStageCleared || 0) >= 8) {
+      cumulativeStats.stage8Clears = Math.max(1, cumulativeStats.stage8Clears || 0);
     }
     if ((cumulativeStats.highestStageCleared || 0) === 0 && cumulativeStats.totalClears > 0) {
       cumulativeStats.highestStageCleared = 1;
@@ -30734,7 +34662,7 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
     energyCapacityLevel = clamp(
       Math.floor(finiteNumber(parsed.progress.energyCapacityLevel, 1)),
       1,
-      D.maxUpgradeLevel
+      maxEnergyCapacityLevel()
     );
 
     const loadedUpgradeLevels = parsed.progress.unitUpgradeLevels && typeof parsed.progress.unitUpgradeLevels === 'object'
@@ -30780,7 +34708,21 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
     const savedStats = parsed.progress.cumulativeStats;
     if (finiteNumber(savedStats.highestStageCleared, 0) >= 5 && finiteNumber(savedStats.stage5Clears, 0) < 1) {
       savedStats.stage5Clears = 1;
-      savedStats.highestStageReached = Math.max(5, finiteNumber(savedStats.highestStageReached, 1));
+      savedStats.highestStageReached = Math.max(6, finiteNumber(savedStats.highestStageReached, 1));
+      repaired = true;
+    }
+    if (finiteNumber(savedStats.highestStageCleared, 0) >= 6) {
+      savedStats.stage6Clears = Math.max(1, finiteNumber(savedStats.stage6Clears, 0));
+      savedStats.highestStageReached = Math.max(7, finiteNumber(savedStats.highestStageReached, 1));
+      repaired = true;
+    }
+    if (finiteNumber(savedStats.highestStageCleared, 0) >= 7) {
+      savedStats.stage7Clears = Math.max(1, finiteNumber(savedStats.stage7Clears, 0));
+      savedStats.highestStageReached = Math.max(8, finiteNumber(savedStats.highestStageReached, 1));
+      repaired = true;
+    }
+    if (finiteNumber(savedStats.highestStageCleared, 0) >= 8) {
+      savedStats.stage8Clears = Math.max(1, finiteNumber(savedStats.stage8Clears, 0));
       repaired = true;
     }
     parsed.progress.mockExamProgress = normalizeMockExamProgress(parsed.progress.mockExamProgress);
@@ -30949,6 +34891,12 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
       openResearchCardSelection(completed);
     } else if (manualPaused && gameStatus === 'playing') showPauseModal('restored');
     else if ($('pauseModal')) $('pauseModal').hidden = true;
+    const pendingAmbushBoss = enemies.find((enemy) => enemy.wipeAlliesOnArrival && !enemy.ambushIntroCompleted && enemy.hp > 0);
+    if (pendingAmbushBoss && gameStatus === 'playing') {
+      manualPaused = false;
+      resumePromptPending = false;
+      window.setTimeout(() => beginBossAnnihilationSequence(pendingAmbushBoss, D.enemies.find((item) => item.id === pendingAmbushBoss.typeId)), 120);
+    }
     updateHud();
     renderUnitButtons();
     renderUpgradePanel();
@@ -31138,7 +35086,17 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
   }
 
   const updateNotices = [
-    {"version":"v4.45","title":"全ユーザーが要望を管理できるv4.45へ更新","body":"v4.4の表示・実績・再生産修正を維持し、要望一覧の実装済み切替と削除をログイン中の全ユーザーへ開放しました。","isNew":true},
+    {"version":"v5.0","title":"全味方を消し去る高速BOSSがStage 8に出現","body":"Stage 8「蓄積急襲区」を追加しました。Wave 10のBOSSは通常敵級のHPですが、Lv.MAX強襲型より速く、出現演出と同時に場の味方をすべて倒します。Energy上限を拡張し、125以上を蓄えてから再展開することが攻略の鍵です。","isNew":true},
+    {version:'v4.6',title:'Stage 7・弱塩基の遊離',body:'Stage 6の塩基版として、弱塩基由来陽イオン100％のStage 7を追加しました。第5ユニットKOHの強塩基が1.4倍になり、BOSSは予告後に増援を召集します。',isNew:false},
+    {version:'v4.5',title:'半反応式・飛行型調整・Stage 6',body:'半反応式の基本40問・難問30問を追加し、飛行型の時間経過自傷を廃止しました。弱酸由来陰イオン100％のStage 6と、増援を召集するBOSSを追加しました。',isNew:false},
+    {version:'v4.45',title:'全員で要望を管理',body:'v4.4の修正を統合し、管理者登録方式を廃止しました。ログイン済みの全ユーザーが、すべての要望を実装済み／検討中へ変更し、確認後に削除できます。',isNew:false},
+    {version:'v4.4',title:'要望管理・飛行表示・進行バグ修正',body:'要望の実装済み切替と削除、飛行型の表示位置上昇、Stage 5実績の旧セーブ修復、再生産クールタイム表示と実際の召喚可否の同期を追加しました。',isNew:false},
+    {version:'v4.3',title:'化学相性と反応表記を修正',body:'弱酸・弱塩基そのものではなく、弱酸由来陰イオン・弱塩基由来陽イオンに対してのみ遊離相性が発生するよう修正しました。反応式・物質名・H₂O₂・Stage 3 BOSSも化学監査しました。',isNew:false},
+    {version:'v4.2',title:'第二形態BOSS演出',body:'第1形態撃破時に戦闘全体を停止し、専用変身演出、第二形態への変化、通常BOSS出現演出を順番に再生してから戦闘を再開するようにしました。',isNew:false},
+    {version:'v4.1',title:'BOSS出現演出',body:'全StageのBOSS出現時に、黒い圧力波、暗転、画面振動、専用表示、Web Audioによる低音を組み合わせた独自演出を追加しました。',isNew:false},
+    {version:'v4.0',title:'総合完成・問題品質アップデート',body:'基本480問・難問250問・実戦8大問40小問へ増量し、問題メタデータ・選択肢別解説・数値誤答監査を追加。過去機能監査、旧セーブ移行、開発ソース分割、自動回帰検査も行いました。',isNew:false},
+    {version:'v3.95',title:'Wave 1再開・倍速試験制限',body:'ポーズ画面から同じStageのWave 1へやり直す機能と、倍速試験の不正解後30秒間は再挑戦できない制限を追加しました。再読み込みによる回避も防止します。',isNew:false},
+    {version:'v3.9',title:'共通テスト型実戦問題',body:'共通テスト型の実戦問題を追加し、合格点、初回・再挑戦報酬、次のバトル1回だけ有効なEnergy・回復・コイン報酬を選べるようにしました。',isNew:false},
     {version:'v3.8',title:'長期記憶・出題タイミング最適化',body:'画面や操作を増やさず、問題ごとの正誤と経過時間に応じて出題優先度を調整します。誤答は約12時間後、正答は3日・7日・14日・30日・45〜60日後を目安に再出題し、同一30問・近似20問・類題8問の短時間連続防止も維持します。',isNew:false},
     {version:'v3.7',title:'開発・検査・配布作業の効率化',body:'問題データ、版情報、ゲーム本体テンプレートを分離し、1コマンドで生成・検査・配布ZIP作成まで行える開発基盤へ整理しました。プレイヤー向けのゲーム内容は変更していません。',isNew:false},
     {version:'v3.6.1',title:'旧版継続を禁止する必須アップデート',body:'新しい版を検出した場合は戦闘と画面操作を停止し、進行を保存して自動的に最新版へ切り替えるようにしました。「あとで」は廃止し、更新準備中もゲームを続けられません。オンライン中は5分ごと、画面へ戻った際は1分以上経過していれば最新版を確認します。',isNew:true},
@@ -31162,7 +35120,17 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
     {version:'安全確認',title:'ユーザー名をLINEで送ってください',body:'登録したユーザー名、または変更後のユーザー名を作成者へLINEで送ってください。本名・学校名・SNS IDは使わないでください。',isNew:false}
   ];
   const updateHistory = [
-    ["v4.45","v4.4の要望管理・飛行表示・Stage 5実績・再生産クールタイム修正を統合。v4.45ではrequestAdmins方式を廃止し、匿名認証を含むログイン済みの全ユーザーが全要望を実装済み／検討中へ変更・削除できるように変更。削除前には確認画面を表示。"],
+    ["v5.0","Stage 8「蓄積急襲区」を追加。Wave 10のO₃ BOSSは第二形態なし・通常敵級HP・強襲型Lv.MAX超えの速度。出現時に戦闘を停止して全味方を消去し、通常BOSS演出後に戦闘再開。Energy上限強化をLv.12・最大265へ拡張し、125以上を蓄えて再展開する攻略を追加。"],
+    ['v4.6','弱塩基由来陽イオン100％のStage 7「弱塩基遊離区」を追加。第5ユニットKOHの強塩基で弱塩基の遊離が発生し1.4倍。BOSSは予告後に増援を召集。'],
+    ['v4.5','半反応式の基本40問・難問30問を追加。飛行型の時間経過自傷を廃止し、弱酸由来陰イオン100％のStage 6「弱酸遊離区」を追加。BOSSは予告後に弱酸由来イオンを召集。'],
+    ['v4.45','v4.4の全修正を統合し、requestAdmins方式を廃止。匿名認証を含むログイン済みの全ユーザーが、すべての要望を実装済み／検討中へ変更し、削除できる方式へ変更。'],
+    ['v4.4','要望一覧へ実装済み切替と削除を追加。飛行型の表示位置を約1体分上へ移動し、Stage 5実績が解除されない旧セーブを自動修復。再生産クールタイムの表示と実際の召喚可否を同期。'],
+    ['v4.3','弱酸・弱塩基そのものへ遊離相性を出していた誤りを修正。強酸は弱酸由来陰イオン、強塩基は弱塩基由来陽イオンにのみ1.4倍とし、反応式・物質名・H₂O₂・Stage 3 BOSSの化学表記も監査。'],
+    ['v4.2','二段階BOSSの第1形態撃破時に戦闘全体を停止し、専用変身演出、第二形態への変化、通常BOSS出現演出を順番に再生してから戦闘を再開するシーケンスを追加。'],
+    ['v4.1','全StageのBOSS出現時に、黒い圧力波、暗転、画面振動、専用表示、Web Audioによる低音を組み合わせた独自演出を追加。'],
+    ['v4.0','基本480問・難問250問・実戦8大問40小問へ増量。問題メタデータ・選択肢別解説・数値誤答監査を追加し、過去機能の実装監査、旧セーブ移行、開発ソース分割、自動回帰検査を実施。'],
+    ['v3.95','ポーズ画面から同じStageのWave 1へやり直す機能と、倍速試験で不正解になった後30秒間再挑戦できない制限を追加。再読み込みによる回避も防止。'],
+    ['v3.9','共通テスト型の実戦問題を5大問25小問追加。3/5以上で合格し、初回・再挑戦報酬と、次のバトル1回だけ有効なEnergy・回復・コイン報酬を選べるようにしました。'],
     ['v3.8','新しい画面を増やさず、問題ごとの正誤と経過時間に基づく長期記憶向け出題を実装。誤答は約12時間後、正答は3日・7日・14日・30日・45〜60日後を目安に優先し、同一30問・近似20問・類題8問の出題分散を維持。'],
     ['v3.7','通常問題・難問・ゲーム設定・版情報・テンプレートを分離し、生成、構文検査、問題検査、出題分散試験、文書・ZIP作成を1コマンドへ統合。GitHub Actionsでも生成元と公開物の同期を検査。'],
     ['v3.6.1','更新を「あとで」にできる仕様を廃止。新版を検出するとゲーム操作をロックし、進行を保存して自動更新。更新準備中も旧版でのプレイを続けられない必須アップデート方式へ変更。'],
@@ -32145,7 +36113,7 @@ initializeFirebase();
   <script>
   (() => {
     'use strict';
-    const CURRENT_VERSION = '4.45';
+    const CURRENT_VERSION = '5.0';
     const VERSION_CHECK_INTERVAL = 5 * 60 * 1000;
     const VERSION_FOCUS_MIN_INTERVAL = 60 * 1000;
     let registration = null;
