@@ -1,13 +1,18 @@
 {
   "name": "chemion-quest",
   "private": true,
-  "version": "3.7.0",
+  "version": "4.45.0",
   "type": "module",
   "scripts": {
     "build": "node scripts/build.mjs",
     "build:check": "node scripts/build.mjs --check",
     "validate": "node scripts/validate.mjs",
     "test:rotation": "node scripts/test-rotation.mjs",
-    "release": "node scripts/release.mjs"
+    "release": "node scripts/release.mjs",
+    "audit": "node scripts/audit-features.mjs",
+    "audit:questions": "node scripts/audit-questions.mjs",
+    "test:features": "node scripts/test-features.mjs",
+    "test:browser": "python3 scripts/browser-smoke.py",
+    "audit:chemistry": "node scripts/audit-chemistry.mjs"
   }
 }

@@ -1,11 +1,27 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
+    function validRequestStatusUpdate() {
+      return request.resource.data.diff(resource.data).affectedKeys()
+               .hasOnly(['status', 'implementedAt', 'implementedBy'])
+             && request.resource.data.status in ['検討中', '実装済み']
+             && (
+               (request.resource.data.status == '実装済み'
+                && request.resource.data.implementedAt is timestamp
+                && request.resource.data.implementedBy == request.auth.uid)
+               ||
+               (request.resource.data.status == '検討中'
+                && request.resource.data.implementedAt == null
+                && request.resource.data.implementedBy == null)
+             );
+    }
+
     match /players/{userId} {
       allow read: if true;
       allow create, update: if request.auth != null && request.auth.uid == userId;
       allow delete: if false;
     }
+
     match /requests/{requestId} {
       allow read: if true;
       allow create: if request.auth != null
@@ -17,8 +33,9 @@ service cloud.firestore {
                     && request.resource.data.text.size() >= 5
                     && request.resource.data.text.size() <= 300
                     && request.resource.data.status == '検討中';
-      allow update: if false;
-      allow delete: if request.auth != null && resource.data.userId == request.auth.uid;
+      // v4.45: 匿名認証を含むログイン済みの全ユーザーが、全要望の状態変更と削除を行える。
+      allow update: if request.auth != null && validRequestStatusUpdate();
+      allow delete: if request.auth != null;
     }
   }
 }

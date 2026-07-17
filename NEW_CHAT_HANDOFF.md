@@ -2,53 +2,66 @@
 
 ## 現在の最新版
 
-- バージョン: v3.7
-- リリース名: 開発効率化アップデート
+- バージョン: v4.45
+- リリース名: 全員要望管理方式・v4.4統合アップデート
 - 公開URL: `https://c95dw9z4s6-cyber.github.io/chemimon-quest/`
-- 内部セーブバージョン: 27
-- 基本問題: 320問
-- 難問: 182問
+- 内部セーブバージョン: 31
+- 基本問題: 480問
+- 難問: 250問
+- 実戦問題: 8大問・40小問
 
-## v3.7の主要変更
+## v4.45の主要変更
 
-- 通常問題、難問、ゲーム設定をdataフォルダーのJSONへ分離しました。
-- config/release.jsonの1か所を基準に、ゲーム画面、version.json、Service Worker、README、引き継ぎ文書へ版情報を自動反映します。
-- npm run releaseで、生成・構文検査・問題検査・出題分散試験・配布フォルダー・ZIP作成まで一括実行します。
-- 生成済みファイルと開発元データの不一致をGitHub Actionsで検出し、検査に失敗した版は公開しません。
-- ゲーム内容、基本問題320問、難問182問、内部セーブバージョン27、Firebase、ランキング、PWA、必須更新を維持しました。
+- 要望一覧の管理権限を変更し、匿名認証を含むログイン済みの全ユーザーが、すべての要望を「実装済み／検討中」へ変更し、削除できるようにしました。
+- requestAdminsコレクションと製作者向け管理者ID設定を廃止しました。管理者登録は不要です。削除時には元に戻せないことを確認する画面を表示します。
+- v4.4の修正をすべて維持しています。飛行型は従来より42px上に表示され、Stage 5実績の旧セーブ補完と、再生産クールタイム終了直後の召喚修正が含まれます。
+- v4.3の化学的に正しい遊離相性、ボス出現演出、第二形態演出、問題数、内部セーブバージョン31を維持しています。
 
 ## 開発元の基準
 
-`index.html`は生成物です。次回以降は、以下を基準に編集してください。
+`index.html`は生成物です。次回以降は以下を編集してください。
 
-- 版情報・更新説明: `config/release.json`
+- 版情報: `config/release.json`
+- 必須機能一覧: `config/features.json`
 - 通常問題: `data/basic-questions.json`
 - 難問: `data/hard-questions.json`
-- 問題以外のゲーム設定: `data/game-core.json`
-- HTML・JavaScript・CSS: `src/index.template.html`
+- 実戦問題: `data/mock-exams.json`
+- ゲーム設定・実績: `data/game-core.json`
+- HTML構造: `src/index.template.html`
+- CSS: `src/styles/*.css`
+- 戦闘・クイズ・学習・セーブ: `src/scripts/game-runtime.js`
+- Firebase・ランキング: `src/scripts/online-runtime.js`
+- PWA・必須更新: `src/scripts/pwa-runtime.js`
 - Service Worker: `src/sw.template.js`
 
-編集後は`npm run release`を実行します。生成済み`index.html`だけを直接修正すると、`npm run validate`とGitHub Actionsが不一致として停止します。
+編集後は`npm run release`を実行します。生成済み`index.html`を直接修正すると、GitHub Actionsが不一致として停止します。
 
 ## 維持するゲーム仕様
 
-- Firebase、匿名認証、ランキング、ニックネーム、公開要望
-- Stage 1〜5、研究カード、飛行型、二段階BOSS
-- 専用倍速試験、ポーズ、中断保存、セーブコード
+- Firebase、匿名認証、ランキング、ニックネーム、公開要望（ログイン済みの全ユーザーが状態変更・削除可能）
+- Stage 1〜5、研究カード、飛行型（表示＋42px）、二段階BOSS
+- 二段階BOSSは第1形態撃破時に全戦闘を停止し、専用変身演出後に通常BOSS出現演出を再度再生してから再開
+- 専用倍速試験、誤答後30秒制限、ポーズからWave 1再開
 - 学習記録、練習、復習、段階ヒント、習熟度
+- 誤答12時間、正答3・7・14・30・45・60日の間隔反復
 - 同一問題30問、近似問題20問、同じ類題グループ8問の出題分散
+- 実戦問題8大問・40小問と次回バトル報酬
 - 難問の出典表示、化学式直後の句点分離
-- PWA、オフライン起動、5分ごとの更新確認、必須アップデート
-- localStorageとセーブコードの既存互換
+- 中和は演出のみでダメージ倍率変化なし
+- 強酸→弱酸由来陰イオン、強塩基→弱塩基由来陽イオンのみ遊離相性1.4倍
+- 弱酸・弱塩基そのものは遊離相性の対象外。反応式は`liberationReaction`で管理
+- PWA、オフライン起動、必須アップデート
+- v3.95のセーブバージョン30を含む既存セーブ互換。Stage 5クリア済み旧セーブはstage5Clearsを自動補完
 
 ## 必須検査
 
 1. `npm run build`
 2. `npm run validate`
 3. `npm run release`
-4. `release/`内のZIP破損確認
-5. 公開後にSafariまたはChromeで版表示、セーブ、ランキング、必須更新を確認
+4. `docs/IMPLEMENTATION_AUDIT.md`、`docs/QUESTION_QUALITY_REPORT.md`、`docs/CHEMISTRY_AUDIT.md`を確認
+5. 配布ZIPを別フォルダーへ展開し、`npm run build:check`と`npm run validate`
+6. 公開後にSafariまたはChromeで版表示、旧セーブ移行、ランキング、必須更新を確認
 
 ## 次回の依頼文
 
-> Chemion Quest v3.7の続きです。添付した一式ZIPを最新版の基準にしてください。NEW_CHAT_HANDOFF.mdを維持し、指定した次版を実装してください。生成済みindex.htmlを直接編集せず、config・data・srcを編集してnpm run releaseを実行し、検査済みのindex.html、一式ZIP、READMEをください。
+> Chemion Quest v4.45の続きです。添付した一式ZIPを最新版の基準にしてください。NEW_CHAT_HANDOFF.mdと監査仕様を維持し、指定した次版を実装してください。生成済みindex.htmlを直接編集せず、config・data・srcを編集してnpm run releaseを実行し、検査済みのindex.html、一式ZIP、README、監査レポートをください。
