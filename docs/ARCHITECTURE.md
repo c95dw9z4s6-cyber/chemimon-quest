@@ -1,8 +1,8 @@
-# Chemion Quest 開発構成（v4.45）
+# Chemion Quest 開発構成（v4.6）
 
 ## 基本方針
 
-公開用`index.html`は自動生成物です。直接編集せず、`config/`、`data/`、`src/`を変更します。v4.0で開発元を分割し、v4.1でボス出現演出、v4.2で二段階BOSSの形態移行、v4.3で化学相性と反応表記の監査層を追加し、v4.4で要望管理・飛行表示・Stage 5実績・再生産クールタイムの回帰修正を追加し、v4.45で要望管理を全ユーザー方式へ変更しました。
+公開用`index.html`は自動生成物です。直接編集せず、`config/`、`data/`、`src/`を変更します。v4.0で開発元を分割し、v4.1でボス出現演出、v4.2で二段階BOSSの形態移行、v4.3で化学相性と反応表記の監査層を追加し、v4.4で要望管理・飛行表示・Stage 5実績・再生産クールタイムの回帰修正を追加し、v4.45で要望管理を全ユーザー方式へ変更し、v4.5で半反応式・飛行型調整・Stage 6を追加しました。
 
 ## 編集場所
 
@@ -86,3 +86,20 @@ GitHub Pagesで配信する主なファイルは`index.html`、`manifest.webmani
 - 飛行型の描画Y座標へ`FLYING_EXTRA_RENDER_OFFSET = 42`を追加しました。
 - Stage 5クリア実績は`stage5Clears`を専用指標とし、旧セーブでは`highestStageCleared >= 5`から補完します。
 - 再生産は`summonCooldownRemaining()`を表示と召喚判定の共通基準とし、0.1秒周期でボタン状態を同期します。
+
+
+## v4.5 Stage 6・半反応式
+
+- `data/game-core.json`へ`stage6`を追加しました。
+- Stage 6の全敵は`weak_acid_conjugate_base`を持ち、第5ユニットは`strong_acid`です。
+- BOSS召集は`bossSummonInterval`、`bossSummonWarning`、`bossSummonCount`、`bossSummonPool`でデータ駆動します。
+- 飛行型の`selfDamagePerSecond`をデータ・処理・表示から削除しました。
+- 半反応式は基本40問・難問30問を追加し、基本520問・難問280問です。
+
+
+## v4.6 Stage 7
+
+- `data/game-core.json`へ`stage7`を追加しました。
+- Stage 7の全敵は`weak_base_conjugate_acid`を持ち、第5ユニットは`strong_base`です。
+- Stage 6とStage 7のBOSS召集表示を、敵の遊離対象に応じて弱酸／弱塩基へ切り替える共通処理にしました。
+- `highestStageCleared >= 6`の旧セーブは、Stage 7を自動解放します。
