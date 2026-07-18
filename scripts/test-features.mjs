@@ -16,7 +16,7 @@ test(runtime.includes('chemionQuestSpeedTrialRetryV1'),'speed cooldown persisten
 test(runtime.includes('SPACING_CORRECT_INTERVAL_DAYS = [3, 7, 14, 30, 45, 60]'),'spacing schedule changed');
 test(runtime.includes('SPACING_INCORRECT_DELAY_HOURS = 12'),'incorrect spacing changed');
 test(runtime.includes('function migrateSaveData(input)'),'save migration function missing');
-test(/29, 30, 31, D\.version/.test(runtime),'v30-v31 save compatibility missing');
+test(/29, 30, 31, 32, D\.version/.test(runtime),'v30-v32 save compatibility missing');
 test(template.includes('id="bossArrivalFx"'),'boss arrival overlay missing');
 test(runtime.includes('function triggerBossArrivalEffect'),'boss arrival trigger missing');
 test(runtime.includes('function playBossArrivalSound'),'boss arrival sound missing');
@@ -131,7 +131,7 @@ test(runtime.includes("currentStageId % 5 === 0 ? 'difficult' : 'normal'") && ru
 test(runtime.includes('if (document.hidden) { pauseBgm(); suspendForHiddenPage(); }'),'BGM hidden-page suspension missing');
 test(runtime.includes('writeTransferValue(BGM_KEY, bundle.storage.bgm)') && runtime.includes('writeTransferValue(BGM_VOLUME_KEY, bundle.storage.bgmVolume)'),'BGM transfer restore missing');
 const swTemplate=fs.readFileSync(path.join(projectRoot,'src/sw.template.js'),'utf8');
-test(swTemplate.includes('./assets/audio/chemion-normal-bgm.mp3') && swTemplate.includes('./assets/audio/chemion-difficult-bgm.mp3'),'BGM offline cache missing');
+test(swTemplate.includes('./assets/audio/chemion-normal-bgm.mp3') && swTemplate.includes('./assets/audio/chemion-difficult-bgm.mp3') && swTemplate.includes('./assets/audio/chemion-milestone-stage-bgm-v3.mp3'),'BGM offline cache missing');
 const generatedSw=fs.readFileSync(path.join(projectRoot,'sw.js'),'utf8');
 test(generatedSw.includes(`shell-v${release.version}`) && generatedSw.includes(`runtime-v${release.version}`),`v${release.version} PWA cache names missing`);
 test(generatedSw.includes('./assets/audio/chemion-stage10-au-boss-v16-loop.mp3'),'Stage 10 V16 loop PWA cache missing');

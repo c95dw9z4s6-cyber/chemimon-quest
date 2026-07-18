@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import crypto from 'node:crypto';
 import { projectRoot, readJson, loadReleaseConfig } from './lib.mjs';
 
 const html = fs.readFileSync(path.join(projectRoot, 'index.html'), 'utf8');
@@ -26,7 +27,7 @@ const checks = {
       && cleared?.metric === 'stage5Clears' && cleared?.goal === 1;
   })(),
   'neutralization-guide': template.includes('中和によるダメージ倍率の変化はありません'),
-  'save-v30-migration': runtime.includes('function migrateSaveData(input)') && /29, 30, 31, D\.version/.test(runtime),
+  'save-v30-migration': runtime.includes('function migrateSaveData(input)') && /29, 30, 31, 32, D\.version/.test(runtime),
   'modular-source': ['src/styles/core.css','src/styles/release.css','src/scripts/game-runtime.js','src/scripts/online-runtime.js','src/scripts/pwa-runtime.js'].every((file) => fs.existsSync(path.join(projectRoot,file))),
   'boss-arrival-effect': template.includes('id="bossArrivalFx"') && runtime.includes('function triggerBossArrivalEffect') && runtime.includes('function playBossArrivalSound') && fs.readFileSync(path.join(projectRoot,'src/styles/core.css'),'utf8').includes('@keyframes bossBlackWave'),
   'boss-second-phase-cinematic': template.includes('id="bossPhaseFx"') && runtime.includes('function beginBossSecondPhaseSequence') && runtime.includes('bossPhaseTransitionActive') && runtime.includes('triggerBossArrivalEffect(enemy, { formula: enemy.formula, name: enemy.name })') && fs.readFileSync(path.join(projectRoot,'src/styles/core.css'),'utf8').includes('@keyframes bossPhaseCollapse'),
@@ -157,9 +158,37 @@ const checks = {
     && runtime.includes("damageType === 'physical' || damageType === 'aqua_regia'")
     && runtime.includes('function beginStage10AuFormation(enemy)')
     && runtime.includes('function beginAquaAuContact()')
-    && runtime.includes("stage10State?.phase === 'combat' || stage10State?.phase === 'victory'")
+    && runtime.includes("['protected', 'combat', 'victory'].includes(stage10State?.phase)")
     && fs.existsSync(path.join(projectRoot,'assets/audio/chemion-stage10-au-boss-v16-loop.mp3'))
     && fs.readFileSync(path.join(projectRoot,'src/sw.template.js'),'utf8').includes('./assets/audio/chemion-stage10-au-boss-v16-loop.mp3'),
+  'stage10-time-attack': template.includes('id="timeAttackStartBtn"')
+    && template.includes('id="timeAttackResultModal"')
+    && runtime.includes('function beginTimeAttack()')
+    && runtime.includes('function restoreNormalAfterTimeAttack')
+    && runtime.includes('if (isTimeAttackActive())')
+    && runtime.includes('timeAttackNormalSave')
+    && runtime.includes('TIME_ATTACK_BACKGROUND_LIMIT_MS'),
+  'stage10-time-attack-ranking': (() => {
+    const online = fs.readFileSync(path.join(projectRoot,'src/scripts/online-runtime.js'),'utf8');
+    const rules = fs.readFileSync(path.join(projectRoot,'firestore.rules'),'utf8');
+    return template.includes('id="timeAttackRankingModal"')
+      && online.includes("TIME_ATTACK_COLLECTION = 'stage10TimeAttack'")
+      && online.includes('runTransaction')
+      && online.includes("f.orderBy('bestMs', 'asc')")
+      && rules.includes('match /stage10TimeAttack/{userId}')
+      && rules.includes('request.resource.data.bestMs < resource.data.bestMs');
+  })(),
+  'stage10-v3-v16-presentation': (() => {
+    const v3 = path.join(projectRoot,'assets/audio/chemion-milestone-stage-bgm-v3.mp3');
+    const sw = fs.readFileSync(path.join(projectRoot,'src/sw.template.js'),'utf8');
+    const digest = fs.existsSync(v3) ? crypto.createHash('sha256').update(fs.readFileSync(v3)).digest('hex') : '';
+    return digest === '14600796c5beea7b3f81679a8c4bc2c7d535b1448b6985af7b0a857e3bd5c2ba'
+      && runtime.includes("milestoneV3: { src: \"assets/audio/chemion-milestone-stage-bgm-v3.mp3\"")
+      && runtime.includes("['protected', 'combat', 'victory'].includes(stage10State?.phase)")
+      && runtime.includes('function drawStage10Atmosphere()')
+      && runtime.includes('function drawStage10AbilityWarnings()')
+      && sw.includes('./assets/audio/chemion-milestone-stage-bgm-v3.mp3');
+  })(),
   'complete-update-history': ['v3.9','v3.95','v4.0','v4.1','v4.2','v4.3','v4.4','v4.45'].every((version)=>runtime.includes(`['${version}'`) && runtime.includes(`{version:'${version}'`))
 };
 

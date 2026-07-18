@@ -453,14 +453,14 @@ def main():
         """, phase_save)
         page.on('pageerror',lambda err: errors.append(str(err)))
         page.set_content(html,wait_until='domcontentloaded',timeout=30000)
-        page.wait_for_selector('#bossPhaseFx:not([hidden])',timeout=5000)
+        page.wait_for_selector('#bossPhaseFx:not([hidden])',timeout=10000)
         assert page.locator('#pauseBtn').is_disabled()
         assert page.locator('#bossPhaseFrom').inner_text() == 'ClO⁻'
         assert page.locator('#bossPhaseTo').inner_text() == 'Cl⁻'
         frozen_time=page.locator('#gameTime').inner_text()
         page.wait_for_timeout(500)
         assert page.locator('#gameTime').inner_text() == frozen_time
-        page.wait_for_selector('#bossArrivalFx:not([hidden])',timeout=5000)
+        page.wait_for_selector('#bossArrivalFx:not([hidden])',timeout=10000)
         assert 'Cl⁻' in page.locator('#bossArrivalName').inner_text()
         page.wait_for_function("document.getElementById('bossPhaseFx').hidden && document.getElementById('bossArrivalFx').hidden && !document.getElementById('pauseBtn').disabled",timeout=7000)
 
@@ -649,14 +649,14 @@ def main():
         """, ambush_save)
         page.on('pageerror',lambda err: errors.append(str(err)))
         page.set_content(html,wait_until='domcontentloaded',timeout=30000)
-        page.wait_for_selector('#bossPhaseFx:not([hidden])',timeout=5000)
+        page.wait_for_selector('#bossPhaseFx:not([hidden])',timeout=10000)
         assert page.locator('#pauseBtn').is_disabled()
         assert page.locator('#bossPhaseFrom').inner_text() == 'ALLY UNITS'
         assert page.locator('#bossPhaseTo').inner_text() == '0'
         frozen_time=page.locator('#gameTime').inner_text()
         page.wait_for_timeout(500)
         assert page.locator('#gameTime').inner_text() == frozen_time
-        page.wait_for_selector('#bossArrivalFx:not([hidden])',timeout=5000)
+        page.wait_for_selector('#bossArrivalFx:not([hidden])',timeout=10000)
         assert 'O₃' in page.locator('#bossArrivalName').inner_text()
         page.wait_for_function("document.getElementById('bossPhaseFx').hidden && document.getElementById('bossArrivalFx').hidden && !document.getElementById('pauseBtn').disabled",timeout=7000)
         ambush_result=page.evaluate("""

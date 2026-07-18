@@ -10,11 +10,11 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Chemion Quest">
-  <meta name="cq-app-version" content="6.0">
+  <meta name="cq-app-version" content="6.1">
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
   <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
-  <title>Chemion Quest v6.0</title>
+  <title>Chemion Quest v6.1</title>
   <style>
 :root {
   color-scheme: dark;
@@ -1044,7 +1044,7 @@ body[data-stage="4"] .stage-button{border-color:#85e8ff;background:linear-gradie
 @media(max-width:760px){.research-card-grid{grid-template-columns:1fr}.research-card-choice{min-height:0}.research-loadout{max-width:180px}.research-loadout-chip{font-size:8px}}
 
 
-/* v6.0 mandatory PWA update UI */
+/* v6.1 mandatory PWA update UI */
 .pwa-update-banner{position:fixed;inset:0;z-index:99999;display:grid;place-items:center;width:auto;transform:none;padding:max(18px,env(safe-area-inset-top)) 18px max(18px,env(safe-area-inset-bottom));border:0;border-radius:0;background:rgba(1,7,16,.94);backdrop-filter:blur(10px);color:#eafcff}.pwa-update-banner[hidden]{display:none}.pwa-update-card{width:min(620px,100%);padding:22px;border:1px solid rgba(120,230,255,.62);border-radius:20px;background:linear-gradient(145deg,rgba(10,34,57,.99),rgba(5,16,30,.995));box-shadow:0 22px 70px rgba(0,0,0,.66),0 0 32px rgba(69,213,255,.22);text-align:center}.pwa-update-copy{display:grid;gap:7px;min-width:0}.pwa-update-copy strong{font-size:1.18rem}.pwa-update-copy span{color:#d3e8f2;font-size:.88rem;line-height:1.7}.pwa-update-actions{display:flex;justify-content:center;margin-top:16px}.pwa-update-actions button{min-width:220px}.pwa-update-actions button:disabled{opacity:.72;cursor:progress}.pwa-update-note{margin:12px 0 0;color:#ffe5a3;font-size:.74rem;line-height:1.55}.pwa-offline-banner{position:fixed;right:12px;top:max(12px,env(safe-area-inset-top));z-index:3000;padding:8px 11px;border:1px solid rgba(255,210,113,.44);border-radius:999px;background:rgba(73,49,8,.94);box-shadow:0 10px 30px rgba(0,0,0,.32);color:#ffe8a6;font-size:.74rem;font-weight:850}.pwa-offline-banner[hidden]{display:none}.pwa-info-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:12px 0}.pwa-info-card{padding:12px;border:1px solid var(--line);border-radius:13px;background:rgba(8,27,46,.78)}.pwa-info-card small,.pwa-info-card strong{display:block}.pwa-info-card small{color:var(--muted);font-size:.68rem;letter-spacing:.08em}.pwa-info-card strong{margin-top:4px;font-size:.92rem}.pwa-help{padding:12px;border:1px solid rgba(111,231,255,.22);border-radius:13px;background:rgba(9,34,53,.62);color:#cfe7f1;line-height:1.65}.pwa-view-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.pwa-view-status{min-height:1.6em;margin:10px 0 0;color:#aeeeff;white-space:pre-wrap}.pwa-installed-badge{display:inline-flex;align-items:center;gap:5px;padding:4px 8px;border-radius:999px;background:rgba(112,231,168,.14);color:#9ff4c4;font-size:.72rem;font-weight:900}body.pwa-update-required{overflow:hidden}body.pwa-update-required>*:not(#pwaUpdateBanner){pointer-events:none!important;user-select:none!important}.pwa-update-banner{pointer-events:auto!important}
 @media(max-width:620px){.pwa-update-card{padding:18px 15px}.pwa-update-actions{display:grid}.pwa-update-actions button{width:100%;min-width:0}.pwa-info-grid{grid-template-columns:1fr}.pwa-view-actions{display:grid}.pwa-view-actions button{width:100%}}
 
@@ -1331,6 +1331,16 @@ body.low-power-mode .settings-section{box-shadow:none!important}
 @keyframes stage10GoldPulse{50%{transform:scale(.82);opacity:.42}}@keyframes stage10GoldGather{50%{transform:scale(.7);opacity:.82}}
 body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinematic-particles{display:none}
 @media(max-width:620px){.aqua-regia-head{display:grid}.aqua-regia-actions{display:grid}.aqua-regia-actions button{width:100%;min-width:0}.stage10-cinematic{padding:16px}.stage10-cinematic small{font-size:.72rem}}
+
+/* v6.1: isolated Stage 10 time attack and presentation quality */
+.time-attack-indicator{position:fixed;left:max(10px,env(safe-area-inset-left));bottom:max(10px,env(safe-area-inset-bottom));z-index:1250;display:flex;align-items:center;gap:10px;max-width:min(460px,calc(100vw - 20px));padding:8px 10px;border:1px solid rgba(255,218,91,.62);border-radius:14px;background:rgba(37,27,5,.96);box-shadow:0 10px 30px rgba(0,0,0,.38);color:#fff3b8}.time-attack-indicator[hidden]{display:none}.time-attack-indicator>span{display:grid;grid-template-columns:auto auto;column-gap:10px;align-items:baseline;min-width:0}.time-attack-indicator b{font-size:.66rem;letter-spacing:.08em}.time-attack-indicator strong{color:#fff0a2;font:950 1.18rem/1 ui-monospace,SFMono-Regular,Consolas,monospace;font-variant-numeric:tabular-nums}.time-attack-indicator small{grid-column:1/-1;margin-top:3px;color:#ffe3a0;font-size:.66rem}.time-attack-indicator.invalid{border-color:rgba(255,125,143,.64);background:rgba(60,12,22,.96)}.time-attack-indicator.invalid small{color:#ffd0d7}.time-attack-indicator .small-button{min-height:36px;margin:0;padding:7px 9px;white-space:nowrap}
+.time-attack-launch-panel{grid-column:1/-1;margin-top:14px;padding:15px;border:1px solid rgba(255,216,93,.4);border-radius:15px;background:linear-gradient(145deg,rgba(74,51,8,.43),rgba(6,24,40,.86))}.time-attack-launch-panel h3{margin:3px 0 0;color:#fff0ae}.time-attack-launch-panel p{margin:9px 0;color:#dceaf0;line-height:1.55}.time-attack-launch-actions,.time-attack-result-actions{display:flex;flex-wrap:wrap;gap:8px}.time-attack-launch-actions button,.time-attack-result-actions button{margin-top:0;min-width:190px}.time-attack-result-card{text-align:center;max-width:620px}.time-attack-result-time{display:block;margin:14px 0;color:#ffe17d;font:950 clamp(2.2rem,10vw,4.8rem)/1 ui-monospace,SFMono-Regular,Consolas,monospace;font-variant-numeric:tabular-nums}.time-attack-result-actions{justify-content:center;margin-top:18px}.time-attack-ranking-time{color:#ffe17d;font:950 1.05rem ui-monospace,SFMono-Regular,Consolas,monospace;font-variant-numeric:tabular-nums}
+.stage10-gold-pressure{position:absolute;inset:0;pointer-events:none}.stage10-gold-pressure i{position:absolute;left:50%;top:50%;width:18%;aspect-ratio:1;border:2px solid rgba(255,226,119,.42);border-radius:50%;transform:translate(-50%,-50%);animation:stage10Pressure 1.35s cubic-bezier(.15,.72,.24,1) infinite}.stage10-gold-pressure i:nth-child(2){animation-delay:-.44s}.stage10-gold-pressure i:nth-child(3){animation-delay:-.88s}.stage10-cinematic{pointer-events:none;background:radial-gradient(circle at center,rgba(109,76,12,.42),rgba(2,7,13,.72) 66%);backdrop-filter:blur(1px)}.stage10-cinematic[data-kind="aqua"]{background:radial-gradient(circle at 42% 48%,rgba(24,101,146,.42),rgba(113,58,18,.3) 38%,rgba(2,7,13,.7) 72%)}.stage10-cinematic[data-kind="aqua"]::before{border-color:rgba(111,224,255,.48);transform:rotate(17deg)}.stage10-cinematic[data-kind="aqua"]::after{border-color:rgba(255,181,91,.45);transform:rotate(-23deg)}.stage10-cinematic[data-kind="aqua"] .stage10-cinematic-particles{background-image:radial-gradient(circle,#8eeaff 0 2px,transparent 3px),radial-gradient(circle,#ffb96b 0 3px,transparent 4px)}.stage10-cinematic[data-kind="victory"]{background:radial-gradient(circle,rgba(55,126,96,.42),rgba(2,7,13,.74) 68%)}
+@keyframes stage10Pressure{0%{width:12%;opacity:.72}100%{width:94%;opacity:0}}
+@media(max-width:620px){.time-attack-indicator{right:10px;align-items:stretch}.time-attack-indicator>span{flex:1}.time-attack-indicator .small-button{font-size:.68rem}.time-attack-launch-actions,.time-attack-result-actions{display:grid}.time-attack-launch-actions button,.time-attack-result-actions button{width:100%;min-width:0}.time-attack-result-time{font-size:2.35rem}}
+@media(max-width:360px){.time-attack-indicator{display:grid}.time-attack-indicator>span{grid-template-columns:1fr auto}.time-attack-indicator .small-button{width:100%}}
+@media(prefers-reduced-motion:reduce){.stage10-gold-pressure i,.stage10-cinematic::before,.stage10-cinematic::after,.stage10-cinematic-particles{animation:none!important}.stage10-gold-pressure i:nth-child(n+2){display:none}.stage10-cinematic{backdrop-filter:none}}
+body.low-power-mode .stage10-gold-pressure i:nth-child(n+2){display:none}
 </style>
 
 <style>
@@ -1343,7 +1353,7 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
 /* v3.4 question punctuation, clear restart, and dedicated speed trial */
 /* v3.5 question rotation, expanded hard quiz, and source clarity */
 /* v3.9 common-test-style mock exams and distractor-quality audit */
-/* v6.0 mandatory updates and automated publication checks */
+/* v6.1 mandatory updates and automated publication checks */
 .tutorial-overlay{position:fixed;inset:0;z-index:2600;pointer-events:none}
 .tutorial-spotlight{position:fixed;border:3px solid #8ff5ff;border-radius:16px;box-shadow:0 0 0 9999px rgba(1,7,16,.68),0 0 0 7px rgba(77,220,255,.16),0 0 26px rgba(92,229,255,.9);transition:left .2s ease,top .2s ease,width .2s ease,height .2s ease;pointer-events:none}
 .tutorial-bubble{position:fixed;width:min(360px,calc(100vw - 24px));padding:17px;border-radius:18px;background:linear-gradient(145deg,rgba(10,29,48,.98),rgba(5,15,29,.99));border:1px solid rgba(122,229,255,.5);box-shadow:0 18px 55px rgba(0,0,0,.52),0 0 28px rgba(67,212,255,.18);color:#ecfbff;pointer-events:auto}
@@ -1381,7 +1391,7 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
       <div class="brand-area">
         <div class="brand-mark" aria-hidden="true">CQ</div>
         <div>
-          <h1>Chemion Quest <span>v6.0</span></h1>
+          <h1>Chemion Quest <span>v6.1</span></h1>
           <p class="subtitle">クイズで召喚する化学タワーディフェンス</p>
         </div>
       </div>
@@ -1401,6 +1411,10 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
     </header>
 
     <div id="guestAssistIndicator" class="guest-assist-indicator" role="status" hidden>ゲストアシスト中</div>
+    <div id="timeAttackIndicator" class="time-attack-indicator" role="status" hidden>
+      <span><b>STAGE 10 TIME ATTACK</b><strong id="timeAttackClock">0:00.00</strong><small id="timeAttackValidity">公式記録走行中</small></span>
+      <button id="timeAttackExitBtn" class="small-button" type="button">中断して通常へ戻る</button>
+    </div>
 
     <section id="hud" class="hud" aria-label="ゲーム情報">
       <div class="hud-card"><span class="hud-label">ENERGY</span><strong><span id="energy">0</span> / <span id="maxEnergy">0</span></strong><span class="hud-subtext">回復 <span id="energyRate">1.00</span>/秒</span></div>
@@ -1445,6 +1459,7 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
       <div id="battleMessage" class="battle-message" aria-live="polite"></div>
       <div id="researchLoadout" class="research-loadout" hidden aria-label="選択中の研究カード"></div>
       <div id="stage10Cinematic" class="stage10-cinematic" hidden aria-live="assertive" aria-atomic="true">
+        <div class="stage10-gold-pressure" aria-hidden="true"><i></i><i></i><i></i></div>
         <div class="stage10-cinematic-particles" aria-hidden="true"></div>
         <p id="stage10CinematicKicker">GOLD REACTION</p>
         <strong id="stage10CinematicTitle">79 Au</strong>
@@ -1476,7 +1491,7 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
           <b id="aquaRegiaLevel">Lv.1 / 10</b>
         </div>
         <p class="aqua-regia-ratio">濃硝酸：濃塩酸＝1：3（体積比）</p>
-        <p class="aqua-regia-safety">危険：これは抽象化された学習表現です。実物を混合しないでください。</p>
+        <p class="aqua-regia-safety">危険：これは抽象化された学習表現です。実際に混ぜたり試したりしないでください。</p>
         <div class="aqua-regia-progress" aria-live="polite">
           <span id="aquaNitricCount">HNO₃ 0/1</span>
           <span id="aquaHydrochloricCount">HCl 0/3</span>
@@ -1533,7 +1548,7 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
     </section>
 
     <footer class="version-footer">
-      <strong>Chemion Quest v6.0 黄金王・Au反応区</strong>
+      <strong>Chemion Quest v6.1 Stage 10 タイムアタック</strong>
       <span>オフライン起動・ホーム画面追加・安全な更新通知に対応しました。</span>
     </footer>
   </main>
@@ -1743,6 +1758,18 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
     </div>
   </div>
 
+  <div id="timeAttackRankingModal" class="modal" hidden>
+    <div class="modal-card ranking-modal-card" role="dialog" aria-modal="true" aria-labelledby="timeAttackRankingTitle">
+      <button id="timeAttackRankingCloseBtn" class="modal-close" type="button" aria-label="タイムアタックランキングを閉じる">×</button>
+      <p class="modal-kicker">STAGE 10 TIME ATTACK</p>
+      <h2 id="timeAttackRankingTitle">⏱️ タイムアタックランキング</h2>
+      <p id="timeAttackRankingMessage" class="modal-lead"></p>
+      <div id="timeAttackMyRankCard" class="my-rank-card" hidden></div>
+      <div id="timeAttackRankingList" class="ranking-list"></div>
+      <button id="timeAttackRankingRefreshBtn" class="continue-button" type="button">再読み込み</button>
+    </div>
+  </div>
+
   <div id="achievementModal" class="modal" hidden>
     <div class="modal-card achievement-modal-card" role="dialog" aria-modal="true" aria-labelledby="achievementTitle">
       <button id="achievementCloseBtn" class="modal-close" type="button" aria-label="アチーブメントを閉じる">×</button>
@@ -1793,6 +1820,14 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
       <p class="modal-kicker">STAGE SELECT</p>
       <h2 id="stageTitle">ステージを選択</h2>
       <p class="modal-lead">ステージごとにコイン・ユニット解放・研究強化は独立します。化学レベル、実績、累計記録、復習問題は共通です。切り替えると戦闘は第1ウェーブから始まります。</p>
+      <article id="timeAttackLaunchPanel" class="time-attack-launch-panel" aria-labelledby="timeAttackLaunchTitle">
+        <div><span class="section-kicker">STAGE 10 CHALLENGE</span><h3 id="timeAttackLaunchTitle">Stage 10 タイムアタック</h3></div>
+        <p id="timeAttackLaunchStatus">Stage 10を通常クリアすると解放されます。</p>
+        <div class="time-attack-actions">
+          <button id="timeAttackStartBtn" class="continue-button" type="button" disabled>タイムアタック開始</button>
+          <button id="timeAttackRankingBtn" class="small-button" type="button">専用ランキング</button>
+        </div>
+      </article>
       <div id="stageOptions" class="stage-grid"></div>
     </div>
   </div>
@@ -1842,6 +1877,20 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
     </div>
   </div>
 
+  <div id="timeAttackResultModal" class="modal" hidden>
+    <div class="modal-card time-attack-result-card" role="dialog" aria-modal="true" aria-labelledby="timeAttackResultTitle">
+      <p class="modal-kicker">STAGE 10 TIME ATTACK</p>
+      <h2 id="timeAttackResultTitle">タイムアタック結果</h2>
+      <strong id="timeAttackResultTime" class="time-attack-result-time">0:00.00</strong>
+      <p id="timeAttackResultStatus" class="modal-lead"></p>
+      <p id="timeAttackResultBest"></p>
+      <div class="time-attack-actions">
+        <button id="timeAttackResultRankingBtn" class="continue-button" type="button">専用ランキングを見る</button>
+        <button id="timeAttackResultCloseBtn" class="small-button" type="button">通常ゲームへ戻る</button>
+      </div>
+    </div>
+  </div>
+
   <div id="pauseModal" class="modal" hidden>
     <div class="modal-card pause-card" role="dialog" aria-modal="true" aria-labelledby="pauseTitle">
       <p class="modal-kicker">BATTLE SUSPENDED</p>
@@ -1885,7 +1934,7 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
   </div>
 
   <script>window.gameData = {
-  "version": 32,
+  "version": 33,
   "tuningVersion": 27,
   "waveSystemVersion": 2,
   "saveKey": "chemionQuestSaveV4",
@@ -6908,7 +6957,7 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
         "H₂OでAlとFeを回復する",
         "HNO₃ 1体の近くへHCl 3体を集め、王水を調製する"
       ],
-      "chemistryTip": "王水は濃硝酸と濃塩酸を1:3の体積比で混合したものとして学びます。このゲームは抽象化された学習表現です。危険なので実物を混合しないでください。Auから[AuCl₄]⁻への表示は簡略化しており、実際の反応はより複雑で条件に依存します。",
+      "chemistryTip": "王水は濃硝酸と濃塩酸を1:3の体積比で混合したものとして学びます。このゲームは抽象化された学習表現です。実際に混ぜたり試したりしないでください。Auから[AuCl₄]⁻への表示は簡略化しており、実際の反応はより複雑で条件に依存します。",
       "bossStrategy": "Au戦の前線はAlで受け、Feを継続的に届かせます。王水は唯一の手段ではありませんが、調製できれば金溶解反応で大きく有利になります。金箔展開の予告中は押し戻し後の立て直しを意識してください。",
       "energyGuide": "HNO₃ 1体とHCl 3体を同時に維持するEnergyを残しつつ、AlとH₂Oを切らさないようにします。調製そのものに追加Energyは不要です。",
       "progressiveHints": [
@@ -37000,6 +37049,7 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
   const SUMMON_UI_REFRESH_INTERVAL = 0.1;
   const NORMAL_RENDER_FPS = 45;
   const LOW_POWER_RENDER_FPS = 30;
+  const STAGE10_RENDER_FPS = 60;
   const NORMAL_IDLE_RENDER_FPS = 10;
   const LOW_POWER_IDLE_RENDER_FPS = 5;
   const NORMAL_UI_REFRESH_INTERVAL = 0.1;
@@ -37103,6 +37153,23 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
   let aquaRegiaLevel = 1;
   let aquaAuContactComplete = false;
   let stage10State = null;
+  let timeAttackProfile = null;
+  let timeAttackRun = null;
+  let timeAttackNormalSave = '';
+  let timeAttackNormalAux = null;
+  let timeAttackHiddenAt = 0;
+  const prefersReducedMotion = Boolean(window.matchMedia?.('(prefers-reduced-motion: reduce)').matches);
+  let performanceMetrics = null;
+
+  function defaultPerformanceMetrics() {
+    return {
+      startedAt: performance.now(), frames: 0, intervalTotalMs: 0, maxGapMs: 0,
+      longFrames: 0, lastFrameAt: 0, peakEffects: 0, peakProjectiles: 0,
+      audioNodesActive: 0, audioNodesPeak: 0,
+      heapStart: finiteNumber(performance.memory?.usedJSHeapSize, 0),
+      heapPeak: finiteNumber(performance.memory?.usedJSHeapSize, 0)
+    };
+  }
 
   let currentWaveIndex;
   let nextWaveEnemyIndex;
@@ -37170,6 +37237,7 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
   const BGM_TRACKS = Object.freeze({
     normal: { src: "assets/audio/chemion-normal-bgm.mp3", label: "通常Stage BGM" },
     difficult: { src: "assets/audio/chemion-difficult-bgm.mp3", label: "難関Stage BGM" },
+    milestoneV3: { src: "assets/audio/chemion-milestone-stage-bgm-v3.mp3", label: "Stage 10 節目BGM・V3" },
     au: { src: "assets/audio/chemion-stage10-au-boss-v16-loop.mp3", label: "Stage 10 Au BOSS BGM・V16 loop" }
   });
   const LOW_POWER_KEY = "chemionQuestLowPowerV1";
@@ -37190,6 +37258,7 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
   let bgmDuckFactor = 1;
   let lowPowerMode = false;
   let audioContext = null;
+  const transientAudioSources = new Map();
   let lastAttackSoundAt = 0;
   try {
     soundEnabled = localStorage.getItem(SOUND_KEY) !== 'off';
@@ -37212,6 +37281,251 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
     return Math.max(min, Math.min(max, value));
   }
 
+  const TIME_ATTACK_MIN_VALID_MS = 45000;
+  const TIME_ATTACK_MAX_VALID_MS = 2 * 60 * 60 * 1000;
+  const TIME_ATTACK_BACKGROUND_LIMIT_MS = 10000;
+
+  function defaultTimeAttackProfile() {
+    return {
+      unlocked: false,
+      localBestMs: null,
+      pendingSubmission: null,
+      lastSubmittedRunId: '',
+      currentRunId: '',
+      officialRunInProgress: false,
+      runInvalid: false,
+      lastInvalidReason: ''
+    };
+  }
+
+  function normalizeTimeAttackProfile(value, stats = cumulativeStats) {
+    const input = value && typeof value === 'object' ? value : {};
+    const best = finiteNumber(input.localBestMs, NaN);
+    const pending = input.pendingSubmission && typeof input.pendingSubmission === 'object'
+      ? {
+          runId: String(input.pendingSubmission.runId || ''),
+          timeMs: Math.round(finiteNumber(input.pendingSubmission.timeMs, 0)),
+          completedAt: String(input.pendingSubmission.completedAt || '')
+        }
+      : null;
+    const validPending = pending && pending.runId && pending.timeMs >= TIME_ATTACK_MIN_VALID_MS && pending.timeMs <= TIME_ATTACK_MAX_VALID_MS ? pending : null;
+    return {
+      unlocked: Boolean(input.unlocked || finiteNumber(stats?.highestStageCleared, 0) >= 10 || finiteNumber(stats?.stage10Clears, 0) >= 1),
+      localBestMs: Number.isFinite(best) && best >= TIME_ATTACK_MIN_VALID_MS && best <= TIME_ATTACK_MAX_VALID_MS ? Math.round(best) : null,
+      pendingSubmission: validPending,
+      lastSubmittedRunId: String(input.lastSubmittedRunId || ''),
+      currentRunId: String(input.currentRunId || ''),
+      officialRunInProgress: Boolean(input.officialRunInProgress),
+      runInvalid: Boolean(input.runInvalid),
+      lastInvalidReason: String(input.lastInvalidReason || '')
+    };
+  }
+
+  function formatTimeAttackMs(value) {
+    const milliseconds = Math.max(0, Math.round(finiteNumber(value, 0)));
+    const minutes = Math.floor(milliseconds / 60000);
+    const seconds = Math.floor(milliseconds % 60000 / 1000);
+    const hundredths = Math.floor(milliseconds % 1000 / 10);
+    return `${minutes}:${String(seconds).padStart(2, '0')}.${String(hundredths).padStart(2, '0')}`;
+  }
+
+  function createTimeAttackRunId() {
+    try { if (crypto?.randomUUID) return crypto.randomUUID(); } catch (_) {}
+    return `ta-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 14)}`;
+  }
+
+  function isDeveloperOrAutomatedState() {
+    try {
+      const params = new URLSearchParams(location.search);
+      return params.get('cqTest') === '1' || ['localhost', '127.0.0.1', '::1'].includes(location.hostname);
+    } catch (_) { return true; }
+  }
+
+  function isTimeAttackActive() {
+    return Boolean(timeAttackRun?.active);
+  }
+
+  function currentTimeAttackMs() {
+    if (!timeAttackRun) return 0;
+    const end = finiteNumber(timeAttackRun.stoppedAt, 0) || performance.now();
+    return Math.max(0, Math.round(end - finiteNumber(timeAttackRun.startedAt, end)));
+  }
+
+  function updateTimeAttackUi() {
+    const active = isTimeAttackActive();
+    if ($('timeAttackIndicator')) $('timeAttackIndicator').hidden = !active;
+    if (active) {
+      $('timeAttackClock').textContent = formatTimeAttackMs(currentTimeAttackMs());
+      $('timeAttackValidity').textContent = timeAttackRun.valid ? '公式記録走行中' : 'この走行は公式記録の対象外です';
+      $('timeAttackIndicator').classList.toggle('invalid', !timeAttackRun.valid);
+    }
+    const unlockedForUi = Boolean(timeAttackProfile?.unlocked || finiteNumber(cumulativeStats?.highestStageCleared, 0) >= 10);
+    if ($('timeAttackStartBtn')) $('timeAttackStartBtn').disabled = !unlockedForUi || active;
+    if ($('stageBtn')) $('stageBtn').disabled = active;
+    if ($('timeAttackLaunchStatus')) {
+      const best = timeAttackProfile?.localBestMs ? `あなたのベスト ${formatTimeAttackMs(timeAttackProfile.localBestMs)}` : '自己ベストはまだありません。';
+      $('timeAttackLaunchStatus').textContent = unlockedForUi
+        ? `${best} 通常セーブと完全に分離した初期状態で挑戦します。`
+        : 'Stage 10を通常クリアすると解放されます。';
+    }
+  }
+
+  function writeTimeAttackProfileToNormalSave(profile) {
+    try {
+      const raw = timeAttackNormalSave || localStorage.getItem(D.saveKey);
+      if (!raw) return false;
+      const payload = JSON.parse(raw);
+      payload.progress = payload.progress && typeof payload.progress === 'object' ? payload.progress : {};
+      payload.progress.timeAttack = JSON.parse(JSON.stringify(profile));
+      localStorage.setItem(D.saveKey, JSON.stringify(payload));
+      return true;
+    } catch (error) {
+      console.error(error);
+      return false;
+    }
+  }
+
+  function invalidateTimeAttackRun(reason) {
+    if (!isTimeAttackActive() || !timeAttackRun.valid) return;
+    timeAttackRun.valid = false;
+    timeAttackRun.invalidReason = String(reason || '走行条件を確認できませんでした。');
+    timeAttackProfile.runInvalid = true;
+    timeAttackProfile.lastInvalidReason = timeAttackRun.invalidReason;
+    updateTimeAttackUi();
+  }
+
+  function beginTimeAttack() {
+    if (isTimeAttackActive() || !timeAttackProfile?.unlocked) return false;
+    if (!saveGame({ silent: true })) {
+      showMessage('通常セーブを保護できないため、タイムアタックを開始できません。', 4.2);
+      return false;
+    }
+    timeAttackNormalSave = localStorage.getItem(D.saveKey) || '';
+    if (!timeAttackNormalSave) return false;
+    timeAttackNormalAux = {
+      review: localStorage.getItem(REVIEW_KEY),
+      learning: localStorage.getItem(LEARNING_KEY),
+      speedTrialRetry: localStorage.getItem(SPEED_TRIAL_RETRY_KEY),
+      recentQuestionHistory: JSON.parse(JSON.stringify(recentQuestionHistory || []))
+    };
+    const runId = createTimeAttackRunId();
+    timeAttackProfile = normalizeTimeAttackProfile(timeAttackProfile);
+    timeAttackProfile.currentRunId = runId;
+    timeAttackProfile.officialRunInProgress = true;
+    timeAttackProfile.runInvalid = false;
+    timeAttackProfile.lastInvalidReason = '';
+    if (!writeTimeAttackProfileToNormalSave(timeAttackProfile)) return false;
+
+    applyStageDefinition(10);
+    coins = 0;
+    level = 1;
+    experience = 0;
+    unlocked = new Set(initialUnlockedIds());
+    energyCapacityLevel = 1;
+    unitUpgradeLevels = defaultUnitUpgradeLevels();
+    aquaRegiaUnlocked = false;
+    aquaRegiaLevel = 1;
+    aquaAuContactComplete = false;
+    guestAssistEnabled = false;
+    resetStage({ keepProgress: true });
+    coins = 0;
+    level = 1;
+    experience = 0;
+    unlocked = new Set(initialUnlockedIds());
+    energyCapacityLevel = 1;
+    unitUpgradeLevels = defaultUnitUpgradeLevels();
+    aquaRegiaUnlocked = false;
+    aquaRegiaLevel = 1;
+    aquaAuContactComplete = false;
+    timeAttackRun = {
+      active: true,
+      runId,
+      startedAt: performance.now(),
+      stoppedAt: 0,
+      valid: !isDeveloperOrAutomatedState(),
+      invalidReason: isDeveloperOrAutomatedState() ? '開発者・自動テスト状態です。' : '',
+      completed: false
+    };
+    timeAttackHiddenAt = 0;
+    $('stageModal').hidden = true;
+    overlayPauseCount = 0;
+    paused = false;
+    updateGuestAssistUi();
+    updateTimeAttackUi();
+    renderUnitButtons();
+    renderUpgradePanel();
+    showMessage('Stage 10タイムアタック開始｜問題中・操作待ちも計測します。', 4.2);
+    return true;
+  }
+
+  function completeTimeAttackClock() {
+    if (!isTimeAttackActive() || timeAttackRun.stoppedAt) return;
+    timeAttackRun.stoppedAt = performance.now();
+    timeAttackRun.completed = true;
+    const elapsed = currentTimeAttackMs();
+    if (elapsed < TIME_ATTACK_MIN_VALID_MS || elapsed > TIME_ATTACK_MAX_VALID_MS) invalidateTimeAttackRun('現実的でない異常な計測値です。');
+    if (timeAttackProfile.currentRunId !== timeAttackRun.runId) invalidateTimeAttackRun('開始・終了走行IDが一致しません。');
+  }
+
+  function restoreNormalAfterTimeAttack({ victory = false, reason = '' } = {}) {
+    if (!timeAttackRun) return false;
+    if (victory) completeTimeAttackClock();
+    else invalidateTimeAttackRun(reason || '走行を途中で終了しました。');
+    const finishedRun = { ...timeAttackRun };
+    const elapsed = currentTimeAttackMs();
+    const official = Boolean(victory && finishedRun.valid && finishedRun.completed);
+    const previousBest = timeAttackProfile.localBestMs;
+    const improved = official && (!Number.isFinite(previousBest) || elapsed < previousBest);
+    if (improved) {
+      timeAttackProfile.localBestMs = elapsed;
+      timeAttackProfile.pendingSubmission = { runId: finishedRun.runId, timeMs: elapsed, completedAt: new Date().toISOString() };
+    }
+    timeAttackProfile.currentRunId = '';
+    timeAttackProfile.officialRunInProgress = false;
+    timeAttackProfile.runInvalid = !official;
+    timeAttackProfile.lastInvalidReason = official ? '' : (finishedRun.invalidReason || reason || 'この走行は公式記録の対象外です');
+    if (!writeTimeAttackProfileToNormalSave(timeAttackProfile)) return false;
+    timeAttackRun = null;
+    timeAttackHiddenAt = 0;
+    if (timeAttackNormalAux) {
+      for (const [key, value] of [[REVIEW_KEY, timeAttackNormalAux.review], [LEARNING_KEY, timeAttackNormalAux.learning], [SPEED_TRIAL_RETRY_KEY, timeAttackNormalAux.speedTrialRetry]]) {
+        if (typeof value === 'string') localStorage.setItem(key, value);
+        else localStorage.removeItem(key);
+      }
+    }
+    const restored = loadGame({ silent: true });
+    recentQuestionHistory = Array.isArray(timeAttackNormalAux?.recentQuestionHistory) ? timeAttackNormalAux.recentQuestionHistory : recentQuestionHistory;
+    timeAttackNormalSave = '';
+    timeAttackNormalAux = null;
+    if (!restored) return false;
+    updateTimeAttackUi();
+    $('timeAttackResultTime').textContent = formatTimeAttackMs(elapsed);
+    $('timeAttackResultStatus').textContent = official
+      ? improved ? '公式走行として完走し、自己ベストを更新しました。' : '公式走行として完走しました。自己ベストは更新されませんでした。'
+      : `この走行は公式記録の対象外です${timeAttackProfile.lastInvalidReason ? `｜${timeAttackProfile.lastInvalidReason}` : ''}`;
+    $('timeAttackResultBest').textContent = timeAttackProfile.localBestMs ? `あなたのベスト：${formatTimeAttackMs(timeAttackProfile.localBestMs)}` : '有効な自己ベストはありません。';
+    $('timeAttackResultModal').hidden = false;
+    pauseForOverlay();
+    if (improved) window.dispatchEvent(new CustomEvent('cq-ta-record-ready', { detail: { ...timeAttackProfile.pendingSubmission } }));
+    return true;
+  }
+
+  function exitTimeAttack() {
+    if (!isTimeAttackActive()) return;
+    if (!window.confirm('タイムアタックを中断して通常セーブへ戻りますか？この走行は公式記録になりません。')) return;
+    restoreNormalAfterTimeAttack({ victory: false, reason: '途中離脱しました。' });
+  }
+
+  function openTimeAttackRanking() {
+    window.dispatchEvent(new CustomEvent('cq-open-ta-ranking'));
+  }
+
+  function closeTimeAttackResult() {
+    if (!$('timeAttackResultModal') || $('timeAttackResultModal').hidden) return;
+    $('timeAttackResultModal').hidden = true;
+    resumeFromOverlay();
+  }
+
   function defaultStage10State() {
     return {
       phase: 'normal',
@@ -37220,6 +37534,9 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
       contactComplete: Boolean(aquaAuContactComplete),
       contactTimer: 0,
       preparation: null,
+      preparationSuccessTimer: 0,
+      formationElapsed: 0,
+      formationPushX: null,
       candidateKeys: [],
       stableSeconds: 0
     };
@@ -37234,6 +37551,9 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
     state.contactStarted = Boolean(aquaAuContactComplete || source.contactStarted || source.contactComplete);
     state.contactComplete = Boolean(aquaAuContactComplete || source.contactComplete);
     state.contactTimer = Math.max(0, finiteNumber(source.contactTimer, 0));
+    state.preparationSuccessTimer = Math.max(0, finiteNumber(source.preparationSuccessTimer, 0));
+    state.formationElapsed = Math.max(0, finiteNumber(source.formationElapsed, 0));
+    state.formationPushX = Number.isFinite(Number(source.formationPushX)) ? Number(source.formationPushX) : null;
     state.candidateKeys = Array.isArray(source.candidateKeys) ? source.candidateKeys.map(String).slice(0, 4) : [];
     state.stableSeconds = Math.max(0, finiteNumber(source.stableSeconds, 0));
     if (source.preparation && typeof source.preparation === 'object') {
@@ -37292,6 +37612,34 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
     return audioContext;
   }
 
+  function trackTransientAudioSource(source, connectedNodes = []) {
+    if (!source) return source;
+    const nodes = Array.isArray(connectedNodes) ? connectedNodes.filter(Boolean) : [];
+    transientAudioSources.set(source, nodes);
+    if (performanceMetrics) {
+      performanceMetrics.audioNodesActive += 1;
+      performanceMetrics.audioNodesPeak = Math.max(performanceMetrics.audioNodesPeak, performanceMetrics.audioNodesActive);
+    }
+    source.addEventListener('ended', () => {
+      if (!transientAudioSources.has(source)) return;
+      transientAudioSources.delete(source);
+      try { source.disconnect(); } catch (_) {}
+      for (const node of nodes) { try { node.disconnect(); } catch (_) {} }
+      if (performanceMetrics) performanceMetrics.audioNodesActive = Math.max(0, performanceMetrics.audioNodesActive - 1);
+    }, { once: true });
+    return source;
+  }
+
+  function stopTransientAudioNodes() {
+    for (const [source, nodes] of transientAudioSources.entries()) {
+      try { source.stop(); } catch (_) {}
+      try { source.disconnect(); } catch (_) {}
+      for (const node of nodes) { try { node.disconnect(); } catch (_) {} }
+    }
+    transientAudioSources.clear();
+    if (performanceMetrics) performanceMetrics.audioNodesActive = 0;
+  }
+
   function playTone(frequency, duration = .08, volume = .025, type = 'sine', delay = 0) {
     const audio = ensureAudioContext();
     if (!audio || !soundEnabled) return;
@@ -37304,6 +37652,7 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
     gain.gain.exponentialRampToValueAtTime(Math.max(.0002, volume), now + .012);
     gain.gain.exponentialRampToValueAtTime(.0001, now + Math.max(.025, duration));
     oscillator.connect(gain).connect(audio.destination);
+    trackTransientAudioSource(oscillator, [gain]);
     oscillator.start(now);
     oscillator.stop(now + Math.max(.035, duration) + .02);
   }
@@ -37322,6 +37671,7 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
       wave: [[330,.08,.021,'triangle',0],[440,.08,.021,'triangle',.08],[660,.11,.022,'triangle',.16]],
       boss: [[105,.18,.036,'sawtooth',0],[82,.24,.028,'square',.12]],
       transform: [[170,.12,.025,'sawtooth',0],[260,.12,.024,'square',.10],[410,.18,.025,'sine',.20]],
+      aqua: [[280,.10,.022,'triangle',0],[430,.16,.025,'sine',.07],[710,.22,.023,'sine',.16],[980,.18,.018,'sine',.27]],
       phaseShift: [[118,.22,.034,'sawtooth',0],[176,.18,.028,'square',.18],[264,.16,.026,'triangle',.34],[396,.20,.024,'sine',.50]],
       correct: [[660,.08,.022,'sine',0],[880,.12,.024,'sine',.08]],
       wrong: [[230,.12,.022,'sawtooth',0],[170,.15,.018,'triangle',.10]],
@@ -37362,6 +37712,8 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
       localGain.gain.exponentialRampToValueAtTime(gain, begin + .02);
       localGain.gain.exponentialRampToValueAtTime(.0001, begin + duration);
       oscillator.connect(localGain).connect(master);
+      const cleanupMaster = delay + duration >= 1.1 ? [localGain, master] : [localGain];
+      trackTransientAudioSource(oscillator, cleanupMaster);
       oscillator.start(begin);
       oscillator.stop(begin + duration + .04);
     });
@@ -37380,6 +37732,7 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
     noiseGain.gain.exponentialRampToValueAtTime(.0001, now + .38);
     noise.buffer = buffer;
     noise.connect(filter).connect(noiseGain).connect(master);
+    trackTransientAudioSource(noise, [filter, noiseGain]);
     noise.start(now);
   }
 
@@ -37615,7 +37968,7 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
   }
 
   function desiredBgmTrackKey() {
-    if (isStage10()) return stage10State?.phase === 'combat' || stage10State?.phase === 'victory' ? 'au' : 'normal';
+    if (isStage10()) return ['protected', 'combat', 'victory'].includes(stage10State?.phase) ? 'au' : 'milestoneV3';
     return currentStageDefinition()?.milestone || currentStageId % 5 === 0 ? 'difficult' : 'normal';
   }
 
@@ -37715,7 +38068,8 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
     if (document.hidden) return 0;
     const idle = paused || gameStatus !== 'playing';
     if (idle) return lowPowerMode ? LOW_POWER_IDLE_RENDER_FPS : NORMAL_IDLE_RENDER_FPS;
-    return lowPowerMode ? LOW_POWER_RENDER_FPS : NORMAL_RENDER_FPS;
+    if (lowPowerMode) return LOW_POWER_RENDER_FPS;
+    return isStage10() ? STAGE10_RENDER_FPS : NORMAL_RENDER_FPS;
   }
 
   function currentUiRefreshInterval() {
@@ -37822,6 +38176,10 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
 
   function restartCurrentStageFromPause() {
     if (gameStatus !== 'playing' || !manualPaused) return;
+    if (isTimeAttackActive()) {
+      restoreNormalAfterTimeAttack({ victory: false, reason: '走行中にStageを再構築しました。' });
+      return;
+    }
     const accepted = window.confirm(`Stage ${currentStageId}の現在の挑戦を諦め、ウェーブ1から再開しますか？\n\n場の味方・敵と、この挑戦中の研究カードはリセットされます。所持コイン・解放・恒久強化・実績・学習記録は維持されます。`);
     if (!accepted) return;
     if ($('pauseModal')) $('pauseModal').hidden = true;
@@ -37834,6 +38192,10 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
   }
 
   function suspendForHiddenPage() {
+    if (isTimeAttackActive()) {
+      timeAttackHiddenAt = performance.now();
+      return;
+    }
     if (gameStatus !== 'playing' || activeQuiz) return;
     pauseBattle({ reason: 'background', show: false, save: true });
   }
@@ -38635,6 +38997,7 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
   }
 
   function resetStage({ keepProgress = true } = {}) {
+    stopTransientAudioNodes();
     if (!keepProgress) {
       coins = 0;
       unlocked = new Set(initialUnlockedIds());
@@ -38874,8 +39237,10 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
   }
 
   function openStageModal() {
+    if (isTimeAttackActive()) return;
     rememberCurrentStageProgress();
     renderStageOptions();
+    updateTimeAttackUi();
     $('stageModal').hidden = false;
     pauseForOverlay();
   }
@@ -38887,6 +39252,7 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
   }
 
   function switchStage(stageId) {
+    if (isTimeAttackActive()) return;
     const requested = Math.floor(finiteNumber(stageId, 1));
     const target = STAGE_LIBRARY[requested] ? requested : 1;
     if (target === currentStageId) { closeStageModal(); return; }
@@ -39000,6 +39366,7 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
     $('wavePhase').textContent = `${currentStageDefinition().name}｜${wavePhaseText()}`;
     if ($('stageButtonLabel')) $('stageButtonLabel').textContent = currentStageDefinition().milestone ? `STAGE ${currentStageId} ◆難関` : `STAGE ${currentStageId}`;
     renderAchievementButton();
+    updateTimeAttackUi();
   }
 
   function setSaveStatus(text) {
@@ -39717,7 +40084,7 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
       if (index === selectedIndex && !correct) button.classList.add('wrong');
     });
 
-    recordLearningResult(question, correct, mode);
+    if (!isTimeAttackActive()) recordLearningResult(question, correct, mode);
     const speedBoostMessage = applySpeedQuizResult(correct, activeQuiz);
     if ($('speedBoostNote')) {
       $('speedBoostNote').textContent = speedBoostMessage;
@@ -39727,8 +40094,10 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
     $('answerResult').classList.add(correct ? 'good' : 'bad');
     playSound(correct ? 'correct' : 'wrong');
     $('correctAnswer').textContent = `正解：${formatChemicalText(question.options[question.answer])}`;
-    if (!correct) addReviewItem(question, selectedIndex);
-    else if (mode === 'review' || mode === 'practice') markReviewCorrect(question);
+    if (!isTimeAttackActive()) {
+      if (!correct) addReviewItem(question, selectedIndex);
+      else if (mode === 'review' || mode === 'practice') markReviewCorrect(question);
+    }
     const selectedFeedback = !correct ? wrongReason(question, selectedIndex) : '';
     $('explanation').textContent = formatChemicalText(question.explanation + (selectedFeedback ? `\n\n【誤答原因の確認】${selectedFeedback}` : ''));
     $('calculationHint').hidden = !question.calculation;
@@ -40070,6 +40439,7 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
       xpReward: Math.max(1, Math.round(enemy.xp * wave.rewardScale)),
       waveIndex,
       visualSerial: serial,
+      moveVelocity: 0,
       boss: Boolean(enemy.boss),
       bossPhase: 1,
       phaseTwo: enemy.phaseTwo ? { ...enemy.phaseTwo } : null,
@@ -40156,7 +40526,8 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
       airVulnerability: 1.7, baseDamageMultiplier: 1, guard: false, damageReduction: 0,
       firstStrikeMultiplier: 1, firstStrikeReady: false, pushback: 0, attackFlash: 0, hitFlash: 0,
       aquaRegia: true, hitCount: Math.max(1, Math.floor(finiteNumber(stats.hitCount, 6))),
-      hitInterval: Math.max(.06, finiteNumber(stats.hitInterval, .14)), multiHit: null, visualSerial: serial
+      hitInterval: Math.max(.06, finiteNumber(stats.hitInterval, .14)), multiHit: null, visualSerial: serial,
+      motionTrail: [], visualPhase: 0
     };
   }
 
@@ -40215,11 +40586,15 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
     $('stage10CinematicTitle').textContent = title;
     $('stage10CinematicText').textContent = body;
     $('stage10CinematicNote').textContent = note;
+    $('stage10Cinematic').dataset.kind = kicker.startsWith('AQUA REGIA') ? 'aqua' : kicker.includes('REACTION COMPLETE') ? 'victory' : 'gold';
     $('stage10Cinematic').hidden = false;
   }
 
   function hideStage10Cinematic() {
-    if ($('stage10Cinematic')) $('stage10Cinematic').hidden = true;
+    if ($('stage10Cinematic')) {
+      $('stage10Cinematic').hidden = true;
+      delete $('stage10Cinematic').dataset.kind;
+    }
   }
 
   function updateAquaRegiaUi() {
@@ -40289,9 +40664,9 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
     const required = Math.max(.5, finiteNumber(stage10AquaDefinition()?.stableSeconds, 1));
     if (candidates.length !== 4 || stage10State.stableSeconds < required) return;
     const hpRatio = candidates.reduce((sum, entity) => sum + entity.hp / Math.max(1, entity.maxHp), 0) / 4;
-    stage10State.preparation = { phase: 'animating', timer: 1.8, ingredientKeys: candidates.map(entityBattleKey), hpRatio, created: false };
+    stage10State.preparation = { phase: 'animating', timer: 2.05, ingredientKeys: candidates.map(entityBattleKey), hpRatio, created: false };
     setBgmDuckFactor(.22);
-    showStage10Cinematic('AQUA REGIA PREPARATION', '王水', '濃硝酸：濃塩酸＝1：3（体積比）', '抽象化された学習表現です。危険なので実物を混合しないでください。');
+    showStage10Cinematic('AQUA REGIA PREPARATION', 'HNO₃ 1/1 ＋ HCl 3/3', '二系統粒子を中心へ収束', '体積比 1：3｜抽象化された学習表現です。実際に混ぜたり試したりしないでください。');
     saveGame({ silent: true });
     updateAquaRegiaUi();
   }
@@ -40318,12 +40693,13 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
     }
     preparation.created = true;
     stage10State.preparation = null;
+    stage10State.preparationSuccessTimer = 1.05;
     stage10State.candidateKeys = [];
     stage10State.stableSeconds = 0;
     setBgmDuckFactor(1);
-    hideStage10Cinematic();
+    showStage10Cinematic('AQUA REGIA', '王水', '調製成功', '専用ユニットが戦場へ加わりました。');
     showMessage('調製成功｜AQUA REGIA｜王水1体を生成しました。', 4.2);
-    playSound('transform');
+    playSound('aqua');
     saveGame({ silent: true });
     updateAquaRegiaUi();
   }
@@ -40331,12 +40707,13 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
   function beginStage10AuFormation(enemy) {
     if (!isStage10() || !enemy?.auBoss || !stage10State || stage10State.phase !== 'normal') return;
     stage10State.phase = 'forming';
-    stage10State.phaseTimer = 3.2;
+    stage10State.phaseTimer = 4.4;
+    stage10State.formationElapsed = 0;
     enemy.stage10Hidden = true;
     enemy.stage10Protected = true;
     projectiles = projectiles.filter((projectile) => !(projectile.ownerKind === 'ally' && projectile.effectKind !== 'heal'));
     const fallbackX = BASE.allyX + (BASE.enemyX - BASE.allyX) * .43;
-    for (const ally of allies) ally.x = Math.min(ally.x, fallbackX - ally.radius);
+    stage10State.formationPushX = fallbackX;
     setBgmDuckFactor(.12);
     showStage10Cinematic('GOLD PARTICLE ASSEMBLY', '79 Au', '金｜高い耐食性をもつ貴金属', '味方のHP・強化状態・内部状態を維持して戦線を再配置しています。');
     saveGame({ silent: true });
@@ -40354,6 +40731,7 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
 
   function startStage10VictorySequence() {
     if (!isStage10() || stage10State?.phase === 'victory') return;
+    completeTimeAttackClock();
     stage10State.phase = 'victory';
     stage10State.phaseTimer = 1.6;
     setBgmDuckFactor(.35);
@@ -40363,14 +40741,23 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
 
   function stage10CombatFrozen() {
     if (!isStage10() || !stage10State) return false;
-    return Boolean(stage10State.preparation || (stage10State.contactStarted && !stage10State.contactComplete) || ['forming', 'protected', 'victory'].includes(stage10State.phase));
+    return Boolean(stage10State.preparation || stage10State.preparationSuccessTimer > 0 || (stage10State.contactStarted && !stage10State.contactComplete) || ['forming', 'protected', 'victory'].includes(stage10State.phase));
   }
 
   function updateStage10Sequence(dt) {
     if (!isStage10() || !stage10State) return false;
     if (stage10State.preparation) {
       stage10State.preparation.timer = Math.max(0, stage10State.preparation.timer - dt);
+      const timer = stage10State.preparation.timer;
+      if (timer > 1.35) showStage10Cinematic('AQUA REGIA PREPARATION', 'HNO₃ 1/1 ＋ HCl 3/3', '4体の光線を中心へ収束', '体積比 1：3｜抽象化された学習表現です。実際に混ぜたり試したりしないでください。');
+      else if (timer > .65) showStage10Cinematic('AQUA REGIA PREPARATION', '1：3', '二系統粒子と複層リングが混合', '実用的な量・器具・投入順・温度・保存方法は示していません。');
+      else showStage10Cinematic('AQUA REGIA PREPARATION', 'AQUA REGIA', '拡大 → 収束', '簡略化された安全な学習演出です。');
       if (stage10State.preparation.timer <= 0) commitAquaRegiaPreparation();
+      return true;
+    }
+    if (stage10State.preparationSuccessTimer > 0) {
+      stage10State.preparationSuccessTimer = Math.max(0, stage10State.preparationSuccessTimer - dt);
+      if (stage10State.preparationSuccessTimer <= 0) hideStage10Cinematic();
       return true;
     }
     if (stage10State.contactStarted && !stage10State.contactComplete) {
@@ -40385,13 +40772,26 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
       return true;
     }
     if (stage10State.phase === 'forming') {
+      stage10State.formationElapsed += dt;
       stage10State.phaseTimer = Math.max(0, stage10State.phaseTimer - dt);
+      const fallbackX = finiteNumber(stage10State.formationPushX, BASE.allyX + (BASE.enemyX - BASE.allyX) * .43);
+      for (const ally of allies) {
+        const targetX = Math.min(ally.x, fallbackX - ally.radius);
+        ally.x += (targetX - ally.x) * Math.min(1, dt * 4.5);
+      }
+      const elapsed = stage10State.formationElapsed;
+      if (elapsed < 1.05) showStage10Cinematic('GOLD PARTICLE ASSEMBLY', '79', '低速金色波動｜遠方粒子収束', '味方のHP・強化・内部状態を維持したまま滑らかに再配置しています。');
+      else if (elapsed < 2.05) showStage10Cinematic('GOLD PARTICLE ASSEMBLY', 'Au', '原子番号79｜金', '金箔粒子が中心へ集まり、質量を形成します。');
+      else if (elapsed < 3.05) showStage10Cinematic('GOLD PARTICLE ASSEMBLY', '金', '高い耐食性をもつ貴金属', '形成直前に空間が静止します。');
+      else showStage10Cinematic('GOLD PARTICLE ASSEMBLY', '黄金王・Au', '大波動｜段階形成完了', '短く弱い振動のあと、専用戦闘曲へ切り替わります。');
       if (stage10State.phaseTimer <= 0) {
         stage10State.phase = 'protected';
         stage10State.phaseTimer = 3;
         const au = enemies.find((enemy) => enemy.auBoss && enemy.hp > 0);
         if (au) au.stage10Hidden = false;
-        showStage10Cinematic('LOW REACTIVITY', '低反応性', '通常の化学攻撃を約80%軽減', '物理攻撃と王水によるAu専用反応は軽減を迂回します。');
+        setBgmDuckFactor(1);
+        syncBgmTrack({ restart: true });
+        showStage10Cinematic('LOW REACTIVITY', '黄金王・Au', '形成完了｜約3秒の相互攻撃停止', '通常の化学攻撃を約80%軽減。物理攻撃と王水は軽減を迂回します。');
         saveGame({ silent: true });
       }
       return true;
@@ -40403,7 +40803,7 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
         for (const enemy of enemies) if (enemy.auBoss) enemy.stage10Protected = false;
         hideStage10Cinematic();
         setBgmDuckFactor(1);
-        syncBgmTrack({ restart: true });
+        syncBgmTrack();
         showMessage('V16 loop開始｜Au戦闘再開', 3.2);
         saveGame({ silent: true });
       }
@@ -40438,7 +40838,10 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
     }
     if (stage10State.preparation) {
       setBgmDuckFactor(.22);
-      showStage10Cinematic('AQUA REGIA PREPARATION', '王水', '濃硝酸：濃塩酸＝1：3（体積比）', '抽象化された学習表現です。危険なので実物を混合しないでください。');
+      showStage10Cinematic('AQUA REGIA PREPARATION', 'HNO₃ 1/1 ＋ HCl 3/3', '二系統粒子を中心へ収束', '体積比 1：3｜抽象化された学習表現です。実際に混ぜたり試したりしないでください。');
+    } else if (stage10State.preparationSuccessTimer > 0) {
+      setBgmDuckFactor(1);
+      showStage10Cinematic('AQUA REGIA', '王水', '調製成功', '専用ユニットが戦場へ加わりました。');
     } else if (stage10State.contactStarted && !stage10State.contactComplete) {
       setBgmDuckFactor(.04);
       showStage10Cinematic('AQUA REGIA VS Au', '金の溶解開始', '酸化＋塩化物錯体形成｜Au → [AuCl₄]⁻', '簡略化した学習表現です。実際の反応はより複雑で条件に依存します。');
@@ -40446,8 +40849,8 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
       setBgmDuckFactor(.12);
       showStage10Cinematic('GOLD PARTICLE ASSEMBLY', '79 Au', '金｜高い耐食性をもつ貴金属', '味方のHP・強化状態・内部状態は維持されています。');
     } else if (stage10State.phase === 'protected') {
-      setBgmDuckFactor(.12);
-      showStage10Cinematic('LOW REACTIVITY', '低反応性', '通常の化学攻撃を約80%軽減', '物理攻撃と王水によるAu専用反応は軽減を迂回します。');
+      setBgmDuckFactor(1);
+      showStage10Cinematic('LOW REACTIVITY', '黄金王・Au', '形成完了｜約3秒の相互攻撃停止', '通常の化学攻撃を約80%軽減。物理攻撃と王水は軽減を迂回します。');
     } else if (stage10State.phase === 'victory') {
       setBgmDuckFactor(.35);
       showStage10Cinematic('Au REACTION COMPLETE', 'Au撃破', 'Stage 10「黄金王・Au反応区」クリア', '敵拠点の破壊は必要ありません。');
@@ -40930,10 +41333,19 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
     spawnAttackProjectile(ally, target);
     const hitNumber = sequence.totalHits - sequence.hitsRemaining + 1;
     if (target.auBoss) {
+      const reactionStages = [
+        ['酸化開始', 'Au表面の酸化点'],
+        ['酸化開始', '酸化点が拡大'],
+        ['Cl⁻錯形成', 'Cl⁻軌道形成'],
+        ['Cl⁻錯形成', '錯体形成が進行'],
+        ['Au粒子離脱', '金粒子が表面から離脱'],
+        ['[AuCl₄]⁻ 反応完了', '簡略化した学習表現']
+      ];
+      const [text, subtext] = reactionStages[clamp(hitNumber - 1, 0, reactionStages.length - 1)];
       combatEffects.push({
         x: target.x, y: entityVisualY(target) - target.radius - 24,
-        text: `金溶解反応 ${hitNumber}/6`, subtext: '[AuCl₄]⁻', color: '#ffe07a', kind: 'liberation',
-        life: .72, maxLife: .72, particles: lowPowerMode ? [] : Array.from({length: 8}, (_, index) => ({angle: Math.PI * 2 * index / 8, speed: 18 + index * 2}))
+        text: `${text} ${hitNumber}/6`, subtext, color: '#ffe07a', kind: `aqua-au-${hitNumber}`,
+        life: .72, maxLife: .72, particles: lowPowerMode || prefersReducedMotion ? [] : Array.from({length: 8}, (_, index) => ({angle: Math.PI * 2 * index / 8, speed: 18 + index * 2}))
       });
     } else {
       combatEffects.push({
@@ -40954,6 +41366,14 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
 
   function updateAlly(ally, dt) {
     if (ally.hp <= 0) return;
+    if (ally.aquaRegia) {
+      ally.visualPhase = finiteNumber(ally.visualPhase, 0) + dt;
+      const trail = Array.isArray(ally.motionTrail) ? ally.motionTrail : [];
+      const last = trail[0];
+      if (!last || Math.hypot(last.x - ally.x, last.y - ally.y) > 3) trail.unshift({ x: ally.x, y: ally.y, life: 1 });
+      for (const point of trail) point.life = Math.max(0, finiteNumber(point.life, 0) - dt * 2.2);
+      ally.motionTrail = trail.filter((point) => point.life > 0).slice(0, lowPowerMode ? 3 : 8);
+    }
     ally.stunTimer = Math.max(0, finiteNumber(ally.stunTimer, 0) - dt);
     if (ally.stunTimer > 0) return;
     if (ally.aquaRegia && updateAquaRegiaMultiHit(ally, dt)) return;
@@ -41217,7 +41637,13 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
       return;
     }
 
-    enemy.x = Math.max(BASE.allyX + BASE.radius + enemy.radius, enemy.x - enemy.speed * dt);
+    if (enemy.auBoss) {
+      const desiredVelocity = -enemy.speed;
+      enemy.moveVelocity = finiteNumber(enemy.moveVelocity, 0) + (desiredVelocity - finiteNumber(enemy.moveVelocity, 0)) * Math.min(1, dt * 3.6);
+      enemy.x = Math.max(BASE.allyX + BASE.radius + enemy.radius, enemy.x + enemy.moveVelocity * dt);
+    } else {
+      enemy.x = Math.max(BASE.allyX + BASE.radius + enemy.radius, enemy.x - enemy.speed * dt);
+    }
   }
 
   function resolveDefeatedEntities() {
@@ -41340,6 +41766,14 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
   }
 
   function finishGame(victory) {
+    if (isTimeAttackActive()) {
+      gameStatus = victory ? 'victory' : 'defeat';
+      paused = true;
+      playSound(victory ? 'victory' : 'defeat');
+      hideWaveBanner();
+      restoreNormalAfterTimeAttack({ victory, reason: victory ? '' : '味方拠点が破壊されました。' });
+      return;
+    }
     gameStatus = victory ? 'victory' : 'defeat';
     manualPaused = false;
     resumePromptPending = false;
@@ -41370,6 +41804,10 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
       const maxStageId = Math.max(...Object.keys(STAGE_LIBRARY).map(Number));
       const nextStageId = Math.min(maxStageId, currentStageId + 1);
       cumulativeStats.highestStageReached = Math.max(cumulativeStats.highestStageReached || 1, nextStageId);
+      if (currentStageId === 10) {
+        timeAttackProfile = normalizeTimeAttackProfile(timeAttackProfile);
+        timeAttackProfile.unlocked = true;
+      }
       if (runStats.alliesDefeated === 0 && runStats.baseDamageTaken === 0) {
         cumulativeStats.flawlessClears += 1;
       }
@@ -41678,6 +42116,91 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
     }) || null;
   }
 
+  function drawAquaRegiaTrail(entity) {
+    if (!entity.aquaRegia || !Array.isArray(entity.motionTrail)) return;
+    ctx.save();
+    for (const [index, point] of entity.motionTrail.entries()) {
+      const alpha = clamp(finiteNumber(point.life, 0) * (.24 - index * .018), 0, .24);
+      if (alpha <= 0) continue;
+      const trailX = logicalToCanvasX(point.x);
+      ctx.globalAlpha = alpha;
+      ctx.fillStyle = index % 2 ? '#ffb35f' : '#7adfff';
+      ctx.beginPath();
+      ctx.ellipse(trailX, point.y, 15 - index, 7 - index * .3, 0, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.restore();
+  }
+
+  function drawStage10Atmosphere() {
+    if (!isStage10() || !stage10State) return;
+    const centerX = cv.width * .62;
+    if (stage10State.phase === 'forming') {
+      const elapsed = stage10State.formationElapsed;
+      ctx.save();
+      for (let index = 0; index < (lowPowerMode ? 2 : 4); index += 1) {
+        const progress = (elapsed * .34 + index * .23) % 1;
+        ctx.globalAlpha = (1 - progress) * .34;
+        ctx.strokeStyle = index % 2 ? '#ffe58b' : '#b98720';
+        ctx.lineWidth = 2 + index;
+        ctx.beginPath();
+        ctx.ellipse(centerX, 300, 45 + progress * 330, 26 + progress * 170, 0, 0, Math.PI * 2);
+        ctx.stroke();
+      }
+      const particles = lowPowerMode || prefersReducedMotion ? 12 : 30;
+      for (let index = 0; index < particles; index += 1) {
+        const angle = index * 2.399 + elapsed * .25;
+        const distance = Math.max(18, 300 - elapsed * 52 + (index % 7) * 12);
+        ctx.globalAlpha = .25 + (index % 4) * .12;
+        ctx.fillStyle = index % 3 ? '#f3c94e' : '#fff0a4';
+        ctx.beginPath();
+        ctx.arc(centerX + Math.cos(angle) * distance, 300 + Math.sin(angle) * distance * .42, 1.5 + index % 3, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.restore();
+    }
+  }
+
+  function drawStage10AbilityWarnings() {
+    if (!isStage10()) return;
+    const au = enemies.find((enemy) => enemy.auBoss && enemy.hp > 0 && !enemy.stage10Hidden);
+    if (!au) return;
+    const auX = logicalToCanvasX(au.x);
+    const auY = entityVisualY(au);
+    if (au.goldCrushPendingTimer > 0) {
+      const target = findBattleEntityByKey(au.goldCrushTargetKey);
+      if (target) {
+        const targetX = logicalToCanvasX(target.x);
+        const pulse = 1 - clamp(au.goldCrushPendingTimer / Math.max(.3, au.goldCrushWarning), 0, 1);
+        ctx.save();
+        ctx.strokeStyle = '#ffd15a';
+        ctx.fillStyle = 'rgba(255,194,43,.11)';
+        ctx.lineWidth = 3;
+        ctx.beginPath(); ctx.arc(targetX, entityVisualY(target), 28 + pulse * 42, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(auX - 18, auY); ctx.lineTo(targetX + 24, entityVisualY(target)); ctx.stroke();
+        ctx.fillStyle = '#ffeaa3'; ctx.font = '900 17px sans-serif'; ctx.textAlign = 'center';
+        ctx.fillText('←', targetX - 34, entityVisualY(target) + 5);
+        ctx.restore();
+      }
+    }
+    if (au.goldFoilPendingTimer > 0) {
+      const progress = 1 - clamp(au.goldFoilPendingTimer / Math.max(1.5, au.goldFoilWarning), 0, 1);
+      ctx.save();
+      for (let layer = 0; layer < (lowPowerMode || prefersReducedMotion ? 2 : 4); layer += 1) {
+        const length = 120 + layer * 48 + progress * 70;
+        ctx.globalAlpha = .12 + layer * .055;
+        ctx.fillStyle = layer % 2 ? '#fff0a5' : '#d39a25';
+        ctx.beginPath();
+        ctx.moveTo(auX - 18, auY);
+        ctx.lineTo(auX - length, auY - 48 - layer * 7);
+        ctx.lineTo(auX - length * 1.06, auY + 48 + layer * 7);
+        ctx.closePath();
+        ctx.fill();
+      }
+      ctx.restore();
+    }
+  }
+
   function drawEntity(entity) {
     if (entity.stage10Hidden) return;
     const ally = entity.kind === 'ally';
@@ -41704,6 +42227,8 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
     const height = Math.max(43, entity.radius * 2.15) * bossScale;
     const x = entity.x - width / 2;
     const y = entity.y - height / 2;
+
+    drawAquaRegiaTrail(entity);
 
     drawCompactEntityVitals(entity, y, width);
 
@@ -41748,12 +42273,68 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
       ctx.restore();
     }
 
-    ctx.fillStyle = entity.auBoss ? '#8a6415' : ally ? (entity.aquaRegia ? '#594014' : '#183f5b') : (entity.boss ? (entity.bossPhase >= 2 ? '#54206e' : '#6b2338') : '#54293a');
+    if (entity.auBoss) {
+      const gradient = ctx.createLinearGradient(x, y, x + width, y + height);
+      gradient.addColorStop(0, '#5f430e');
+      gradient.addColorStop(.42 + Math.sin(gameTime * .55) * .08, '#d6a52d');
+      gradient.addColorStop(1, '#6b4b0c');
+      ctx.fillStyle = gradient;
+    } else if (entity.aquaRegia) {
+      const gradient = ctx.createLinearGradient(x, y, x + width, y + height);
+      gradient.addColorStop(0, '#183e63');
+      gradient.addColorStop(.48, '#6a3b28');
+      gradient.addColorStop(1, '#d28b32');
+      ctx.fillStyle = gradient;
+    } else {
+      ctx.fillStyle = ally ? '#183f5b' : (entity.boss ? (entity.bossPhase >= 2 ? '#54206e' : '#6b2338') : '#54293a');
+    }
     ctx.strokeStyle = entity.auBoss ? '#ffe27b' : ally ? (entity.aquaRegia ? '#ffd08a' : '#5fd6ff') : '#ff8798';
     ctx.lineWidth = 2;
     drawRoundedRect(x, y, width, height, 11);
     ctx.fill();
     ctx.stroke();
+
+    if (entity.auBoss) {
+      ctx.save();
+      ctx.globalAlpha = .24;
+      ctx.fillStyle = '#fff1a8';
+      ctx.beginPath();
+      ctx.ellipse(entity.x + Math.sin(gameTime * .72) * width * .06, entity.y + Math.cos(gameTime * .48) * 3, width * .31, height * .25, Math.sin(gameTime * .18) * .16, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.globalAlpha = .34;
+      ctx.strokeStyle = '#ffe583';
+      ctx.lineWidth = 1.5;
+      for (let band = 0; band < (lowPowerMode ? 2 : 4); band += 1) {
+        const yy = y + height * (.25 + band * .16) + Math.sin(gameTime * .9 + band) * 3;
+        ctx.beginPath();
+        ctx.moveTo(x + 8, yy);
+        ctx.bezierCurveTo(x + width * .3, yy - 7, x + width * .66, yy + 7, x + width - 8, yy);
+        ctx.stroke();
+      }
+      ctx.restore();
+    }
+
+    if (entity.aquaRegia) {
+      const hpRatio = clamp(entity.hp / Math.max(1, entity.maxHp), 0, 1);
+      const phase = gameTime * (hpRatio < .35 ? 1.25 : .8) + finiteNumber(entity.visualSerial, 0);
+      ctx.save();
+      ctx.translate(entity.x, entity.y);
+      ctx.globalAlpha = .62 * (.72 + hpRatio * .28);
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = '#71ddff';
+      ctx.beginPath(); ctx.ellipse(0, 0, width * .62, height * .72, phase, 0, Math.PI * 1.45); ctx.stroke();
+      ctx.strokeStyle = '#ffb45f';
+      ctx.beginPath(); ctx.ellipse(0, 0, width * .72, height * .56, -phase * .82, Math.PI * .25, Math.PI * 1.82); ctx.stroke();
+      const particleCount = entity.multiHit ? 6 : lowPowerMode ? 4 : 8;
+      for (let index = 0; index < particleCount; index += 1) {
+        const angle = phase * (index % 2 ? -1 : 1) + Math.PI * 2 * index / particleCount;
+        const radius = width * (.45 + (index % 3) * .09);
+        ctx.fillStyle = index % 2 ? '#ffbe6c' : '#84e8ff';
+        ctx.globalAlpha = .55 + (index % 3) * .12;
+        ctx.beginPath(); ctx.arc(Math.cos(angle) * radius, Math.sin(angle) * height * .58, 2.2 + index % 2, 0, Math.PI * 2); ctx.fill();
+      }
+      ctx.restore();
+    }
 
     if (entity.flying) {
       ctx.save();ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillStyle='#d7f4ff';ctx.strokeStyle='rgba(7,22,35,.9)';ctx.lineWidth=3;ctx.font='900 9px "Segoe UI",sans-serif';ctx.strokeText('✈ FLYING',entity.x,y-12);ctx.fillText('✈ FLYING',entity.x,y-12);ctx.restore();
@@ -41946,6 +42527,7 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
 
   function draw() {
     drawBackground();
+    drawStage10Atmosphere();
     drawBase(logicalToCanvasX(BASE.allyX), allyBaseHp, D.allyBaseHp, true);
     drawBase(logicalToCanvasX(BASE.enemyX), enemyBaseHp, D.enemyBaseHp, false);
 
@@ -41956,6 +42538,7 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
       drawEntity(entity);
       entity.x = logicalX;
     });
+    drawStage10AbilityWarnings();
     drawProjectiles();
     drawImpactBursts();
     drawCombatEffects();
@@ -42175,6 +42758,7 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
       attackTimer: entity.attackTimer,
       waveIndex: entity.waveIndex,
       visualSerial: entity.visualSerial,
+      moveVelocity: finiteNumber(entity.moveVelocity, 0),
       firstStrikeReady: entity.firstStrikeReady,
       bossPhase: entity.bossPhase || 1,
       bossSummonTimer: entity.bossSummonTimer,
@@ -42236,10 +42820,15 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
     enemy.stage10Protected = Boolean(saved.stage10Protected);
     if (enemy.wipeAlliesOnArrival) enemy.ambushIntroCompleted = Boolean(saved.ambushIntroCompleted);
     enemy.visualSerial = Math.max(0, Math.floor(finiteNumber(saved.visualSerial, enemy.visualSerial)));
+    enemy.moveVelocity = finiteNumber(saved.moveVelocity, 0);
     return enemy;
   }
 
   function saveGame({ silent = false } = {}) {
+    if (isTimeAttackActive()) {
+      if (!silent) setSaveStatus('タイムアタック中は通常セーブを変更しません');
+      return false;
+    }
     if (activeQuiz) {
       if (!silent) setSaveStatus('クイズ終了後に保存してください');
       return false;
@@ -42267,7 +42856,8 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
         tutorialSeen,
         mockExamProgress: JSON.parse(JSON.stringify(mockExamProgress)),
         guestAssistEnabled,
-        guestAssistUsed
+        guestAssistUsed,
+        timeAttack: JSON.parse(JSON.stringify(timeAttackProfile || defaultTimeAttackProfile()))
       },
       battle: {
         energy,
@@ -42369,6 +42959,7 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
     achievementState = normalizeAchievementState(parsed.progress.achievementState);
     guestAssistEnabled = Boolean(parsed.progress.guestAssistEnabled);
     guestAssistUsed = Boolean(parsed.progress.guestAssistUsed || guestAssistEnabled);
+    timeAttackProfile = normalizeTimeAttackProfile(parsed.progress.timeAttack, cumulativeStats);
     if (isStage10()) {
       const stage10Progress = parsed.stageProgress?.['10'] || parsed.stageProgress?.[10] || {};
       aquaRegiaUnlocked = Boolean(stage10Progress.aquaRegiaUnlocked);
@@ -42457,6 +43048,14 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
       repaired = true;
     }
     parsed.progress.mockExamProgress = normalizeMockExamProgress(parsed.progress.mockExamProgress);
+    parsed.progress.timeAttack = normalizeTimeAttackProfile(parsed.progress.timeAttack, savedStats);
+    if (parsed.progress.timeAttack.officialRunInProgress) {
+      parsed.progress.timeAttack.officialRunInProgress = false;
+      parsed.progress.timeAttack.currentRunId = '';
+      parsed.progress.timeAttack.runInvalid = true;
+      parsed.progress.timeAttack.lastInvalidReason = 'ページ再読み込みまたはアプリ終了により走行を無効化しました。';
+      repaired = true;
+    }
     parsed.battle.research = parsed.battle.research && typeof parsed.battle.research === 'object'
       ? parsed.battle.research
       : { activeCards: [], claimedWaves: [], introSeen: false };
@@ -42467,6 +43066,11 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
   }
 
   function loadGame({ silent = false } = {}) {
+    if (isTimeAttackActive()) {
+      invalidateTimeAttackRun('セーブ差し替えを検出しました。');
+      if (!silent) setSaveStatus('タイムアタック中は通常セーブを読み込みません');
+      return false;
+    }
     let parsed;
     try {
       const raw = localStorage.getItem(D.saveKey);
@@ -42481,7 +43085,7 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
       return false;
     }
 
-    const compatibleSaveVersions = new Set([4, 7, 13, 14, 15, 16, 17, 18, 19, 20, 21, 23, 26, 27, 28, 29, 30, 31, D.version]);
+    const compatibleSaveVersions = new Set([4, 7, 13, 14, 15, 16, 17, 18, 19, 20, 21, 23, 26, 27, 28, 29, 30, 31, 32, D.version]);
     if (!parsed || !compatibleSaveVersions.has(parsed.saveVersion) || !parsed.progress || !parsed.battle) {
       setSaveStatus('このバージョンでは読めないデータです');
       return false;
@@ -42743,6 +43347,11 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
   }
 
   async function importTransferCode() {
+    if (isTimeAttackActive()) {
+      invalidateTimeAttackRun('セーブ差し替え操作を検出しました。');
+      setTransferStatus('タイムアタック中はセーブを復元できません。', true);
+      return;
+    }
     const code = $('transferCode').value.replace(/\s+/g, '');
     const match = /^CQ33\.([sf][0-9a-f]+)\.([A-Za-z0-9_-]+)$/.exec(code);
     if (!match) { setTransferStatus('コード形式が正しくありません。先頭がCQ33.のコードをすべて貼り付けてください。', true); return; }
@@ -42812,6 +43421,10 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
   }
 
   function deleteSave() {
+    if (isTimeAttackActive()) {
+      invalidateTimeAttackRun('セーブ削除操作を検出しました。');
+      return;
+    }
     const accepted = window.confirm('セーブデータを削除し、コイン・化学レベル・解放・研究強化をすべて初期化しますか？');
     if (!accepted) return;
 
@@ -42825,6 +43438,7 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
     aquaRegiaLevel = 1;
     aquaAuContactComplete = false;
     stage10State = defaultStage10State();
+    timeAttackProfile = defaultTimeAttackProfile();
     updateGuestAssistUi();
     speedTrialRetryAt = 0;
     mockExamProgress = defaultMockExamProgress();
@@ -42842,7 +43456,7 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
   }
 
   const updateNotices = [
-    {"version":"v6.0","title":"v6.0へ更新しました","body":"Stage 10「黄金王・Au反応区」を追加しました。HNO₃とHClから王水を調製し、Feの物理攻撃と王水による金溶解反応でAuへ挑みます。","isNew":true},
+    {"version":"v6.1","title":"v6.1へ更新しました","body":"通常Stage 10クリア後に、通常セーブと完全分離したStage 10タイムアタックと専用ランキングを利用できます。Stage 10のV3→V16 BGM遷移、Au・王水演出も強化しました。","isNew":true},
     {version:'v5.4',title:'Stage 9・遠距離攻撃禁止',body:'Stage 9「近接反応・射程封鎖区」を追加しました。遠距離攻撃ユニットは召喚不可となり、Mg・Al・Fe・H₂OでBOSS BaSO₄を攻略します。',isNew:false},
     {version:'v5.3',title:'Stage攻略情報',body:'Stage選択画面と敗北画面へ攻略情報を追加し、敗北回数に応じて段階的に具体化するヒントと敗北分析を実装しました。',isNew:false},
     {version:'v5.2',title:'安全な単一ZIP公開',body:'公開物を完全性検査付きchemion-release.zipへ統一し、破損や版不一致がある場合は公開を停止する方式へ移行しました。',isNew:false},
@@ -42881,7 +43495,7 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
     {version:'安全確認',title:'ユーザー名をLINEで送ってください',body:'登録したユーザー名、または変更後のユーザー名を作成者へLINEで送ってください。本名・学校名・SNS IDは使わないでください。',isNew:false}
   ];
   const updateHistory = [
-    ["v6.0","Stage 10、王水調製、Auボス、V16 loop、Stage 10専用演出と保存移行を追加。Stage 1〜9の戦闘値は維持。"],
+    ["v6.1","Stage 10タイムアタック、1人1件の専用ベストランキング、正式V3、V16遷移、Au・王水アニメーション品質を追加。Stage 1〜9の戦闘値とBGMは維持。"],
     ['v5.4','Stage 9「近接反応・射程封鎖区」を追加。遠距離攻撃を禁止し、近接・盾・回復でBaSO₄を突破する制限攻略を実装。'],
     ['v5.3','Stage 1〜8の攻略情報、敗北原因分析、敗北回数に応じた段階式ヒントを追加。'],
     ['v5.2','完全性検査付きの単一chemion-release.zip公開方式へ移行。'],
@@ -42931,17 +43545,25 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
   window.cqPauseOverlay = pauseForOverlay;
   window.cqResumeOverlay = resumeFromOverlay;
   function updateGuestAssistUi() {
-    if ($('guestAssistIndicator')) $('guestAssistIndicator').hidden = !guestAssistEnabled;
+    const blocked = isTimeAttackActive();
+    if ($('guestAssistIndicator')) $('guestAssistIndicator').hidden = !guestAssistEnabled || blocked;
     if ($('guestAssistDisableBtn')) $('guestAssistDisableBtn').hidden = !guestAssistEnabled;
     if ($('guestAssistCodeBtn')) $('guestAssistCodeBtn').hidden = guestAssistEnabled;
     if ($('guestAssistCode')) {
-      $('guestAssistCode').disabled = guestAssistEnabled;
+      $('guestAssistCode').disabled = guestAssistEnabled || blocked;
       if (guestAssistEnabled) $('guestAssistCode').value = '';
     }
+    if ($('guestAssistCodeBtn')) $('guestAssistCodeBtn').disabled = blocked;
+    if ($('guestAssistDisableBtn')) $('guestAssistDisableBtn').disabled = blocked;
+    if ($('guestAssistCodeStatus') && blocked) $('guestAssistCodeStatus').textContent = 'タイムアタック中は利用できません';
     if ($('guestAssistCodeStatus') && guestAssistEnabled) $('guestAssistCodeStatus').textContent = 'ゲストアシスト中';
   }
 
   function requestGuestAssist() {
+    if (isTimeAttackActive()) {
+      invalidateTimeAttackRun('ゲストアシスト操作を検出しました。');
+      return;
+    }
     const code = String($('guestAssistCode')?.value || '').trim().toLowerCase();
     if (code !== 'easy') {
       $('guestAssistCodeStatus').textContent = 'コードを確認してください';
@@ -42960,6 +43582,11 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
   }
 
   function enableGuestAssist() {
+    if (isTimeAttackActive()) {
+      invalidateTimeAttackRun('ゲストアシスト操作を検出しました。');
+      closeGuestAssistConfirmation();
+      return;
+    }
     guestAssistEnabled = true;
     guestAssistUsed = true;
     $('guestAssistConfirmModal').hidden = true;
@@ -42970,6 +43597,10 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
   }
 
   function disableGuestAssist() {
+    if (isTimeAttackActive()) {
+      invalidateTimeAttackRun('ゲストアシスト操作を検出しました。');
+      return;
+    }
     guestAssistEnabled = false;
     updateGuestAssistUi();
     $('guestAssistCodeStatus').textContent = '';
@@ -43347,6 +43978,12 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
     $('infoModal').hidden = false;
     const container = $('infoContent');
     container.innerHTML = '';
+    if (isTimeAttackActive() && ['review', 'learning', 'practice', 'mock'].includes(kind)) {
+      $('infoKicker').textContent = 'TIME ATTACK';
+      $('infoTitle').textContent = '走行中は利用できません';
+      container.innerHTML = '<p class="modal-lead">通常の学習記録・練習成績を完全に分離するため、タイムアタック終了後に利用してください。計測は継続しています。</p>';
+      return;
+    }
     if (kind === 'notice') {
       $('infoKicker').textContent = 'NEWS'; $('infoTitle').textContent = 'お知らせ';
       const list = document.createElement('div'); list.className = 'notice-list';
@@ -43389,6 +44026,11 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
     $('musicVolume').addEventListener('input', (event) => setBgmVolume(event.currentTarget.value));
     $('stageBtn').addEventListener('click', openStageModal);
     $('stageCloseBtn').addEventListener('click', closeStageModal);
+    $('timeAttackStartBtn').addEventListener('click', beginTimeAttack);
+    $('timeAttackRankingBtn').addEventListener('click', openTimeAttackRanking);
+    $('timeAttackExitBtn').addEventListener('click', exitTimeAttack);
+    $('timeAttackResultRankingBtn').addEventListener('click', openTimeAttackRanking);
+    $('timeAttackResultCloseBtn').addEventListener('click', closeTimeAttackResult);
     $('stageGuideCloseBtn').addEventListener('click', closeStageGuide);
     $('stageGuideCloseBottomBtn').addEventListener('click', closeStageGuide);
     $('stageGuideSelectBtn').addEventListener('click', selectStageFromGuide);
@@ -43436,6 +44078,29 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
     window.addEventListener('resize', positionTutorialOverlay);
     window.addEventListener('scroll', positionTutorialOverlay, true);
     window.addEventListener('cq-profile-closed', () => setTimeout(maybeStartPendingTutorial, 120));
+    window.addEventListener('cq-ta-profile-updated', (event) => {
+      timeAttackProfile = normalizeTimeAttackProfile(event.detail, cumulativeStats);
+      updateTimeAttackUi();
+      if ($('timeAttackResultBest') && !$('timeAttackResultModal').hidden) {
+        $('timeAttackResultBest').textContent = timeAttackProfile.localBestMs
+          ? `あなたのベスト：${formatTimeAttackMs(timeAttackProfile.localBestMs)}`
+          : '有効な自己ベストはありません。';
+      }
+    });
+    window.addEventListener('cq-ta-submit-result', (event) => {
+      if (!$('timeAttackResultModal') || $('timeAttackResultModal').hidden) return;
+      const detail = event.detail || {};
+      if (!detail.ok) {
+        $('timeAttackResultStatus').textContent += '｜オンライン送信は保留されました。';
+        return;
+      }
+      const label = detail.outcome === 'created' || detail.outcome === 'improved'
+        ? 'オンライン自己ベストを更新しました。'
+        : detail.outcome === 'slower'
+          ? 'オンライン記録は既存の速いベストを維持しました。'
+          : '同じ走行は重複登録せず確認済みです。';
+      $('timeAttackResultStatus').textContent += `｜${label}`;
+    });
     $('achievementBtn').addEventListener('click', openAchievements);
     $('achievementCloseBtn').addEventListener('click', closeAchievements);
     $('achievementCloseBottomBtn').addEventListener('click', closeAchievements);
@@ -43456,6 +44121,7 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
       if (tutorialActive) finishTutorial(true);
       else if (!$('transferModal').hidden) closeTransferModal();
       else if (!$('guestAssistConfirmModal').hidden) closeGuestAssistConfirmation();
+      else if (!$('timeAttackResultModal').hidden) closeTimeAttackResult();
       else if (!$('achievementModal').hidden) closeAchievements();
       else if (!$('stageGuideModal').hidden) closeStageGuide();
       else if (!$('stageModal').hidden) closeStageModal();
@@ -43478,9 +44144,24 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
     document.addEventListener('visibilitychange', () => {
       updatePowerControls();
       if (document.hidden) { pauseBgm(); suspendForHiddenPage(); }
-      else { lastTimestamp = performance.now(); lastRenderedTimestamp = 0; syncBgmPlayback(); if (manualPaused && gameStatus === 'playing') showPauseModal(pauseReason === 'background' ? 'background' : pauseReason); }
+      else {
+        if (isTimeAttackActive() && timeAttackHiddenAt > 0 && performance.now() - timeAttackHiddenAt > TIME_ATTACK_BACKGROUND_LIMIT_MS) {
+          invalidateTimeAttackRun('長時間バックグラウンドへ移動しました。');
+        }
+        timeAttackHiddenAt = 0;
+        lastTimestamp = performance.now();
+        lastRenderedTimestamp = 0;
+        syncBgmPlayback();
+        if (manualPaused && gameStatus === 'playing') showPauseModal(pauseReason === 'background' ? 'background' : pauseReason);
+      }
     });
-    window.addEventListener('pagehide', () => { pauseBgm(); suspendForHiddenPage(); });
+    window.addEventListener('pagehide', () => {
+      if (isTimeAttackActive()) invalidateTimeAttackRun('ページ終了または再読み込みを検出しました。');
+      pauseBgm();
+      suspendForHiddenPage();
+    });
+    window.addEventListener('error', () => invalidateTimeAttackRun('実行エラーを検出しました。'));
+    window.addEventListener('unhandledrejection', () => invalidateTimeAttackRun('未処理エラーを検出しました。'));
   }
 
   function animationLoop(timestamp) {
@@ -43491,6 +44172,17 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
       return;
     }
     const elapsedSinceRender = lastRenderedTimestamp > 0 ? timestamp - lastRenderedTimestamp : frameInterval;
+    if (performanceMetrics.lastFrameAt > 0) {
+      const gap = Math.max(0, timestamp - performanceMetrics.lastFrameAt);
+      performanceMetrics.intervalTotalMs += gap;
+      performanceMetrics.maxGapMs = Math.max(performanceMetrics.maxGapMs, gap);
+      if (gap > 50) performanceMetrics.longFrames += 1;
+    }
+    performanceMetrics.lastFrameAt = timestamp;
+    performanceMetrics.frames += 1;
+    performanceMetrics.peakEffects = Math.max(performanceMetrics.peakEffects, combatEffects.length + impactBursts.length);
+    performanceMetrics.peakProjectiles = Math.max(performanceMetrics.peakProjectiles, projectiles.length);
+    performanceMetrics.heapPeak = Math.max(performanceMetrics.heapPeak, finiteNumber(performance.memory?.usedJSHeapSize, 0));
     const rawDt = Math.max(0, (timestamp - lastTimestamp) / 1000);
     const realDt = Math.min(0.25, rawDt);
     const dt = Math.min(0.1, realDt);
@@ -43508,6 +44200,7 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
       achievementToastTimer = Math.max(0, achievementToastTimer - dt);
       if (achievementToastTimer <= 0) $('achievementToast').hidden = true;
     }
+    if (isTimeAttackActive() && performanceMetrics.frames % 3 === 0) updateTimeAttackUi();
     draw();
     requestAnimationFrame(animationLoop);
   }
@@ -43579,6 +44272,74 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
         au.hp = clamp(finiteNumber(value, au.hp), 0, au.maxHp);
         return true;
       },
+      setTimeAttackUnlocked(value = true) {
+        timeAttackProfile = normalizeTimeAttackProfile(timeAttackProfile, cumulativeStats);
+        timeAttackProfile.unlocked = Boolean(value);
+        saveGame({ silent: true });
+        updateTimeAttackUi();
+      },
+      beginTimeAttack,
+      forceTimeAttackElapsed(milliseconds, { valid = false } = {}) {
+        if (!isTimeAttackActive()) return false;
+        const elapsed = Math.max(0, finiteNumber(milliseconds, 0));
+        timeAttackRun.startedAt = performance.now() - elapsed;
+        timeAttackRun.valid = Boolean(valid);
+        timeAttackRun.invalidReason = valid ? '' : '開発者・自動テスト状態です。';
+        updateTimeAttackUi();
+        return true;
+      },
+      finishTimeAttack(victory = true) { return restoreNormalAfterTimeAttack({ victory: Boolean(victory), reason: victory ? '' : '自動テスト中断' }); },
+      invalidateTimeAttack: invalidateTimeAttackRun,
+      requestFirstSummon() {
+        const unit = D.units.find((candidate) => unlocked.has(candidate.id));
+        if (!unit) return false;
+        requestSummon(unit);
+        return Boolean(activeQuiz);
+      },
+      answerActiveQuizCorrect() {
+        if (!activeQuiz || activeQuiz.answered) return false;
+        answerQuiz(activeQuiz.question.answer);
+        return true;
+      },
+      continueActiveQuiz() {
+        if (!activeQuiz?.answered) return false;
+        closeQuiz();
+        return true;
+      },
+      resetPerformanceMetrics() { performanceMetrics = defaultPerformanceMetrics(); },
+      performanceSnapshot() {
+        const elapsedMs = Math.max(1, performance.now() - performanceMetrics.startedAt);
+        const measuredIntervals = Math.max(1, performanceMetrics.frames - 1);
+        return {
+          ...performanceMetrics,
+          elapsedMs,
+          averageFps: performanceMetrics.frames * 1000 / elapsedMs,
+          intervalFps: 1000 / Math.max(.001, performanceMetrics.intervalTotalMs / measuredIntervals),
+          heapGrowthBytes: finiteNumber(performanceMetrics.heapPeak, 0) - finiteNumber(performanceMetrics.heapStart, 0)
+        };
+      },
+      benchmarkDraw(iterations = 12) {
+        const count = clamp(Math.floor(finiteNumber(iterations, 12)), 1, 120);
+        const startedAt = performance.now();
+        for (let index = 0; index < count; index += 1) draw();
+        const elapsedMs = performance.now() - startedAt;
+        return { count, elapsedMs, averageDrawMs: elapsedMs / count };
+      },
+      benchmarkFrames(iterations = 60, dt = 1 / 60) {
+        const count = clamp(Math.floor(finiteNumber(iterations, 60)), 1, 240);
+        const frameDt = clamp(finiteNumber(dt, 1 / 60), 1 / 240, .1);
+        let maxFrameMs = 0;
+        const startedAt = performance.now();
+        for (let index = 0; index < count; index += 1) {
+          const frameStartedAt = performance.now();
+          if (!paused && gameStatus === 'playing') updateGame(frameDt * activeBattleSpeed());
+          draw();
+          maxFrameMs = Math.max(maxFrameMs, performance.now() - frameStartedAt);
+        }
+        const elapsedMs = performance.now() - startedAt;
+        const averageFrameMs = elapsedMs / count;
+        return { count, elapsedMs, averageFrameMs, maxFrameMs, processingCapacityFps: 1000 / Math.max(.001, averageFrameMs) };
+      },
       saveNow() { return saveGame({ silent: true }); },
       loadNow() { return loadGame({ silent: true }); },
       setPaused(value) { paused = Boolean(value); updatePauseButton(); },
@@ -43588,17 +44349,24 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
       },
       snapshot() {
         return {
-          stage: currentStageId, gameStatus, wave: currentWaveIndex + 1, wavePhase, gameTime,
+          stage: currentStageId, gameStatus, paused, manualPaused, renderFps: currentRenderFps(), wave: currentWaveIndex + 1, wavePhase, gameTime,
           logicalScale: stageLogicalScale(), logicalEnemyX: BASE.enemyX, canvasEnemyX: logicalToCanvasX(BASE.enemyX),
-          coins, energy, aquaRegiaUnlocked, aquaRegiaLevel, aquaAuContactComplete,
+          coins, energy, level, experience, energyCapacityLevel,
+          unitUpgradeLevels: { ...unitUpgradeLevels },
+          aquaRegiaUnlocked, aquaRegiaLevel, aquaAuContactComplete,
           highestStageCleared: cumulativeStats.highestStageCleared,
           highestStageReached: cumulativeStats.highestStageReached,
           guestAssistEnabled, guestAssistUsed,
+          timeAttackActive: isTimeAttackActive(), timeAttackMs: currentTimeAttackMs(),
+          timeAttackRun: timeAttackRun ? { ...timeAttackRun } : null,
+          timeAttackProfile: JSON.parse(JSON.stringify(timeAttackProfile || defaultTimeAttackProfile())),
           cumulativeStats: JSON.parse(JSON.stringify(cumulativeStats)),
           stage10: JSON.parse(JSON.stringify(stage10State)),
           allies: allies.map((entity) => ({ ...serializeEntity(entity), kind: entity.kind, formula: entity.formula, hp: entity.hp, maxHp: entity.maxHp, aquaRegia: Boolean(entity.aquaRegia) })),
           enemies: enemies.map((entity) => ({ ...serializeEntity(entity), kind: entity.kind, formula: entity.formula, hp: entity.hp, maxHp: entity.maxHp, auBoss: Boolean(entity.auBoss) })),
           projectiles: projectiles.map((item) => ({ ownerKind: item.ownerKind, effectKind: item.effectKind })),
+          visualCounts: { combatEffects: combatEffects.length, impactBursts: impactBursts.length, projectiles: projectiles.length, audioNodesActive: performanceMetrics.audioNodesActive },
+          activeQuiz: activeQuiz ? { mode: activeQuiz.mode, answered: activeQuiz.answered } : null,
           desiredBgmTrackKey: desiredBgmTrackKey(), activeBgmTrackKey,
           enemyBaseHp, allyBaseHp
         };
@@ -43628,10 +44396,12 @@ body.low-power-mode .stage10-cinematic::after,body.low-power-mode .stage10-cinem
     tutorialActive = false;
     guestAssistEnabled = false;
     guestAssistUsed = false;
+    timeAttackProfile = defaultTimeAttackProfile();
     aquaRegiaUnlocked = false;
     aquaRegiaLevel = 1;
     aquaAuContactComplete = false;
     stage10State = defaultStage10State();
+    performanceMetrics = defaultPerformanceMetrics();
 
     buildUnitButtons();
     buildFormulaGuide();
@@ -43690,6 +44460,11 @@ let db = null;
 let currentUser = null;
 let configured = false;
 let syncing = false;
+let timeAttackSyncing = false;
+let timeAttackRankingOpen = false;
+const TIME_ATTACK_COLLECTION = 'stage10TimeAttack';
+const TIME_ATTACK_MIN_MS = 45000;
+const TIME_ATTACK_MAX_MS = 2 * 60 * 60 * 1000;
 
 function firebaseConfigured() {
   const c = D.firebaseConfig || {};
@@ -43733,6 +44508,52 @@ function guestAssistWasUsed() {
   } catch {
     return false;
   }
+}
+
+function formatTimeAttackMs(value) {
+  const milliseconds = Math.max(0, Math.round(Number(value) || 0));
+  const minutes = Math.floor(milliseconds / 60000);
+  const seconds = Math.floor(milliseconds % 60000 / 1000);
+  const hundredths = Math.floor(milliseconds % 1000 / 10);
+  return `${minutes}:${String(seconds).padStart(2, '0')}.${String(hundredths).padStart(2, '0')}`;
+}
+
+function readTimeAttackProfile() {
+  try {
+    const save = JSON.parse(localStorage.getItem(SAVE_KEY) || '{}');
+    return { save, profile: save?.progress?.timeAttack && typeof save.progress.timeAttack === 'object' ? save.progress.timeAttack : {} };
+  } catch {
+    return { save: null, profile: {} };
+  }
+}
+
+function writeTimeAttackProfile(mutator) {
+  try {
+    const { save, profile } = readTimeAttackProfile();
+    if (!save?.progress) return false;
+    const next = mutator({ ...profile });
+    if (!next || typeof next !== 'object') return false;
+    save.progress.timeAttack = next;
+    localStorage.setItem(SAVE_KEY, JSON.stringify(save));
+    window.dispatchEvent(new CustomEvent('cq-ta-profile-updated', { detail: { ...next } }));
+    return true;
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
+}
+
+function validPendingTimeAttack(value) {
+  const timeMs = Math.round(Number(value?.timeMs));
+  const runId = String(value?.runId || '');
+  return runId && Number.isInteger(timeMs) && timeMs >= TIME_ATTACK_MIN_MS && timeMs <= TIME_ATTACK_MAX_MS
+    ? { runId, timeMs, completedAt: String(value.completedAt || '') }
+    : null;
+}
+
+function isFilteredTimeAttackRecord(record) {
+  const name = String(record?.username || '').normalize('NFKC').trim().toLowerCase();
+  return record?.isTest === true || /^tester(?:$|[-_\s\d])/.test(name) || name.includes('自動テスト');
 }
 
 function rankingScore(x) {
@@ -43799,19 +44620,22 @@ async function initializeFirebase() {
       setDoc: firestore.setDoc,
       updateDoc: firestore.updateDoc,
       collection: firestore.collection,
+      getDoc: firestore.getDoc,
       getDocs: firestore.getDocs,
       query: firestore.query,
       orderBy: firestore.orderBy,
       limit: firestore.limit,
       serverTimestamp: firestore.serverTimestamp,
       addDoc: firestore.addDoc,
-      deleteDoc: firestore.deleteDoc
+      deleteDoc: firestore.deleteDoc,
+      runTransaction: firestore.runTransaction
     };
     onAuthStateChanged(auth, async (user) => {
       currentUser = user;
       if (user) {
         setStatus('オンライン');
         syncProfile();
+        syncTimeAttackBest();
       } else {
         setStatus('認証待ち');
       }
@@ -43847,6 +44671,162 @@ async function syncProfile() {
     setStatus('同期失敗');
   } finally {
     syncing = false;
+  }
+}
+
+async function syncTimeAttackBest() {
+  if (timeAttackSyncing || !configured || !currentUser || !navigator.onLine) return;
+  const nicknameResult = validateNickname(localStorage.getItem(NICK_KEY));
+  const { profile } = readTimeAttackProfile();
+  const pending = validPendingTimeAttack(profile.pendingSubmission);
+  if (!pending || !nicknameResult.ok) return;
+  timeAttackSyncing = true;
+  try {
+    const f = window.__cqfb;
+    const reference = f.doc(db, TIME_ATTACK_COLLECTION, currentUser.uid);
+    let outcome = 'unchanged';
+    let serverBestMs = null;
+    await f.runTransaction(db, async (transaction) => {
+      const snapshot = await transaction.get(reference);
+      if (!snapshot.exists()) {
+        transaction.set(reference, {
+          userId: currentUser.uid,
+          username: nicknameResult.name,
+          bestMs: pending.timeMs,
+          runId: pending.runId,
+          isTest: false,
+          firstRegisteredAt: f.serverTimestamp(),
+          submittedAt: f.serverTimestamp()
+        });
+        outcome = 'created';
+        serverBestMs = pending.timeMs;
+        return;
+      }
+      const current = snapshot.data() || {};
+      serverBestMs = Math.round(Number(current.bestMs) || 0);
+      if (String(current.runId || '') === pending.runId) {
+        outcome = 'duplicate';
+        return;
+      }
+      if (serverBestMs > 0 && serverBestMs <= pending.timeMs) {
+        outcome = 'slower';
+        return;
+      }
+      transaction.update(reference, {
+        username: nicknameResult.name,
+        bestMs: pending.timeMs,
+        runId: pending.runId,
+        submittedAt: f.serverTimestamp()
+      });
+      outcome = 'improved';
+      serverBestMs = pending.timeMs;
+    });
+    writeTimeAttackProfile((next) => {
+      const localBest = Math.round(Number(next.localBestMs) || 0);
+      if (serverBestMs >= TIME_ATTACK_MIN_MS && (!localBest || serverBestMs < localBest)) next.localBestMs = serverBestMs;
+      if (String(next.pendingSubmission?.runId || '') === pending.runId) next.pendingSubmission = null;
+      next.lastSubmittedRunId = pending.runId;
+      return next;
+    });
+    window.dispatchEvent(new CustomEvent('cq-ta-submit-result', {
+      detail: { ok: true, outcome, runId: pending.runId, bestMs: serverBestMs }
+    }));
+  } catch (error) {
+    console.error(error);
+    window.dispatchEvent(new CustomEvent('cq-ta-submit-result', {
+      detail: { ok: false, runId: pending.runId, message: '記録は端末に保留され、オンライン復帰後に再送されます。' }
+    }));
+  } finally {
+    timeAttackSyncing = false;
+  }
+}
+
+async function openTimeAttackRanking() {
+  if (timeAttackRankingOpen) return;
+  timeAttackRankingOpen = true;
+  window.cqPauseOverlay?.();
+  $('timeAttackRankingModal').hidden = false;
+  await loadTimeAttackRanking();
+}
+
+function closeTimeAttackRanking() {
+  if (!timeAttackRankingOpen) return;
+  timeAttackRankingOpen = false;
+  $('timeAttackRankingModal').hidden = true;
+  window.cqResumeOverlay?.();
+}
+
+async function loadTimeAttackRanking() {
+  const list = $('timeAttackRankingList');
+  list.replaceChildren();
+  $('timeAttackMyRankCard').hidden = true;
+  const message = $('timeAttackRankingMessage');
+  if (!configured) {
+    message.textContent = 'タイムアタックランキングを利用するにはFirebase設定が必要です。ローカル自己ベストは保存されます。';
+    return;
+  }
+  if (!navigator.onLine) {
+    message.textContent = '現在オフラインです。記録は端末に保留され、再接続後に安全に再送されます。';
+    return;
+  }
+  if (!currentUser) {
+    message.textContent = '匿名ログインを準備しています。数秒後に再読み込みしてください。';
+    return;
+  }
+  await syncTimeAttackBest();
+  try {
+    const f = window.__cqfb;
+    const snapshot = await f.getDocs(f.query(
+      f.collection(db, TIME_ATTACK_COLLECTION),
+      f.orderBy('bestMs', 'asc'),
+      f.orderBy('firstRegisteredAt', 'asc'),
+      f.limit(100)
+    ));
+    const records = [];
+    snapshot.forEach((item) => {
+      const record = { id: item.id, ...item.data() };
+      if (!isFilteredTimeAttackRecord(record)) records.push(record);
+    });
+    const shown = records.slice(0, 50);
+    message.textContent = `Stage 10公式タイムアタック上位${shown.length}人。各プレイヤーの最速記録1件だけを表示します。`;
+    shown.forEach((record, index) => {
+      const row = document.createElement('div');
+      row.className = `ranking-row${record.id === currentUser.uid ? ' me' : ''}`;
+      const position = document.createElement('span');
+      position.className = 'ranking-position';
+      position.textContent = `${index + 1}位`;
+      const name = document.createElement('span');
+      name.className = 'ranking-name';
+      escapeTextInto(name, record.username || '名無し');
+      const score = document.createElement('span');
+      score.className = 'ranking-score time-attack-ranking-time';
+      score.textContent = formatTimeAttackMs(record.bestMs);
+      row.append(position, name, score);
+      list.append(row);
+    });
+    const myIndex = records.findIndex((record) => record.id === currentUser.uid);
+    const { profile } = readTimeAttackProfile();
+    const myRecord = myIndex >= 0 ? records[myIndex] : null;
+    const localBest = Math.round(Number(profile.localBestMs) || 0);
+    if (myRecord && myRecord.bestMs >= TIME_ATTACK_MIN_MS && (!localBest || myRecord.bestMs < localBest)) {
+      writeTimeAttackProfile((next) => ({ ...next, localBestMs: Math.round(myRecord.bestMs) }));
+    }
+    if (myRecord || localBest) {
+      const card = $('timeAttackMyRankCard');
+      card.replaceChildren();
+      const title = document.createElement('strong');
+      title.textContent = myRecord ? `自分：${myIndex + 1}位` : '自分：ローカル記録';
+      const name = document.createElement('span');
+      escapeTextInto(name, localStorage.getItem(NICK_KEY) || '未登録');
+      const best = document.createElement('span');
+      best.textContent = `ベスト ${formatTimeAttackMs(myRecord?.bestMs || localBest)}`;
+      card.append(title, name, best);
+      card.hidden = false;
+    }
+    if (!list.children.length) list.innerHTML = '<p class="modal-lead">正式記録はまだありません。</p>';
+  } catch (error) {
+    console.error(error);
+    message.textContent = 'タイムアタックランキングの取得に失敗しました。端末の記録は失われません。';
   }
 }
 
@@ -44079,6 +45059,8 @@ function wire() {
   window.addEventListener('cq-open-profile', () => openProfile(false));
   window.addEventListener('cq-save-imported', () => { setTimeout(syncProfile, 250); });
   window.addEventListener('cq-guest-assist-changed', () => { if (guestAssistWasUsed()) setStatus('ランキング送信対象外'); });
+  window.addEventListener('cq-ta-record-ready', syncTimeAttackBest);
+  window.addEventListener('cq-open-ta-ranking', openTimeAttackRanking);
   window.addEventListener('cq-open-requests', openRequests);
   window.addEventListener('cq-submit-request', openRequestSubmit);
   $('requestSubmitCloseBtn').addEventListener('click', () => {
@@ -44089,6 +45071,8 @@ function wire() {
   $('rankingBtn').addEventListener('click', openRanking);
   $('rankingCloseBtn').addEventListener('click', closeRanking);
   $('rankingRefreshBtn').addEventListener('click', loadRanking);
+  $('timeAttackRankingCloseBtn').addEventListener('click', closeTimeAttackRanking);
+  $('timeAttackRankingRefreshBtn').addEventListener('click', loadTimeAttackRanking);
   $('nicknameSaveBtn').addEventListener('click', saveNickname);
   $('profileCancelBtn').addEventListener('click', () => {
     localStorage.setItem(ONLINE_SEEN_KEY, '1');
@@ -44098,12 +45082,14 @@ function wire() {
   window.addEventListener('online', () => {
     setStatus('再接続・同期中');
     syncProfile();
+    syncTimeAttackBest();
   });
   window.addEventListener('offline', () => setStatus('オフライン'));
   document.addEventListener('visibilitychange', () => {
-    if (document.visibilityState === 'hidden') syncProfile();
+    if (document.visibilityState === 'hidden') { syncProfile(); syncTimeAttackBest(); }
   });
-  setInterval(syncProfile, 30000);
+  document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && timeAttackRankingOpen) closeTimeAttackRanking(); });
+  setInterval(() => { syncProfile(); syncTimeAttackBest(); }, 30000);
   if (!localStorage.getItem(NICK_KEY) && !localStorage.getItem(ONLINE_SEEN_KEY)) openProfile(false);
 }
 
@@ -44113,7 +45099,7 @@ initializeFirebase();
   <script>
   (() => {
     'use strict';
-    const CURRENT_VERSION = '6.0';
+    const CURRENT_VERSION = '6.1';
     const VERSION_CHECK_INTERVAL = 5 * 60 * 1000;
     const VERSION_FOCUS_MIN_INTERVAL = 60 * 1000;
     let registration = null;

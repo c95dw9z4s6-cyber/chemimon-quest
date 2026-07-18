@@ -220,5 +220,23 @@
     "introducedIn": "6.0",
     "title": "Stage 10・王水調製・Au低反応性・V16 loop",
     "required": true
+  },
+  {
+    "id": "stage10-time-attack",
+    "introducedIn": "6.1",
+    "title": "通常セーブ完全分離のStage 10タイムアタック",
+    "required": true
+  },
+  {
+    "id": "stage10-time-attack-ranking",
+    "introducedIn": "6.1",
+    "title": "1プレイヤー1件・最速のみの専用ランキング",
+    "required": true
+  },
+  {
+    "id": "stage10-v3-v16-presentation",
+    "introducedIn": "6.1",
+    "title": "正式V3からV16への遷移とAu・王水演出強化",
+    "required": true
   }
 ]

@@ -1,0 +1,13 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "stage10TimeAttack",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "bestMs", "order": "ASCENDING" },
+        { "fieldPath": "firstRegisteredAt", "order": "ASCENDING" }
+      ]
+    }
+  ],
+  "fieldOverrides": []
+}

@@ -1,8 +1,8 @@
-/* Chemion Quest v6.0 service worker */
+/* Chemion Quest v6.1 service worker */
 'use strict';
 const CACHE_PREFIX = 'chemimon-quest-';
-const SHELL_CACHE = `${CACHE_PREFIX}shell-v6.0`;
-const RUNTIME_CACHE = `${CACHE_PREFIX}runtime-v6.0`;
+const SHELL_CACHE = `${CACHE_PREFIX}shell-v6.1`;
+const RUNTIME_CACHE = `${CACHE_PREFIX}runtime-v6.1`;
 const APP_SHELL = [
   './',
   './index.html',
@@ -14,6 +14,7 @@ const APP_SHELL = [
   './icons/apple-touch-icon.png',
   './assets/audio/chemion-normal-bgm.mp3',
   './assets/audio/chemion-difficult-bgm.mp3',
+  './assets/audio/chemion-milestone-stage-bgm-v3.mp3',
   './assets/audio/chemion-stage10-au-boss-v16-loop.mp3'
 ];
 

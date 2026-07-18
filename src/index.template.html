@@ -72,6 +72,10 @@ __RELEASE_STYLES__
     </header>
 
     <div id="guestAssistIndicator" class="guest-assist-indicator" role="status" hidden>ゲストアシスト中</div>
+    <div id="timeAttackIndicator" class="time-attack-indicator" role="status" hidden>
+      <span><b>STAGE 10 TIME ATTACK</b><strong id="timeAttackClock">0:00.00</strong><small id="timeAttackValidity">公式記録走行中</small></span>
+      <button id="timeAttackExitBtn" class="small-button" type="button">中断して通常へ戻る</button>
+    </div>
 
     <section id="hud" class="hud" aria-label="ゲーム情報">
       <div class="hud-card"><span class="hud-label">ENERGY</span><strong><span id="energy">0</span> / <span id="maxEnergy">0</span></strong><span class="hud-subtext">回復 <span id="energyRate">1.00</span>/秒</span></div>
@@ -116,6 +120,7 @@ __RELEASE_STYLES__
       <div id="battleMessage" class="battle-message" aria-live="polite"></div>
       <div id="researchLoadout" class="research-loadout" hidden aria-label="選択中の研究カード"></div>
       <div id="stage10Cinematic" class="stage10-cinematic" hidden aria-live="assertive" aria-atomic="true">
+        <div class="stage10-gold-pressure" aria-hidden="true"><i></i><i></i><i></i></div>
         <div class="stage10-cinematic-particles" aria-hidden="true"></div>
         <p id="stage10CinematicKicker">GOLD REACTION</p>
         <strong id="stage10CinematicTitle">79 Au</strong>
@@ -147,7 +152,7 @@ __RELEASE_STYLES__
           <b id="aquaRegiaLevel">Lv.1 / 10</b>
         </div>
         <p class="aqua-regia-ratio">濃硝酸：濃塩酸＝1：3（体積比）</p>
-        <p class="aqua-regia-safety">危険：これは抽象化された学習表現です。実物を混合しないでください。</p>
+        <p class="aqua-regia-safety">危険：これは抽象化された学習表現です。実際に混ぜたり試したりしないでください。</p>
         <div class="aqua-regia-progress" aria-live="polite">
           <span id="aquaNitricCount">HNO₃ 0/1</span>
           <span id="aquaHydrochloricCount">HCl 0/3</span>
@@ -414,6 +419,18 @@ __RELEASE_STYLES__
     </div>
   </div>
 
+  <div id="timeAttackRankingModal" class="modal" hidden>
+    <div class="modal-card ranking-modal-card" role="dialog" aria-modal="true" aria-labelledby="timeAttackRankingTitle">
+      <button id="timeAttackRankingCloseBtn" class="modal-close" type="button" aria-label="タイムアタックランキングを閉じる">×</button>
+      <p class="modal-kicker">STAGE 10 TIME ATTACK</p>
+      <h2 id="timeAttackRankingTitle">⏱️ タイムアタックランキング</h2>
+      <p id="timeAttackRankingMessage" class="modal-lead"></p>
+      <div id="timeAttackMyRankCard" class="my-rank-card" hidden></div>
+      <div id="timeAttackRankingList" class="ranking-list"></div>
+      <button id="timeAttackRankingRefreshBtn" class="continue-button" type="button">再読み込み</button>
+    </div>
+  </div>
+
   <div id="achievementModal" class="modal" hidden>
     <div class="modal-card achievement-modal-card" role="dialog" aria-modal="true" aria-labelledby="achievementTitle">
       <button id="achievementCloseBtn" class="modal-close" type="button" aria-label="アチーブメントを閉じる">×</button>
@@ -464,6 +481,14 @@ __RELEASE_STYLES__
       <p class="modal-kicker">STAGE SELECT</p>
       <h2 id="stageTitle">ステージを選択</h2>
       <p class="modal-lead">ステージごとにコイン・ユニット解放・研究強化は独立します。化学レベル、実績、累計記録、復習問題は共通です。切り替えると戦闘は第1ウェーブから始まります。</p>
+      <article id="timeAttackLaunchPanel" class="time-attack-launch-panel" aria-labelledby="timeAttackLaunchTitle">
+        <div><span class="section-kicker">STAGE 10 CHALLENGE</span><h3 id="timeAttackLaunchTitle">Stage 10 タイムアタック</h3></div>
+        <p id="timeAttackLaunchStatus">Stage 10を通常クリアすると解放されます。</p>
+        <div class="time-attack-actions">
+          <button id="timeAttackStartBtn" class="continue-button" type="button" disabled>タイムアタック開始</button>
+          <button id="timeAttackRankingBtn" class="small-button" type="button">専用ランキング</button>
+        </div>
+      </article>
       <div id="stageOptions" class="stage-grid"></div>
     </div>
   </div>
@@ -510,6 +535,20 @@ __RELEASE_STYLES__
       <button id="continuePlayBtn" class="continue-button" type="button" hidden>ウェーブ1から続けて遊ぶ</button>
       <button id="endStageGuideBtn" class="small-button stage-guide-entry" type="button" hidden>🧭 攻略情報を見る</button>
       <button id="retryBtn" class="small-button" type="button">同じステージを再挑戦</button>
+    </div>
+  </div>
+
+  <div id="timeAttackResultModal" class="modal" hidden>
+    <div class="modal-card time-attack-result-card" role="dialog" aria-modal="true" aria-labelledby="timeAttackResultTitle">
+      <p class="modal-kicker">STAGE 10 TIME ATTACK</p>
+      <h2 id="timeAttackResultTitle">タイムアタック結果</h2>
+      <strong id="timeAttackResultTime" class="time-attack-result-time">0:00.00</strong>
+      <p id="timeAttackResultStatus" class="modal-lead"></p>
+      <p id="timeAttackResultBest"></p>
+      <div class="time-attack-actions">
+        <button id="timeAttackResultRankingBtn" class="continue-button" type="button">専用ランキングを見る</button>
+        <button id="timeAttackResultCloseBtn" class="small-button" type="button">通常ゲームへ戻る</button>
+      </div>
     </div>
   </div>
 

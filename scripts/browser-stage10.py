@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Real-browser integration checks for the v6.0 Stage 10 runtime."""
+"""Real-browser integration checks for the v6.1 Stage 10 runtime."""
 from __future__ import annotations
 
 from contextlib import contextmanager
@@ -86,7 +86,7 @@ def main() -> int:
              overflow: document.documentElement.scrollWidth > window.innerWidth,
              stage10Panel: Boolean(document.getElementById('aquaRegiaPanel')) })
         """)
-        check(results, "desktop-layout", layout["version"] == "Chemion Quest v6.0" and not layout["overflow"] and layout["stage10Panel"], layout)
+        check(results, "desktop-layout", layout["version"] == "Chemion Quest v6.1" and not layout["overflow"] and layout["stage10Panel"], layout)
         page.set_viewport_size({"width": 390, "height": 844})
         mobile = page.evaluate("""
           ({ overflow: document.documentElement.scrollWidth > window.innerWidth,
@@ -146,9 +146,9 @@ def main() -> int:
         projectile_pairs = sorted((item["ownerKind"], item["effectKind"]) for item in forming["projectiles"])
         check(results, "au-formation-removes-only-friendly-attacks", ("ally", "attack") not in projectile_pairs and ("ally", "heal") in projectile_pairs and ("enemy", "attack") in projectile_pairs, projectile_pairs)
         check(results, "au-formation-preserves-allies", [round(unit["hp"] / unit["maxHp"], 2) for unit in forming["allies"]] == [round(unit["hp"] / unit["maxHp"], 2) for unit in before_formation["allies"]], forming["allies"])
-        page.evaluate("cqV6TestApi.step(3.25)")
+        page.evaluate("cqV6TestApi.step(4.45)")
         protected = snap(page)
-        check(results, "au-visible-protection-phase", protected["stage10"]["phase"] == "protected" and au_from(protected)["stage10Protected"], {"stage10": protected["stage10"], "au": au_from(protected)})
+        check(results, "au-visible-protection-phase", protected["stage10"]["phase"] == "protected" and protected["desiredBgmTrackKey"] == "au" and au_from(protected)["stage10Protected"], {"stage10": protected["stage10"], "track": protected["desiredBgmTrackKey"], "au": au_from(protected)})
         page.evaluate("cqV6TestApi.step(3.1)")
         combat = snap(page)
         check(results, "au-v16-combat-start", combat["stage10"]["phase"] == "combat" and combat["desiredBgmTrackKey"] == "au" and not au_from(combat)["stage10Protected"], {"stage10": combat["stage10"], "track": combat["desiredBgmTrackKey"]})
@@ -228,7 +228,7 @@ def main() -> int:
           (async () => {
             const regs=await navigator.serviceWorker.getRegistrations();
             await Promise.all(regs.map(reg=>reg.unregister()));
-            await caches.open('chemimon-quest-shell-v5.95');
+            await caches.open('chemimon-quest-shell-v6.0');
           })()
         """)
         page.reload(wait_until="domcontentloaded", timeout=30000)
@@ -236,12 +236,13 @@ def main() -> int:
         pwa = page.evaluate("""
           (async () => {
             const names=await caches.keys();
-            const shell=await caches.open('chemimon-quest-shell-v6.0');
+            const shell=await caches.open('chemimon-quest-shell-v6.1');
             const boss=await shell.match('./assets/audio/chemion-stage10-au-boss-v16-loop.mp3');
-            return {names,bossCached:Boolean(boss)};
+            const milestone=await shell.match('./assets/audio/chemion-milestone-stage-bgm-v3.mp3');
+            return {names,bossCached:Boolean(boss),milestoneCached:Boolean(milestone)};
           })()
         """)
-        check(results, "pwa-v5.95-cache-upgrade", "chemimon-quest-shell-v5.95" not in pwa["names"] and "chemimon-quest-shell-v6.0" in pwa["names"] and pwa["bossCached"], pwa)
+        check(results, "pwa-v6.0-cache-upgrade", "chemimon-quest-shell-v6.0" not in pwa["names"] and "chemimon-quest-shell-v6.1" in pwa["names"] and pwa["bossCached"] and pwa["milestoneCached"], pwa)
 
         browser.close()
 

@@ -28,16 +28,17 @@ check('Aqua regia uses six time-split hits', core.stage10?.aquaRegia?.hitCount =
 check('Au uses chemical-only reduction', core.stage10?.enemies?.find((enemy) => enemy.auBoss)?.chemicalDamageReduction === .8 && core.stage10?.enemies?.find((enemy) => enemy.auBoss)?.damageReduction === undefined);
 check('Au has both required physical abilities', runtime.includes('function beginAuGoldCrush') && runtime.includes('function resolveAuGoldFoil'));
 check('Au defeat is Stage 10 victory', runtime.includes('if (defeatedAu && isStage10()) startStage10VictorySequence()') && runtime.includes('!isStage10() && enemyBaseHp <= 0'));
-check('Au formation preserves allies and removes ally projectiles only', runtime.includes("projectile.ownerKind === 'ally'") && !/beginStage10AuFormation[\s\S]{0,1000}allies\s*=\s*\[\]/.test(runtime));
+check('Au formation preserves allies and removes ally attack projectiles only', runtime.includes("projectile.ownerKind === 'ally' && projectile.effectKind !== 'heal'") && !/beginStage10AuFormation[\s\S]{0,1000}allies\s*=\s*\[\]/.test(runtime));
 check('Aqua preparation is transactional and capped at one', runtime.includes('function commitAquaRegiaPreparation()') && runtime.includes('if (!aquaRegiaExists())') && runtime.includes('aquaRegiaExists() || stage10State?.preparation'));
 check('Aqua material HP ratio is averaged', runtime.includes('entity.hp / Math.max(1, entity.maxHp), 0) / 4'));
 check('Aqua Au first contact is persisted once', runtime.includes('aquaAuContactComplete') && runtime.includes('if (!isStage10() || aquaAuContactComplete || stage10State.contactStarted) return false'));
-check('Non-Au path does not show Au complex', /if \(target\.auBoss\)[\s\S]*?subtext: '\[AuCl₄\]⁻'[\s\S]*?else \{[\s\S]*?subtext: ''/.test(runtime));
+check('Non-Au path does not show Au complex', runtime.includes("kind: `aqua-au-${hitNumber}`") && /else \{[\s\S]{0,500}text: `混酸連撃 \$\{hitNumber\}\/6`[\s\S]{0,180}subtext: ''/.test(runtime));
 check('Stage 9 clears unlock Stage 10 during migration', runtime.includes('Math.max(10, cumulativeStats.highestStageReached || 1)') && runtime.includes('Math.max(10, finiteNumber(savedStats.highestStageReached, 1))'));
-check('v5.95 save version 31 remains accepted', /29, 30, 31, D\.version/.test(runtime));
+check('v6.0 save version 32 remains accepted', /29, 30, 31, 32, D\.version/.test(runtime));
 check('Guest assist persistence remains present', runtime.includes('guestAssistUsed = Boolean(parsed.progress.guestAssistUsed || guestAssistEnabled)'));
 check('V16 is cached by PWA', sw.includes('./assets/audio/chemion-stage10-au-boss-v16-loop.mp3'));
-check('Stage 10 UI includes safe warning', template.includes('実物を混合しないでください') && !template.includes('mL'));
+check('V3 is cached by PWA', sw.includes('./assets/audio/chemion-milestone-stage-bgm-v3.mp3'));
+check('Stage 10 UI includes safe warning', template.includes('実際に混ぜたり試したりしないでください') && !template.includes('mL'));
 
 const audioPath = path.join(projectRoot, 'assets/audio/chemion-stage10-au-boss-v16-loop.mp3');
 const audioHash = fs.existsSync(audioPath) ? crypto.createHash('sha256').update(fs.readFileSync(audioPath)).digest('hex').toUpperCase() : '';
@@ -59,7 +60,7 @@ check('Aqua regia question IDs and total count are preserved', basic.length === 
 check('Aqua regia questions contain no practical quantities or handling instructions', aquaQuestions.every((question) => !unsafeAquaPattern.test(JSON.stringify(question))), aquaQuestions.filter((question) => unsafeAquaPattern.test(JSON.stringify(question))).map((question) => question.id).join(','));
 
 const forbiddenStage10Gameplay = /Pt希少敵|クリティカル|装備|対人戦|マルチプレイ|通常変異体|Stage間素材/;
-check('No v6.1+ gameplay is present in Stage 10 data', !forbiddenStage10Gameplay.test(JSON.stringify(core.stage10)));
+check('No v6.2+ gameplay is present in Stage 10 data', !forbiddenStage10Gameplay.test(JSON.stringify(core.stage10)));
 
 const output = { generatedAt: new Date().toISOString(), baseline, audioHash, results, passed: failures.length === 0 };
 fs.writeFileSync(path.join(projectRoot, 'docs/STAGE10_TEST_RESULTS.json'), `${JSON.stringify(output, null, 2)}\n`);

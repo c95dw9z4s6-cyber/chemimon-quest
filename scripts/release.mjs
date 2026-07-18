@@ -19,7 +19,8 @@ if (name) config.releaseName = name;
 fs.writeFileSync(configPath, `${JSON.stringify(config, null, 2)}\n`);
 
 const runNode = (script, extra = []) => execFileSync(process.execPath, [path.join(projectRoot, script), ...extra], { cwd: projectRoot, stdio: 'inherit' });
-const runPython = (script, extra = []) => execFileSync('python3', [path.join(projectRoot, script), ...extra], { cwd: projectRoot, stdio: 'inherit' });
+const pythonExecutable = process.env.PYTHON || (process.platform === 'win32' ? 'python' : 'python3');
+const runPython = (script, extra = []) => execFileSync(pythonExecutable, [path.join(projectRoot, script), ...extra], { cwd: projectRoot, stdio: 'inherit' });
 
 runNode('scripts/build.mjs');
 runNode('scripts/validate.mjs');
@@ -37,8 +38,8 @@ const bundleFolderName = `chemion_v${slug}`;
 const bundleFolder = path.join(releaseRoot, bundleFolderName);
 fs.mkdirSync(bundleFolder, { recursive: true });
 const include = [
-  '.github', '.nojekyll', 'assets', 'config', 'data', 'docs', 'icons', 'scripts', 'src',
-  'firestore.rules', 'index.html', 'manifest.webmanifest', 'sw.js', 'version.json',
+  '.github', '.firebaserc', '.nojekyll', 'assets', 'config', 'data', 'docs', 'icons', 'scripts', 'src',
+  'firebase.json', 'firestore.indexes.json', 'firestore.rules', 'index.html', 'manifest.webmanifest', 'sw.js', 'version.json',
   'README.md', 'NEW_CHAT_HANDOFF.md', 'package.json', 'chemion-release.zip'
 ];
 for (const relative of include) {

@@ -23,6 +23,7 @@
   const SUMMON_UI_REFRESH_INTERVAL = 0.1;
   const NORMAL_RENDER_FPS = 45;
   const LOW_POWER_RENDER_FPS = 30;
+  const STAGE10_RENDER_FPS = 60;
   const NORMAL_IDLE_RENDER_FPS = 10;
   const LOW_POWER_IDLE_RENDER_FPS = 5;
   const NORMAL_UI_REFRESH_INTERVAL = 0.1;
@@ -126,6 +127,23 @@
   let aquaRegiaLevel = 1;
   let aquaAuContactComplete = false;
   let stage10State = null;
+  let timeAttackProfile = null;
+  let timeAttackRun = null;
+  let timeAttackNormalSave = '';
+  let timeAttackNormalAux = null;
+  let timeAttackHiddenAt = 0;
+  const prefersReducedMotion = Boolean(window.matchMedia?.('(prefers-reduced-motion: reduce)').matches);
+  let performanceMetrics = null;
+
+  function defaultPerformanceMetrics() {
+    return {
+      startedAt: performance.now(), frames: 0, intervalTotalMs: 0, maxGapMs: 0,
+      longFrames: 0, lastFrameAt: 0, peakEffects: 0, peakProjectiles: 0,
+      audioNodesActive: 0, audioNodesPeak: 0,
+      heapStart: finiteNumber(performance.memory?.usedJSHeapSize, 0),
+      heapPeak: finiteNumber(performance.memory?.usedJSHeapSize, 0)
+    };
+  }
 
   let currentWaveIndex;
   let nextWaveEnemyIndex;
@@ -193,6 +211,7 @@
   const BGM_TRACKS = Object.freeze({
     normal: { src: "assets/audio/chemion-normal-bgm.mp3", label: "通常Stage BGM" },
     difficult: { src: "assets/audio/chemion-difficult-bgm.mp3", label: "難関Stage BGM" },
+    milestoneV3: { src: "assets/audio/chemion-milestone-stage-bgm-v3.mp3", label: "Stage 10 節目BGM・V3" },
     au: { src: "assets/audio/chemion-stage10-au-boss-v16-loop.mp3", label: "Stage 10 Au BOSS BGM・V16 loop" }
   });
   const LOW_POWER_KEY = "chemionQuestLowPowerV1";
@@ -213,6 +232,7 @@
   let bgmDuckFactor = 1;
   let lowPowerMode = false;
   let audioContext = null;
+  const transientAudioSources = new Map();
   let lastAttackSoundAt = 0;
   try {
     soundEnabled = localStorage.getItem(SOUND_KEY) !== 'off';
@@ -235,6 +255,251 @@
     return Math.max(min, Math.min(max, value));
   }
 
+  const TIME_ATTACK_MIN_VALID_MS = 45000;
+  const TIME_ATTACK_MAX_VALID_MS = 2 * 60 * 60 * 1000;
+  const TIME_ATTACK_BACKGROUND_LIMIT_MS = 10000;
+
+  function defaultTimeAttackProfile() {
+    return {
+      unlocked: false,
+      localBestMs: null,
+      pendingSubmission: null,
+      lastSubmittedRunId: '',
+      currentRunId: '',
+      officialRunInProgress: false,
+      runInvalid: false,
+      lastInvalidReason: ''
+    };
+  }
+
+  function normalizeTimeAttackProfile(value, stats = cumulativeStats) {
+    const input = value && typeof value === 'object' ? value : {};
+    const best = finiteNumber(input.localBestMs, NaN);
+    const pending = input.pendingSubmission && typeof input.pendingSubmission === 'object'
+      ? {
+          runId: String(input.pendingSubmission.runId || ''),
+          timeMs: Math.round(finiteNumber(input.pendingSubmission.timeMs, 0)),
+          completedAt: String(input.pendingSubmission.completedAt || '')
+        }
+      : null;
+    const validPending = pending && pending.runId && pending.timeMs >= TIME_ATTACK_MIN_VALID_MS && pending.timeMs <= TIME_ATTACK_MAX_VALID_MS ? pending : null;
+    return {
+      unlocked: Boolean(input.unlocked || finiteNumber(stats?.highestStageCleared, 0) >= 10 || finiteNumber(stats?.stage10Clears, 0) >= 1),
+      localBestMs: Number.isFinite(best) && best >= TIME_ATTACK_MIN_VALID_MS && best <= TIME_ATTACK_MAX_VALID_MS ? Math.round(best) : null,
+      pendingSubmission: validPending,
+      lastSubmittedRunId: String(input.lastSubmittedRunId || ''),
+      currentRunId: String(input.currentRunId || ''),
+      officialRunInProgress: Boolean(input.officialRunInProgress),
+      runInvalid: Boolean(input.runInvalid),
+      lastInvalidReason: String(input.lastInvalidReason || '')
+    };
+  }
+
+  function formatTimeAttackMs(value) {
+    const milliseconds = Math.max(0, Math.round(finiteNumber(value, 0)));
+    const minutes = Math.floor(milliseconds / 60000);
+    const seconds = Math.floor(milliseconds % 60000 / 1000);
+    const hundredths = Math.floor(milliseconds % 1000 / 10);
+    return `${minutes}:${String(seconds).padStart(2, '0')}.${String(hundredths).padStart(2, '0')}`;
+  }
+
+  function createTimeAttackRunId() {
+    try { if (crypto?.randomUUID) return crypto.randomUUID(); } catch (_) {}
+    return `ta-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 14)}`;
+  }
+
+  function isDeveloperOrAutomatedState() {
+    try {
+      const params = new URLSearchParams(location.search);
+      return params.get('cqTest') === '1' || ['localhost', '127.0.0.1', '::1'].includes(location.hostname);
+    } catch (_) { return true; }
+  }
+
+  function isTimeAttackActive() {
+    return Boolean(timeAttackRun?.active);
+  }
+
+  function currentTimeAttackMs() {
+    if (!timeAttackRun) return 0;
+    const end = finiteNumber(timeAttackRun.stoppedAt, 0) || performance.now();
+    return Math.max(0, Math.round(end - finiteNumber(timeAttackRun.startedAt, end)));
+  }
+
+  function updateTimeAttackUi() {
+    const active = isTimeAttackActive();
+    if ($('timeAttackIndicator')) $('timeAttackIndicator').hidden = !active;
+    if (active) {
+      $('timeAttackClock').textContent = formatTimeAttackMs(currentTimeAttackMs());
+      $('timeAttackValidity').textContent = timeAttackRun.valid ? '公式記録走行中' : 'この走行は公式記録の対象外です';
+      $('timeAttackIndicator').classList.toggle('invalid', !timeAttackRun.valid);
+    }
+    const unlockedForUi = Boolean(timeAttackProfile?.unlocked || finiteNumber(cumulativeStats?.highestStageCleared, 0) >= 10);
+    if ($('timeAttackStartBtn')) $('timeAttackStartBtn').disabled = !unlockedForUi || active;
+    if ($('stageBtn')) $('stageBtn').disabled = active;
+    if ($('timeAttackLaunchStatus')) {
+      const best = timeAttackProfile?.localBestMs ? `あなたのベスト ${formatTimeAttackMs(timeAttackProfile.localBestMs)}` : '自己ベストはまだありません。';
+      $('timeAttackLaunchStatus').textContent = unlockedForUi
+        ? `${best} 通常セーブと完全に分離した初期状態で挑戦します。`
+        : 'Stage 10を通常クリアすると解放されます。';
+    }
+  }
+
+  function writeTimeAttackProfileToNormalSave(profile) {
+    try {
+      const raw = timeAttackNormalSave || localStorage.getItem(D.saveKey);
+      if (!raw) return false;
+      const payload = JSON.parse(raw);
+      payload.progress = payload.progress && typeof payload.progress === 'object' ? payload.progress : {};
+      payload.progress.timeAttack = JSON.parse(JSON.stringify(profile));
+      localStorage.setItem(D.saveKey, JSON.stringify(payload));
+      return true;
+    } catch (error) {
+      console.error(error);
+      return false;
+    }
+  }
+
+  function invalidateTimeAttackRun(reason) {
+    if (!isTimeAttackActive() || !timeAttackRun.valid) return;
+    timeAttackRun.valid = false;
+    timeAttackRun.invalidReason = String(reason || '走行条件を確認できませんでした。');
+    timeAttackProfile.runInvalid = true;
+    timeAttackProfile.lastInvalidReason = timeAttackRun.invalidReason;
+    updateTimeAttackUi();
+  }
+
+  function beginTimeAttack() {
+    if (isTimeAttackActive() || !timeAttackProfile?.unlocked) return false;
+    if (!saveGame({ silent: true })) {
+      showMessage('通常セーブを保護できないため、タイムアタックを開始できません。', 4.2);
+      return false;
+    }
+    timeAttackNormalSave = localStorage.getItem(D.saveKey) || '';
+    if (!timeAttackNormalSave) return false;
+    timeAttackNormalAux = {
+      review: localStorage.getItem(REVIEW_KEY),
+      learning: localStorage.getItem(LEARNING_KEY),
+      speedTrialRetry: localStorage.getItem(SPEED_TRIAL_RETRY_KEY),
+      recentQuestionHistory: JSON.parse(JSON.stringify(recentQuestionHistory || []))
+    };
+    const runId = createTimeAttackRunId();
+    timeAttackProfile = normalizeTimeAttackProfile(timeAttackProfile);
+    timeAttackProfile.currentRunId = runId;
+    timeAttackProfile.officialRunInProgress = true;
+    timeAttackProfile.runInvalid = false;
+    timeAttackProfile.lastInvalidReason = '';
+    if (!writeTimeAttackProfileToNormalSave(timeAttackProfile)) return false;
+
+    applyStageDefinition(10);
+    coins = 0;
+    level = 1;
+    experience = 0;
+    unlocked = new Set(initialUnlockedIds());
+    energyCapacityLevel = 1;
+    unitUpgradeLevels = defaultUnitUpgradeLevels();
+    aquaRegiaUnlocked = false;
+    aquaRegiaLevel = 1;
+    aquaAuContactComplete = false;
+    guestAssistEnabled = false;
+    resetStage({ keepProgress: true });
+    coins = 0;
+    level = 1;
+    experience = 0;
+    unlocked = new Set(initialUnlockedIds());
+    energyCapacityLevel = 1;
+    unitUpgradeLevels = defaultUnitUpgradeLevels();
+    aquaRegiaUnlocked = false;
+    aquaRegiaLevel = 1;
+    aquaAuContactComplete = false;
+    timeAttackRun = {
+      active: true,
+      runId,
+      startedAt: performance.now(),
+      stoppedAt: 0,
+      valid: !isDeveloperOrAutomatedState(),
+      invalidReason: isDeveloperOrAutomatedState() ? '開発者・自動テスト状態です。' : '',
+      completed: false
+    };
+    timeAttackHiddenAt = 0;
+    $('stageModal').hidden = true;
+    overlayPauseCount = 0;
+    paused = false;
+    updateGuestAssistUi();
+    updateTimeAttackUi();
+    renderUnitButtons();
+    renderUpgradePanel();
+    showMessage('Stage 10タイムアタック開始｜問題中・操作待ちも計測します。', 4.2);
+    return true;
+  }
+
+  function completeTimeAttackClock() {
+    if (!isTimeAttackActive() || timeAttackRun.stoppedAt) return;
+    timeAttackRun.stoppedAt = performance.now();
+    timeAttackRun.completed = true;
+    const elapsed = currentTimeAttackMs();
+    if (elapsed < TIME_ATTACK_MIN_VALID_MS || elapsed > TIME_ATTACK_MAX_VALID_MS) invalidateTimeAttackRun('現実的でない異常な計測値です。');
+    if (timeAttackProfile.currentRunId !== timeAttackRun.runId) invalidateTimeAttackRun('開始・終了走行IDが一致しません。');
+  }
+
+  function restoreNormalAfterTimeAttack({ victory = false, reason = '' } = {}) {
+    if (!timeAttackRun) return false;
+    if (victory) completeTimeAttackClock();
+    else invalidateTimeAttackRun(reason || '走行を途中で終了しました。');
+    const finishedRun = { ...timeAttackRun };
+    const elapsed = currentTimeAttackMs();
+    const official = Boolean(victory && finishedRun.valid && finishedRun.completed);
+    const previousBest = timeAttackProfile.localBestMs;
+    const improved = official && (!Number.isFinite(previousBest) || elapsed < previousBest);
+    if (improved) {
+      timeAttackProfile.localBestMs = elapsed;
+      timeAttackProfile.pendingSubmission = { runId: finishedRun.runId, timeMs: elapsed, completedAt: new Date().toISOString() };
+    }
+    timeAttackProfile.currentRunId = '';
+    timeAttackProfile.officialRunInProgress = false;
+    timeAttackProfile.runInvalid = !official;
+    timeAttackProfile.lastInvalidReason = official ? '' : (finishedRun.invalidReason || reason || 'この走行は公式記録の対象外です');
+    if (!writeTimeAttackProfileToNormalSave(timeAttackProfile)) return false;
+    timeAttackRun = null;
+    timeAttackHiddenAt = 0;
+    if (timeAttackNormalAux) {
+      for (const [key, value] of [[REVIEW_KEY, timeAttackNormalAux.review], [LEARNING_KEY, timeAttackNormalAux.learning], [SPEED_TRIAL_RETRY_KEY, timeAttackNormalAux.speedTrialRetry]]) {
+        if (typeof value === 'string') localStorage.setItem(key, value);
+        else localStorage.removeItem(key);
+      }
+    }
+    const restored = loadGame({ silent: true });
+    recentQuestionHistory = Array.isArray(timeAttackNormalAux?.recentQuestionHistory) ? timeAttackNormalAux.recentQuestionHistory : recentQuestionHistory;
+    timeAttackNormalSave = '';
+    timeAttackNormalAux = null;
+    if (!restored) return false;
+    updateTimeAttackUi();
+    $('timeAttackResultTime').textContent = formatTimeAttackMs(elapsed);
+    $('timeAttackResultStatus').textContent = official
+      ? improved ? '公式走行として完走し、自己ベストを更新しました。' : '公式走行として完走しました。自己ベストは更新されませんでした。'
+      : `この走行は公式記録の対象外です${timeAttackProfile.lastInvalidReason ? `｜${timeAttackProfile.lastInvalidReason}` : ''}`;
+    $('timeAttackResultBest').textContent = timeAttackProfile.localBestMs ? `あなたのベスト：${formatTimeAttackMs(timeAttackProfile.localBestMs)}` : '有効な自己ベストはありません。';
+    $('timeAttackResultModal').hidden = false;
+    pauseForOverlay();
+    if (improved) window.dispatchEvent(new CustomEvent('cq-ta-record-ready', { detail: { ...timeAttackProfile.pendingSubmission } }));
+    return true;
+  }
+
+  function exitTimeAttack() {
+    if (!isTimeAttackActive()) return;
+    if (!window.confirm('タイムアタックを中断して通常セーブへ戻りますか？この走行は公式記録になりません。')) return;
+    restoreNormalAfterTimeAttack({ victory: false, reason: '途中離脱しました。' });
+  }
+
+  function openTimeAttackRanking() {
+    window.dispatchEvent(new CustomEvent('cq-open-ta-ranking'));
+  }
+
+  function closeTimeAttackResult() {
+    if (!$('timeAttackResultModal') || $('timeAttackResultModal').hidden) return;
+    $('timeAttackResultModal').hidden = true;
+    resumeFromOverlay();
+  }
+
   function defaultStage10State() {
     return {
       phase: 'normal',
@@ -243,6 +508,9 @@
       contactComplete: Boolean(aquaAuContactComplete),
       contactTimer: 0,
       preparation: null,
+      preparationSuccessTimer: 0,
+      formationElapsed: 0,
+      formationPushX: null,
       candidateKeys: [],
       stableSeconds: 0
     };
@@ -257,6 +525,9 @@
     state.contactStarted = Boolean(aquaAuContactComplete || source.contactStarted || source.contactComplete);
     state.contactComplete = Boolean(aquaAuContactComplete || source.contactComplete);
     state.contactTimer = Math.max(0, finiteNumber(source.contactTimer, 0));
+    state.preparationSuccessTimer = Math.max(0, finiteNumber(source.preparationSuccessTimer, 0));
+    state.formationElapsed = Math.max(0, finiteNumber(source.formationElapsed, 0));
+    state.formationPushX = Number.isFinite(Number(source.formationPushX)) ? Number(source.formationPushX) : null;
     state.candidateKeys = Array.isArray(source.candidateKeys) ? source.candidateKeys.map(String).slice(0, 4) : [];
     state.stableSeconds = Math.max(0, finiteNumber(source.stableSeconds, 0));
     if (source.preparation && typeof source.preparation === 'object') {
@@ -315,6 +586,34 @@
     return audioContext;
   }
 
+  function trackTransientAudioSource(source, connectedNodes = []) {
+    if (!source) return source;
+    const nodes = Array.isArray(connectedNodes) ? connectedNodes.filter(Boolean) : [];
+    transientAudioSources.set(source, nodes);
+    if (performanceMetrics) {
+      performanceMetrics.audioNodesActive += 1;
+      performanceMetrics.audioNodesPeak = Math.max(performanceMetrics.audioNodesPeak, performanceMetrics.audioNodesActive);
+    }
+    source.addEventListener('ended', () => {
+      if (!transientAudioSources.has(source)) return;
+      transientAudioSources.delete(source);
+      try { source.disconnect(); } catch (_) {}
+      for (const node of nodes) { try { node.disconnect(); } catch (_) {} }
+      if (performanceMetrics) performanceMetrics.audioNodesActive = Math.max(0, performanceMetrics.audioNodesActive - 1);
+    }, { once: true });
+    return source;
+  }
+
+  function stopTransientAudioNodes() {
+    for (const [source, nodes] of transientAudioSources.entries()) {
+      try { source.stop(); } catch (_) {}
+      try { source.disconnect(); } catch (_) {}
+      for (const node of nodes) { try { node.disconnect(); } catch (_) {} }
+    }
+    transientAudioSources.clear();
+    if (performanceMetrics) performanceMetrics.audioNodesActive = 0;
+  }
+
   function playTone(frequency, duration = .08, volume = .025, type = 'sine', delay = 0) {
     const audio = ensureAudioContext();
     if (!audio || !soundEnabled) return;
@@ -327,6 +626,7 @@
     gain.gain.exponentialRampToValueAtTime(Math.max(.0002, volume), now + .012);
     gain.gain.exponentialRampToValueAtTime(.0001, now + Math.max(.025, duration));
     oscillator.connect(gain).connect(audio.destination);
+    trackTransientAudioSource(oscillator, [gain]);
     oscillator.start(now);
     oscillator.stop(now + Math.max(.035, duration) + .02);
   }
@@ -345,6 +645,7 @@
       wave: [[330,.08,.021,'triangle',0],[440,.08,.021,'triangle',.08],[660,.11,.022,'triangle',.16]],
       boss: [[105,.18,.036,'sawtooth',0],[82,.24,.028,'square',.12]],
       transform: [[170,.12,.025,'sawtooth',0],[260,.12,.024,'square',.10],[410,.18,.025,'sine',.20]],
+      aqua: [[280,.10,.022,'triangle',0],[430,.16,.025,'sine',.07],[710,.22,.023,'sine',.16],[980,.18,.018,'sine',.27]],
       phaseShift: [[118,.22,.034,'sawtooth',0],[176,.18,.028,'square',.18],[264,.16,.026,'triangle',.34],[396,.20,.024,'sine',.50]],
       correct: [[660,.08,.022,'sine',0],[880,.12,.024,'sine',.08]],
       wrong: [[230,.12,.022,'sawtooth',0],[170,.15,.018,'triangle',.10]],
@@ -385,6 +686,8 @@
       localGain.gain.exponentialRampToValueAtTime(gain, begin + .02);
       localGain.gain.exponentialRampToValueAtTime(.0001, begin + duration);
       oscillator.connect(localGain).connect(master);
+      const cleanupMaster = delay + duration >= 1.1 ? [localGain, master] : [localGain];
+      trackTransientAudioSource(oscillator, cleanupMaster);
       oscillator.start(begin);
       oscillator.stop(begin + duration + .04);
     });
@@ -403,6 +706,7 @@
     noiseGain.gain.exponentialRampToValueAtTime(.0001, now + .38);
     noise.buffer = buffer;
     noise.connect(filter).connect(noiseGain).connect(master);
+    trackTransientAudioSource(noise, [filter, noiseGain]);
     noise.start(now);
   }
 
@@ -638,7 +942,7 @@
   }
 
   function desiredBgmTrackKey() {
-    if (isStage10()) return stage10State?.phase === 'combat' || stage10State?.phase === 'victory' ? 'au' : 'normal';
+    if (isStage10()) return ['protected', 'combat', 'victory'].includes(stage10State?.phase) ? 'au' : 'milestoneV3';
     return currentStageDefinition()?.milestone || currentStageId % 5 === 0 ? 'difficult' : 'normal';
   }
 
@@ -738,7 +1042,8 @@
     if (document.hidden) return 0;
     const idle = paused || gameStatus !== 'playing';
     if (idle) return lowPowerMode ? LOW_POWER_IDLE_RENDER_FPS : NORMAL_IDLE_RENDER_FPS;
-    return lowPowerMode ? LOW_POWER_RENDER_FPS : NORMAL_RENDER_FPS;
+    if (lowPowerMode) return LOW_POWER_RENDER_FPS;
+    return isStage10() ? STAGE10_RENDER_FPS : NORMAL_RENDER_FPS;
   }
 
   function currentUiRefreshInterval() {
@@ -845,6 +1150,10 @@
 
   function restartCurrentStageFromPause() {
     if (gameStatus !== 'playing' || !manualPaused) return;
+    if (isTimeAttackActive()) {
+      restoreNormalAfterTimeAttack({ victory: false, reason: '走行中にStageを再構築しました。' });
+      return;
+    }
     const accepted = window.confirm(`Stage ${currentStageId}の現在の挑戦を諦め、ウェーブ1から再開しますか？\n\n場の味方・敵と、この挑戦中の研究カードはリセットされます。所持コイン・解放・恒久強化・実績・学習記録は維持されます。`);
     if (!accepted) return;
     if ($('pauseModal')) $('pauseModal').hidden = true;
@@ -857,6 +1166,10 @@
   }
 
   function suspendForHiddenPage() {
+    if (isTimeAttackActive()) {
+      timeAttackHiddenAt = performance.now();
+      return;
+    }
     if (gameStatus !== 'playing' || activeQuiz) return;
     pauseBattle({ reason: 'background', show: false, save: true });
   }
@@ -1658,6 +1971,7 @@
   }
 
   function resetStage({ keepProgress = true } = {}) {
+    stopTransientAudioNodes();
     if (!keepProgress) {
       coins = 0;
       unlocked = new Set(initialUnlockedIds());
@@ -1897,8 +2211,10 @@
   }
 
   function openStageModal() {
+    if (isTimeAttackActive()) return;
     rememberCurrentStageProgress();
     renderStageOptions();
+    updateTimeAttackUi();
     $('stageModal').hidden = false;
     pauseForOverlay();
   }
@@ -1910,6 +2226,7 @@
   }
 
   function switchStage(stageId) {
+    if (isTimeAttackActive()) return;
     const requested = Math.floor(finiteNumber(stageId, 1));
     const target = STAGE_LIBRARY[requested] ? requested : 1;
     if (target === currentStageId) { closeStageModal(); return; }
@@ -2023,6 +2340,7 @@
     $('wavePhase').textContent = `${currentStageDefinition().name}｜${wavePhaseText()}`;
     if ($('stageButtonLabel')) $('stageButtonLabel').textContent = currentStageDefinition().milestone ? `STAGE ${currentStageId} ◆難関` : `STAGE ${currentStageId}`;
     renderAchievementButton();
+    updateTimeAttackUi();
   }
 
   function setSaveStatus(text) {
@@ -2740,7 +3058,7 @@
       if (index === selectedIndex && !correct) button.classList.add('wrong');
     });
 
-    recordLearningResult(question, correct, mode);
+    if (!isTimeAttackActive()) recordLearningResult(question, correct, mode);
     const speedBoostMessage = applySpeedQuizResult(correct, activeQuiz);
     if ($('speedBoostNote')) {
       $('speedBoostNote').textContent = speedBoostMessage;
@@ -2750,8 +3068,10 @@
     $('answerResult').classList.add(correct ? 'good' : 'bad');
     playSound(correct ? 'correct' : 'wrong');
     $('correctAnswer').textContent = `正解：${formatChemicalText(question.options[question.answer])}`;
-    if (!correct) addReviewItem(question, selectedIndex);
-    else if (mode === 'review' || mode === 'practice') markReviewCorrect(question);
+    if (!isTimeAttackActive()) {
+      if (!correct) addReviewItem(question, selectedIndex);
+      else if (mode === 'review' || mode === 'practice') markReviewCorrect(question);
+    }
     const selectedFeedback = !correct ? wrongReason(question, selectedIndex) : '';
     $('explanation').textContent = formatChemicalText(question.explanation + (selectedFeedback ? `\n\n【誤答原因の確認】${selectedFeedback}` : ''));
     $('calculationHint').hidden = !question.calculation;
@@ -3093,6 +3413,7 @@
       xpReward: Math.max(1, Math.round(enemy.xp * wave.rewardScale)),
       waveIndex,
       visualSerial: serial,
+      moveVelocity: 0,
       boss: Boolean(enemy.boss),
       bossPhase: 1,
       phaseTwo: enemy.phaseTwo ? { ...enemy.phaseTwo } : null,
@@ -3179,7 +3500,8 @@
       airVulnerability: 1.7, baseDamageMultiplier: 1, guard: false, damageReduction: 0,
       firstStrikeMultiplier: 1, firstStrikeReady: false, pushback: 0, attackFlash: 0, hitFlash: 0,
       aquaRegia: true, hitCount: Math.max(1, Math.floor(finiteNumber(stats.hitCount, 6))),
-      hitInterval: Math.max(.06, finiteNumber(stats.hitInterval, .14)), multiHit: null, visualSerial: serial
+      hitInterval: Math.max(.06, finiteNumber(stats.hitInterval, .14)), multiHit: null, visualSerial: serial,
+      motionTrail: [], visualPhase: 0
     };
   }
 
@@ -3238,11 +3560,15 @@
     $('stage10CinematicTitle').textContent = title;
     $('stage10CinematicText').textContent = body;
     $('stage10CinematicNote').textContent = note;
+    $('stage10Cinematic').dataset.kind = kicker.startsWith('AQUA REGIA') ? 'aqua' : kicker.includes('REACTION COMPLETE') ? 'victory' : 'gold';
     $('stage10Cinematic').hidden = false;
   }
 
   function hideStage10Cinematic() {
-    if ($('stage10Cinematic')) $('stage10Cinematic').hidden = true;
+    if ($('stage10Cinematic')) {
+      $('stage10Cinematic').hidden = true;
+      delete $('stage10Cinematic').dataset.kind;
+    }
   }
 
   function updateAquaRegiaUi() {
@@ -3312,9 +3638,9 @@
     const required = Math.max(.5, finiteNumber(stage10AquaDefinition()?.stableSeconds, 1));
     if (candidates.length !== 4 || stage10State.stableSeconds < required) return;
     const hpRatio = candidates.reduce((sum, entity) => sum + entity.hp / Math.max(1, entity.maxHp), 0) / 4;
-    stage10State.preparation = { phase: 'animating', timer: 1.8, ingredientKeys: candidates.map(entityBattleKey), hpRatio, created: false };
+    stage10State.preparation = { phase: 'animating', timer: 2.05, ingredientKeys: candidates.map(entityBattleKey), hpRatio, created: false };
     setBgmDuckFactor(.22);
-    showStage10Cinematic('AQUA REGIA PREPARATION', '王水', '濃硝酸：濃塩酸＝1：3（体積比）', '抽象化された学習表現です。危険なので実物を混合しないでください。');
+    showStage10Cinematic('AQUA REGIA PREPARATION', 'HNO₃ 1/1 ＋ HCl 3/3', '二系統粒子を中心へ収束', '体積比 1：3｜抽象化された学習表現です。実際に混ぜたり試したりしないでください。');
     saveGame({ silent: true });
     updateAquaRegiaUi();
   }
@@ -3341,12 +3667,13 @@
     }
     preparation.created = true;
     stage10State.preparation = null;
+    stage10State.preparationSuccessTimer = 1.05;
     stage10State.candidateKeys = [];
     stage10State.stableSeconds = 0;
     setBgmDuckFactor(1);
-    hideStage10Cinematic();
+    showStage10Cinematic('AQUA REGIA', '王水', '調製成功', '専用ユニットが戦場へ加わりました。');
     showMessage('調製成功｜AQUA REGIA｜王水1体を生成しました。', 4.2);
-    playSound('transform');
+    playSound('aqua');
     saveGame({ silent: true });
     updateAquaRegiaUi();
   }
@@ -3354,12 +3681,13 @@
   function beginStage10AuFormation(enemy) {
     if (!isStage10() || !enemy?.auBoss || !stage10State || stage10State.phase !== 'normal') return;
     stage10State.phase = 'forming';
-    stage10State.phaseTimer = 3.2;
+    stage10State.phaseTimer = 4.4;
+    stage10State.formationElapsed = 0;
     enemy.stage10Hidden = true;
     enemy.stage10Protected = true;
     projectiles = projectiles.filter((projectile) => !(projectile.ownerKind === 'ally' && projectile.effectKind !== 'heal'));
     const fallbackX = BASE.allyX + (BASE.enemyX - BASE.allyX) * .43;
-    for (const ally of allies) ally.x = Math.min(ally.x, fallbackX - ally.radius);
+    stage10State.formationPushX = fallbackX;
     setBgmDuckFactor(.12);
     showStage10Cinematic('GOLD PARTICLE ASSEMBLY', '79 Au', '金｜高い耐食性をもつ貴金属', '味方のHP・強化状態・内部状態を維持して戦線を再配置しています。');
     saveGame({ silent: true });
@@ -3377,6 +3705,7 @@
 
   function startStage10VictorySequence() {
     if (!isStage10() || stage10State?.phase === 'victory') return;
+    completeTimeAttackClock();
     stage10State.phase = 'victory';
     stage10State.phaseTimer = 1.6;
     setBgmDuckFactor(.35);
@@ -3386,14 +3715,23 @@
 
   function stage10CombatFrozen() {
     if (!isStage10() || !stage10State) return false;
-    return Boolean(stage10State.preparation || (stage10State.contactStarted && !stage10State.contactComplete) || ['forming', 'protected', 'victory'].includes(stage10State.phase));
+    return Boolean(stage10State.preparation || stage10State.preparationSuccessTimer > 0 || (stage10State.contactStarted && !stage10State.contactComplete) || ['forming', 'protected', 'victory'].includes(stage10State.phase));
   }
 
   function updateStage10Sequence(dt) {
     if (!isStage10() || !stage10State) return false;
     if (stage10State.preparation) {
       stage10State.preparation.timer = Math.max(0, stage10State.preparation.timer - dt);
+      const timer = stage10State.preparation.timer;
+      if (timer > 1.35) showStage10Cinematic('AQUA REGIA PREPARATION', 'HNO₃ 1/1 ＋ HCl 3/3', '4体の光線を中心へ収束', '体積比 1：3｜抽象化された学習表現です。実際に混ぜたり試したりしないでください。');
+      else if (timer > .65) showStage10Cinematic('AQUA REGIA PREPARATION', '1：3', '二系統粒子と複層リングが混合', '実用的な量・器具・投入順・温度・保存方法は示していません。');
+      else showStage10Cinematic('AQUA REGIA PREPARATION', 'AQUA REGIA', '拡大 → 収束', '簡略化された安全な学習演出です。');
       if (stage10State.preparation.timer <= 0) commitAquaRegiaPreparation();
+      return true;
+    }
+    if (stage10State.preparationSuccessTimer > 0) {
+      stage10State.preparationSuccessTimer = Math.max(0, stage10State.preparationSuccessTimer - dt);
+      if (stage10State.preparationSuccessTimer <= 0) hideStage10Cinematic();
       return true;
     }
     if (stage10State.contactStarted && !stage10State.contactComplete) {
@@ -3408,13 +3746,26 @@
       return true;
     }
     if (stage10State.phase === 'forming') {
+      stage10State.formationElapsed += dt;
       stage10State.phaseTimer = Math.max(0, stage10State.phaseTimer - dt);
+      const fallbackX = finiteNumber(stage10State.formationPushX, BASE.allyX + (BASE.enemyX - BASE.allyX) * .43);
+      for (const ally of allies) {
+        const targetX = Math.min(ally.x, fallbackX - ally.radius);
+        ally.x += (targetX - ally.x) * Math.min(1, dt * 4.5);
+      }
+      const elapsed = stage10State.formationElapsed;
+      if (elapsed < 1.05) showStage10Cinematic('GOLD PARTICLE ASSEMBLY', '79', '低速金色波動｜遠方粒子収束', '味方のHP・強化・内部状態を維持したまま滑らかに再配置しています。');
+      else if (elapsed < 2.05) showStage10Cinematic('GOLD PARTICLE ASSEMBLY', 'Au', '原子番号79｜金', '金箔粒子が中心へ集まり、質量を形成します。');
+      else if (elapsed < 3.05) showStage10Cinematic('GOLD PARTICLE ASSEMBLY', '金', '高い耐食性をもつ貴金属', '形成直前に空間が静止します。');
+      else showStage10Cinematic('GOLD PARTICLE ASSEMBLY', '黄金王・Au', '大波動｜段階形成完了', '短く弱い振動のあと、専用戦闘曲へ切り替わります。');
       if (stage10State.phaseTimer <= 0) {
         stage10State.phase = 'protected';
         stage10State.phaseTimer = 3;
         const au = enemies.find((enemy) => enemy.auBoss && enemy.hp > 0);
         if (au) au.stage10Hidden = false;
-        showStage10Cinematic('LOW REACTIVITY', '低反応性', '通常の化学攻撃を約80%軽減', '物理攻撃と王水によるAu専用反応は軽減を迂回します。');
+        setBgmDuckFactor(1);
+        syncBgmTrack({ restart: true });
+        showStage10Cinematic('LOW REACTIVITY', '黄金王・Au', '形成完了｜約3秒の相互攻撃停止', '通常の化学攻撃を約80%軽減。物理攻撃と王水は軽減を迂回します。');
         saveGame({ silent: true });
       }
       return true;
@@ -3426,7 +3777,7 @@
         for (const enemy of enemies) if (enemy.auBoss) enemy.stage10Protected = false;
         hideStage10Cinematic();
         setBgmDuckFactor(1);
-        syncBgmTrack({ restart: true });
+        syncBgmTrack();
         showMessage('V16 loop開始｜Au戦闘再開', 3.2);
         saveGame({ silent: true });
       }
@@ -3461,7 +3812,10 @@
     }
     if (stage10State.preparation) {
       setBgmDuckFactor(.22);
-      showStage10Cinematic('AQUA REGIA PREPARATION', '王水', '濃硝酸：濃塩酸＝1：3（体積比）', '抽象化された学習表現です。危険なので実物を混合しないでください。');
+      showStage10Cinematic('AQUA REGIA PREPARATION', 'HNO₃ 1/1 ＋ HCl 3/3', '二系統粒子を中心へ収束', '体積比 1：3｜抽象化された学習表現です。実際に混ぜたり試したりしないでください。');
+    } else if (stage10State.preparationSuccessTimer > 0) {
+      setBgmDuckFactor(1);
+      showStage10Cinematic('AQUA REGIA', '王水', '調製成功', '専用ユニットが戦場へ加わりました。');
     } else if (stage10State.contactStarted && !stage10State.contactComplete) {
       setBgmDuckFactor(.04);
       showStage10Cinematic('AQUA REGIA VS Au', '金の溶解開始', '酸化＋塩化物錯体形成｜Au → [AuCl₄]⁻', '簡略化した学習表現です。実際の反応はより複雑で条件に依存します。');
@@ -3469,8 +3823,8 @@
       setBgmDuckFactor(.12);
       showStage10Cinematic('GOLD PARTICLE ASSEMBLY', '79 Au', '金｜高い耐食性をもつ貴金属', '味方のHP・強化状態・内部状態は維持されています。');
     } else if (stage10State.phase === 'protected') {
-      setBgmDuckFactor(.12);
-      showStage10Cinematic('LOW REACTIVITY', '低反応性', '通常の化学攻撃を約80%軽減', '物理攻撃と王水によるAu専用反応は軽減を迂回します。');
+      setBgmDuckFactor(1);
+      showStage10Cinematic('LOW REACTIVITY', '黄金王・Au', '形成完了｜約3秒の相互攻撃停止', '通常の化学攻撃を約80%軽減。物理攻撃と王水は軽減を迂回します。');
     } else if (stage10State.phase === 'victory') {
       setBgmDuckFactor(.35);
       showStage10Cinematic('Au REACTION COMPLETE', 'Au撃破', 'Stage 10「黄金王・Au反応区」クリア', '敵拠点の破壊は必要ありません。');
@@ -3953,10 +4307,19 @@
     spawnAttackProjectile(ally, target);
     const hitNumber = sequence.totalHits - sequence.hitsRemaining + 1;
     if (target.auBoss) {
+      const reactionStages = [
+        ['酸化開始', 'Au表面の酸化点'],
+        ['酸化開始', '酸化点が拡大'],
+        ['Cl⁻錯形成', 'Cl⁻軌道形成'],
+        ['Cl⁻錯形成', '錯体形成が進行'],
+        ['Au粒子離脱', '金粒子が表面から離脱'],
+        ['[AuCl₄]⁻ 反応完了', '簡略化した学習表現']
+      ];
+      const [text, subtext] = reactionStages[clamp(hitNumber - 1, 0, reactionStages.length - 1)];
       combatEffects.push({
         x: target.x, y: entityVisualY(target) - target.radius - 24,
-        text: `金溶解反応 ${hitNumber}/6`, subtext: '[AuCl₄]⁻', color: '#ffe07a', kind: 'liberation',
-        life: .72, maxLife: .72, particles: lowPowerMode ? [] : Array.from({length: 8}, (_, index) => ({angle: Math.PI * 2 * index / 8, speed: 18 + index * 2}))
+        text: `${text} ${hitNumber}/6`, subtext, color: '#ffe07a', kind: `aqua-au-${hitNumber}`,
+        life: .72, maxLife: .72, particles: lowPowerMode || prefersReducedMotion ? [] : Array.from({length: 8}, (_, index) => ({angle: Math.PI * 2 * index / 8, speed: 18 + index * 2}))
       });
     } else {
       combatEffects.push({
@@ -3977,6 +4340,14 @@
 
   function updateAlly(ally, dt) {
     if (ally.hp <= 0) return;
+    if (ally.aquaRegia) {
+      ally.visualPhase = finiteNumber(ally.visualPhase, 0) + dt;
+      const trail = Array.isArray(ally.motionTrail) ? ally.motionTrail : [];
+      const last = trail[0];
+      if (!last || Math.hypot(last.x - ally.x, last.y - ally.y) > 3) trail.unshift({ x: ally.x, y: ally.y, life: 1 });
+      for (const point of trail) point.life = Math.max(0, finiteNumber(point.life, 0) - dt * 2.2);
+      ally.motionTrail = trail.filter((point) => point.life > 0).slice(0, lowPowerMode ? 3 : 8);
+    }
     ally.stunTimer = Math.max(0, finiteNumber(ally.stunTimer, 0) - dt);
     if (ally.stunTimer > 0) return;
     if (ally.aquaRegia && updateAquaRegiaMultiHit(ally, dt)) return;
@@ -4240,7 +4611,13 @@
       return;
     }
 
-    enemy.x = Math.max(BASE.allyX + BASE.radius + enemy.radius, enemy.x - enemy.speed * dt);
+    if (enemy.auBoss) {
+      const desiredVelocity = -enemy.speed;
+      enemy.moveVelocity = finiteNumber(enemy.moveVelocity, 0) + (desiredVelocity - finiteNumber(enemy.moveVelocity, 0)) * Math.min(1, dt * 3.6);
+      enemy.x = Math.max(BASE.allyX + BASE.radius + enemy.radius, enemy.x + enemy.moveVelocity * dt);
+    } else {
+      enemy.x = Math.max(BASE.allyX + BASE.radius + enemy.radius, enemy.x - enemy.speed * dt);
+    }
   }
 
   function resolveDefeatedEntities() {
@@ -4363,6 +4740,14 @@
   }
 
   function finishGame(victory) {
+    if (isTimeAttackActive()) {
+      gameStatus = victory ? 'victory' : 'defeat';
+      paused = true;
+      playSound(victory ? 'victory' : 'defeat');
+      hideWaveBanner();
+      restoreNormalAfterTimeAttack({ victory, reason: victory ? '' : '味方拠点が破壊されました。' });
+      return;
+    }
     gameStatus = victory ? 'victory' : 'defeat';
     manualPaused = false;
     resumePromptPending = false;
@@ -4393,6 +4778,10 @@
       const maxStageId = Math.max(...Object.keys(STAGE_LIBRARY).map(Number));
       const nextStageId = Math.min(maxStageId, currentStageId + 1);
       cumulativeStats.highestStageReached = Math.max(cumulativeStats.highestStageReached || 1, nextStageId);
+      if (currentStageId === 10) {
+        timeAttackProfile = normalizeTimeAttackProfile(timeAttackProfile);
+        timeAttackProfile.unlocked = true;
+      }
       if (runStats.alliesDefeated === 0 && runStats.baseDamageTaken === 0) {
         cumulativeStats.flawlessClears += 1;
       }
@@ -4701,6 +5090,91 @@
     }) || null;
   }
 
+  function drawAquaRegiaTrail(entity) {
+    if (!entity.aquaRegia || !Array.isArray(entity.motionTrail)) return;
+    ctx.save();
+    for (const [index, point] of entity.motionTrail.entries()) {
+      const alpha = clamp(finiteNumber(point.life, 0) * (.24 - index * .018), 0, .24);
+      if (alpha <= 0) continue;
+      const trailX = logicalToCanvasX(point.x);
+      ctx.globalAlpha = alpha;
+      ctx.fillStyle = index % 2 ? '#ffb35f' : '#7adfff';
+      ctx.beginPath();
+      ctx.ellipse(trailX, point.y, 15 - index, 7 - index * .3, 0, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.restore();
+  }
+
+  function drawStage10Atmosphere() {
+    if (!isStage10() || !stage10State) return;
+    const centerX = cv.width * .62;
+    if (stage10State.phase === 'forming') {
+      const elapsed = stage10State.formationElapsed;
+      ctx.save();
+      for (let index = 0; index < (lowPowerMode ? 2 : 4); index += 1) {
+        const progress = (elapsed * .34 + index * .23) % 1;
+        ctx.globalAlpha = (1 - progress) * .34;
+        ctx.strokeStyle = index % 2 ? '#ffe58b' : '#b98720';
+        ctx.lineWidth = 2 + index;
+        ctx.beginPath();
+        ctx.ellipse(centerX, 300, 45 + progress * 330, 26 + progress * 170, 0, 0, Math.PI * 2);
+        ctx.stroke();
+      }
+      const particles = lowPowerMode || prefersReducedMotion ? 12 : 30;
+      for (let index = 0; index < particles; index += 1) {
+        const angle = index * 2.399 + elapsed * .25;
+        const distance = Math.max(18, 300 - elapsed * 52 + (index % 7) * 12);
+        ctx.globalAlpha = .25 + (index % 4) * .12;
+        ctx.fillStyle = index % 3 ? '#f3c94e' : '#fff0a4';
+        ctx.beginPath();
+        ctx.arc(centerX + Math.cos(angle) * distance, 300 + Math.sin(angle) * distance * .42, 1.5 + index % 3, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.restore();
+    }
+  }
+
+  function drawStage10AbilityWarnings() {
+    if (!isStage10()) return;
+    const au = enemies.find((enemy) => enemy.auBoss && enemy.hp > 0 && !enemy.stage10Hidden);
+    if (!au) return;
+    const auX = logicalToCanvasX(au.x);
+    const auY = entityVisualY(au);
+    if (au.goldCrushPendingTimer > 0) {
+      const target = findBattleEntityByKey(au.goldCrushTargetKey);
+      if (target) {
+        const targetX = logicalToCanvasX(target.x);
+        const pulse = 1 - clamp(au.goldCrushPendingTimer / Math.max(.3, au.goldCrushWarning), 0, 1);
+        ctx.save();
+        ctx.strokeStyle = '#ffd15a';
+        ctx.fillStyle = 'rgba(255,194,43,.11)';
+        ctx.lineWidth = 3;
+        ctx.beginPath(); ctx.arc(targetX, entityVisualY(target), 28 + pulse * 42, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(auX - 18, auY); ctx.lineTo(targetX + 24, entityVisualY(target)); ctx.stroke();
+        ctx.fillStyle = '#ffeaa3'; ctx.font = '900 17px sans-serif'; ctx.textAlign = 'center';
+        ctx.fillText('←', targetX - 34, entityVisualY(target) + 5);
+        ctx.restore();
+      }
+    }
+    if (au.goldFoilPendingTimer > 0) {
+      const progress = 1 - clamp(au.goldFoilPendingTimer / Math.max(1.5, au.goldFoilWarning), 0, 1);
+      ctx.save();
+      for (let layer = 0; layer < (lowPowerMode || prefersReducedMotion ? 2 : 4); layer += 1) {
+        const length = 120 + layer * 48 + progress * 70;
+        ctx.globalAlpha = .12 + layer * .055;
+        ctx.fillStyle = layer % 2 ? '#fff0a5' : '#d39a25';
+        ctx.beginPath();
+        ctx.moveTo(auX - 18, auY);
+        ctx.lineTo(auX - length, auY - 48 - layer * 7);
+        ctx.lineTo(auX - length * 1.06, auY + 48 + layer * 7);
+        ctx.closePath();
+        ctx.fill();
+      }
+      ctx.restore();
+    }
+  }
+
   function drawEntity(entity) {
     if (entity.stage10Hidden) return;
     const ally = entity.kind === 'ally';
@@ -4727,6 +5201,8 @@
     const height = Math.max(43, entity.radius * 2.15) * bossScale;
     const x = entity.x - width / 2;
     const y = entity.y - height / 2;
+
+    drawAquaRegiaTrail(entity);
 
     drawCompactEntityVitals(entity, y, width);
 
@@ -4771,12 +5247,68 @@
       ctx.restore();
     }
 
-    ctx.fillStyle = entity.auBoss ? '#8a6415' : ally ? (entity.aquaRegia ? '#594014' : '#183f5b') : (entity.boss ? (entity.bossPhase >= 2 ? '#54206e' : '#6b2338') : '#54293a');
+    if (entity.auBoss) {
+      const gradient = ctx.createLinearGradient(x, y, x + width, y + height);
+      gradient.addColorStop(0, '#5f430e');
+      gradient.addColorStop(.42 + Math.sin(gameTime * .55) * .08, '#d6a52d');
+      gradient.addColorStop(1, '#6b4b0c');
+      ctx.fillStyle = gradient;
+    } else if (entity.aquaRegia) {
+      const gradient = ctx.createLinearGradient(x, y, x + width, y + height);
+      gradient.addColorStop(0, '#183e63');
+      gradient.addColorStop(.48, '#6a3b28');
+      gradient.addColorStop(1, '#d28b32');
+      ctx.fillStyle = gradient;
+    } else {
+      ctx.fillStyle = ally ? '#183f5b' : (entity.boss ? (entity.bossPhase >= 2 ? '#54206e' : '#6b2338') : '#54293a');
+    }
     ctx.strokeStyle = entity.auBoss ? '#ffe27b' : ally ? (entity.aquaRegia ? '#ffd08a' : '#5fd6ff') : '#ff8798';
     ctx.lineWidth = 2;
     drawRoundedRect(x, y, width, height, 11);
     ctx.fill();
     ctx.stroke();
+
+    if (entity.auBoss) {
+      ctx.save();
+      ctx.globalAlpha = .24;
+      ctx.fillStyle = '#fff1a8';
+      ctx.beginPath();
+      ctx.ellipse(entity.x + Math.sin(gameTime * .72) * width * .06, entity.y + Math.cos(gameTime * .48) * 3, width * .31, height * .25, Math.sin(gameTime * .18) * .16, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.globalAlpha = .34;
+      ctx.strokeStyle = '#ffe583';
+      ctx.lineWidth = 1.5;
+      for (let band = 0; band < (lowPowerMode ? 2 : 4); band += 1) {
+        const yy = y + height * (.25 + band * .16) + Math.sin(gameTime * .9 + band) * 3;
+        ctx.beginPath();
+        ctx.moveTo(x + 8, yy);
+        ctx.bezierCurveTo(x + width * .3, yy - 7, x + width * .66, yy + 7, x + width - 8, yy);
+        ctx.stroke();
+      }
+      ctx.restore();
+    }
+
+    if (entity.aquaRegia) {
+      const hpRatio = clamp(entity.hp / Math.max(1, entity.maxHp), 0, 1);
+      const phase = gameTime * (hpRatio < .35 ? 1.25 : .8) + finiteNumber(entity.visualSerial, 0);
+      ctx.save();
+      ctx.translate(entity.x, entity.y);
+      ctx.globalAlpha = .62 * (.72 + hpRatio * .28);
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = '#71ddff';
+      ctx.beginPath(); ctx.ellipse(0, 0, width * .62, height * .72, phase, 0, Math.PI * 1.45); ctx.stroke();
+      ctx.strokeStyle = '#ffb45f';
+      ctx.beginPath(); ctx.ellipse(0, 0, width * .72, height * .56, -phase * .82, Math.PI * .25, Math.PI * 1.82); ctx.stroke();
+      const particleCount = entity.multiHit ? 6 : lowPowerMode ? 4 : 8;
+      for (let index = 0; index < particleCount; index += 1) {
+        const angle = phase * (index % 2 ? -1 : 1) + Math.PI * 2 * index / particleCount;
+        const radius = width * (.45 + (index % 3) * .09);
+        ctx.fillStyle = index % 2 ? '#ffbe6c' : '#84e8ff';
+        ctx.globalAlpha = .55 + (index % 3) * .12;
+        ctx.beginPath(); ctx.arc(Math.cos(angle) * radius, Math.sin(angle) * height * .58, 2.2 + index % 2, 0, Math.PI * 2); ctx.fill();
+      }
+      ctx.restore();
+    }
 
     if (entity.flying) {
       ctx.save();ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillStyle='#d7f4ff';ctx.strokeStyle='rgba(7,22,35,.9)';ctx.lineWidth=3;ctx.font='900 9px "Segoe UI",sans-serif';ctx.strokeText('✈ FLYING',entity.x,y-12);ctx.fillText('✈ FLYING',entity.x,y-12);ctx.restore();
@@ -4969,6 +5501,7 @@
 
   function draw() {
     drawBackground();
+    drawStage10Atmosphere();
     drawBase(logicalToCanvasX(BASE.allyX), allyBaseHp, D.allyBaseHp, true);
     drawBase(logicalToCanvasX(BASE.enemyX), enemyBaseHp, D.enemyBaseHp, false);
 
@@ -4979,6 +5512,7 @@
       drawEntity(entity);
       entity.x = logicalX;
     });
+    drawStage10AbilityWarnings();
     drawProjectiles();
     drawImpactBursts();
     drawCombatEffects();
@@ -5198,6 +5732,7 @@
       attackTimer: entity.attackTimer,
       waveIndex: entity.waveIndex,
       visualSerial: entity.visualSerial,
+      moveVelocity: finiteNumber(entity.moveVelocity, 0),
       firstStrikeReady: entity.firstStrikeReady,
       bossPhase: entity.bossPhase || 1,
       bossSummonTimer: entity.bossSummonTimer,
@@ -5259,10 +5794,15 @@
     enemy.stage10Protected = Boolean(saved.stage10Protected);
     if (enemy.wipeAlliesOnArrival) enemy.ambushIntroCompleted = Boolean(saved.ambushIntroCompleted);
     enemy.visualSerial = Math.max(0, Math.floor(finiteNumber(saved.visualSerial, enemy.visualSerial)));
+    enemy.moveVelocity = finiteNumber(saved.moveVelocity, 0);
     return enemy;
   }
 
   function saveGame({ silent = false } = {}) {
+    if (isTimeAttackActive()) {
+      if (!silent) setSaveStatus('タイムアタック中は通常セーブを変更しません');
+      return false;
+    }
     if (activeQuiz) {
       if (!silent) setSaveStatus('クイズ終了後に保存してください');
       return false;
@@ -5290,7 +5830,8 @@
         tutorialSeen,
         mockExamProgress: JSON.parse(JSON.stringify(mockExamProgress)),
         guestAssistEnabled,
-        guestAssistUsed
+        guestAssistUsed,
+        timeAttack: JSON.parse(JSON.stringify(timeAttackProfile || defaultTimeAttackProfile()))
       },
       battle: {
         energy,
@@ -5392,6 +5933,7 @@
     achievementState = normalizeAchievementState(parsed.progress.achievementState);
     guestAssistEnabled = Boolean(parsed.progress.guestAssistEnabled);
     guestAssistUsed = Boolean(parsed.progress.guestAssistUsed || guestAssistEnabled);
+    timeAttackProfile = normalizeTimeAttackProfile(parsed.progress.timeAttack, cumulativeStats);
     if (isStage10()) {
       const stage10Progress = parsed.stageProgress?.['10'] || parsed.stageProgress?.[10] || {};
       aquaRegiaUnlocked = Boolean(stage10Progress.aquaRegiaUnlocked);
@@ -5480,6 +6022,14 @@
       repaired = true;
     }
     parsed.progress.mockExamProgress = normalizeMockExamProgress(parsed.progress.mockExamProgress);
+    parsed.progress.timeAttack = normalizeTimeAttackProfile(parsed.progress.timeAttack, savedStats);
+    if (parsed.progress.timeAttack.officialRunInProgress) {
+      parsed.progress.timeAttack.officialRunInProgress = false;
+      parsed.progress.timeAttack.currentRunId = '';
+      parsed.progress.timeAttack.runInvalid = true;
+      parsed.progress.timeAttack.lastInvalidReason = 'ページ再読み込みまたはアプリ終了により走行を無効化しました。';
+      repaired = true;
+    }
     parsed.battle.research = parsed.battle.research && typeof parsed.battle.research === 'object'
       ? parsed.battle.research
       : { activeCards: [], claimedWaves: [], introSeen: false };
@@ -5490,6 +6040,11 @@
   }
 
   function loadGame({ silent = false } = {}) {
+    if (isTimeAttackActive()) {
+      invalidateTimeAttackRun('セーブ差し替えを検出しました。');
+      if (!silent) setSaveStatus('タイムアタック中は通常セーブを読み込みません');
+      return false;
+    }
     let parsed;
     try {
       const raw = localStorage.getItem(D.saveKey);
@@ -5504,7 +6059,7 @@
       return false;
     }
 
-    const compatibleSaveVersions = new Set([4, 7, 13, 14, 15, 16, 17, 18, 19, 20, 21, 23, 26, 27, 28, 29, 30, 31, D.version]);
+    const compatibleSaveVersions = new Set([4, 7, 13, 14, 15, 16, 17, 18, 19, 20, 21, 23, 26, 27, 28, 29, 30, 31, 32, D.version]);
     if (!parsed || !compatibleSaveVersions.has(parsed.saveVersion) || !parsed.progress || !parsed.battle) {
       setSaveStatus('このバージョンでは読めないデータです');
       return false;
@@ -5766,6 +6321,11 @@
   }
 
   async function importTransferCode() {
+    if (isTimeAttackActive()) {
+      invalidateTimeAttackRun('セーブ差し替え操作を検出しました。');
+      setTransferStatus('タイムアタック中はセーブを復元できません。', true);
+      return;
+    }
     const code = $('transferCode').value.replace(/\s+/g, '');
     const match = /^CQ33\.([sf][0-9a-f]+)\.([A-Za-z0-9_-]+)$/.exec(code);
     if (!match) { setTransferStatus('コード形式が正しくありません。先頭がCQ33.のコードをすべて貼り付けてください。', true); return; }
@@ -5835,6 +6395,10 @@
   }
 
   function deleteSave() {
+    if (isTimeAttackActive()) {
+      invalidateTimeAttackRun('セーブ削除操作を検出しました。');
+      return;
+    }
     const accepted = window.confirm('セーブデータを削除し、コイン・化学レベル・解放・研究強化をすべて初期化しますか？');
     if (!accepted) return;
 
@@ -5848,6 +6412,7 @@
     aquaRegiaLevel = 1;
     aquaAuContactComplete = false;
     stage10State = defaultStage10State();
+    timeAttackProfile = defaultTimeAttackProfile();
     updateGuestAssistUi();
     speedTrialRetryAt = 0;
     mockExamProgress = defaultMockExamProgress();
@@ -5954,17 +6519,25 @@
   window.cqPauseOverlay = pauseForOverlay;
   window.cqResumeOverlay = resumeFromOverlay;
   function updateGuestAssistUi() {
-    if ($('guestAssistIndicator')) $('guestAssistIndicator').hidden = !guestAssistEnabled;
+    const blocked = isTimeAttackActive();
+    if ($('guestAssistIndicator')) $('guestAssistIndicator').hidden = !guestAssistEnabled || blocked;
     if ($('guestAssistDisableBtn')) $('guestAssistDisableBtn').hidden = !guestAssistEnabled;
     if ($('guestAssistCodeBtn')) $('guestAssistCodeBtn').hidden = guestAssistEnabled;
     if ($('guestAssistCode')) {
-      $('guestAssistCode').disabled = guestAssistEnabled;
+      $('guestAssistCode').disabled = guestAssistEnabled || blocked;
       if (guestAssistEnabled) $('guestAssistCode').value = '';
     }
+    if ($('guestAssistCodeBtn')) $('guestAssistCodeBtn').disabled = blocked;
+    if ($('guestAssistDisableBtn')) $('guestAssistDisableBtn').disabled = blocked;
+    if ($('guestAssistCodeStatus') && blocked) $('guestAssistCodeStatus').textContent = 'タイムアタック中は利用できません';
     if ($('guestAssistCodeStatus') && guestAssistEnabled) $('guestAssistCodeStatus').textContent = 'ゲストアシスト中';
   }
 
   function requestGuestAssist() {
+    if (isTimeAttackActive()) {
+      invalidateTimeAttackRun('ゲストアシスト操作を検出しました。');
+      return;
+    }
     const code = String($('guestAssistCode')?.value || '').trim().toLowerCase();
     if (code !== 'easy') {
       $('guestAssistCodeStatus').textContent = 'コードを確認してください';
@@ -5983,6 +6556,11 @@
   }
 
   function enableGuestAssist() {
+    if (isTimeAttackActive()) {
+      invalidateTimeAttackRun('ゲストアシスト操作を検出しました。');
+      closeGuestAssistConfirmation();
+      return;
+    }
     guestAssistEnabled = true;
     guestAssistUsed = true;
     $('guestAssistConfirmModal').hidden = true;
@@ -5993,6 +6571,10 @@
   }
 
   function disableGuestAssist() {
+    if (isTimeAttackActive()) {
+      invalidateTimeAttackRun('ゲストアシスト操作を検出しました。');
+      return;
+    }
     guestAssistEnabled = false;
     updateGuestAssistUi();
     $('guestAssistCodeStatus').textContent = '';
@@ -6370,6 +6952,12 @@
     $('infoModal').hidden = false;
     const container = $('infoContent');
     container.innerHTML = '';
+    if (isTimeAttackActive() && ['review', 'learning', 'practice', 'mock'].includes(kind)) {
+      $('infoKicker').textContent = 'TIME ATTACK';
+      $('infoTitle').textContent = '走行中は利用できません';
+      container.innerHTML = '<p class="modal-lead">通常の学習記録・練習成績を完全に分離するため、タイムアタック終了後に利用してください。計測は継続しています。</p>';
+      return;
+    }
     if (kind === 'notice') {
       $('infoKicker').textContent = 'NEWS'; $('infoTitle').textContent = 'お知らせ';
       const list = document.createElement('div'); list.className = 'notice-list';
@@ -6412,6 +7000,11 @@
     $('musicVolume').addEventListener('input', (event) => setBgmVolume(event.currentTarget.value));
     $('stageBtn').addEventListener('click', openStageModal);
     $('stageCloseBtn').addEventListener('click', closeStageModal);
+    $('timeAttackStartBtn').addEventListener('click', beginTimeAttack);
+    $('timeAttackRankingBtn').addEventListener('click', openTimeAttackRanking);
+    $('timeAttackExitBtn').addEventListener('click', exitTimeAttack);
+    $('timeAttackResultRankingBtn').addEventListener('click', openTimeAttackRanking);
+    $('timeAttackResultCloseBtn').addEventListener('click', closeTimeAttackResult);
     $('stageGuideCloseBtn').addEventListener('click', closeStageGuide);
     $('stageGuideCloseBottomBtn').addEventListener('click', closeStageGuide);
     $('stageGuideSelectBtn').addEventListener('click', selectStageFromGuide);
@@ -6459,6 +7052,29 @@
     window.addEventListener('resize', positionTutorialOverlay);
     window.addEventListener('scroll', positionTutorialOverlay, true);
     window.addEventListener('cq-profile-closed', () => setTimeout(maybeStartPendingTutorial, 120));
+    window.addEventListener('cq-ta-profile-updated', (event) => {
+      timeAttackProfile = normalizeTimeAttackProfile(event.detail, cumulativeStats);
+      updateTimeAttackUi();
+      if ($('timeAttackResultBest') && !$('timeAttackResultModal').hidden) {
+        $('timeAttackResultBest').textContent = timeAttackProfile.localBestMs
+          ? `あなたのベスト：${formatTimeAttackMs(timeAttackProfile.localBestMs)}`
+          : '有効な自己ベストはありません。';
+      }
+    });
+    window.addEventListener('cq-ta-submit-result', (event) => {
+      if (!$('timeAttackResultModal') || $('timeAttackResultModal').hidden) return;
+      const detail = event.detail || {};
+      if (!detail.ok) {
+        $('timeAttackResultStatus').textContent += '｜オンライン送信は保留されました。';
+        return;
+      }
+      const label = detail.outcome === 'created' || detail.outcome === 'improved'
+        ? 'オンライン自己ベストを更新しました。'
+        : detail.outcome === 'slower'
+          ? 'オンライン記録は既存の速いベストを維持しました。'
+          : '同じ走行は重複登録せず確認済みです。';
+      $('timeAttackResultStatus').textContent += `｜${label}`;
+    });
     $('achievementBtn').addEventListener('click', openAchievements);
     $('achievementCloseBtn').addEventListener('click', closeAchievements);
     $('achievementCloseBottomBtn').addEventListener('click', closeAchievements);
@@ -6479,6 +7095,7 @@
       if (tutorialActive) finishTutorial(true);
       else if (!$('transferModal').hidden) closeTransferModal();
       else if (!$('guestAssistConfirmModal').hidden) closeGuestAssistConfirmation();
+      else if (!$('timeAttackResultModal').hidden) closeTimeAttackResult();
       else if (!$('achievementModal').hidden) closeAchievements();
       else if (!$('stageGuideModal').hidden) closeStageGuide();
       else if (!$('stageModal').hidden) closeStageModal();
@@ -6501,9 +7118,24 @@
     document.addEventListener('visibilitychange', () => {
       updatePowerControls();
       if (document.hidden) { pauseBgm(); suspendForHiddenPage(); }
-      else { lastTimestamp = performance.now(); lastRenderedTimestamp = 0; syncBgmPlayback(); if (manualPaused && gameStatus === 'playing') showPauseModal(pauseReason === 'background' ? 'background' : pauseReason); }
+      else {
+        if (isTimeAttackActive() && timeAttackHiddenAt > 0 && performance.now() - timeAttackHiddenAt > TIME_ATTACK_BACKGROUND_LIMIT_MS) {
+          invalidateTimeAttackRun('長時間バックグラウンドへ移動しました。');
+        }
+        timeAttackHiddenAt = 0;
+        lastTimestamp = performance.now();
+        lastRenderedTimestamp = 0;
+        syncBgmPlayback();
+        if (manualPaused && gameStatus === 'playing') showPauseModal(pauseReason === 'background' ? 'background' : pauseReason);
+      }
     });
-    window.addEventListener('pagehide', () => { pauseBgm(); suspendForHiddenPage(); });
+    window.addEventListener('pagehide', () => {
+      if (isTimeAttackActive()) invalidateTimeAttackRun('ページ終了または再読み込みを検出しました。');
+      pauseBgm();
+      suspendForHiddenPage();
+    });
+    window.addEventListener('error', () => invalidateTimeAttackRun('実行エラーを検出しました。'));
+    window.addEventListener('unhandledrejection', () => invalidateTimeAttackRun('未処理エラーを検出しました。'));
   }
 
   function animationLoop(timestamp) {
@@ -6514,6 +7146,17 @@
       return;
     }
     const elapsedSinceRender = lastRenderedTimestamp > 0 ? timestamp - lastRenderedTimestamp : frameInterval;
+    if (performanceMetrics.lastFrameAt > 0) {
+      const gap = Math.max(0, timestamp - performanceMetrics.lastFrameAt);
+      performanceMetrics.intervalTotalMs += gap;
+      performanceMetrics.maxGapMs = Math.max(performanceMetrics.maxGapMs, gap);
+      if (gap > 50) performanceMetrics.longFrames += 1;
+    }
+    performanceMetrics.lastFrameAt = timestamp;
+    performanceMetrics.frames += 1;
+    performanceMetrics.peakEffects = Math.max(performanceMetrics.peakEffects, combatEffects.length + impactBursts.length);
+    performanceMetrics.peakProjectiles = Math.max(performanceMetrics.peakProjectiles, projectiles.length);
+    performanceMetrics.heapPeak = Math.max(performanceMetrics.heapPeak, finiteNumber(performance.memory?.usedJSHeapSize, 0));
     const rawDt = Math.max(0, (timestamp - lastTimestamp) / 1000);
     const realDt = Math.min(0.25, rawDt);
     const dt = Math.min(0.1, realDt);
@@ -6531,6 +7174,7 @@
       achievementToastTimer = Math.max(0, achievementToastTimer - dt);
       if (achievementToastTimer <= 0) $('achievementToast').hidden = true;
     }
+    if (isTimeAttackActive() && performanceMetrics.frames % 3 === 0) updateTimeAttackUi();
     draw();
     requestAnimationFrame(animationLoop);
   }
@@ -6602,6 +7246,74 @@
         au.hp = clamp(finiteNumber(value, au.hp), 0, au.maxHp);
         return true;
       },
+      setTimeAttackUnlocked(value = true) {
+        timeAttackProfile = normalizeTimeAttackProfile(timeAttackProfile, cumulativeStats);
+        timeAttackProfile.unlocked = Boolean(value);
+        saveGame({ silent: true });
+        updateTimeAttackUi();
+      },
+      beginTimeAttack,
+      forceTimeAttackElapsed(milliseconds, { valid = false } = {}) {
+        if (!isTimeAttackActive()) return false;
+        const elapsed = Math.max(0, finiteNumber(milliseconds, 0));
+        timeAttackRun.startedAt = performance.now() - elapsed;
+        timeAttackRun.valid = Boolean(valid);
+        timeAttackRun.invalidReason = valid ? '' : '開発者・自動テスト状態です。';
+        updateTimeAttackUi();
+        return true;
+      },
+      finishTimeAttack(victory = true) { return restoreNormalAfterTimeAttack({ victory: Boolean(victory), reason: victory ? '' : '自動テスト中断' }); },
+      invalidateTimeAttack: invalidateTimeAttackRun,
+      requestFirstSummon() {
+        const unit = D.units.find((candidate) => unlocked.has(candidate.id));
+        if (!unit) return false;
+        requestSummon(unit);
+        return Boolean(activeQuiz);
+      },
+      answerActiveQuizCorrect() {
+        if (!activeQuiz || activeQuiz.answered) return false;
+        answerQuiz(activeQuiz.question.answer);
+        return true;
+      },
+      continueActiveQuiz() {
+        if (!activeQuiz?.answered) return false;
+        closeQuiz();
+        return true;
+      },
+      resetPerformanceMetrics() { performanceMetrics = defaultPerformanceMetrics(); },
+      performanceSnapshot() {
+        const elapsedMs = Math.max(1, performance.now() - performanceMetrics.startedAt);
+        const measuredIntervals = Math.max(1, performanceMetrics.frames - 1);
+        return {
+          ...performanceMetrics,
+          elapsedMs,
+          averageFps: performanceMetrics.frames * 1000 / elapsedMs,
+          intervalFps: 1000 / Math.max(.001, performanceMetrics.intervalTotalMs / measuredIntervals),
+          heapGrowthBytes: finiteNumber(performanceMetrics.heapPeak, 0) - finiteNumber(performanceMetrics.heapStart, 0)
+        };
+      },
+      benchmarkDraw(iterations = 12) {
+        const count = clamp(Math.floor(finiteNumber(iterations, 12)), 1, 120);
+        const startedAt = performance.now();
+        for (let index = 0; index < count; index += 1) draw();
+        const elapsedMs = performance.now() - startedAt;
+        return { count, elapsedMs, averageDrawMs: elapsedMs / count };
+      },
+      benchmarkFrames(iterations = 60, dt = 1 / 60) {
+        const count = clamp(Math.floor(finiteNumber(iterations, 60)), 1, 240);
+        const frameDt = clamp(finiteNumber(dt, 1 / 60), 1 / 240, .1);
+        let maxFrameMs = 0;
+        const startedAt = performance.now();
+        for (let index = 0; index < count; index += 1) {
+          const frameStartedAt = performance.now();
+          if (!paused && gameStatus === 'playing') updateGame(frameDt * activeBattleSpeed());
+          draw();
+          maxFrameMs = Math.max(maxFrameMs, performance.now() - frameStartedAt);
+        }
+        const elapsedMs = performance.now() - startedAt;
+        const averageFrameMs = elapsedMs / count;
+        return { count, elapsedMs, averageFrameMs, maxFrameMs, processingCapacityFps: 1000 / Math.max(.001, averageFrameMs) };
+      },
       saveNow() { return saveGame({ silent: true }); },
       loadNow() { return loadGame({ silent: true }); },
       setPaused(value) { paused = Boolean(value); updatePauseButton(); },
@@ -6611,17 +7323,24 @@
       },
       snapshot() {
         return {
-          stage: currentStageId, gameStatus, wave: currentWaveIndex + 1, wavePhase, gameTime,
+          stage: currentStageId, gameStatus, paused, manualPaused, renderFps: currentRenderFps(), wave: currentWaveIndex + 1, wavePhase, gameTime,
           logicalScale: stageLogicalScale(), logicalEnemyX: BASE.enemyX, canvasEnemyX: logicalToCanvasX(BASE.enemyX),
-          coins, energy, aquaRegiaUnlocked, aquaRegiaLevel, aquaAuContactComplete,
+          coins, energy, level, experience, energyCapacityLevel,
+          unitUpgradeLevels: { ...unitUpgradeLevels },
+          aquaRegiaUnlocked, aquaRegiaLevel, aquaAuContactComplete,
           highestStageCleared: cumulativeStats.highestStageCleared,
           highestStageReached: cumulativeStats.highestStageReached,
           guestAssistEnabled, guestAssistUsed,
+          timeAttackActive: isTimeAttackActive(), timeAttackMs: currentTimeAttackMs(),
+          timeAttackRun: timeAttackRun ? { ...timeAttackRun } : null,
+          timeAttackProfile: JSON.parse(JSON.stringify(timeAttackProfile || defaultTimeAttackProfile())),
           cumulativeStats: JSON.parse(JSON.stringify(cumulativeStats)),
           stage10: JSON.parse(JSON.stringify(stage10State)),
           allies: allies.map((entity) => ({ ...serializeEntity(entity), kind: entity.kind, formula: entity.formula, hp: entity.hp, maxHp: entity.maxHp, aquaRegia: Boolean(entity.aquaRegia) })),
           enemies: enemies.map((entity) => ({ ...serializeEntity(entity), kind: entity.kind, formula: entity.formula, hp: entity.hp, maxHp: entity.maxHp, auBoss: Boolean(entity.auBoss) })),
           projectiles: projectiles.map((item) => ({ ownerKind: item.ownerKind, effectKind: item.effectKind })),
+          visualCounts: { combatEffects: combatEffects.length, impactBursts: impactBursts.length, projectiles: projectiles.length, audioNodesActive: performanceMetrics.audioNodesActive },
+          activeQuiz: activeQuiz ? { mode: activeQuiz.mode, answered: activeQuiz.answered } : null,
           desiredBgmTrackKey: desiredBgmTrackKey(), activeBgmTrackKey,
           enemyBaseHp, allyBaseHp
         };
@@ -6651,10 +7370,12 @@
     tutorialActive = false;
     guestAssistEnabled = false;
     guestAssistUsed = false;
+    timeAttackProfile = defaultTimeAttackProfile();
     aquaRegiaUnlocked = false;
     aquaRegiaLevel = 1;
     aquaAuContactComplete = false;
     stage10State = defaultStage10State();
+    performanceMetrics = defaultPerformanceMetrics();
 
     buildUnitButtons();
     buildFormulaGuide();

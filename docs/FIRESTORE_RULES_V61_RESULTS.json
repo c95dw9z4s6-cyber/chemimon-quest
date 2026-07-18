@@ -1,0 +1,64 @@
+{
+  "generatedAt": "2026-07-18T22:26:00.083355+00:00",
+  "emulatorHost": "127.0.0.1:8080",
+  "projectId": "chemion-quest",
+  "passed": true,
+  "tests": [
+    {
+      "name": "unauthenticated-create-denied",
+      "passed": true,
+      "status": 403,
+      "expected": 403,
+      "statusText": "Forbidden"
+    },
+    {
+      "name": "owner-valid-create-allowed",
+      "passed": true,
+      "status": 200,
+      "expected": 200,
+      "statusText": "OK"
+    },
+    {
+      "name": "public-read-allowed",
+      "passed": true,
+      "status": 200,
+      "expected": 200,
+      "statusText": "OK"
+    },
+    {
+      "name": "other-user-update-denied",
+      "passed": true,
+      "status": 403,
+      "expected": 403,
+      "statusText": "Forbidden"
+    },
+    {
+      "name": "slower-owner-update-denied",
+      "passed": true,
+      "status": 403,
+      "expected": 403,
+      "statusText": "Forbidden"
+    },
+    {
+      "name": "faster-owner-update-allowed",
+      "passed": true,
+      "status": 200,
+      "expected": 200,
+      "statusText": "OK"
+    },
+    {
+      "name": "duplicate-run-id-update-denied",
+      "passed": true,
+      "status": 403,
+      "expected": 403,
+      "statusText": "Forbidden"
+    },
+    {
+      "name": "delete-denied",
+      "passed": true,
+      "status": 403,
+      "expected": 403,
+      "statusText": "Forbidden"
+    }
+  ]
+}

@@ -8,6 +8,11 @@ let db = null;
 let currentUser = null;
 let configured = false;
 let syncing = false;
+let timeAttackSyncing = false;
+let timeAttackRankingOpen = false;
+const TIME_ATTACK_COLLECTION = 'stage10TimeAttack';
+const TIME_ATTACK_MIN_MS = 45000;
+const TIME_ATTACK_MAX_MS = 2 * 60 * 60 * 1000;
 
 function firebaseConfigured() {
   const c = D.firebaseConfig || {};
@@ -51,6 +56,52 @@ function guestAssistWasUsed() {
   } catch {
     return false;
   }
+}
+
+function formatTimeAttackMs(value) {
+  const milliseconds = Math.max(0, Math.round(Number(value) || 0));
+  const minutes = Math.floor(milliseconds / 60000);
+  const seconds = Math.floor(milliseconds % 60000 / 1000);
+  const hundredths = Math.floor(milliseconds % 1000 / 10);
+  return `${minutes}:${String(seconds).padStart(2, '0')}.${String(hundredths).padStart(2, '0')}`;
+}
+
+function readTimeAttackProfile() {
+  try {
+    const save = JSON.parse(localStorage.getItem(SAVE_KEY) || '{}');
+    return { save, profile: save?.progress?.timeAttack && typeof save.progress.timeAttack === 'object' ? save.progress.timeAttack : {} };
+  } catch {
+    return { save: null, profile: {} };
+  }
+}
+
+function writeTimeAttackProfile(mutator) {
+  try {
+    const { save, profile } = readTimeAttackProfile();
+    if (!save?.progress) return false;
+    const next = mutator({ ...profile });
+    if (!next || typeof next !== 'object') return false;
+    save.progress.timeAttack = next;
+    localStorage.setItem(SAVE_KEY, JSON.stringify(save));
+    window.dispatchEvent(new CustomEvent('cq-ta-profile-updated', { detail: { ...next } }));
+    return true;
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
+}
+
+function validPendingTimeAttack(value) {
+  const timeMs = Math.round(Number(value?.timeMs));
+  const runId = String(value?.runId || '');
+  return runId && Number.isInteger(timeMs) && timeMs >= TIME_ATTACK_MIN_MS && timeMs <= TIME_ATTACK_MAX_MS
+    ? { runId, timeMs, completedAt: String(value.completedAt || '') }
+    : null;
+}
+
+function isFilteredTimeAttackRecord(record) {
+  const name = String(record?.username || '').normalize('NFKC').trim().toLowerCase();
+  return record?.isTest === true || /^tester(?:$|[-_\s\d])/.test(name) || name.includes('自動テスト');
 }
 
 function rankingScore(x) {
@@ -117,19 +168,22 @@ async function initializeFirebase() {
       setDoc: firestore.setDoc,
       updateDoc: firestore.updateDoc,
       collection: firestore.collection,
+      getDoc: firestore.getDoc,
       getDocs: firestore.getDocs,
       query: firestore.query,
       orderBy: firestore.orderBy,
       limit: firestore.limit,
       serverTimestamp: firestore.serverTimestamp,
       addDoc: firestore.addDoc,
-      deleteDoc: firestore.deleteDoc
+      deleteDoc: firestore.deleteDoc,
+      runTransaction: firestore.runTransaction
     };
     onAuthStateChanged(auth, async (user) => {
       currentUser = user;
       if (user) {
         setStatus('オンライン');
         syncProfile();
+        syncTimeAttackBest();
       } else {
         setStatus('認証待ち');
       }
@@ -165,6 +219,162 @@ async function syncProfile() {
     setStatus('同期失敗');
   } finally {
     syncing = false;
+  }
+}
+
+async function syncTimeAttackBest() {
+  if (timeAttackSyncing || !configured || !currentUser || !navigator.onLine) return;
+  const nicknameResult = validateNickname(localStorage.getItem(NICK_KEY));
+  const { profile } = readTimeAttackProfile();
+  const pending = validPendingTimeAttack(profile.pendingSubmission);
+  if (!pending || !nicknameResult.ok) return;
+  timeAttackSyncing = true;
+  try {
+    const f = window.__cqfb;
+    const reference = f.doc(db, TIME_ATTACK_COLLECTION, currentUser.uid);
+    let outcome = 'unchanged';
+    let serverBestMs = null;
+    await f.runTransaction(db, async (transaction) => {
+      const snapshot = await transaction.get(reference);
+      if (!snapshot.exists()) {
+        transaction.set(reference, {
+          userId: currentUser.uid,
+          username: nicknameResult.name,
+          bestMs: pending.timeMs,
+          runId: pending.runId,
+          isTest: false,
+          firstRegisteredAt: f.serverTimestamp(),
+          submittedAt: f.serverTimestamp()
+        });
+        outcome = 'created';
+        serverBestMs = pending.timeMs;
+        return;
+      }
+      const current = snapshot.data() || {};
+      serverBestMs = Math.round(Number(current.bestMs) || 0);
+      if (String(current.runId || '') === pending.runId) {
+        outcome = 'duplicate';
+        return;
+      }
+      if (serverBestMs > 0 && serverBestMs <= pending.timeMs) {
+        outcome = 'slower';
+        return;
+      }
+      transaction.update(reference, {
+        username: nicknameResult.name,
+        bestMs: pending.timeMs,
+        runId: pending.runId,
+        submittedAt: f.serverTimestamp()
+      });
+      outcome = 'improved';
+      serverBestMs = pending.timeMs;
+    });
+    writeTimeAttackProfile((next) => {
+      const localBest = Math.round(Number(next.localBestMs) || 0);
+      if (serverBestMs >= TIME_ATTACK_MIN_MS && (!localBest || serverBestMs < localBest)) next.localBestMs = serverBestMs;
+      if (String(next.pendingSubmission?.runId || '') === pending.runId) next.pendingSubmission = null;
+      next.lastSubmittedRunId = pending.runId;
+      return next;
+    });
+    window.dispatchEvent(new CustomEvent('cq-ta-submit-result', {
+      detail: { ok: true, outcome, runId: pending.runId, bestMs: serverBestMs }
+    }));
+  } catch (error) {
+    console.error(error);
+    window.dispatchEvent(new CustomEvent('cq-ta-submit-result', {
+      detail: { ok: false, runId: pending.runId, message: '記録は端末に保留され、オンライン復帰後に再送されます。' }
+    }));
+  } finally {
+    timeAttackSyncing = false;
+  }
+}
+
+async function openTimeAttackRanking() {
+  if (timeAttackRankingOpen) return;
+  timeAttackRankingOpen = true;
+  window.cqPauseOverlay?.();
+  $('timeAttackRankingModal').hidden = false;
+  await loadTimeAttackRanking();
+}
+
+function closeTimeAttackRanking() {
+  if (!timeAttackRankingOpen) return;
+  timeAttackRankingOpen = false;
+  $('timeAttackRankingModal').hidden = true;
+  window.cqResumeOverlay?.();
+}
+
+async function loadTimeAttackRanking() {
+  const list = $('timeAttackRankingList');
+  list.replaceChildren();
+  $('timeAttackMyRankCard').hidden = true;
+  const message = $('timeAttackRankingMessage');
+  if (!configured) {
+    message.textContent = 'タイムアタックランキングを利用するにはFirebase設定が必要です。ローカル自己ベストは保存されます。';
+    return;
+  }
+  if (!navigator.onLine) {
+    message.textContent = '現在オフラインです。記録は端末に保留され、再接続後に安全に再送されます。';
+    return;
+  }
+  if (!currentUser) {
+    message.textContent = '匿名ログインを準備しています。数秒後に再読み込みしてください。';
+    return;
+  }
+  await syncTimeAttackBest();
+  try {
+    const f = window.__cqfb;
+    const snapshot = await f.getDocs(f.query(
+      f.collection(db, TIME_ATTACK_COLLECTION),
+      f.orderBy('bestMs', 'asc'),
+      f.orderBy('firstRegisteredAt', 'asc'),
+      f.limit(100)
+    ));
+    const records = [];
+    snapshot.forEach((item) => {
+      const record = { id: item.id, ...item.data() };
+      if (!isFilteredTimeAttackRecord(record)) records.push(record);
+    });
+    const shown = records.slice(0, 50);
+    message.textContent = `Stage 10公式タイムアタック上位${shown.length}人。各プレイヤーの最速記録1件だけを表示します。`;
+    shown.forEach((record, index) => {
+      const row = document.createElement('div');
+      row.className = `ranking-row${record.id === currentUser.uid ? ' me' : ''}`;
+      const position = document.createElement('span');
+      position.className = 'ranking-position';
+      position.textContent = `${index + 1}位`;
+      const name = document.createElement('span');
+      name.className = 'ranking-name';
+      escapeTextInto(name, record.username || '名無し');
+      const score = document.createElement('span');
+      score.className = 'ranking-score time-attack-ranking-time';
+      score.textContent = formatTimeAttackMs(record.bestMs);
+      row.append(position, name, score);
+      list.append(row);
+    });
+    const myIndex = records.findIndex((record) => record.id === currentUser.uid);
+    const { profile } = readTimeAttackProfile();
+    const myRecord = myIndex >= 0 ? records[myIndex] : null;
+    const localBest = Math.round(Number(profile.localBestMs) || 0);
+    if (myRecord && myRecord.bestMs >= TIME_ATTACK_MIN_MS && (!localBest || myRecord.bestMs < localBest)) {
+      writeTimeAttackProfile((next) => ({ ...next, localBestMs: Math.round(myRecord.bestMs) }));
+    }
+    if (myRecord || localBest) {
+      const card = $('timeAttackMyRankCard');
+      card.replaceChildren();
+      const title = document.createElement('strong');
+      title.textContent = myRecord ? `自分：${myIndex + 1}位` : '自分：ローカル記録';
+      const name = document.createElement('span');
+      escapeTextInto(name, localStorage.getItem(NICK_KEY) || '未登録');
+      const best = document.createElement('span');
+      best.textContent = `ベスト ${formatTimeAttackMs(myRecord?.bestMs || localBest)}`;
+      card.append(title, name, best);
+      card.hidden = false;
+    }
+    if (!list.children.length) list.innerHTML = '<p class="modal-lead">正式記録はまだありません。</p>';
+  } catch (error) {
+    console.error(error);
+    message.textContent = 'タイムアタックランキングの取得に失敗しました。端末の記録は失われません。';
   }
 }
 
@@ -397,6 +607,8 @@ function wire() {
   window.addEventListener('cq-open-profile', () => openProfile(false));
   window.addEventListener('cq-save-imported', () => { setTimeout(syncProfile, 250); });
   window.addEventListener('cq-guest-assist-changed', () => { if (guestAssistWasUsed()) setStatus('ランキング送信対象外'); });
+  window.addEventListener('cq-ta-record-ready', syncTimeAttackBest);
+  window.addEventListener('cq-open-ta-ranking', openTimeAttackRanking);
   window.addEventListener('cq-open-requests', openRequests);
   window.addEventListener('cq-submit-request', openRequestSubmit);
   $('requestSubmitCloseBtn').addEventListener('click', () => {
@@ -407,6 +619,8 @@ function wire() {
   $('rankingBtn').addEventListener('click', openRanking);
   $('rankingCloseBtn').addEventListener('click', closeRanking);
   $('rankingRefreshBtn').addEventListener('click', loadRanking);
+  $('timeAttackRankingCloseBtn').addEventListener('click', closeTimeAttackRanking);
+  $('timeAttackRankingRefreshBtn').addEventListener('click', loadTimeAttackRanking);
   $('nicknameSaveBtn').addEventListener('click', saveNickname);
   $('profileCancelBtn').addEventListener('click', () => {
     localStorage.setItem(ONLINE_SEEN_KEY, '1');
@@ -416,12 +630,14 @@ function wire() {
   window.addEventListener('online', () => {
     setStatus('再接続・同期中');
     syncProfile();
+    syncTimeAttackBest();
   });
   window.addEventListener('offline', () => setStatus('オフライン'));
   document.addEventListener('visibilitychange', () => {
-    if (document.visibilityState === 'hidden') syncProfile();
+    if (document.visibilityState === 'hidden') { syncProfile(); syncTimeAttackBest(); }
   });
-  setInterval(syncProfile, 30000);
+  document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && timeAttackRankingOpen) closeTimeAttackRanking(); });
+  setInterval(() => { syncProfile(); syncTimeAttackBest(); }, 30000);
   if (!localStorage.getItem(NICK_KEY) && !localStorage.getItem(ONLINE_SEEN_KEY)) openProfile(false);
 }
 

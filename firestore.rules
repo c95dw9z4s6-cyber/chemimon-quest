@@ -16,9 +16,43 @@ service cloud.firestore {
              );
     }
 
+    function validTimeAttackRecord(userId) {
+      return request.auth != null
+             && request.auth.uid == userId
+             && request.resource.data.keys().hasOnly([
+               'userId', 'username', 'bestMs', 'runId', 'isTest',
+               'firstRegisteredAt', 'submittedAt'
+             ])
+             && request.resource.data.userId == userId
+             && request.resource.data.username is string
+             && request.resource.data.username.size() >= 2
+             && request.resource.data.username.size() <= 16
+             && request.resource.data.bestMs is int
+             && request.resource.data.bestMs >= 45000
+             && request.resource.data.bestMs <= 7200000
+             && request.resource.data.runId is string
+             && request.resource.data.runId.size() >= 8
+             && request.resource.data.runId.size() <= 100
+             && request.resource.data.isTest == false
+             && request.resource.data.firstRegisteredAt is timestamp
+             && request.resource.data.submittedAt is timestamp;
+    }
+
     match /players/{userId} {
       allow read: if true;
       allow create, update: if request.auth != null && request.auth.uid == userId;
+      allow delete: if false;
+    }
+
+    match /stage10TimeAttack/{userId} {
+      allow read: if true;
+      allow create: if validTimeAttackRecord(userId);
+      allow update: if validTimeAttackRecord(userId)
+                    && request.resource.data.diff(resource.data).affectedKeys()
+                         .hasOnly(['username', 'bestMs', 'runId', 'submittedAt'])
+                    && request.resource.data.firstRegisteredAt == resource.data.firstRegisteredAt
+                    && request.resource.data.bestMs < resource.data.bestMs
+                    && request.resource.data.runId != resource.data.runId;
       allow delete: if false;
     }
 

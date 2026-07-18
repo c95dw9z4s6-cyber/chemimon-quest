@@ -14,6 +14,7 @@ const APP_SHELL = [
   './icons/apple-touch-icon.png',
   './assets/audio/chemion-normal-bgm.mp3',
   './assets/audio/chemion-difficult-bgm.mp3',
+  './assets/audio/chemion-milestone-stage-bgm-v3.mp3',
   './assets/audio/chemion-stage10-au-boss-v16-loop.mp3'
 ];
 

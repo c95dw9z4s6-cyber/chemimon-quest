@@ -163,13 +163,14 @@ assert(/function finishMockExam\(\)/.test(html), 'mock exam result flow is missi
 assert(html.includes("id: 'initial_energy'") && html.includes("id: 'energy_regen'") && html.includes("id: 'coin_boost'"), 'next-battle mock rewards are incomplete');
 assert(html.includes('mockExamProgress: JSON.parse(JSON.stringify(mockExamProgress))'), 'mock exam progress is not saved');
 assert(html.includes('mockReward: activeMockReward ? { ...activeMockReward } : null'), 'active mock reward is not saved');
-assert(/29, 30, 31, D\.version/.test(html), 'v3.95 through v5.95 save compatibility is missing');
+assert(/29, 30, 31, 32, D\.version/.test(html), 'v3.95 through v6.0 save compatibility is missing');
 assert(/function migrateSaveData\(input\)/.test(html), 'explicit save migration function is missing');
 assert(sourceData.stage10?.id === 10 && sourceData.stage10?.waves?.length === 10, 'Stage 10 must have exactly 10 waves');
 assert(sourceData.stage10?.units?.length === 5, 'Stage 10 must have exactly five existing ally choices');
 assert(sourceData.stage10?.enemies?.some((enemy) => enemy.auBoss && enemy.formula === '79 Au'), 'Stage 10 Au boss data is missing');
 assert(sourceData.stage10?.logicalBattlefieldScale === 1.3, 'Stage 10 logical battlefield scale must be 1.30');
 assert(html.includes('chemion-stage10-au-boss-v16-loop.mp3'), 'Stage 10 V16 loop asset is missing from the public build');
+assert(html.includes('chemion-milestone-stage-bgm-v3.mp3'), 'Stage 10 V3 asset is missing from the public build');
 assert(html.includes('id="pauseRestartBtn"'), 'pause restart button is missing');
 assert(/function restartCurrentStageFromPause\(\)/.test(html), 'pause restart handler is missing');
 assert(/resetStage\(\{ keepProgress: true \}\)/.test(html), 'pause restart must reset the current stage while preserving progress');
