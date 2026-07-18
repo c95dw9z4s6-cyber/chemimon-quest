@@ -1,17 +1,19 @@
 # v6.1 本番スモーク報告
 
-状態: `NEEDS_APPROVAL / 未実行`
+状態: `合格`
 
-Firebase CLIが未認証のため、仕様どおり公開前に停止しました。main、GitHub Pages、Firebase、正式v6.1 tagは変更していません。
+公開前バックアップ`production-before-v6.1`は正式v6.0コミット`0f9d6e9496d381d8110de586c84eae59412ca1e5`を指します。v6.1候補`207db17062ebc0166dbb0c9ce9f104757f3dbdaf`のGitHub Pages workflowと、Firebaseの`firestore:rules,firestore:indexes`限定deployは成功しました。
 
-再開後の本番smoke項目:
+本番スモーク結果:
 
-- 公開URLのversion 6.1、save version 33、main commit一致
-- index、version.json、sw.js、V3、V16、manifestのHTTP 200とSHA-256
-- PWA旧cacheからの更新
-- Stage 1起動、通常quiz、Stage選択、設定、既存save読込み
-- Stage 10 TA lock/unlock表示、normal Stage 10 BGM V3
-- 専用ranking読込み成功（本番test recordは作成しない）
-- 通常rankingの継続
+- `[合格]` 公開URLのversion 6.1、save version 33
+- `[合格]` index、version.json、sw.js、V3、V16、manifestのHTTP 200
+- `[合格]` V3・V16の本番配信SHA-256が正式値と一致
+- `[合格]` PWAのv6.0旧cacheを除去し、v6.1 shell/runtime cacheへ更新
+- `[合格]` v6.1 PWAのオフライン再起動
+- `[合格]` Stage 10起動とタイムアタック解放状態
+- `[合格]` ブラウザpage errorなし
+- `[合格]` 専用ランキングの本番公開read HTTP 200
+- `[合格]` 本番テスト記録を送信していない
 
-1件でも失敗した場合は`ROLLBACK_V6_1.md`に従い自動rollbackします。
+初期のスモーク試行では、検査側がsave versionをアプリversionとして比較したこと、戻り値のないテスト補助関数をboolean判定したこと、テスト用JavaScript式の構文誤りにより検査コードが停止しました。いずれも製品の不合格ではなく、正式な状態キーと期待値へ修正した確定スモークは全項目合格しています。このためロールバックは実行していません。

@@ -11,10 +11,10 @@
 
 Firebase CLI v15.24.0とFirestore emulator v1.21.0でrulesをcompileし、8/8の許可・拒否試験に合格しました。
 
-## NEEDS_APPROVAL
+## 本番公開
 
-CLIの`login:list`は認証済みアカウントなし、`projects:list --json`は認証失敗でした。このため本番deployは実行していません。再開時も対象なし`firebase deploy`は禁止し、次だけを実行します。
+Firebase CLI v15.24.0で再認証し、対象プロジェクト`chemion-quest`を確認しました。次の対象限定deployだけを実行し、Rulesのcompile、Rules release、Indexes deployがすべて成功しました。
 
 `firebase deploy --only firestore:rules,firestore:indexes --project chemion-quest`
 
-Firestore実データの削除・変換はありません。
+無条件の`firebase deploy`、Hosting、Functions、Storage、Auth変更は実行していません。Firestore実データの削除・変換もありません。本番の`stage10TimeAttack`公開readはHTTP 200を確認しましたが、スモーク試験から本番ランキング記録は送信していません。

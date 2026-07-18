@@ -1,6 +1,6 @@
 {
   "version": "6.1",
-  "status": "local-release-candidate-needs-firebase-login",
+  "status": "published-and-production-smoke-passed",
   "assets": {
     "assets/audio/chemion-milestone-stage-bgm-v3.mp3": {
       "bytes": 3747570,

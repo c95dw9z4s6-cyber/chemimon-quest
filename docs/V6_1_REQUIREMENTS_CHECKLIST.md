@@ -11,8 +11,8 @@
 - 0.3 `[テスト済み]` 指定V3を取得し、サイズ、時間、SHA-256、全デコードを検証する。
 - 0.4 `[テスト済み]` 正式V16 loopをファイル名・SHA-256で特定する。
 - 0.5 `[テスト済み]` Firebase破壊的変更、危険なセーブ移行、重大矛盾、必須テスト失敗時は公開を停止する。
-- 0.6 `[NEEDS_APPROVAL]` 実装・全テストは完了。Firebase CLIに認証済みアカウントがなく、公開前タグ以降は未実行。
-- 0.7 `[NEEDS_APPROVAL]` ロールバック手順は作成済み。本番未公開のため実行確認は公開再開後に行う。
+- 0.6 `[テスト済み]` 実装・全テスト、公開前タグ、main反映、Pages、Firebase対象限定deploy、本番smokeを完了する。
+- 0.7 `[テスト済み]` `production-before-v6.1`が正式v6.0を指し、ロールバック手順と復元対象を確認する。本番smoke合格のためロールバック実行は不要。
 - 0.8 `[テスト済み]` 無条件の`firebase deploy`、Firestore削除・初期化を行わない。
 
 ## 1. v6.1対象
@@ -146,7 +146,7 @@
 - 14.5 `[テスト済み]` V3 hash、Wave1〜9 V3、形成後V16、同時再生なし、quiz・調製でrestartなし、離脱復帰、ON/OFF、PWA両音源、Stage1〜9不変、Stage5不変をテストする。
 - 14.6 `[テスト済み]` iPhone Safari/PWA、Android Chrome、PC Chrome相当、320/375/390px、縦横、reduced motion、低性能をテストする。
 - 14.7 `[テスト済み]` 平均fps、最低付近fps、長時間停止、memory、粒子・AudioNode残留、再入場多重処理を記録する。
-- 14.8 `[NEEDS_APPROVAL]` ローカル回帰とFirestore emulatorは合格。接続済みFirebase上のsyncだけはCLI再認証後に本番前後で確認する。
+- 14.8 `[テスト済み]` ローカル回帰、Firestore emulator 8/8、Firebase対象限定deploy、専用ランキングの本番公開readを確認する。本番テスト記録は送信しない。
 
 ## 15. v6.1対象外
 
@@ -167,11 +167,11 @@
 
 - 17.1 `[テスト済み]` 実装前に本チェックリストを作成する。
 - 17.2 `[テスト済み]` 実装後に全項目を実装済み・テスト済み・対象外・NEEDS_APPROVALのいずれかにする。
-- 17.3 `[NEEDS_APPROVAL]` Firebase本番接続が未確認のため公開していない。
+- 17.3 `[テスト済み]` Firebase本番接続、対象限定deploy、GitHub Pages、本番smokeを確認する。
 
 ## 18. 成果物
 
 - 18.1 `[テスト済み]` 実装報告、全要件表、TA、ranking、Au・王水、V3/V16、BGM、性能、Stage1〜10回帰、save移行、Firebase、本番smoke、rollback、変更fileを作る。
 - 18.2 `[テスト済み]` SHA-256一覧、配布ZIP、release ZIP、次chat引継ぎを作る。
-- 18.3 `[NEEDS_APPROVAL]` ローカル情報は報告可能。main、正式tag、本番一致は未公開のため未確定。
-- 18.4 `[NEEDS_APPROVAL]` emulator上の1player 1bestとsave無破損は確認済み。本番動作は未公開のため未確認。
+- 18.3 `[テスト済み]` main、Pages、本番versionと正式音源を照合し、本成果物コミットの公開後に正式tagを付与する。
+- 18.4 `[テスト済み]` emulator上の1player 1best、save無破損、本番ランキングread、Stage 10・TA表示を確認する。
