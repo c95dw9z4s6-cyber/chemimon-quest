@@ -1,9 +1,10 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { projectRoot, readJson } from './lib.mjs';
+import { projectRoot, readJson, loadReleaseConfig } from './lib.mjs';
 const runtime=fs.readFileSync(path.join(projectRoot,'src/scripts/game-runtime.js'),'utf8');
 const template=fs.readFileSync(path.join(projectRoot,'src/index.template.html'),'utf8');
 const core=readJson('data/game-core.json');
+const release=loadReleaseConfig();
 const css=fs.readFileSync(path.join(projectRoot,'src/styles/core.css'),'utf8');
 const failures=[];
 const test=(condition,message)=>{if(!condition) failures.push(message);};
@@ -15,7 +16,7 @@ test(runtime.includes('chemionQuestSpeedTrialRetryV1'),'speed cooldown persisten
 test(runtime.includes('SPACING_CORRECT_INTERVAL_DAYS = [3, 7, 14, 30, 45, 60]'),'spacing schedule changed');
 test(runtime.includes('SPACING_INCORRECT_DELAY_HOURS = 12'),'incorrect spacing changed');
 test(runtime.includes('function migrateSaveData(input)'),'save migration function missing');
-test(/29, 30, D\.version/.test(runtime),'v30 save compatibility missing');
+test(/29, 30, 31, D\.version/.test(runtime),'v30-v31 save compatibility missing');
 test(template.includes('id="bossArrivalFx"'),'boss arrival overlay missing');
 test(runtime.includes('function triggerBossArrivalEffect'),'boss arrival trigger missing');
 test(runtime.includes('function playBossArrivalSound'),'boss arrival sound missing');
@@ -95,8 +96,8 @@ test(runtime.includes("refs.state.textContent = '⛔ 遠距離攻撃禁止：召
 test(runtime.includes('Math.max(9, cumulativeStats.highestStageReached || 1)'),'Stage 8-cleared old saves do not unlock Stage 9');
 
 const stageGuides=core.stageGuides||{};
-test(Object.keys(stageGuides).length===9,'Stage guide data must cover Stage 1-9');
-for (let stageId=1;stageId<=9;stageId+=1) {
+test(Object.keys(stageGuides).length>=10,'Stage guide data must cover Stage 1-10');
+for (let stageId=1;stageId<=10;stageId+=1) {
   const guide=stageGuides[String(stageId)];
   test(Boolean(guide),'Stage '+stageId+' guide missing');
   test(typeof guide?.specialRule==='string' && guide.specialRule.length>=20,'Stage '+stageId+' special rule missing');
@@ -132,7 +133,8 @@ test(runtime.includes('writeTransferValue(BGM_KEY, bundle.storage.bgm)') && runt
 const swTemplate=fs.readFileSync(path.join(projectRoot,'src/sw.template.js'),'utf8');
 test(swTemplate.includes('./assets/audio/chemion-normal-bgm.mp3') && swTemplate.includes('./assets/audio/chemion-difficult-bgm.mp3'),'BGM offline cache missing');
 const generatedSw=fs.readFileSync(path.join(projectRoot,'sw.js'),'utf8');
-test(generatedSw.includes("shell-v5.95") && generatedSw.includes("runtime-v5.95"),'v5.95 PWA cache names missing');
+test(generatedSw.includes(`shell-v${release.version}`) && generatedSw.includes(`runtime-v${release.version}`),`v${release.version} PWA cache names missing`);
+test(generatedSw.includes('./assets/audio/chemion-stage10-au-boss-v16-loop.mp3'),'Stage 10 V16 loop PWA cache missing');
 test(generatedSw.includes("name.startsWith(CACHE_PREFIX)") && generatedSw.includes("caches.delete(name)"),'old PWA cache cleanup missing');
 
 

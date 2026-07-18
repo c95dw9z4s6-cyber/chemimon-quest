@@ -191,7 +191,9 @@ def main():
         assert page.evaluate("document.body.dataset.renderFps") == '30'
         page.wait_for_timeout(1200)
         low_power_time_after=float(page.locator('#gameTime').inner_text())
-        assert 0.8 <= low_power_time_after-low_power_time_before <= 1.6,(low_power_time_before,low_power_time_after)
+        # The HUD is integer-seconds and an already-active 1.5x trial can cross two
+        # displayed seconds during this 1.2s wall-clock sample.
+        assert 0.8 <= low_power_time_after-low_power_time_before <= 2.2,(low_power_time_before,low_power_time_after)
         page.locator('#settingsBtn').click()
         page.wait_for_selector('#settingsModal:not([hidden])',timeout=3000)
         assert page.locator('#settingsMusicBtn').is_visible()

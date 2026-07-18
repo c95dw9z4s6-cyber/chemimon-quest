@@ -15,6 +15,7 @@
     radius: 31,
     laneOffsets: [-42, 0, 42]
   };
+  const NORMAL_BASE = Object.freeze({ allyX: 48, enemyX: cv.width - 48, allySpawnX: 91, enemySpawnX: cv.width - 91 });
   // v4.4: flying entities are drawn about one unit-height above the old position.
   // Collision lanes stay unchanged; this is a visual separation only.
   const FLYING_EXTRA_RENDER_OFFSET = 42;
@@ -52,7 +53,8 @@
     6: D.stage6,
     7: D.stage7,
     8: D.stage8,
-    9: D.stage9
+    9: D.stage9,
+    10: D.stage10
   };
 
   let currentStageId = 1;
@@ -74,6 +76,11 @@
     D.allyBaseHp = stage.allyBaseHp;
     D.enemyBaseHp = stage.enemyBaseHp;
     D.startingEnergy = stage.startingEnergy;
+    const battlefieldScale = Math.max(1, finiteNumber(stage.logicalBattlefieldScale, 1));
+    BASE.allyX = NORMAL_BASE.allyX;
+    BASE.allySpawnX = NORMAL_BASE.allySpawnX;
+    BASE.enemyX = NORMAL_BASE.allyX + (NORMAL_BASE.enemyX - NORMAL_BASE.allyX) * battlefieldScale;
+    BASE.enemySpawnX = BASE.enemyX - (NORMAL_BASE.enemyX - NORMAL_BASE.enemySpawnX);
     document.body.dataset.stage = String(currentStageId);
     if ($('stageButtonLabel')) $('stageButtonLabel').textContent = currentStageDefinition().milestone ? `STAGE ${currentStageId} ◆難関` : `STAGE ${currentStageId}`;
     syncBgmTrack({ restart: true });
@@ -115,6 +122,10 @@
   let messageTimeout = 0;
   let guestAssistEnabled = false;
   let guestAssistUsed = false;
+  let aquaRegiaUnlocked = false;
+  let aquaRegiaLevel = 1;
+  let aquaAuContactComplete = false;
+  let stage10State = null;
 
   let currentWaveIndex;
   let nextWaveEnemyIndex;
@@ -181,7 +192,8 @@
   const BGM_VOLUME_KEY = "chemionQuestBgmVolumeV1";
   const BGM_TRACKS = Object.freeze({
     normal: { src: "assets/audio/chemion-normal-bgm.mp3", label: "通常Stage BGM" },
-    difficult: { src: "assets/audio/chemion-difficult-bgm.mp3", label: "難関Stage BGM" }
+    difficult: { src: "assets/audio/chemion-difficult-bgm.mp3", label: "難関Stage BGM" },
+    au: { src: "assets/audio/chemion-stage10-au-boss-v16-loop.mp3", label: "Stage 10 Au BOSS BGM・V16 loop" }
   });
   const LOW_POWER_KEY = "chemionQuestLowPowerV1";
   const SPEED_TRIAL_RETRY_KEY = "chemionQuestSpeedTrialRetryV1";
@@ -198,6 +210,7 @@
   let bgmVolume = 0.35;
   let bgmUserActivated = false;
   let activeBgmTrackKey = "";
+  let bgmDuckFactor = 1;
   let lowPowerMode = false;
   let audioContext = null;
   let lastAttackSoundAt = 0;
@@ -220,6 +233,70 @@
 
   function clamp(value, min, max) {
     return Math.max(min, Math.min(max, value));
+  }
+
+  function defaultStage10State() {
+    return {
+      phase: 'normal',
+      phaseTimer: 0,
+      contactStarted: Boolean(aquaAuContactComplete),
+      contactComplete: Boolean(aquaAuContactComplete),
+      contactTimer: 0,
+      preparation: null,
+      candidateKeys: [],
+      stableSeconds: 0
+    };
+  }
+
+  function normalizeStage10State(value) {
+    const source = value && typeof value === 'object' ? value : {};
+    const allowedPhases = new Set(['normal', 'forming', 'protected', 'combat', 'victory']);
+    const state = defaultStage10State();
+    state.phase = allowedPhases.has(source.phase) ? source.phase : 'normal';
+    state.phaseTimer = Math.max(0, finiteNumber(source.phaseTimer, 0));
+    state.contactStarted = Boolean(aquaAuContactComplete || source.contactStarted || source.contactComplete);
+    state.contactComplete = Boolean(aquaAuContactComplete || source.contactComplete);
+    state.contactTimer = Math.max(0, finiteNumber(source.contactTimer, 0));
+    state.candidateKeys = Array.isArray(source.candidateKeys) ? source.candidateKeys.map(String).slice(0, 4) : [];
+    state.stableSeconds = Math.max(0, finiteNumber(source.stableSeconds, 0));
+    if (source.preparation && typeof source.preparation === 'object') {
+      state.preparation = {
+        phase: ['animating', 'committed'].includes(source.preparation.phase) ? source.preparation.phase : 'animating',
+        timer: Math.max(0, finiteNumber(source.preparation.timer, 0)),
+        ingredientKeys: Array.isArray(source.preparation.ingredientKeys) ? source.preparation.ingredientKeys.map(String).slice(0, 4) : [],
+        hpRatio: clamp(finiteNumber(source.preparation.hpRatio, 1), 0.01, 1),
+        created: Boolean(source.preparation.created)
+      };
+    }
+    return state;
+  }
+
+  function isStage10() {
+    return currentStageId === 10;
+  }
+
+  function stageLogicalScale() {
+    return Math.max(1, finiteNumber(currentStageDefinition()?.logicalBattlefieldScale, 1));
+  }
+
+  function logicalToCanvasX(value) {
+    if (!isStage10()) return value;
+    const span = Math.max(1, BASE.enemyX - BASE.allyX);
+    return NORMAL_BASE.allyX + (finiteNumber(value, BASE.allyX) - BASE.allyX) * (NORMAL_BASE.enemyX - NORMAL_BASE.allyX) / span;
+  }
+
+  function canvasToLogicalX(value) {
+    if (!isStage10()) return value;
+    const span = Math.max(1, NORMAL_BASE.enemyX - NORMAL_BASE.allyX);
+    return BASE.allyX + (finiteNumber(value, NORMAL_BASE.allyX) - NORMAL_BASE.allyX) * (BASE.enemyX - BASE.allyX) / span;
+  }
+
+  function currentWaveIntervalSeconds() {
+    return Math.max(1, finiteNumber(currentStageDefinition()?.waveIntervalSeconds, D.waveIntervalSeconds));
+  }
+
+  function currentFinalWaveStartSeconds() {
+    return Math.max(currentWaveIntervalSeconds(), finiteNumber(currentStageDefinition()?.finalWaveStartSeconds, D.finalWaveStartSeconds));
   }
 
   function formatStat(value, digits = 1) {
@@ -561,7 +638,18 @@
   }
 
   function desiredBgmTrackKey() {
+    if (isStage10()) return stage10State?.phase === 'combat' || stage10State?.phase === 'victory' ? 'au' : 'normal';
     return currentStageDefinition()?.milestone || currentStageId % 5 === 0 ? 'difficult' : 'normal';
+  }
+
+  function applyBgmVolume() {
+    const audio = bgmElement();
+    if (audio) audio.volume = clamp(bgmVolume * bgmDuckFactor, 0, 1);
+  }
+
+  function setBgmDuckFactor(value) {
+    bgmDuckFactor = clamp(finiteNumber(value, 1), 0, 1);
+    applyBgmVolume();
   }
 
   function desiredBgmTrack() {
@@ -604,7 +692,7 @@
     if ($('musicVolumeValue')) $('musicVolumeValue').textContent = `${percent}%`;
     document.querySelector('.music-settings-card')?.classList.toggle('is-muted', !bgmEnabled);
     const audio = bgmElement();
-    if (audio) audio.volume = bgmVolume;
+    applyBgmVolume();
   }
 
   function pauseBgm() {
@@ -616,7 +704,7 @@
     const audio = bgmElement();
     if (!audio) return;
     syncBgmTrack();
-    audio.volume = bgmVolume;
+    applyBgmVolume();
     if (!bgmEnabled || !bgmUserActivated || document.hidden) {
       pauseBgm();
       return;
@@ -830,6 +918,7 @@
       stage7Clears: 0,
       stage8Clears: 0,
       stage9Clears: 0,
+      stage10Clears: 0,
       stage1Defeats: 0,
       stage2Defeats: 0,
       stage3Defeats: 0,
@@ -839,6 +928,7 @@
       stage7Defeats: 0,
       stage8Defeats: 0,
       stage9Defeats: 0,
+      stage10Defeats: 0,
       mockExamsCompleted: 0,
       mockExamPerfects: 0
     };
@@ -1473,12 +1563,18 @@
   }
 
   function captureCurrentStageProgress() {
-    return {
+    const progress = {
       coins: Math.max(0, Math.floor(finiteNumber(coins, 0))),
       unlocked: [...(unlocked || new Set(initialUnlockedIds()))],
       energyCapacityLevel: clamp(Math.floor(finiteNumber(energyCapacityLevel, 1)), 1, maxEnergyCapacityLevel()),
       unitUpgradeLevels: { ...defaultUnitUpgradeLevels(), ...(unitUpgradeLevels || {}) }
     };
+    if (isStage10()) {
+      progress.aquaRegiaUnlocked = Boolean(aquaRegiaUnlocked);
+      progress.aquaRegiaLevel = clamp(Math.floor(finiteNumber(aquaRegiaLevel, 1)), 1, 10);
+      progress.aquaAuContactComplete = Boolean(aquaAuContactComplete);
+    }
+    return progress;
   }
 
   function rememberCurrentStageProgress() {
@@ -1496,6 +1592,12 @@
     for (const unit of D.units) {
       unitUpgradeLevels[unit.id] = clamp(Math.floor(finiteNumber(saved?.unitUpgradeLevels?.[unit.id], 1)), 1, D.maxUpgradeLevel);
     }
+    if (stageId === 10) {
+      aquaRegiaUnlocked = Boolean(saved?.aquaRegiaUnlocked);
+      aquaRegiaLevel = clamp(Math.floor(finiteNumber(saved?.aquaRegiaLevel, 1)), 1, 10);
+      aquaAuContactComplete = Boolean(saved?.aquaAuContactComplete);
+    }
+    updateAquaRegiaUi();
   }
 
   function initialUnlockedIds() {
@@ -1511,14 +1613,16 @@
   }
 
   function isEnemyBaseVulnerable() {
+    if (isStage10()) return false;
     if (!isFinalWave()) return false;
     const wave = currentWave();
     return nextWaveEnemyIndex >= wave.enemies.length && wavePhase !== 'announcement';
   }
 
   function wavePhaseText() {
+    if (isStage10() && isFinalWave()) return stage10State?.phase === 'combat' ? `Au戦｜敵 ${enemies.length}体` : `Au形成段階｜敵 ${enemies.length}体`;
     if (wavePhase === 'finalBase') return '敵拠点を破壊';
-    const nextAt = Math.min(D.finalWaveStartSeconds, (currentWaveIndex + 1) * D.waveIntervalSeconds);
+    const nextAt = Math.min(currentFinalWaveStartSeconds(), (currentWaveIndex + 1) * currentWaveIntervalSeconds());
     const remaining = Math.max(0, Math.ceil(nextAt - gameTime));
     if (isFinalWave()) return `最終ウェーブ｜敵 ${enemies.length}体`;
     return `次まで ${remaining}秒｜敵 ${enemies.length}体`;
@@ -1592,6 +1696,9 @@
     combatEffects = [];
     projectiles = [];
     impactBursts = [];
+    stage10State = defaultStage10State();
+    setBgmDuckFactor(1);
+    hideStage10Cinematic();
     hideBossArrivalEffect();
     clearBossPhaseTransition({ resume: false });
     battleInspectorKey = '';
@@ -1634,13 +1741,15 @@
     if ($('requestSubmitModal')) $('requestSubmitModal').hidden = true;
     lastTimestamp = performance.now();
     beginWave(0);
+    syncBgmTrack({ restart: true });
     updateHud();
     renderUnitButtons();
     renderUpgradePanel();
+    updateAquaRegiaUi();
     evaluateAchievements({ notify: false });
     const rewardMessage = mockRewardDefinition() ? `｜実戦報酬：${mockRewardDefinition().name}` : '';
     const stageRuleMessage = currentStageDefinition().rules?.disableRangedAllyAttacks ? '｜遠距離攻撃禁止・回復は使用可能' : '';
-    showMessage(`${currentStageDefinition().milestone ? '◆ 5の倍数・難関｜' : ''}Stage ${currentStageId}「${currentStageDefinition().name}」開始${rewardMessage}${stageRuleMessage}。30秒ごとに敵が追加されます。`, currentStageDefinition().milestone ? 5.4 : 4.8);
+    showMessage(`${currentStageDefinition().milestone ? '◆ 難関｜' : ''}Stage ${currentStageId}「${currentStageDefinition().name}」開始${rewardMessage}${stageRuleMessage}。${formatStat(currentWaveIntervalSeconds(), 1)}秒ごとにWaveが進行します。`, currentStageDefinition().milestone ? 5.4 : 4.8);
   }
 
   function escapeGuideText(value) {
@@ -2912,6 +3021,7 @@
       affinityTarget: unit.affinityTarget || null,
       liberationReaction: unit.liberationReaction || '',
       projectileLabel: unit.projectileLabel || '',
+      damageType: unit.damageType || 'chemical',
       role: unit.role || '標準型',
       upgradeLevel: stats.upgradeLevel,
       x: BASE.allySpawnX,
@@ -2928,6 +3038,7 @@
       attackInterval: Number((stats.attackInterval * researchProduct('attackIntervalMultiplier')).toFixed(2)),
       baseAttackInterval: stats.attackInterval,
       attackTimer: 0,
+      stunTimer: 0,
       healer: Boolean(stats.healer),
       rangedAttack: Boolean(stats.rangedAttack),
       healAmount: Math.max(0, Math.round((stats.healAmount || 0) * researchProduct('healMultiplier'))),
@@ -2947,6 +3058,7 @@
       pushback: Math.max(0, finiteNumber(stats.pushback, 0)),
       attackFlash: 0,
       hitFlash: 0,
+      multiHit: null,
       visualSerial: serial
     };
   }
@@ -2966,6 +3078,7 @@
       affinityTarget: enemy.affinityTarget || null,
       liberationReaction: enemy.liberationReaction || '',
       projectileLabel: enemy.projectileLabel || '',
+      damageType: enemy.damageType || 'chemical',
       x: BASE.enemySpawnX,
       y: nextLaneY(serial),
       hp: maxHp,
@@ -2996,6 +3109,8 @@
       splashFactor: clamp(finiteNumber(enemy.splashFactor, 0), 0, 1),
       guard: Boolean(enemy.guard),
       damageReduction: clamp(finiteNumber(enemy.damageReduction, 0), 0, 0.8),
+      chemicalDamageReduction: clamp(finiteNumber(enemy.chemicalDamageReduction, 0), 0, 0.95),
+      auBoss: Boolean(enemy.auBoss),
       firstStrikeMultiplier: Math.max(1, finiteNumber(enemy.firstStrikeMultiplier, 1)),
       firstStrikeReady: finiteNumber(enemy.firstStrikeMultiplier, 1) > 1,
       pushback: Math.max(0, finiteNumber(enemy.pushback, 0)),
@@ -3006,6 +3121,20 @@
       bossSummonPendingTimer: 0,
       bossSummonCount: Math.max(0, Math.floor(finiteNumber(enemy.bossSummonCount, 0))),
       bossSummonPool: Array.isArray(enemy.bossSummonPool) ? [...enemy.bossSummonPool] : [],
+      goldFoilInterval: Math.max(0, finiteNumber(enemy.goldFoilInterval, 0)),
+      goldFoilTimer: Math.max(0, finiteNumber(enemy.goldFoilInterval, 0)),
+      goldFoilWarning: Math.max(.5, finiteNumber(enemy.goldFoilWarning, 1.7)),
+      goldFoilPendingTimer: 0,
+      goldFoilDamage: Math.max(0, finiteNumber(enemy.goldFoilDamage, 0)),
+      goldFoilPushback: Math.max(0, finiteNumber(enemy.goldFoilPushback, 0)),
+      goldCrushWarning: Math.max(.3, finiteNumber(enemy.goldCrushWarning, .65)),
+      goldCrushPendingTimer: 0,
+      goldCrushTargetKey: '',
+      goldCrushSplashRadius: Math.max(0, finiteNumber(enemy.goldCrushSplashRadius, 0)),
+      goldCrushSplashFactor: clamp(finiteNumber(enemy.goldCrushSplashFactor, 0), 0, 1),
+      goldCrushPushback: Math.max(0, finiteNumber(enemy.goldCrushPushback, 0)),
+      stage10Hidden: Boolean(enemy.auBoss),
+      stage10Protected: Boolean(enemy.auBoss),
       wipeAlliesOnArrival: Boolean(enemy.wipeAlliesOnArrival),
       ambushIntroCompleted: !enemy.wipeAlliesOnArrival,
       ambushIntroTitle: String(enemy.ambushIntroTitle || '戦線崩壊'),
@@ -3014,6 +3143,342 @@
       attackFlash: 0,
       hitFlash: 0
     };
+  }
+
+  function stage10AquaDefinition() {
+    return currentStageDefinition()?.aquaRegia || D.stage10?.aquaRegia || null;
+  }
+
+  function aquaRegiaStats() {
+    const definition = stage10AquaDefinition();
+    if (!definition) return null;
+    const levelIndex = clamp(aquaRegiaLevel - 1, 0, 9);
+    return {
+      ...definition,
+      level: levelIndex + 1,
+      hp: Math.round(definition.hp * (1 + finiteNumber(definition.hpGrowth, .13) * levelIndex)),
+      attack: Math.round(definition.attack * (1 + finiteNumber(definition.attackGrowth, .18) * levelIndex))
+    };
+  }
+
+  function createAquaRegiaAlly(hpRatio = 1) {
+    const stats = aquaRegiaStats();
+    if (!stats) return null;
+    const serial = allySpawnSerial++;
+    const maxHp = Math.max(1, stats.hp);
+    return {
+      kind: 'ally', typeId: stats.id, formula: stats.formula, name: stats.name,
+      chemistryClass: stats.chemistryClass, chemistryLabel: stats.chemistryLabel,
+      affinityTarget: null, liberationReaction: '', projectileLabel: stats.projectileLabel,
+      damageType: 'aqua_regia', role: stats.role, upgradeLevel: stats.level,
+      x: BASE.allySpawnX + 18, y: nextLaneY(serial), hp: Math.max(1, Math.round(maxHp * clamp(hpRatio, .01, 1))), maxHp,
+      baseMaxHp: maxHp, attack: stats.attack, baseAttack: stats.attack, speed: stats.speed, baseSpeed: stats.speed,
+      range: stats.range, radius: stats.radius, attackInterval: stats.attackInterval, baseAttackInterval: stats.attackInterval,
+      attackTimer: 0, stunTimer: 0, healer: false, rangedAttack: false, healAmount: 0, baseHealAmount: 0,
+      healRange: stats.range, splashRadius: 0, splashFactor: 0, flying: false, antiAir: false, flightHeight: 46,
+      airVulnerability: 1.7, baseDamageMultiplier: 1, guard: false, damageReduction: 0,
+      firstStrikeMultiplier: 1, firstStrikeReady: false, pushback: 0, attackFlash: 0, hitFlash: 0,
+      aquaRegia: true, hitCount: Math.max(1, Math.floor(finiteNumber(stats.hitCount, 6))),
+      hitInterval: Math.max(.06, finiteNumber(stats.hitInterval, .14)), multiHit: null, visualSerial: serial
+    };
+  }
+
+  function aquaRegiaExists() {
+    return allies.some((ally) => ally.hp > 0 && ally.aquaRegia);
+  }
+
+  function sameStringList(left, right) {
+    return left.length === right.length && left.every((value, index) => value === right[index]);
+  }
+
+  function stage10PreparationCandidates() {
+    if (!isStage10() || !aquaRegiaUnlocked || aquaRegiaExists() || stage10State?.preparation) return [];
+    const definition = stage10AquaDefinition();
+    const radius = Math.max(40, finiteNumber(definition?.preparationRadius, 90));
+    const nitricUnits = allies.filter((ally) => ally.hp > 0 && ally.typeId === 'nitricAcidAlly5');
+    const hydrochloricUnits = allies.filter((ally) => ally.hp > 0 && ally.typeId === 'hydrochloricAcidAlly6');
+    let best = [];
+    let bestScore = Infinity;
+    for (const nitric of nitricUnits) {
+      const nearby = hydrochloricUnits
+        .map((unit) => ({ unit, distance: Math.hypot(unit.x - nitric.x, unit.y - nitric.y) }))
+        .filter(({ distance }) => distance <= radius)
+        .sort((a, b) => a.distance - b.distance)
+        .slice(0, 3);
+      if (nearby.length < 3) continue;
+      const score = nearby.reduce((sum, item) => sum + item.distance, 0);
+      if (score < bestScore) {
+        best = [nitric, ...nearby.map((item) => item.unit)];
+        bestScore = score;
+      }
+    }
+    return best;
+  }
+
+  function updateStage10PreparationCandidates(dt) {
+    if (!isStage10() || !stage10State || stage10State.preparation) return;
+    const candidates = stage10PreparationCandidates();
+    const keys = candidates.map(entityBattleKey);
+    if (sameStringList(keys, stage10State.candidateKeys)) stage10State.stableSeconds += dt;
+    else {
+      stage10State.candidateKeys = keys;
+      stage10State.stableSeconds = 0;
+    }
+  }
+
+  function stage10HighlightedKeys() {
+    if (!isStage10() || !stage10State) return new Set();
+    const preparationKeys = stage10State.preparation?.ingredientKeys || [];
+    return new Set(preparationKeys.length ? preparationKeys : stage10State.candidateKeys);
+  }
+
+  function showStage10Cinematic(kicker, title, body, note = '') {
+    if (!$('stage10Cinematic')) return;
+    $('stage10CinematicKicker').textContent = kicker;
+    $('stage10CinematicTitle').textContent = title;
+    $('stage10CinematicText').textContent = body;
+    $('stage10CinematicNote').textContent = note;
+    $('stage10Cinematic').hidden = false;
+  }
+
+  function hideStage10Cinematic() {
+    if ($('stage10Cinematic')) $('stage10Cinematic').hidden = true;
+  }
+
+  function updateAquaRegiaUi() {
+    const panel = $('aquaRegiaPanel');
+    if (!panel) return;
+    panel.hidden = !isStage10();
+    if (!isStage10()) return;
+    const definition = stage10AquaDefinition();
+    const nitricUnlocked = unlocked?.has('nitricAcidAlly5');
+    const hydrochloricUnlocked = unlocked?.has('hydrochloricAcidAlly6');
+    const materialReady = Boolean(nitricUnlocked && hydrochloricUnlocked);
+    const candidates = stage10PreparationCandidates();
+    const nitricCount = candidates.length === 4 ? 1 : Math.min(1, allies.filter((ally) => ally.hp > 0 && ally.typeId === 'nitricAcidAlly5').length);
+    const hydrochloricCount = candidates.length === 4 ? 3 : Math.min(3, allies.filter((ally) => ally.hp > 0 && ally.typeId === 'hydrochloricAcidAlly6').length);
+    const stableRequired = Math.max(.5, finiteNumber(definition?.stableSeconds, 1));
+    const stableReady = stage10State?.candidateKeys?.length === 4 && stage10State.stableSeconds >= stableRequired;
+    $('aquaRegiaLevel').textContent = `Lv.${aquaRegiaLevel} / 10`;
+    $('aquaNitricCount').textContent = `HNO₃ ${nitricCount}/1`;
+    $('aquaHydrochloricCount').textContent = `HCl ${hydrochloricCount}/3`;
+    $('aquaNitricCount').classList.toggle('ready', nitricCount >= 1);
+    $('aquaHydrochloricCount').classList.toggle('ready', hydrochloricCount >= 3);
+    $('aquaStableState').textContent = stableReady ? '調製条件が安定しました' : candidates.length === 4 ? `安定判定 ${Math.min(stableRequired, stage10State.stableSeconds).toFixed(1)} / ${stableRequired.toFixed(1)}秒` : 'HNO₃の近くにHClを3体配置';
+    $('aquaStableState').classList.toggle('ready', stableReady);
+    $('aquaRegiaUnlockBtn').hidden = aquaRegiaUnlocked;
+    $('aquaRegiaUnlockBtn').disabled = !materialReady || coins < finiteNumber(definition?.unlockCost, 220) || paused || gameStatus !== 'playing';
+    $('aquaRegiaUnlockBtn').textContent = materialReady ? `${definition.unlockCost} COINで王水調製を解放` : 'HNO₃とHClを先に解放';
+    const upgradeCosts = Array.isArray(definition?.upgradeCosts) ? definition.upgradeCosts : [];
+    const upgradeCost = aquaRegiaLevel < 10 ? upgradeCosts[aquaRegiaLevel - 1] : null;
+    $('aquaRegiaUpgradeBtn').hidden = !aquaRegiaUnlocked;
+    $('aquaRegiaUpgradeBtn').disabled = upgradeCost == null || coins < upgradeCost || paused || gameStatus !== 'playing';
+    $('aquaRegiaUpgradeBtn').textContent = upgradeCost == null ? '王水 Lv.10・最大強化' : `${upgradeCost} COINでLv.${aquaRegiaLevel + 1}へ強化`;
+    $('aquaRegiaPrepareBtn').hidden = !aquaRegiaUnlocked;
+    $('aquaRegiaPrepareBtn').disabled = !stableReady || aquaRegiaExists() || Boolean(stage10State?.preparation) || paused || gameStatus !== 'playing';
+    panel.classList.toggle('is-ready', stableReady && !aquaRegiaExists());
+    $('aquaRegiaStatus').textContent = !materialReady ? 'HNO₃とHClの両方を解放してください。' : !aquaRegiaUnlocked ? '両材料を解放済みです。コインで王水調製を恒久解放できます。' : aquaRegiaExists() ? '王水は同時に1体までです。' : stableReady ? '対象4体を固定して調製できます。追加Energyは消費しません。' : 'HNO₃ 1体を中心に、近距離へHCl 3体を約1秒維持してください。';
+  }
+
+  function unlockAquaRegia() {
+    if (!isStage10() || aquaRegiaUnlocked) return;
+    const definition = stage10AquaDefinition();
+    const cost = Math.max(0, finiteNumber(definition?.unlockCost, 220));
+    if (!unlocked.has('nitricAcidAlly5') || !unlocked.has('hydrochloricAcidAlly6') || coins < cost) return;
+    coins -= cost;
+    aquaRegiaUnlocked = true;
+    showMessage('王水調製を恒久解放しました。王水はStage 10専用・独立Lv.1です。', 4.2);
+    playSound('level');
+    updateAquaRegiaUi();
+    saveGame({ silent: true });
+  }
+
+  function upgradeAquaRegia() {
+    if (!isStage10() || !aquaRegiaUnlocked || aquaRegiaLevel >= 10) return;
+    const costs = stage10AquaDefinition()?.upgradeCosts || [];
+    const cost = Math.max(0, finiteNumber(costs[aquaRegiaLevel - 1], Infinity));
+    if (!Number.isFinite(cost) || coins < cost) return;
+    coins -= cost;
+    aquaRegiaLevel += 1;
+    showMessage(`王水がLv.${aquaRegiaLevel}へ強化されました。材料ユニットのLvとは独立しています。`, 3.8);
+    playSound('level');
+    updateAquaRegiaUi();
+    saveGame({ silent: true });
+  }
+
+  function beginAquaRegiaPreparation() {
+    if (!isStage10() || !aquaRegiaUnlocked || aquaRegiaExists() || stage10State?.preparation) return;
+    const candidates = stage10PreparationCandidates();
+    const required = Math.max(.5, finiteNumber(stage10AquaDefinition()?.stableSeconds, 1));
+    if (candidates.length !== 4 || stage10State.stableSeconds < required) return;
+    const hpRatio = candidates.reduce((sum, entity) => sum + entity.hp / Math.max(1, entity.maxHp), 0) / 4;
+    stage10State.preparation = { phase: 'animating', timer: 1.8, ingredientKeys: candidates.map(entityBattleKey), hpRatio, created: false };
+    setBgmDuckFactor(.22);
+    showStage10Cinematic('AQUA REGIA PREPARATION', '王水', '濃硝酸：濃塩酸＝1：3（体積比）', '抽象化された学習表現です。危険なので実物を混合しないでください。');
+    saveGame({ silent: true });
+    updateAquaRegiaUi();
+  }
+
+  function commitAquaRegiaPreparation() {
+    const preparation = stage10State?.preparation;
+    if (!preparation || preparation.created) return;
+    const ingredients = preparation.ingredientKeys.map(findBattleEntityByKey).filter(Boolean);
+    if (preparation.phase !== 'committed' && ingredients.length !== 4) {
+      stage10State.preparation = null;
+      stage10State.candidateKeys = [];
+      stage10State.stableSeconds = 0;
+      setBgmDuckFactor(1);
+      hideStage10Cinematic();
+      showMessage('材料の状態が変わったため、王水調製を安全に中止しました。', 3.5);
+      return;
+    }
+    preparation.phase = 'committed';
+    const ingredientKeys = new Set(preparation.ingredientKeys);
+    allies = allies.filter((ally) => !ingredientKeys.has(entityBattleKey(ally)));
+    if (!aquaRegiaExists()) {
+      const aqua = createAquaRegiaAlly(preparation.hpRatio);
+      if (aqua) allies.push(aqua);
+    }
+    preparation.created = true;
+    stage10State.preparation = null;
+    stage10State.candidateKeys = [];
+    stage10State.stableSeconds = 0;
+    setBgmDuckFactor(1);
+    hideStage10Cinematic();
+    showMessage('調製成功｜AQUA REGIA｜王水1体を生成しました。', 4.2);
+    playSound('transform');
+    saveGame({ silent: true });
+    updateAquaRegiaUi();
+  }
+
+  function beginStage10AuFormation(enemy) {
+    if (!isStage10() || !enemy?.auBoss || !stage10State || stage10State.phase !== 'normal') return;
+    stage10State.phase = 'forming';
+    stage10State.phaseTimer = 3.2;
+    enemy.stage10Hidden = true;
+    enemy.stage10Protected = true;
+    projectiles = projectiles.filter((projectile) => !(projectile.ownerKind === 'ally' && projectile.effectKind !== 'heal'));
+    const fallbackX = BASE.allyX + (BASE.enemyX - BASE.allyX) * .43;
+    for (const ally of allies) ally.x = Math.min(ally.x, fallbackX - ally.radius);
+    setBgmDuckFactor(.12);
+    showStage10Cinematic('GOLD PARTICLE ASSEMBLY', '79 Au', '金｜高い耐食性をもつ貴金属', '味方のHP・強化状態・内部状態を維持して戦線を再配置しています。');
+    saveGame({ silent: true });
+  }
+
+  function beginAquaAuContact() {
+    if (!isStage10() || aquaAuContactComplete || stage10State.contactStarted) return false;
+    stage10State.contactStarted = true;
+    stage10State.contactTimer = .7;
+    setBgmDuckFactor(.04);
+    showStage10Cinematic('AQUA REGIA VS Au', '金の溶解開始', '酸化＋塩化物錯体形成｜Au → [AuCl₄]⁻', '簡略化した学習表現です。実際の反応はより複雑で条件に依存します。');
+    saveGame({ silent: true });
+    return true;
+  }
+
+  function startStage10VictorySequence() {
+    if (!isStage10() || stage10State?.phase === 'victory') return;
+    stage10State.phase = 'victory';
+    stage10State.phaseTimer = 1.6;
+    setBgmDuckFactor(.35);
+    showStage10Cinematic('Au REACTION COMPLETE', 'Au撃破', 'Stage 10「黄金王・Au反応区」クリア', '敵拠点の破壊は必要ありません。');
+    saveGame({ silent: true });
+  }
+
+  function stage10CombatFrozen() {
+    if (!isStage10() || !stage10State) return false;
+    return Boolean(stage10State.preparation || (stage10State.contactStarted && !stage10State.contactComplete) || ['forming', 'protected', 'victory'].includes(stage10State.phase));
+  }
+
+  function updateStage10Sequence(dt) {
+    if (!isStage10() || !stage10State) return false;
+    if (stage10State.preparation) {
+      stage10State.preparation.timer = Math.max(0, stage10State.preparation.timer - dt);
+      if (stage10State.preparation.timer <= 0) commitAquaRegiaPreparation();
+      return true;
+    }
+    if (stage10State.contactStarted && !stage10State.contactComplete) {
+      stage10State.contactTimer = Math.max(0, stage10State.contactTimer - dt);
+      if (stage10State.contactTimer <= 0) {
+        stage10State.contactComplete = true;
+        aquaAuContactComplete = true;
+        setBgmDuckFactor(1);
+        hideStage10Cinematic();
+        saveGame({ silent: true });
+      }
+      return true;
+    }
+    if (stage10State.phase === 'forming') {
+      stage10State.phaseTimer = Math.max(0, stage10State.phaseTimer - dt);
+      if (stage10State.phaseTimer <= 0) {
+        stage10State.phase = 'protected';
+        stage10State.phaseTimer = 3;
+        const au = enemies.find((enemy) => enemy.auBoss && enemy.hp > 0);
+        if (au) au.stage10Hidden = false;
+        showStage10Cinematic('LOW REACTIVITY', '低反応性', '通常の化学攻撃を約80%軽減', '物理攻撃と王水によるAu専用反応は軽減を迂回します。');
+        saveGame({ silent: true });
+      }
+      return true;
+    }
+    if (stage10State.phase === 'protected') {
+      stage10State.phaseTimer = Math.max(0, stage10State.phaseTimer - dt);
+      if (stage10State.phaseTimer <= 0) {
+        stage10State.phase = 'combat';
+        for (const enemy of enemies) if (enemy.auBoss) enemy.stage10Protected = false;
+        hideStage10Cinematic();
+        setBgmDuckFactor(1);
+        syncBgmTrack({ restart: true });
+        showMessage('V16 loop開始｜Au戦闘再開', 3.2);
+        saveGame({ silent: true });
+      }
+      return true;
+    }
+    if (stage10State.phase === 'victory') {
+      stage10State.phaseTimer = Math.max(0, stage10State.phaseTimer - dt);
+      if (stage10State.phaseTimer <= 0) {
+        hideStage10Cinematic();
+        setBgmDuckFactor(1);
+        finishGame(true);
+      }
+      return true;
+    }
+    return false;
+  }
+
+  function restoreStage10PresentationAfterLoad() {
+    if (!isStage10() || !stage10State || gameStatus !== 'playing') {
+      setBgmDuckFactor(1);
+      hideStage10Cinematic();
+      return;
+    }
+    if (['forming', 'protected', 'combat'].includes(stage10State.phase) && !enemies.some((enemy) => enemy.auBoss && enemy.hp > 0)) {
+      const definition = D.enemies.find((enemy) => enemy.auBoss);
+      if (definition) enemies.push(createEnemy(definition, D.waves.length - 1));
+    }
+    const au = enemies.find((enemy) => enemy.auBoss && enemy.hp > 0);
+    if (au) {
+      au.stage10Hidden = stage10State.phase === 'forming';
+      au.stage10Protected = ['forming', 'protected'].includes(stage10State.phase);
+    }
+    if (stage10State.preparation) {
+      setBgmDuckFactor(.22);
+      showStage10Cinematic('AQUA REGIA PREPARATION', '王水', '濃硝酸：濃塩酸＝1：3（体積比）', '抽象化された学習表現です。危険なので実物を混合しないでください。');
+    } else if (stage10State.contactStarted && !stage10State.contactComplete) {
+      setBgmDuckFactor(.04);
+      showStage10Cinematic('AQUA REGIA VS Au', '金の溶解開始', '酸化＋塩化物錯体形成｜Au → [AuCl₄]⁻', '簡略化した学習表現です。実際の反応はより複雑で条件に依存します。');
+    } else if (stage10State.phase === 'forming') {
+      setBgmDuckFactor(.12);
+      showStage10Cinematic('GOLD PARTICLE ASSEMBLY', '79 Au', '金｜高い耐食性をもつ貴金属', '味方のHP・強化状態・内部状態は維持されています。');
+    } else if (stage10State.phase === 'protected') {
+      setBgmDuckFactor(.12);
+      showStage10Cinematic('LOW REACTIVITY', '低反応性', '通常の化学攻撃を約80%軽減', '物理攻撃と王水によるAu専用反応は軽減を迂回します。');
+    } else if (stage10State.phase === 'victory') {
+      setBgmDuckFactor(.35);
+      showStage10Cinematic('Au REACTION COMPLETE', 'Au撃破', 'Stage 10「黄金王・Au反応区」クリア', '敵拠点の破壊は必要ありません。');
+    } else {
+      setBgmDuckFactor(1);
+      hideStage10Cinematic();
+    }
+    syncBgmTrack();
   }
 
 
@@ -3078,6 +3543,12 @@
     const spawnedEnemy = createEnemy(definition, currentWaveIndex);
     enemies.push(spawnedEnemy);
     if (spawnedEnemy.boss) {
+      if (spawnedEnemy.auBoss && isStage10()) {
+        beginStage10AuFormation(spawnedEnemy);
+        nextWaveEnemyIndex += 1;
+        wavePhase = 'fighting';
+        return;
+      }
       focusBattleEntity(spawnedEnemy, 8, true);
       if (spawnedEnemy.wipeAlliesOnArrival) {
         beginBossAnnihilationSequence(spawnedEnemy, definition);
@@ -3131,9 +3602,9 @@
       if (waveBannerTimer <= 0) hideWaveBanner();
     }
 
-    const targetIndex = gameTime >= D.finalWaveStartSeconds
+    const targetIndex = gameTime >= currentFinalWaveStartSeconds()
       ? D.waves.length - 1
-      : Math.min(D.waves.length - 2, Math.floor(gameTime / D.waveIntervalSeconds));
+      : Math.min(D.waves.length - 2, Math.floor(gameTime / currentWaveIntervalSeconds()));
     while (currentWaveIndex < targetIndex) beginWave(currentWaveIndex + 1);
 
     const wave = currentWave();
@@ -3147,7 +3618,7 @@
       if (nextWaveEnemyIndex >= wave.enemies.length) wavePhase = isFinalWave() ? 'fighting' : 'waiting';
     }
 
-    if (isFinalWave() && nextWaveEnemyIndex >= wave.enemies.length && enemies.length === 0) {
+    if (!isStage10() && isFinalWave() && nextWaveEnemyIndex >= wave.enemies.length && enemies.length === 0) {
       wavePhase = 'finalBase';
       if (!finalBaseMessageShown) {
         showMessage('最終ウェーブ撃破。敵拠点を破壊してください。', 4);
@@ -3157,7 +3628,7 @@
   }
 
   function canAttackTarget(attacker, defender) {
-    if (!attacker || !defender || defender.hp <= 0) return false;
+    if (!attacker || !defender || defender.hp <= 0 || attacker.stage10Hidden || defender.stage10Hidden || defender.stage10Protected) return false;
     if (!defender.flying) return true;
     return Boolean(attacker.boss || attacker.flying || attacker.antiAir);
   }
@@ -3259,6 +3730,7 @@
 
   function drawCombatEffects() {
     for (const effect of combatEffects) {
+      const effectX = logicalToCanvasX(effect.x);
       const progress = 1 - effect.life / effect.maxLife;
       const alpha = Math.max(0, effect.life / effect.maxLife);
       ctx.save();
@@ -3267,18 +3739,18 @@
       ctx.fillStyle = effect.color;
       ctx.font = `900 ${effect.kind === 'transform' ? 20 : effect.kind === 'neutralize' ? 15 : 14}px "Segoe UI", "Noto Sans JP", sans-serif`;
       ctx.shadowColor = effect.color; ctx.shadowBlur = lowPowerMode ? 0 : 12;
-      ctx.fillText(effect.text, effect.x, effect.y - 12);
+      ctx.fillText(effect.text, effectX, effect.y - 12);
       ctx.shadowBlur = 0;
       if (effect.subtext) {
         ctx.font = '800 10.5px "Segoe UI", "Noto Sans JP", sans-serif';
         ctx.fillStyle = '#f8fbff';
         ctx.globalAlpha = alpha * 0.94;
-        ctx.fillText(effect.subtext, effect.x, effect.y + 5);
+        ctx.fillText(effect.subtext, effectX, effect.y + 5);
         ctx.fillStyle = effect.color;
       }
       for (const p of effect.particles) {
         const r = p.speed * progress;
-        const px = effect.x + Math.cos(p.angle) * r;
+        const px = effectX + Math.cos(p.angle) * r;
         const py = effect.y + Math.sin(p.angle) * r;
         ctx.beginPath(); ctx.arc(px, py, effect.kind === 'neutralize' ? 3.2 : 2.6, 0, Math.PI*2);
         ctx.fill();
@@ -3288,7 +3760,12 @@
   }
 
   function calculateDamage(attacker, defender, bonusMultiplier = 1) {
-    const reduction = clamp(finiteNumber(defender?.damageReduction, 0), 0, 0.8);
+    if (defender?.stage10Protected) return 0;
+    const damageType = attacker?.damageType || 'chemical';
+    const bypassesAuReduction = damageType === 'physical' || damageType === 'aqua_regia';
+    const reduction = defender?.auBoss && !bypassesAuReduction
+      ? clamp(finiteNumber(defender.chemicalDamageReduction, .8), 0, .95)
+      : clamp(finiteNumber(defender?.damageReduction, 0), 0, 0.8);
     const airMultiplier = defender?.flying && (attacker?.flying || attacker?.antiAir) ? Math.max(1, finiteNumber(defender.airVulnerability, 1.7)) : 1;
     return Math.max(1, Math.round(attacker.attack * affinityMultiplier(attacker, defender) * researchAttackMultiplier(attacker) * Math.max(1, bonusMultiplier) * airMultiplier * (1 - reduction)));
   }
@@ -3318,7 +3795,7 @@
       x: attacker.x, y: attacker.y,
       life: duration, maxLife: duration,
       label: profile.label, color: profile.color, glow: profile.glow,
-      direction, splash
+      direction, splash, ownerKind: attacker.kind, effectKind: 'attack'
     });
     attacker.attackFlash = .18;
     if (target) {
@@ -3337,7 +3814,7 @@
 
   function spawnHealEffect(healer, target, amount) {
     if (!target) return;
-    projectiles.push({ x0: healer.x, y0: healer.y, x1: target.x, y1: target.y, x: healer.x, y: healer.y, life: .36, maxLife: .36, label: '+', color: '#82ffc0', glow: '#c8ffe1', direction: target.x >= healer.x ? 1 : -1, splash: false });
+    projectiles.push({ x0: healer.x, y0: healer.y, x1: target.x, y1: target.y, x: healer.x, y: healer.y, life: .36, maxLife: .36, label: '+', color: '#82ffc0', glow: '#c8ffe1', direction: target.x >= healer.x ? 1 : -1, splash: false, ownerKind: healer.kind, effectKind: 'heal' });
     impactBursts.push({ x: target.x, y: target.y, color: '#82ffc0', life: .65, maxLife: .65, size: 1.25, heal: amount, seed: Math.random() * 10 });
     healer.attackFlash = .22;
     target.hitFlash = .18;
@@ -3367,6 +3844,8 @@
 
   function drawProjectiles() {
     for (const projectile of projectiles) {
+      const projectileX = logicalToCanvasX(projectile.x);
+      const trailX = logicalToCanvasX(projectile.x - projectile.direction * 18);
       const alpha = clamp(projectile.life / Math.min(.12, projectile.maxLife), 0, 1);
       ctx.save();
       ctx.globalAlpha = alpha;
@@ -3375,21 +3854,22 @@
       ctx.shadowColor = projectile.glow;
       ctx.shadowBlur = lowPowerMode ? 0 : 14;
       ctx.beginPath();
-      ctx.moveTo(projectile.x - projectile.direction * 18, projectile.y + 2);
-      ctx.lineTo(projectile.x, projectile.y);
+      ctx.moveTo(trailX, projectile.y + 2);
+      ctx.lineTo(projectileX, projectile.y);
       ctx.stroke();
       ctx.fillStyle = projectile.color;
-      ctx.beginPath(); ctx.arc(projectile.x, projectile.y, projectile.splash ? 7 : 5, 0, Math.PI * 2); ctx.fill();
+      ctx.beginPath(); ctx.arc(projectileX, projectile.y, projectile.splash ? 7 : 5, 0, Math.PI * 2); ctx.fill();
       ctx.fillStyle = '#ffffff';
       ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
       ctx.font = '900 10px "Segoe UI", "Noto Sans JP", sans-serif';
-      ctx.fillText(projectile.label, projectile.x, projectile.y - 1);
+      ctx.fillText(projectile.label, projectileX, projectile.y - 1);
       ctx.restore();
     }
   }
 
   function drawImpactBursts() {
     for (const burst of impactBursts) {
+      const burstX = logicalToCanvasX(burst.x);
       const progress = 1 - burst.life / burst.maxLife;
       const alpha = Math.max(0, burst.life / burst.maxLife);
       ctx.save();
@@ -3397,15 +3877,15 @@
       ctx.strokeStyle = burst.color; ctx.fillStyle = burst.color;
       ctx.shadowColor = burst.color; ctx.shadowBlur = lowPowerMode ? 0 : 12;
       ctx.lineWidth = 2.2;
-      ctx.beginPath(); ctx.arc(burst.x, burst.y, (8 + progress * 24) * burst.size, 0, Math.PI * 2); ctx.stroke();
+      ctx.beginPath(); ctx.arc(burstX, burst.y, (8 + progress * 24) * burst.size, 0, Math.PI * 2); ctx.stroke();
       for (let i = 0; i < (lowPowerMode ? 0 : 8); i += 1) {
         const angle = Math.PI * 2 * i / 8 + burst.seed;
         const radius = (6 + progress * 28) * burst.size;
-        ctx.beginPath(); ctx.arc(burst.x + Math.cos(angle) * radius, burst.y + Math.sin(angle) * radius, 2.3 * burst.size, 0, Math.PI * 2); ctx.fill();
+        ctx.beginPath(); ctx.arc(burstX + Math.cos(angle) * radius, burst.y + Math.sin(angle) * radius, 2.3 * burst.size, 0, Math.PI * 2); ctx.fill();
       }
       if (burst.heal) {
         ctx.fillStyle = '#d8ffe9'; ctx.font = '900 13px "Segoe UI", "Noto Sans JP", sans-serif';
-        ctx.textAlign = 'center'; ctx.fillText(`+${burst.heal}`, burst.x, burst.y - 24 - progress * 12);
+        ctx.textAlign = 'center'; ctx.fillText(`+${burst.heal}`, burstX, burst.y - 24 - progress * 12);
       }
       ctx.restore();
     }
@@ -3446,9 +3926,60 @@
     return target;
   }
 
+  function beginAquaRegiaMultiHit(ally, target) {
+    if (!ally?.aquaRegia || !target || target.hp <= 0) return;
+    ally.multiHit = {
+      targetKey: entityBattleKey(target),
+      hitsRemaining: Math.max(1, Math.floor(finiteNumber(ally.hitCount, 6))),
+      nextHitIn: 0,
+      totalHits: Math.max(1, Math.floor(finiteNumber(ally.hitCount, 6)))
+    };
+  }
+
+  function updateAquaRegiaMultiHit(ally, dt) {
+    const sequence = ally?.multiHit;
+    if (!sequence) return false;
+    const target = findBattleEntityByKey(sequence.targetKey);
+    if (!target || target.hp <= 0 || gameStatus !== 'playing') {
+      ally.multiHit = null;
+      ally.attackTimer = ally.attackInterval;
+      return true;
+    }
+    sequence.nextHitIn = Math.max(0, finiteNumber(sequence.nextHitIn, 0) - dt);
+    if (sequence.nextHitIn > 0) return true;
+    if (target.auBoss && !stage10State?.contactStarted && beginAquaAuContact()) return true;
+    const damage = calculateDamage(ally, target);
+    target.hp -= damage;
+    spawnAttackProjectile(ally, target);
+    const hitNumber = sequence.totalHits - sequence.hitsRemaining + 1;
+    if (target.auBoss) {
+      combatEffects.push({
+        x: target.x, y: entityVisualY(target) - target.radius - 24,
+        text: `金溶解反応 ${hitNumber}/6`, subtext: '[AuCl₄]⁻', color: '#ffe07a', kind: 'liberation',
+        life: .72, maxLife: .72, particles: lowPowerMode ? [] : Array.from({length: 8}, (_, index) => ({angle: Math.PI * 2 * index / 8, speed: 18 + index * 2}))
+      });
+    } else {
+      combatEffects.push({
+        x: target.x, y: entityVisualY(target) - target.radius - 20,
+        text: `混酸連撃 ${hitNumber}/6`, subtext: '', color: '#ffd6a0', kind: 'neutralize',
+        life: .55, maxLife: .55, particles: []
+      });
+    }
+    sequence.hitsRemaining -= 1;
+    if (sequence.hitsRemaining <= 0 || target.hp <= 0) {
+      ally.multiHit = null;
+      ally.attackTimer = ally.attackInterval;
+    } else {
+      sequence.nextHitIn = Math.max(.06, finiteNumber(ally.hitInterval, .14));
+    }
+    return true;
+  }
+
   function updateAlly(ally, dt) {
     if (ally.hp <= 0) return;
-    if (ally.hp <= 0) return;
+    ally.stunTimer = Math.max(0, finiteNumber(ally.stunTimer, 0) - dt);
+    if (ally.stunTimer > 0) return;
+    if (ally.aquaRegia && updateAquaRegiaMultiHit(ally, dt)) return;
     ally.attackTimer = Math.max(0, ally.attackTimer - dt);
     if (ally.healer) {
       const healTarget = mostInjuredAllyFor(ally);
@@ -3470,6 +4001,11 @@
 
     if (targetInRange) {
       if (ally.attackTimer <= 0) {
+        if (ally.aquaRegia) {
+          beginAquaRegiaMultiHit(ally, target);
+          updateAquaRegiaMultiHit(ally, 0);
+          return;
+        }
         const firstStrikeBonus = ally.firstStrikeReady ? ally.firstStrikeMultiplier : 1;
         const damage = calculateDamage(ally, target, firstStrikeBonus);
         target.hp -= damage;
@@ -3514,7 +4050,7 @@
   function triggerBossMinionSummon(enemy) {
     if (!enemy?.boss || !enemy.bossSummonPool?.length || enemy.bossSummonCount <= 0) return;
     const available = Math.max(0, D.maxEnemiesOnField - enemies.length);
-    const count = Math.min(available, Math.max(2, enemy.bossSummonCount - (Math.random() < .35 ? 1 : 0)));
+    const count = Math.min(available, enemy.auBoss ? 1 + Math.floor(Math.random() * 3) : Math.max(2, enemy.bossSummonCount - (Math.random() < .35 ? 1 : 0)));
     let spawned = 0;
     for (let index = 0; index < count; index += 1) {
       const enemyId = enemy.bossSummonPool[Math.floor(Math.random() * enemy.bossSummonPool.length)];
@@ -3527,6 +4063,12 @@
       spawned += 1;
     }
     if (spawned > 0) {
+      if (enemy.auBoss) {
+        combatEffects.push({ x: enemy.x, y: entityVisualY(enemy) - enemy.radius - 34, text: `Au護衛 ×${spawned}`, color: '#ffe08a', kind: 'transform', life: 1.8, maxLife: 1.8, particles: [] });
+        showMessage(`Au護衛：既存敵${spawned}体が戦線へ加わりました。`, 3.4);
+        playSound('wave');
+        return;
+      }
       const weakBaseSummon = enemy.affinityTarget === 'weak_base_conjugate_acid';
       const summonLabel = weakBaseSummon ? '弱塩基群集反応' : '弱酸群集反応';
       const entityLabel = weakBaseSummon ? '弱塩基由来イオン' : '弱酸由来イオン';
@@ -3552,6 +4094,12 @@
     if (enemy.bossSummonTimer <= 0 && enemies.length < D.maxEnemiesOnField - 1) {
       enemy.bossSummonPending = true;
       enemy.bossSummonPendingTimer = Math.max(.6, enemy.bossSummonWarning || 2);
+      if (enemy.auBoss) {
+        combatEffects.push({ x: enemy.x, y: entityVisualY(enemy) - enemy.radius - 34, text: 'Au護衛 接近予告', color: '#ffe08a', kind: 'transform', life: enemy.bossSummonPendingTimer, maxLife: enemy.bossSummonPendingTimer, particles: [] });
+        showMessage(`⚠ Au護衛：${formatStat(enemy.bossSummonPendingTimer, 1)}秒後に1〜3体が接近`, 3.0);
+        playSound('transform');
+        return;
+      }
       const weakBaseSummon = enemy.affinityTarget === 'weak_base_conjugate_acid';
       const summonLabel = weakBaseSummon ? '弱塩基群集反応' : '弱酸群集反応';
       const effectColor = weakBaseSummon ? '#eadcff' : '#f5ffad';
@@ -3561,11 +4109,82 @@
     }
   }
 
+  function beginAuGoldCrush(enemy, target) {
+    enemy.goldCrushPendingTimer = Math.max(.3, finiteNumber(enemy.goldCrushWarning, .65));
+    enemy.goldCrushTargetKey = entityBattleKey(target);
+    combatEffects.push({ x: target.x, y: entityVisualY(target) - target.radius - 26, text: '金塊圧撃 予兆', color: '#ffd66b', kind: 'transform', life: enemy.goldCrushPendingTimer, maxLife: enemy.goldCrushPendingTimer, particles: [] });
+    showMessage('⚠ 金塊圧撃｜高威力の物理攻撃', 2.2);
+  }
+
+  function resolveAuGoldCrush(enemy) {
+    const target = findBattleEntityByKey(enemy.goldCrushTargetKey);
+    enemy.goldCrushTargetKey = '';
+    if (!target || target.hp <= 0) return;
+    const mainDamage = Math.max(1, calculateDamage(enemy, target));
+    target.hp -= mainDamage;
+    target.x = Math.max(BASE.allySpawnX, target.x - finiteNumber(enemy.goldCrushPushback, 28));
+    target.stunTimer = Math.max(target.stunTimer || 0, .45);
+    spawnAttackProjectile(enemy, target, { splash: true });
+    spawnImpactBurst(target.x, entityVisualY(target), '#ffd66b', 1.7);
+    for (const nearby of allies) {
+      if (nearby === target || nearby.hp <= 0) continue;
+      if (Math.hypot(nearby.x - target.x, entityVisualY(nearby) - entityVisualY(target)) > enemy.goldCrushSplashRadius + nearby.radius) continue;
+      const damage = Math.max(1, Math.round(mainDamage * enemy.goldCrushSplashFactor));
+      nearby.hp -= damage;
+      nearby.x = Math.max(BASE.allySpawnX, nearby.x - enemy.goldCrushPushback * .55);
+      nearby.stunTimer = Math.max(nearby.stunTimer || 0, .25);
+    }
+  }
+
+  function resolveAuGoldFoil(enemy) {
+    const targets = allies.filter((ally) => ally.hp > 0 && ally.x <= enemy.x && enemy.x - ally.x <= 310 && Math.abs(ally.y - enemy.y) <= 92);
+    for (const target of targets) {
+      const attack = { ...enemy, attack: enemy.goldFoilDamage, damageType: 'physical' };
+      const damage = Math.max(1, calculateDamage(attack, target));
+      target.hp -= damage;
+      target.x = Math.max(BASE.allySpawnX, target.x - enemy.goldFoilPushback);
+      target.stunTimer = Math.max(target.stunTimer || 0, .28);
+      spawnImpactBurst(target.x, entityVisualY(target), '#ffe58f', 1.35);
+    }
+    combatEffects.push({ x: enemy.x - 70, y: entityVisualY(enemy) - 10, text: `金箔展開 ${targets.length}体`, color: '#ffe58f', kind: 'transform', life: 1.2, maxLife: 1.2, particles: [] });
+    showMessage(`金箔展開｜物理中ダメージ・強ノックバック${targets.length ? `｜${targets.length}体命中` : '｜回避'}`, 3.2);
+  }
+
+  function updateAuBossAbility(enemy, dt) {
+    if (!enemy?.auBoss || enemy.hp <= 0) return false;
+    if (enemy.stage10Hidden || enemy.stage10Protected) return true;
+    if (enemy.goldFoilPendingTimer > 0) {
+      enemy.goldFoilPendingTimer = Math.max(0, enemy.goldFoilPendingTimer - dt);
+      if (enemy.goldFoilPendingTimer <= 0) {
+        resolveAuGoldFoil(enemy);
+        enemy.goldFoilTimer = 18 + Math.random() * 4;
+      }
+      return true;
+    }
+    enemy.goldFoilTimer = Math.max(0, enemy.goldFoilTimer - dt);
+    if (enemy.goldFoilTimer <= 0) {
+      enemy.goldFoilPendingTimer = clamp(finiteNumber(enemy.goldFoilWarning, 1.7), 1.5, 2);
+      combatEffects.push({ x: enemy.x - 80, y: entityVisualY(enemy) - 20, text: '金箔展開 扇形予告', color: '#ffe58f', kind: 'transform', life: enemy.goldFoilPendingTimer, maxLife: enemy.goldFoilPendingTimer, particles: [] });
+      showMessage(`⚠ 金箔展開｜扇形予告 ${enemy.goldFoilPendingTimer.toFixed(1)}秒`, 2.4);
+      return true;
+    }
+    if (enemy.goldCrushPendingTimer > 0) {
+      enemy.goldCrushPendingTimer = Math.max(0, enemy.goldCrushPendingTimer - dt);
+      if (enemy.goldCrushPendingTimer <= 0) {
+        resolveAuGoldCrush(enemy);
+        enemy.attackTimer = enemy.attackInterval;
+      }
+      return true;
+    }
+    return false;
+  }
+
   function updateEnemy(enemy, dt) {
     if (enemy.hp <= 0) return;
     if (enemy.hp <= 0) return;
     enemy.attackTimer = Math.max(0, enemy.attackTimer - dt);
     updateBossSummonAbility(enemy, dt);
+    if (updateAuBossAbility(enemy, dt)) return;
     if (enemy.healer) {
       const healTarget = mostInjuredEnemyFor(enemy);
       if (healTarget && enemy.attackTimer <= 0) {
@@ -3582,6 +4201,10 @@
 
     if (targetInRange) {
       if (enemy.attackTimer <= 0) {
+        if (enemy.auBoss) {
+          beginAuGoldCrush(enemy, target);
+          return;
+        }
         const firstStrikeBonus = enemy.firstStrikeReady ? enemy.firstStrikeMultiplier : 1;
         const damage = calculateDamage(enemy, target, firstStrikeBonus);
         target.hp -= damage;
@@ -3628,6 +4251,7 @@
     }
     const defeatedEnemies = enemies.filter((enemy) => enemy.hp <= 0);
     const defeatedAllies = allies.filter((ally) => ally.hp <= 0);
+    const defeatedAu = defeatedEnemies.some((enemy) => enemy.auBoss);
 
     for (const enemy of defeatedEnemies) {
       spawnImpactBurst(enemy.x, enemy.y, enemy.boss ? '#ffd779' : '#ff8798', enemy.boss ? 2.1 : 1.25);
@@ -3663,9 +4287,17 @@
 
     enemies = enemies.filter((enemy) => enemy.hp > 0);
     allies = allies.filter((ally) => ally.hp > 0);
+    if (defeatedAu && isStage10()) startStage10VictorySequence();
   }
 
   function updateGame(dt) {
+    if (updateStage10Sequence(dt)) {
+      updateCombatEffects(dt);
+      updateBattleVisualEffects(dt);
+      updateAquaRegiaUi();
+      messageTimeout = Math.max(0, messageTimeout - dt);
+      return;
+    }
     gameTime += dt;
     energy = Math.min(currentMaxEnergy(), energy + currentEnergyRegenRate() * dt);
 
@@ -3684,8 +4316,20 @@
     if (endlessMode) updateEndlessMode(dt);
     else updateWaveSystem(dt);
 
-    allies.forEach((ally) => updateAlly(ally, dt));
-    enemies.forEach((enemy) => updateEnemy(enemy, dt));
+    if (stage10CombatFrozen()) {
+      updateCombatEffects(dt);
+      updateBattleVisualEffects(dt);
+      updateAquaRegiaUi();
+      return;
+    }
+
+    updateStage10PreparationCandidates(dt);
+
+    for (const ally of allies) {
+      updateAlly(ally, dt);
+      if (stage10CombatFrozen()) break;
+    }
+    if (!stage10CombatFrozen()) enemies.forEach((enemy) => updateEnemy(enemy, dt));
     resolveDefeatedEntities();
     updateCombatEffects(dt);
     updateBattleVisualEffects(dt);
@@ -3693,7 +4337,7 @@
     allyBaseHp = Math.max(0, allyBaseHp);
     enemyBaseHp = Math.max(0, enemyBaseHp);
 
-    if (!endlessMode && enemyBaseHp <= 0) {
+    if (!endlessMode && !isStage10() && enemyBaseHp <= 0) {
       finishGame(true);
     } else if (allyBaseHp <= 0) {
       finishGame(false);
@@ -3713,6 +4357,7 @@
       updateHud();
       renderUnitButtons();
       renderUpgradePanel();
+      updateAquaRegiaUi();
       updatePauseButton();
     }
   }
@@ -3820,9 +4465,10 @@
     const stageFive = currentStageId === 5;
     const stageSix = currentStageId === 6;
     const stageSeven = currentStageId === 7;
-    const coreColor = stageSeven ? (ally ? '#c7b4ff' : '#f0a7ff') : stageSix ? (ally ? '#b8ff8a' : '#e5ff77') : stageFive ? (ally ? '#ffd779' : '#ff7f6e') : stageFour ? (ally ? '#75eaff' : '#ffbf72') : stageThree ? (ally ? '#d88cff' : '#ff9f63') : stageTwo ? (ally ? '#99efa8' : '#f0cb6b') : (ally ? '#6fe6ff' : '#ff7994');
-    const darkColor = stageSeven ? (ally ? '#2d1b58' : '#55245b') : stageSix ? (ally ? '#234914' : '#4b4d10') : stageFive ? (ally ? '#553410' : '#5d171a') : stageFour ? (ally ? '#123e4d' : '#5a3518') : stageThree ? (ally ? '#44205a' : '#5d2c16') : stageTwo ? (ally ? '#174536' : '#59471e') : (ally ? '#123f61' : '#5a2035');
-    const panelColor = stageSeven ? (ally ? '#6545a6' : '#9b4aa4') : stageSix ? (ally ? '#4b8d2b' : '#8c8c26') : stageFive ? (ally ? '#9a6b1f' : '#9b3331') : stageFour ? (ally ? '#1f7184' : '#95602b') : stageThree ? (ally ? '#773a96' : '#984d25') : stageTwo ? (ally ? '#2c7858' : '#8b6c2d') : (ally ? '#1f6e96' : '#8a3850');
+    const stageTen = currentStageId === 10;
+    const coreColor = stageTen ? (ally ? '#7ce8ff' : '#ffe17a') : stageSeven ? (ally ? '#c7b4ff' : '#f0a7ff') : stageSix ? (ally ? '#b8ff8a' : '#e5ff77') : stageFive ? (ally ? '#ffd779' : '#ff7f6e') : stageFour ? (ally ? '#75eaff' : '#ffbf72') : stageThree ? (ally ? '#d88cff' : '#ff9f63') : stageTwo ? (ally ? '#99efa8' : '#f0cb6b') : (ally ? '#6fe6ff' : '#ff7994');
+    const darkColor = stageTen ? (ally ? '#123f52' : '#4f3508') : stageSeven ? (ally ? '#2d1b58' : '#55245b') : stageSix ? (ally ? '#234914' : '#4b4d10') : stageFive ? (ally ? '#553410' : '#5d171a') : stageFour ? (ally ? '#123e4d' : '#5a3518') : stageThree ? (ally ? '#44205a' : '#5d2c16') : stageTwo ? (ally ? '#174536' : '#59471e') : (ally ? '#123f61' : '#5a2035');
+    const panelColor = stageTen ? (ally ? '#1c7891' : '#97711e') : stageSeven ? (ally ? '#6545a6' : '#9b4aa4') : stageSix ? (ally ? '#4b8d2b' : '#8c8c26') : stageFive ? (ally ? '#9a6b1f' : '#9b3331') : stageFour ? (ally ? '#1f7184' : '#95602b') : stageThree ? (ally ? '#773a96' : '#984d25') : stageTwo ? (ally ? '#2c7858' : '#8b6c2d') : (ally ? '#1f6e96' : '#8a3850');
 
     ctx.save();
     ctx.shadowColor = coreColor;
@@ -4040,7 +4686,7 @@
   function canvasPointFromEvent(event) {
     const rect = cv.getBoundingClientRect();
     return {
-      x: (event.clientX - rect.left) * cv.width / Math.max(1, rect.width),
+      x: canvasToLogicalX((event.clientX - rect.left) * cv.width / Math.max(1, rect.width)),
       y: (event.clientY - rect.top) * cv.height / Math.max(1, rect.height)
     };
   }
@@ -4056,6 +4702,7 @@
   }
 
   function drawEntity(entity) {
+    if (entity.stage10Hidden) return;
     const ally = entity.kind === 'ally';
     const idleBob = Math.sin(gameTime * (entity.flying ? 5.1 : 4.2) + finiteNumber(entity.visualSerial, 0) * .9) * (entity.flying ? 3.0 : 1.6);
     const originalY = entity.y;
@@ -4074,7 +4721,8 @@
     if (/歩兵|強襲|盾/.test(role)) entity.x += direction * Math.sin(motion * Math.PI) * (role.includes('強襲') ? 10 : 5);
     else if (/弓兵|速射|範囲/.test(role)) entity.x -= direction * Math.sin(motion * Math.PI) * 4;
     entity.y += idleBob;
-    const bossScale = entity.boss ? (entity.bossPhase >= 2 ? 1.48 : 1.35) : 1;
+    const auHpRatio = entity.auBoss ? clamp(entity.hp / Math.max(1, entity.maxHp), 0, 1) : 1;
+    const bossScale = entity.auBoss ? .78 + auHpRatio * .62 : entity.boss ? (entity.bossPhase >= 2 ? 1.48 : 1.35) : 1;
     const width = Math.max(62, entity.radius * 3.3) * bossScale;
     const height = Math.max(43, entity.radius * 2.15) * bossScale;
     const x = entity.x - width / 2;
@@ -4103,6 +4751,16 @@
       ctx.restore();
     }
 
+    if (stage10HighlightedKeys().has(entityBattleKey(entity))) {
+      ctx.save();
+      ctx.globalAlpha = .7 + Math.sin(gameTime * 7) * .2;
+      ctx.strokeStyle = '#ffe27b';
+      ctx.lineWidth = 3;
+      ctx.setLineDash([7, 4]);
+      ctx.beginPath(); ctx.ellipse(entity.x, entity.y, width * .62, height * .72, 0, 0, Math.PI * 2); ctx.stroke();
+      ctx.restore();
+    }
+
     if ((entity.hitFlash || 0) > 0 || (entity.attackFlash || 0) > 0) {
       ctx.save();
       const flash = Math.max(entity.hitFlash || 0, entity.attackFlash || 0);
@@ -4113,8 +4771,8 @@
       ctx.restore();
     }
 
-    ctx.fillStyle = ally ? '#183f5b' : (entity.boss ? (entity.bossPhase >= 2 ? '#54206e' : '#6b2338') : '#54293a');
-    ctx.strokeStyle = ally ? '#5fd6ff' : '#ff8798';
+    ctx.fillStyle = entity.auBoss ? '#8a6415' : ally ? (entity.aquaRegia ? '#594014' : '#183f5b') : (entity.boss ? (entity.bossPhase >= 2 ? '#54206e' : '#6b2338') : '#54293a');
+    ctx.strokeStyle = entity.auBoss ? '#ffe27b' : ally ? (entity.aquaRegia ? '#ffd08a' : '#5fd6ff') : '#ff8798';
     ctx.lineWidth = 2;
     drawRoundedRect(x, y, width, height, 11);
     ctx.fill();
@@ -4129,6 +4787,20 @@
     ctx.textBaseline = 'middle';
     ctx.font = `800 ${entity.formula.length > 5 ? 15 : 18}px "Segoe UI", "Noto Sans JP", sans-serif`;
     ctx.fillText(entity.formula, entity.x, entity.y + 1);
+    if (entity.auBoss && auHpRatio < .98) {
+      const lostCount = Math.min(9, Math.max(1, Math.floor((1 - auHpRatio) * 10)));
+      ctx.save();
+      ctx.fillStyle = '#f3c84f';
+      ctx.globalAlpha = .75;
+      for (let index = 0; index < lostCount; index += 1) {
+        const angle = -Math.PI * .8 + index * .47;
+        const distance = width * (.55 + index * .025);
+        ctx.beginPath();
+        ctx.arc(entity.x + Math.cos(angle) * distance, entity.y + Math.sin(angle) * distance - index * 2, 2.5 + index % 2, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.restore();
+    }
     entity.y = originalY;
     entity.x = originalX;
   }
@@ -4144,11 +4816,12 @@
     const stageFive = currentStageId === 5;
     const stageSix = currentStageId === 6;
     const stageSeven = currentStageId === 7;
-    sky.addColorStop(0, stageSeven ? '#170b2c' : stageSix ? '#0b2410' : stageFive ? '#220c18' : stageFour ? '#061e2b' : stageThree ? '#1b0b25' : stageTwo ? '#111b18' : '#071426');
-    sky.addColorStop(.48, stageSeven ? '#4b2470' : stageSix ? '#255c1d' : stageFive ? '#61231f' : stageFour ? '#0c4a5a' : stageThree ? '#3a1647' : stageTwo ? '#1c4034' : '#102b45');
-    sky.addColorStop(.74, stageSeven ? '#7d4f8c' : stageSix ? '#71872b' : stageFive ? '#8a5b2b' : stageFour ? '#35747c' : stageThree ? '#59323d' : stageTwo ? '#38513b' : '#16334b');
-    sky.addColorStop(.75, stageSeven ? '#342142' : stageSix ? '#233215' : stageFive ? '#3d1d18' : stageFour ? '#16343d' : stageThree ? '#34211d' : stageTwo ? '#2a3021' : '#142538');
-    sky.addColorStop(1, stageSeven ? '#10091c' : stageSix ? '#07170b' : stageFive ? '#150a12' : stageFour ? '#07161e' : stageThree ? '#150d14' : stageTwo ? '#11150e' : '#09131f');
+    const stageTen = currentStageId === 10;
+    sky.addColorStop(0, stageTen ? '#241704' : stageSeven ? '#170b2c' : stageSix ? '#0b2410' : stageFive ? '#220c18' : stageFour ? '#061e2b' : stageThree ? '#1b0b25' : stageTwo ? '#111b18' : '#071426');
+    sky.addColorStop(.48, stageTen ? '#684a0d' : stageSeven ? '#4b2470' : stageSix ? '#255c1d' : stageFive ? '#61231f' : stageFour ? '#0c4a5a' : stageThree ? '#3a1647' : stageTwo ? '#1c4034' : '#102b45');
+    sky.addColorStop(.74, stageTen ? '#95752a' : stageSeven ? '#7d4f8c' : stageSix ? '#71872b' : stageFive ? '#8a5b2b' : stageFour ? '#35747c' : stageThree ? '#59323d' : stageTwo ? '#38513b' : '#16334b');
+    sky.addColorStop(.75, stageTen ? '#3c2b0d' : stageSeven ? '#342142' : stageSix ? '#233215' : stageFive ? '#3d1d18' : stageFour ? '#16343d' : stageThree ? '#34211d' : stageTwo ? '#2a3021' : '#142538');
+    sky.addColorStop(1, stageTen ? '#120d04' : stageSeven ? '#10091c' : stageSix ? '#07170b' : stageFive ? '#150a12' : stageFour ? '#07161e' : stageThree ? '#150d14' : stageTwo ? '#11150e' : '#09131f');
     ctx.fillStyle = sky;
     ctx.fillRect(0, 0, cv.width, cv.height);
 
@@ -4236,6 +4909,20 @@
       ctx.globalAlpha=.20;ctx.strokeStyle='#ffe39a';ctx.lineWidth=2;
       for(let x=150;x<cv.width;x+=260){ctx.beginPath();ctx.arc(x,120,34,0,Math.PI*2);ctx.stroke();ctx.beginPath();ctx.moveTo(x-34,120);ctx.lineTo(x+34,120);ctx.stroke();ctx.beginPath();ctx.moveTo(x,86);ctx.lineTo(x,154);ctx.stroke();}
     }
+    if (stageTen) {
+      ctx.globalAlpha = .3;
+      ctx.fillStyle = '#ffe27b';
+      ctx.strokeStyle = '#ffe27b';
+      for (let index = 0; index < (lowPowerMode ? 8 : 20); index += 1) {
+        const x = (index * 83 + visualTime * (3 + index % 3)) % (cv.width + 60) - 30;
+        const y = 56 + (index * 47 % 220);
+        ctx.beginPath(); ctx.arc(x, y, 2 + index % 3, 0, Math.PI * 2); ctx.fill();
+      }
+      ctx.globalAlpha = .18;
+      ctx.font = '900 12px "Segoe UI",sans-serif';
+      ctx.fillText('79 Au', cv.width * .72, 112);
+      ctx.fillText('Au', cv.width * .32, 178);
+    }
     ctx.restore();
 
     ctx.fillStyle = 'rgba(2, 9, 17, .50)';
@@ -4282,11 +4969,16 @@
 
   function draw() {
     drawBackground();
-    drawBase(BASE.allyX, allyBaseHp, D.allyBaseHp, true);
-    drawBase(BASE.enemyX, enemyBaseHp, D.enemyBaseHp, false);
+    drawBase(logicalToCanvasX(BASE.allyX), allyBaseHp, D.allyBaseHp, true);
+    drawBase(logicalToCanvasX(BASE.enemyX), enemyBaseHp, D.enemyBaseHp, false);
 
     const sorted = [...allies, ...enemies].sort((a, b) => a.y - b.y || a.x - b.x);
-    sorted.forEach(drawEntity);
+    sorted.forEach((entity) => {
+      const logicalX = entity.x;
+      entity.x = logicalToCanvasX(logicalX);
+      drawEntity(entity);
+      entity.x = logicalX;
+    });
     drawProjectiles();
     drawImpactBursts();
     drawCombatEffects();
@@ -4489,7 +5181,8 @@
   function buildFormulaGuide() {
     const cards = [
       ...D.units.map((item) => ({ formula: item.formula, name: item.name })),
-      ...D.enemies.map((item) => ({ formula: item.formula, name: item.name }))
+      ...D.enemies.map((item) => ({ formula: item.formula, name: item.name })),
+      ...(isStage10() ? [{ formula: '王水', name: '混酸／調製ユニット（単一の分子式なし）' }] : [])
     ];
     $('formulaGuide').innerHTML = cards
       .map((item) => `<div class="formula-card"><strong>${item.formula}</strong><span>${item.name}</span></div>`)
@@ -4510,19 +5203,37 @@
       bossSummonTimer: entity.bossSummonTimer,
       bossSummonPending: Boolean(entity.bossSummonPending),
       bossSummonPendingTimer: entity.bossSummonPendingTimer,
-      ambushIntroCompleted: Boolean(entity.ambushIntroCompleted)
+      ambushIntroCompleted: Boolean(entity.ambushIntroCompleted),
+      stunTimer: entity.stunTimer,
+      multiHit: entity.multiHit ? { ...entity.multiHit } : null,
+      goldFoilTimer: entity.goldFoilTimer,
+      goldFoilPendingTimer: entity.goldFoilPendingTimer,
+      goldCrushPendingTimer: entity.goldCrushPendingTimer,
+      goldCrushTargetKey: entity.goldCrushTargetKey,
+      stage10Hidden: Boolean(entity.stage10Hidden),
+      stage10Protected: Boolean(entity.stage10Protected)
     };
   }
 
   function restoreAlly(saved, timerFactor = 1) {
     const definition = D.units.find((unit) => unit.id === saved.typeId);
-    if (!definition) return null;
-    const ally = createAlly(definition);
+    const ally = saved.typeId === stage10AquaDefinition()?.id ? createAquaRegiaAlly(1) : definition ? createAlly(definition) : null;
+    if (!ally) return null;
     ally.x = finiteNumber(saved.x, ally.x);
     ally.y = finiteNumber(saved.y, ally.y);
     ally.hp = clamp(finiteNumber(saved.hp, ally.maxHp), 0, ally.maxHp);
     ally.attackTimer = Math.max(0, finiteNumber(saved.attackTimer, 0) * timerFactor);
     if (typeof saved.firstStrikeReady === 'boolean') ally.firstStrikeReady = saved.firstStrikeReady;
+    ally.stunTimer = Math.max(0, finiteNumber(saved.stunTimer, 0));
+    if (ally.aquaRegia && saved.multiHit && typeof saved.multiHit === 'object') {
+      ally.multiHit = {
+        targetKey: String(saved.multiHit.targetKey || ''),
+        hitsRemaining: clamp(Math.floor(finiteNumber(saved.multiHit.hitsRemaining, 0)), 0, ally.hitCount),
+        nextHitIn: Math.max(0, finiteNumber(saved.multiHit.nextHitIn, 0)),
+        totalHits: ally.hitCount
+      };
+      if (!ally.multiHit.targetKey || ally.multiHit.hitsRemaining < 1) ally.multiHit = null;
+    }
     ally.visualSerial = Math.max(0, Math.floor(finiteNumber(saved.visualSerial, ally.visualSerial)));
     return ally;
   }
@@ -4540,6 +5251,12 @@
     enemy.bossSummonTimer = Math.max(0, finiteNumber(saved.bossSummonTimer, enemy.bossSummonTimer));
     enemy.bossSummonPending = Boolean(saved.bossSummonPending);
     enemy.bossSummonPendingTimer = Math.max(0, finiteNumber(saved.bossSummonPendingTimer, 0));
+    enemy.goldFoilTimer = Math.max(0, finiteNumber(saved.goldFoilTimer, enemy.goldFoilTimer));
+    enemy.goldFoilPendingTimer = Math.max(0, finiteNumber(saved.goldFoilPendingTimer, 0));
+    enemy.goldCrushPendingTimer = Math.max(0, finiteNumber(saved.goldCrushPendingTimer, 0));
+    enemy.goldCrushTargetKey = String(saved.goldCrushTargetKey || '');
+    enemy.stage10Hidden = Boolean(saved.stage10Hidden);
+    enemy.stage10Protected = Boolean(saved.stage10Protected);
     if (enemy.wipeAlliesOnArrival) enemy.ambushIntroCompleted = Boolean(saved.ambushIntroCompleted);
     enemy.visualSerial = Math.max(0, Math.floor(finiteNumber(saved.visualSerial, enemy.visualSerial)));
     return enemy;
@@ -4596,6 +5313,7 @@
           claimedWaves: [...researchCardClaimedWaves],
           introSeen: researchCardIntroSeen
         },
+        stage10: isStage10() ? JSON.parse(JSON.stringify(stage10State || defaultStage10State())) : null,
         wave: {
           currentWaveIndex,
           nextWaveEnemyIndex,
@@ -4663,7 +5381,9 @@
     }
     if ((cumulativeStats.highestStageCleared || 0) >= 9) {
       cumulativeStats.stage9Clears = Math.max(1, cumulativeStats.stage9Clears || 0);
+      cumulativeStats.highestStageReached = Math.max(10, cumulativeStats.highestStageReached || 1);
     }
+    if ((cumulativeStats.highestStageCleared || 0) >= 10) cumulativeStats.stage10Clears = Math.max(1, cumulativeStats.stage10Clears || 0);
     if ((cumulativeStats.highestStageCleared || 0) === 0 && cumulativeStats.totalClears > 0) {
       cumulativeStats.highestStageCleared = 1;
       cumulativeStats.highestStageReached = 2;
@@ -4672,6 +5392,12 @@
     achievementState = normalizeAchievementState(parsed.progress.achievementState);
     guestAssistEnabled = Boolean(parsed.progress.guestAssistEnabled);
     guestAssistUsed = Boolean(parsed.progress.guestAssistUsed || guestAssistEnabled);
+    if (isStage10()) {
+      const stage10Progress = parsed.stageProgress?.['10'] || parsed.stageProgress?.[10] || {};
+      aquaRegiaUnlocked = Boolean(stage10Progress.aquaRegiaUnlocked);
+      aquaRegiaLevel = clamp(Math.floor(finiteNumber(stage10Progress.aquaRegiaLevel, 1)), 1, 10);
+      aquaAuContactComplete = Boolean(stage10Progress.aquaAuContactComplete);
+    }
     updateGuestAssistUi();
     onboardingSeen = Boolean(parsed.progress.onboardingSeen);
     tutorialSeen = parsed.progress.tutorialSeen === undefined ? onboardingSeen : Boolean(parsed.progress.tutorialSeen);
@@ -4746,6 +5472,11 @@
     }
     if (finiteNumber(savedStats.highestStageCleared, 0) >= 9) {
       savedStats.stage9Clears = Math.max(1, finiteNumber(savedStats.stage9Clears, 0));
+      savedStats.highestStageReached = Math.max(10, finiteNumber(savedStats.highestStageReached, 1));
+      repaired = true;
+    }
+    if (finiteNumber(savedStats.highestStageCleared, 0) >= 10) {
+      savedStats.stage10Clears = Math.max(1, finiteNumber(savedStats.stage10Clears, 0));
       repaired = true;
     }
     parsed.progress.mockExamProgress = normalizeMockExamProgress(parsed.progress.mockExamProgress);
@@ -4773,7 +5504,7 @@
       return false;
     }
 
-    const compatibleSaveVersions = new Set([4, 7, 13, 14, 15, 16, 17, 18, 19, 20, 21, 23, 26, 27, 28, 29, 30, D.version]);
+    const compatibleSaveVersions = new Set([4, 7, 13, 14, 15, 16, 17, 18, 19, 20, 21, 23, 26, 27, 28, 29, 30, 31, D.version]);
     if (!parsed || !compatibleSaveVersions.has(parsed.saveVersion) || !parsed.progress || !parsed.battle) {
       setSaveStatus('このバージョンでは読めないデータです');
       return false;
@@ -4810,6 +5541,7 @@
     }
 
     const waveSave = parsed.battle.wave;
+    stage10State = isStage10() ? normalizeStage10State(parsed.battle.stage10) : defaultStage10State();
     currentWaveIndex = clamp(Math.floor(finiteNumber(waveSave.currentWaveIndex, 0)), 0, D.waves.length - 1);
     const wave = currentWave();
     nextWaveEnemyIndex = clamp(Math.floor(finiteNumber(waveSave.nextWaveEnemyIndex, 0)), 0, wave.enemies.length);
@@ -4910,6 +5642,7 @@
     lastTimestamp = performance.now();
     projectiles = [];
     impactBursts = [];
+    restoreStage10PresentationAfterLoad();
     if (wavePhase === 'research' && gameStatus === 'playing' && currentStageId >= 3) {
       const completed = [3,6,9].find((waveNumber) => waveNumber === currentWaveIndex) || currentWaveIndex;
       openResearchCardSelection(completed);
@@ -4924,6 +5657,7 @@
     updateHud();
     renderUnitButtons();
     renderUpgradePanel();
+    updateAquaRegiaUi();
     evaluateAchievements({ notify: false });
     const savedDate = new Date(parsed.savedAt);
     if (migration.migrated) {
@@ -5110,6 +5844,10 @@
     localStorage.removeItem(SPEED_TRIAL_RETRY_KEY);
     guestAssistEnabled = false;
     guestAssistUsed = false;
+    aquaRegiaUnlocked = false;
+    aquaRegiaLevel = 1;
+    aquaAuContactComplete = false;
+    stage10State = defaultStage10State();
     updateGuestAssistUi();
     speedTrialRetryAt = 0;
     mockExamProgress = defaultMockExamProgress();
@@ -5690,6 +6428,9 @@
     $('settingsTransferBtn').addEventListener('click', openTransferModal);
     $('settingsSaveBtn').addEventListener('click', () => { saveGame(); closeSettings(); });
     $('settingsLoadBtn').addEventListener('click', () => { loadGame(); closeSettings(); });
+    $('aquaRegiaUnlockBtn').addEventListener('click', unlockAquaRegia);
+    $('aquaRegiaUpgradeBtn').addEventListener('click', upgradeAquaRegia);
+    $('aquaRegiaPrepareBtn').addEventListener('click', beginAquaRegiaPreparation);
     $('guestAssistCodeBtn').addEventListener('click', requestGuestAssist);
     $('guestAssistCode').addEventListener('keydown', (event) => { if (event.key === 'Enter') requestGuestAssist(); });
     $('guestAssistEnableBtn').addEventListener('click', enableGuestAssist);
@@ -5794,6 +6535,100 @@
     requestAnimationFrame(animationLoop);
   }
 
+  function installV6TestApi() {
+    let enabled = false;
+    try { enabled = new URLSearchParams(location.search).get('cqTest') === '1'; } catch (_) {}
+    if (!enabled) return;
+    window.cqV6TestApi = Object.freeze({
+      enterStage10({ testCoins = 5000, unlockUnits = true } = {}) {
+        rememberCurrentStageProgress();
+        applyStageDefinition(10);
+        coins = Math.max(0, testCoins);
+        unlocked = new Set(unlockUnits ? D.units.map((unit) => unit.id) : initialUnlockedIds());
+        energyCapacityLevel = 6;
+        unitUpgradeLevels = Object.fromEntries(D.units.map((unit) => [unit.id, 6]));
+        aquaRegiaUnlocked = false;
+        aquaRegiaLevel = 1;
+        aquaAuContactComplete = false;
+        resetStage({ keepProgress: true });
+        coins = Math.max(0, testCoins);
+        unlocked = new Set(unlockUnits ? D.units.map((unit) => unit.id) : initialUnlockedIds());
+        paused = false;
+        updateAquaRegiaUi();
+      },
+      setAquaProgress({ unlocked: isUnlocked = true, level: nextLevel = 1, contactComplete = false } = {}) {
+        aquaRegiaUnlocked = Boolean(isUnlocked);
+        aquaRegiaLevel = clamp(Math.floor(finiteNumber(nextLevel, 1)), 1, 10);
+        aquaAuContactComplete = Boolean(contactComplete);
+        stage10State.contactStarted = aquaAuContactComplete;
+        stage10State.contactComplete = aquaAuContactComplete;
+        updateAquaRegiaUi();
+      },
+      clearField() { allies = []; enemies = []; projectiles = []; impactBursts = []; combatEffects = []; },
+      spawnAlly(typeId, { x = BASE.allySpawnX, y = BASE.unitY, hpRatio = 1 } = {}) {
+        const definition = D.units.find((unit) => unit.id === typeId);
+        const ally = typeId === stage10AquaDefinition()?.id ? createAquaRegiaAlly(hpRatio) : definition ? createAlly(definition) : null;
+        if (!ally) return null;
+        ally.x = finiteNumber(x, ally.x); ally.y = finiteNumber(y, ally.y); ally.hp = Math.max(1, Math.round(ally.maxHp * clamp(hpRatio, .01, 1)));
+        allies.push(ally); return entityBattleKey(ally);
+      },
+      prepareMaterialFormation() {
+        allies = [];
+        const positions = [[300,298],[338,256],[342,298],[338,340]];
+        const ids = ['nitricAcidAlly5','hydrochloricAcidAlly6','hydrochloricAcidAlly6','hydrochloricAcidAlly6'];
+        ids.forEach((id, index) => this.spawnAlly(id, { x: positions[index][0], y: positions[index][1], hpRatio: .5 + index * .1 }));
+      },
+      beginPreparation: beginAquaRegiaPreparation,
+      spawnAu({ formation = false, x = BASE.enemySpawnX } = {}) {
+        const definition = D.enemies.find((enemy) => enemy.auBoss);
+        if (!definition) return null;
+        const au = createEnemy(definition, D.waves.length - 1);
+        au.x = finiteNumber(x, au.x);
+        enemies.push(au);
+        if (formation) beginStage10AuFormation(au);
+        else {
+          stage10State.phase = 'combat'; au.stage10Hidden = false; au.stage10Protected = false; syncBgmTrack();
+        }
+        return entityBattleKey(au);
+      },
+      addProjectile(ownerKind, effectKind = 'attack') { projectiles.push({ ownerKind, effectKind, life: 2, maxLife: 2, x0: 100, y0: 100, x1: 200, y1: 100, x: 100, y: 100, direction: ownerKind === 'ally' ? 1 : -1, label: 'T', color: '#fff', glow: '#fff', splash: false }); },
+      damageProbe(damageType, attack = 100) {
+        const au = enemies.find((enemy) => enemy.auBoss) || (() => { this.spawnAu(); return enemies.find((enemy) => enemy.auBoss); })();
+        return calculateDamage({ kind: 'ally', attack, damageType, chemistryClass: 'neutral' }, au);
+      },
+      setAuHp(value) {
+        const au = enemies.find((enemy) => enemy.auBoss);
+        if (!au) return false;
+        au.hp = clamp(finiteNumber(value, au.hp), 0, au.maxHp);
+        return true;
+      },
+      saveNow() { return saveGame({ silent: true }); },
+      loadNow() { return loadGame({ silent: true }); },
+      setPaused(value) { paused = Boolean(value); updatePauseButton(); },
+      step(seconds, dt = .05) {
+        const steps = Math.ceil(Math.max(0, seconds) / Math.max(.01, dt));
+        for (let index = 0; index < steps && gameStatus === 'playing'; index += 1) updateGame(Math.min(.1, dt));
+      },
+      snapshot() {
+        return {
+          stage: currentStageId, gameStatus, wave: currentWaveIndex + 1, wavePhase, gameTime,
+          logicalScale: stageLogicalScale(), logicalEnemyX: BASE.enemyX, canvasEnemyX: logicalToCanvasX(BASE.enemyX),
+          coins, energy, aquaRegiaUnlocked, aquaRegiaLevel, aquaAuContactComplete,
+          highestStageCleared: cumulativeStats.highestStageCleared,
+          highestStageReached: cumulativeStats.highestStageReached,
+          guestAssistEnabled, guestAssistUsed,
+          cumulativeStats: JSON.parse(JSON.stringify(cumulativeStats)),
+          stage10: JSON.parse(JSON.stringify(stage10State)),
+          allies: allies.map((entity) => ({ ...serializeEntity(entity), kind: entity.kind, formula: entity.formula, hp: entity.hp, maxHp: entity.maxHp, aquaRegia: Boolean(entity.aquaRegia) })),
+          enemies: enemies.map((entity) => ({ ...serializeEntity(entity), kind: entity.kind, formula: entity.formula, hp: entity.hp, maxHp: entity.maxHp, auBoss: Boolean(entity.auBoss) })),
+          projectiles: projectiles.map((item) => ({ ownerKind: item.ownerKind, effectKind: item.effectKind })),
+          desiredBgmTrackKey: desiredBgmTrackKey(), activeBgmTrackKey,
+          enemyBaseHp, allyBaseHp
+        };
+      }
+    });
+  }
+
   function initialize() {
     applyStageDefinition(1);
     stageProgress = {};
@@ -5816,11 +6651,16 @@
     tutorialActive = false;
     guestAssistEnabled = false;
     guestAssistUsed = false;
+    aquaRegiaUnlocked = false;
+    aquaRegiaLevel = 1;
+    aquaAuContactComplete = false;
+    stage10State = defaultStage10State();
 
     buildUnitButtons();
     buildFormulaGuide();
     buildUpgradePanel();
     wireEvents();
+    installV6TestApi();
     installOverlayPauseObserver();
     renderInlineGuideVisuals();
     updateScopeButton();

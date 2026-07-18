@@ -115,6 +115,13 @@ __RELEASE_STYLES__
       </div>
       <div id="battleMessage" class="battle-message" aria-live="polite"></div>
       <div id="researchLoadout" class="research-loadout" hidden aria-label="選択中の研究カード"></div>
+      <div id="stage10Cinematic" class="stage10-cinematic" hidden aria-live="assertive" aria-atomic="true">
+        <div class="stage10-cinematic-particles" aria-hidden="true"></div>
+        <p id="stage10CinematicKicker">GOLD REACTION</p>
+        <strong id="stage10CinematicTitle">79 Au</strong>
+        <span id="stage10CinematicText">金｜高い耐食性をもつ貴金属</span>
+        <small id="stage10CinematicNote"></small>
+      </div>
     </section>
 
     <section class="battle-legend" aria-label="戦闘パラメータの凡例">
@@ -131,6 +138,28 @@ __RELEASE_STYLES__
       <h2>ユニット</h2>
       <p class="unit-help">ユニットを選び、クイズ正解で召喚。不正解でもエナジーを消費します。</p>
       <div id="units" class="unit-grid"></div>
+      <article id="aquaRegiaPanel" class="aqua-regia-panel" hidden aria-labelledby="aquaRegiaTitle">
+        <div class="aqua-regia-head">
+          <div>
+            <span class="section-kicker">STAGE 10 PREPARATION</span>
+            <h3 id="aquaRegiaTitle">王水｜混酸／調製ユニット</h3>
+          </div>
+          <b id="aquaRegiaLevel">Lv.1 / 10</b>
+        </div>
+        <p class="aqua-regia-ratio">濃硝酸：濃塩酸＝1：3（体積比）</p>
+        <p class="aqua-regia-safety">危険：これは抽象化された学習表現です。実物を混合しないでください。</p>
+        <div class="aqua-regia-progress" aria-live="polite">
+          <span id="aquaNitricCount">HNO₃ 0/1</span>
+          <span id="aquaHydrochloricCount">HCl 0/3</span>
+          <span id="aquaStableState">同じ候補を約1秒維持</span>
+        </div>
+        <p id="aquaRegiaStatus" class="aqua-regia-status">HNO₃とHClの解放後、王水調製を恒久解放できます。</p>
+        <div class="aqua-regia-actions">
+          <button id="aquaRegiaUnlockBtn" class="upgrade-button" type="button">220 COINで王水調製を解放</button>
+          <button id="aquaRegiaUpgradeBtn" class="upgrade-button" type="button" hidden>70 COINでLv.2へ強化</button>
+          <button id="aquaRegiaPrepareBtn" class="continue-button" type="button" hidden disabled>⚗ 王水を調製</button>
+        </div>
+      </article>
     </section>
 
     <section class="upgrade-section">

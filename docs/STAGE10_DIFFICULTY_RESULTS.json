@@ -1,0 +1,111 @@
+{
+  "generatedAt": "2026-07-18T13:20:02.222Z",
+  "model": {
+    "type": "fixed-seed one-second attrition model",
+    "trialsPerScenario": 240,
+    "browserCalibration": "Real runtime damage, six-hit spacing, preparation and Au phase timings are checked separately by browser-stage10.py. This model approximates player replenishment, escort interception and Au ability disruption as sustained factors.",
+    "limitations": "It does not reproduce lane-by-lane targeting or individual quiz timing. Reported rates are deterministic comparative balance estimates, not player-population forecasts."
+  },
+  "summaries": [
+    {
+      "id": "no_aqua_avg_lv6",
+      "label": "王水なし・平均Lv6",
+      "trials": 240,
+      "winRate": 0.4666666666666667,
+      "successMedianSeconds": 273.2,
+      "successP10Seconds": 266.2,
+      "successP90Seconds": 278.2,
+      "defeatMedianAuHp": 274.87636055373935,
+      "aquaUptime": 0,
+      "earlyCollapseRate": 0,
+      "stalemateRate": 0,
+      "loopReachRateAmongNonEarly": 0.8333333333333334
+    },
+    {
+      "id": "aqua_lv1",
+      "label": "王水Lv1",
+      "trials": 240,
+      "winRate": 0,
+      "successMedianSeconds": null,
+      "successP10Seconds": null,
+      "successP90Seconds": null,
+      "defeatMedianAuHp": 3039.2403861693656,
+      "aquaUptime": 0.4765172038643133,
+      "earlyCollapseRate": 0,
+      "stalemateRate": 0,
+      "loopReachRateAmongNonEarly": 0.6625
+    },
+    {
+      "id": "aqua_lv2",
+      "label": "王水Lv2",
+      "trials": 240,
+      "winRate": 0.37083333333333335,
+      "successMedianSeconds": 298.2,
+      "successP10Seconds": 285.2,
+      "successP90Seconds": 312.2,
+      "defeatMedianAuHp": 707.8854676063569,
+      "aquaUptime": 0.49452452321455775,
+      "earlyCollapseRate": 0,
+      "stalemateRate": 0,
+      "loopReachRateAmongNonEarly": 0.8458333333333333
+    },
+    {
+      "id": "aqua_lv3_support_lv3_4",
+      "label": "王水Lv3＋支援Lv3〜4",
+      "trials": 240,
+      "winRate": 0.5958333333333333,
+      "successMedianSeconds": 252.2,
+      "successP10Seconds": 244.2,
+      "successP90Seconds": 262.2,
+      "defeatMedianAuHp": 636.7563177546383,
+      "aquaUptime": 0.48590335662588496,
+      "earlyCollapseRate": 0,
+      "stalemateRate": 0,
+      "loopReachRateAmongNonEarly": 0.03333333333333333
+    },
+    {
+      "id": "aqua_lv4_active",
+      "label": "王水Lv4以上・能動操作",
+      "trials": 240,
+      "winRate": 0.6333333333333333,
+      "successMedianSeconds": 268.7,
+      "successP10Seconds": 256.4,
+      "successP90Seconds": 279.1,
+      "defeatMedianAuHp": 664.8239206481544,
+      "aquaUptime": 0.5239369613108755,
+      "earlyCollapseRate": 0,
+      "stalemateRate": 0,
+      "loopReachRateAmongNonEarly": 0.32083333333333336
+    },
+    {
+      "id": "aqua_lv10_active",
+      "label": "王水Lv10・能動操作",
+      "trials": 240,
+      "winRate": 1,
+      "successMedianSeconds": 198.2,
+      "successP10Seconds": 191.2,
+      "successP90Seconds": 208.29999999999998,
+      "defeatMedianAuHp": null,
+      "aquaUptime": 0.543172265371254,
+      "earlyCollapseRate": 0,
+      "stalemateRate": 0,
+      "loopReachRateAmongNonEarly": 0
+    },
+    {
+      "id": "aqua_lv10_unattended",
+      "label": "王水Lv10・無操作",
+      "trials": 240,
+      "winRate": 0,
+      "successMedianSeconds": null,
+      "successP10Seconds": null,
+      "successP90Seconds": null,
+      "defeatMedianAuHp": 9163.724888482695,
+      "aquaUptime": 0.4493212823314945,
+      "earlyCollapseRate": 0.9583333333333334,
+      "stalemateRate": 0,
+      "loopReachRateAmongNonEarly": 0
+    }
+  ],
+  "passed": true,
+  "failures": []
+}

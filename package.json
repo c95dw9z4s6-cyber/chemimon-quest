@@ -1,7 +1,7 @@
 {
   "name": "chemion-quest",
   "private": true,
-  "version": "5.95.0",
+  "version": "6.0.0",
   "type": "module",
   "scripts": {
     "build": "node scripts/build.mjs",
@@ -12,7 +12,10 @@
     "audit": "node scripts/audit-features.mjs",
     "audit:questions": "node scripts/audit-questions.mjs",
     "test:features": "node scripts/test-features.mjs",
+    "test:stage10": "node scripts/test-stage10.mjs",
+    "test:difficulty": "node scripts/simulate-stage10.mjs",
     "test:browser": "python3 scripts/browser-smoke.py",
+    "test:browser:stage10": "python3 scripts/browser-stage10.py",
     "audit:chemistry": "node scripts/audit-chemistry.mjs",
     "package:site": "python3 scripts/build_release_package.py",
     "verify:package": "python3 scripts/verify_release_package.py chemion-release.zip",

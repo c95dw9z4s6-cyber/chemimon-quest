@@ -1,0 +1,763 @@
+{
+  "generatedAt": "2026-07-18T13:21:00.977117+00:00",
+  "browser": "Chromium",
+  "passed": true,
+  "tests": [
+    {
+      "name": "desktop-layout",
+      "passed": true,
+      "details": {
+        "version": "Chemion Quest v6.0",
+        "overflow": false,
+        "stage10Panel": true
+      }
+    },
+    {
+      "name": "mobile-layout",
+      "passed": true,
+      "details": {
+        "overflow": false,
+        "minButtonHeight": 44
+      }
+    },
+    {
+      "name": "stage10-logical-scale",
+      "passed": true,
+      "details": {
+        "stage": 10,
+        "gameStatus": "playing",
+        "wave": 1,
+        "wavePhase": "spawning",
+        "gameTime": 0,
+        "logicalScale": 1.3,
+        "logicalEnemyX": 1093.2,
+        "canvasEnemyX": 852,
+        "coins": 5000,
+        "energy": 88,
+        "aquaRegiaUnlocked": false,
+        "aquaRegiaLevel": 1,
+        "aquaAuContactComplete": false,
+        "highestStageCleared": 0,
+        "highestStageReached": 1,
+        "guestAssistEnabled": false,
+        "guestAssistUsed": false,
+        "cumulativeStats": {
+          "totalKills": 0,
+          "totalCoinsEarned": 0,
+          "totalClears": 0,
+          "flawlessClears": 0,
+          "perfectResearchClears": 0,
+          "highestStageReached": 1,
+          "highestStageCleared": 0,
+          "stage1Clears": 0,
+          "stage2Clears": 0,
+          "stage3Clears": 0,
+          "stage4Clears": 0,
+          "stage5Clears": 0,
+          "stage6Clears": 0,
+          "stage7Clears": 0,
+          "stage8Clears": 0,
+          "stage9Clears": 0,
+          "stage10Clears": 0,
+          "stage1Defeats": 0,
+          "stage2Defeats": 0,
+          "stage3Defeats": 0,
+          "stage4Defeats": 0,
+          "stage5Defeats": 0,
+          "stage6Defeats": 0,
+          "stage7Defeats": 0,
+          "stage8Defeats": 0,
+          "stage9Defeats": 0,
+          "stage10Defeats": 0,
+          "mockExamsCompleted": 0,
+          "mockExamPerfects": 0
+        },
+        "stage10": {
+          "phase": "normal",
+          "phaseTimer": 0,
+          "contactStarted": false,
+          "contactComplete": false,
+          "contactTimer": 0,
+          "preparation": null,
+          "candidateKeys": [],
+          "stableSeconds": 0
+        },
+        "allies": [],
+        "enemies": [],
+        "projectiles": [],
+        "desiredBgmTrackKey": "normal",
+        "activeBgmTrackKey": "normal",
+        "enemyBaseHp": 2400,
+        "allyBaseHp": 1850
+      }
+    },
+    {
+      "name": "aqua-regia-stable-candidate",
+      "passed": true,
+      "details": {
+        "phase": "normal",
+        "phaseTimer": 0,
+        "contactStarted": false,
+        "contactComplete": false,
+        "contactTimer": 0,
+        "preparation": null,
+        "candidateKeys": [
+          "ally:nitricAcidAlly5:0",
+          "ally:hydrochloricAcidAlly6:2",
+          "ally:hydrochloricAcidAlly6:1",
+          "ally:hydrochloricAcidAlly6:3"
+        ],
+        "stableSeconds": 1.1500000000000004
+      }
+    },
+    {
+      "name": "preparation-transaction-started",
+      "passed": true,
+      "details": {
+        "phase": "normal",
+        "phaseTimer": 0,
+        "contactStarted": false,
+        "contactComplete": false,
+        "contactTimer": 0,
+        "preparation": {
+          "phase": "animating",
+          "timer": 1.8,
+          "ingredientKeys": [
+            "ally:nitricAcidAlly5:0",
+            "ally:hydrochloricAcidAlly6:2",
+            "ally:hydrochloricAcidAlly6:1",
+            "ally:hydrochloricAcidAlly6:3"
+          ],
+          "hpRatio": 0.6497035573122529,
+          "created": false
+        },
+        "candidateKeys": [
+          "ally:nitricAcidAlly5:0",
+          "ally:hydrochloricAcidAlly6:2",
+          "ally:hydrochloricAcidAlly6:1",
+          "ally:hydrochloricAcidAlly6:3"
+        ],
+        "stableSeconds": 1.1500000000000004
+      }
+    },
+    {
+      "name": "preparation-no-extra-energy",
+      "passed": true,
+      "details": {
+        "before": 89.19999999999993,
+        "after": 89.19999999999993
+      }
+    },
+    {
+      "name": "save-during-preparation",
+      "passed": true
+    },
+    {
+      "name": "preparation-restored-or-completed",
+      "passed": true,
+      "details": {
+        "phase": "normal",
+        "phaseTimer": 0,
+        "contactStarted": false,
+        "contactComplete": false,
+        "contactTimer": 0,
+        "preparation": {
+          "phase": "animating",
+          "timer": 1.8,
+          "ingredientKeys": [
+            "ally:nitricAcidAlly5:0",
+            "ally:hydrochloricAcidAlly6:2",
+            "ally:hydrochloricAcidAlly6:1",
+            "ally:hydrochloricAcidAlly6:3"
+          ],
+          "hpRatio": 0.6497035573122529,
+          "created": false
+        },
+        "candidateKeys": [
+          "ally:nitricAcidAlly5:0",
+          "ally:hydrochloricAcidAlly6:2",
+          "ally:hydrochloricAcidAlly6:1",
+          "ally:hydrochloricAcidAlly6:3"
+        ],
+        "stableSeconds": 1.1500000000000004
+      }
+    },
+    {
+      "name": "preparation-exactly-once",
+      "passed": true,
+      "details": {
+        "aqua": 1,
+        "materials": 0
+      }
+    },
+    {
+      "name": "preparation-average-hp-ratio",
+      "passed": true,
+      "details": {
+        "hp": 246,
+        "maxHp": 378
+      }
+    },
+    {
+      "name": "aqua-regia-max-one",
+      "passed": true
+    },
+    {
+      "name": "au-formation-removes-only-friendly-attacks",
+      "passed": true,
+      "details": [
+        [
+          "ally",
+          "heal"
+        ],
+        [
+          "enemy",
+          "attack"
+        ]
+      ]
+    },
+    {
+      "name": "au-formation-preserves-allies",
+      "passed": true,
+      "details": [
+        {
+          "typeId": "aluminumGuardAlly9",
+          "x": 467.43600000000004,
+          "y": 298,
+          "hp": 714,
+          "attackTimer": 0,
+          "waveIndex": null,
+          "visualSerial": 0,
+          "firstStrikeReady": false,
+          "bossPhase": 1,
+          "bossSummonTimer": null,
+          "bossSummonPending": false,
+          "bossSummonPendingTimer": null,
+          "ambushIntroCompleted": false,
+          "stunTimer": 0,
+          "multiHit": null,
+          "goldFoilTimer": null,
+          "goldFoilPendingTimer": null,
+          "goldCrushPendingTimer": null,
+          "goldCrushTargetKey": null,
+          "stage10Hidden": false,
+          "stage10Protected": false,
+          "kind": "ally",
+          "formula": "Al",
+          "maxHp": 1152,
+          "aquaRegia": false
+        },
+        {
+          "typeId": "waterHealerAlly9",
+          "x": 479.43600000000004,
+          "y": 298,
+          "hp": 173,
+          "attackTimer": 0,
+          "waveIndex": null,
+          "visualSerial": 1,
+          "firstStrikeReady": false,
+          "bossPhase": 1,
+          "bossSummonTimer": null,
+          "bossSummonPending": false,
+          "bossSummonPendingTimer": null,
+          "ambushIntroCompleted": false,
+          "stunTimer": 0,
+          "multiHit": null,
+          "goldFoilTimer": null,
+          "goldFoilPendingTimer": null,
+          "goldCrushPendingTimer": null,
+          "goldCrushTargetKey": null,
+          "stage10Hidden": false,
+          "stage10Protected": false,
+          "kind": "ally",
+          "formula": "H₂O",
+          "maxHp": 237,
+          "aquaRegia": false
+        }
+      ]
+    },
+    {
+      "name": "au-visible-protection-phase",
+      "passed": true,
+      "details": {
+        "stage10": {
+          "phase": "protected",
+          "phaseTimer": 3,
+          "contactStarted": false,
+          "contactComplete": false,
+          "contactTimer": 0,
+          "preparation": null,
+          "candidateKeys": [],
+          "stableSeconds": 0.00010000009536747712
+        },
+        "au": {
+          "typeId": "goldBossEnemy10",
+          "x": 1000,
+          "y": 298,
+          "hp": 10000,
+          "attackTimer": 0,
+          "waveIndex": 9,
+          "visualSerial": 1,
+          "firstStrikeReady": false,
+          "bossPhase": 1,
+          "bossSummonTimer": 28,
+          "bossSummonPending": false,
+          "bossSummonPendingTimer": 0,
+          "ambushIntroCompleted": true,
+          "stunTimer": null,
+          "multiHit": null,
+          "goldFoilTimer": 20,
+          "goldFoilPendingTimer": 0,
+          "goldCrushPendingTimer": 0,
+          "goldCrushTargetKey": "",
+          "stage10Hidden": false,
+          "stage10Protected": true,
+          "kind": "enemy",
+          "formula": "79 Au",
+          "maxHp": 10000,
+          "auBoss": true
+        }
+      }
+    },
+    {
+      "name": "au-v16-combat-start",
+      "passed": true,
+      "details": {
+        "stage10": {
+          "phase": "combat",
+          "phaseTimer": 0,
+          "contactStarted": false,
+          "contactComplete": false,
+          "contactTimer": 0,
+          "preparation": null,
+          "candidateKeys": [],
+          "stableSeconds": 0.050100000095367477
+        },
+        "track": "au"
+      }
+    },
+    {
+      "name": "au-damage-routing",
+      "passed": true,
+      "details": {
+        "chemical": 20,
+        "physical": 100,
+        "aqua": 100
+      }
+    },
+    {
+      "name": "first-contact-freezes-before-damage",
+      "passed": true,
+      "details": {
+        "phase": "combat",
+        "phaseTimer": 0,
+        "contactStarted": true,
+        "contactComplete": false,
+        "contactTimer": 0.6499999999999999,
+        "preparation": null,
+        "candidateKeys": [],
+        "stableSeconds": 0.055300000286102206
+      }
+    },
+    {
+      "name": "aqua-regia-six-time-split-hits",
+      "passed": true,
+      "details": {
+        "hp": 9904,
+        "multiHit": null
+      }
+    },
+    {
+      "name": "first-contact-persistent",
+      "passed": true
+    },
+    {
+      "name": "first-contact-restored",
+      "passed": true
+    },
+    {
+      "name": "au-defeat-starts-victory",
+      "passed": true,
+      "details": {
+        "stage": 10,
+        "gameStatus": "playing",
+        "wave": 1,
+        "wavePhase": "spawning",
+        "gameTime": 0.05,
+        "logicalScale": 1.3,
+        "logicalEnemyX": 1093.2,
+        "canvasEnemyX": 852,
+        "coins": 5304,
+        "energy": 88.05,
+        "aquaRegiaUnlocked": true,
+        "aquaRegiaLevel": 10,
+        "aquaAuContactComplete": true,
+        "highestStageCleared": 0,
+        "highestStageReached": 1,
+        "guestAssistEnabled": false,
+        "guestAssistUsed": false,
+        "cumulativeStats": {
+          "totalKills": 1,
+          "totalCoinsEarned": 5304,
+          "totalClears": 0,
+          "flawlessClears": 0,
+          "perfectResearchClears": 0,
+          "highestStageReached": 1,
+          "highestStageCleared": 0,
+          "stage1Clears": 0,
+          "stage2Clears": 0,
+          "stage3Clears": 0,
+          "stage4Clears": 0,
+          "stage5Clears": 0,
+          "stage6Clears": 0,
+          "stage7Clears": 0,
+          "stage8Clears": 0,
+          "stage9Clears": 0,
+          "stage10Clears": 0,
+          "stage1Defeats": 0,
+          "stage2Defeats": 0,
+          "stage3Defeats": 0,
+          "stage4Defeats": 0,
+          "stage5Defeats": 0,
+          "stage6Defeats": 0,
+          "stage7Defeats": 0,
+          "stage8Defeats": 0,
+          "stage9Defeats": 0,
+          "stage10Defeats": 0,
+          "mockExamsCompleted": 0,
+          "mockExamPerfects": 0
+        },
+        "stage10": {
+          "phase": "victory",
+          "phaseTimer": 1.4,
+          "contactStarted": true,
+          "contactComplete": true,
+          "contactTimer": 0,
+          "preparation": null,
+          "candidateKeys": [],
+          "stableSeconds": 0.05
+        },
+        "allies": [
+          {
+            "typeId": "aquaRegiaAlly10",
+            "x": 400,
+            "y": 298,
+            "hp": 651,
+            "attackTimer": 4.8,
+            "waveIndex": null,
+            "visualSerial": 0,
+            "firstStrikeReady": false,
+            "bossPhase": 1,
+            "bossSummonTimer": null,
+            "bossSummonPending": false,
+            "bossSummonPendingTimer": null,
+            "ambushIntroCompleted": false,
+            "stunTimer": 0,
+            "multiHit": null,
+            "goldFoilTimer": null,
+            "goldFoilPendingTimer": null,
+            "goldCrushPendingTimer": null,
+            "goldCrushTargetKey": null,
+            "stage10Hidden": false,
+            "stage10Protected": false,
+            "kind": "ally",
+            "formula": "王水",
+            "maxHp": 651,
+            "aquaRegia": true
+          }
+        ],
+        "enemies": [],
+        "projectiles": [],
+        "desiredBgmTrackKey": "au",
+        "activeBgmTrackKey": "au",
+        "enemyBaseHp": 2400,
+        "allyBaseHp": 1850
+      }
+    },
+    {
+      "name": "stage10-victory-without-base-destruction",
+      "passed": true,
+      "details": {
+        "stage": 10,
+        "gameStatus": "victory",
+        "wave": 1,
+        "wavePhase": "spawning",
+        "gameTime": 0.05,
+        "logicalScale": 1.3,
+        "logicalEnemyX": 1093.2,
+        "canvasEnemyX": 852,
+        "coins": 5304,
+        "energy": 88.05,
+        "aquaRegiaUnlocked": true,
+        "aquaRegiaLevel": 10,
+        "aquaAuContactComplete": true,
+        "highestStageCleared": 10,
+        "highestStageReached": 10,
+        "guestAssistEnabled": false,
+        "guestAssistUsed": false,
+        "cumulativeStats": {
+          "totalKills": 1,
+          "totalCoinsEarned": 5304,
+          "totalClears": 1,
+          "flawlessClears": 1,
+          "perfectResearchClears": 0,
+          "highestStageReached": 10,
+          "highestStageCleared": 10,
+          "stage1Clears": 0,
+          "stage2Clears": 0,
+          "stage3Clears": 0,
+          "stage4Clears": 0,
+          "stage5Clears": 0,
+          "stage6Clears": 0,
+          "stage7Clears": 0,
+          "stage8Clears": 0,
+          "stage9Clears": 0,
+          "stage10Clears": 1,
+          "stage1Defeats": 0,
+          "stage2Defeats": 0,
+          "stage3Defeats": 0,
+          "stage4Defeats": 0,
+          "stage5Defeats": 0,
+          "stage6Defeats": 0,
+          "stage7Defeats": 0,
+          "stage8Defeats": 0,
+          "stage9Defeats": 0,
+          "stage10Defeats": 0,
+          "mockExamsCompleted": 0,
+          "mockExamPerfects": 0
+        },
+        "stage10": {
+          "phase": "victory",
+          "phaseTimer": 0,
+          "contactStarted": true,
+          "contactComplete": true,
+          "contactTimer": 0,
+          "preparation": null,
+          "candidateKeys": [],
+          "stableSeconds": 0.05
+        },
+        "allies": [
+          {
+            "typeId": "aquaRegiaAlly10",
+            "x": 400,
+            "y": 298,
+            "hp": 651,
+            "attackTimer": 4.8,
+            "waveIndex": null,
+            "visualSerial": 0,
+            "firstStrikeReady": false,
+            "bossPhase": 1,
+            "bossSummonTimer": null,
+            "bossSummonPending": false,
+            "bossSummonPendingTimer": null,
+            "ambushIntroCompleted": false,
+            "stunTimer": 0,
+            "multiHit": null,
+            "goldFoilTimer": null,
+            "goldFoilPendingTimer": null,
+            "goldCrushPendingTimer": null,
+            "goldCrushTargetKey": null,
+            "stage10Hidden": false,
+            "stage10Protected": false,
+            "kind": "ally",
+            "formula": "王水",
+            "maxHp": 651,
+            "aquaRegia": true
+          }
+        ],
+        "enemies": [],
+        "projectiles": [],
+        "desiredBgmTrackKey": "au",
+        "activeBgmTrackKey": "au",
+        "enemyBaseHp": 2400,
+        "allyBaseHp": 1850
+      }
+    },
+    {
+      "name": "v5.95-save-direct-migration",
+      "passed": true,
+      "details": {
+        "stage": 9,
+        "gameStatus": "playing",
+        "wave": 1,
+        "wavePhase": "spawning",
+        "gameTime": 0,
+        "logicalScale": 1,
+        "logicalEnemyX": 852,
+        "canvasEnemyX": 852,
+        "coins": 5000,
+        "energy": 88,
+        "aquaRegiaUnlocked": false,
+        "aquaRegiaLevel": 1,
+        "aquaAuContactComplete": false,
+        "highestStageCleared": 9,
+        "highestStageReached": 10,
+        "guestAssistEnabled": false,
+        "guestAssistUsed": true,
+        "cumulativeStats": {
+          "totalKills": 1,
+          "totalCoinsEarned": 5304,
+          "totalClears": 1,
+          "flawlessClears": 1,
+          "perfectResearchClears": 0,
+          "highestStageReached": 10,
+          "highestStageCleared": 9,
+          "stage1Clears": 0,
+          "stage2Clears": 0,
+          "stage3Clears": 0,
+          "stage4Clears": 0,
+          "stage5Clears": 1,
+          "stage6Clears": 1,
+          "stage7Clears": 1,
+          "stage8Clears": 1,
+          "stage9Clears": 1,
+          "stage10Clears": 1,
+          "stage1Defeats": 0,
+          "stage2Defeats": 0,
+          "stage3Defeats": 0,
+          "stage4Defeats": 0,
+          "stage5Defeats": 0,
+          "stage6Defeats": 0,
+          "stage7Defeats": 0,
+          "stage8Defeats": 0,
+          "stage9Defeats": 0,
+          "stage10Defeats": 0,
+          "mockExamsCompleted": 0,
+          "mockExamPerfects": 0
+        },
+        "stage10": {
+          "phase": "normal",
+          "phaseTimer": 0,
+          "contactStarted": false,
+          "contactComplete": false,
+          "contactTimer": 0,
+          "preparation": null,
+          "candidateKeys": [],
+          "stableSeconds": 0
+        },
+        "allies": [],
+        "enemies": [],
+        "projectiles": [],
+        "desiredBgmTrackKey": "normal",
+        "activeBgmTrackKey": "normal",
+        "enemyBaseHp": 2200,
+        "allyBaseHp": 1700
+      }
+    },
+    {
+      "name": "v5.0-save-direct-migration",
+      "passed": true,
+      "details": {
+        "stage": 1,
+        "gameStatus": "playing",
+        "wave": 1,
+        "wavePhase": "spawning",
+        "gameTime": 0,
+        "logicalScale": 1,
+        "logicalEnemyX": 852,
+        "canvasEnemyX": 852,
+        "coins": 432,
+        "energy": 88,
+        "aquaRegiaUnlocked": false,
+        "aquaRegiaLevel": 1,
+        "aquaAuContactComplete": false,
+        "highestStageCleared": 5,
+        "highestStageReached": 6,
+        "guestAssistEnabled": false,
+        "guestAssistUsed": false,
+        "cumulativeStats": {
+          "totalKills": 1,
+          "totalCoinsEarned": 5304,
+          "totalClears": 1,
+          "flawlessClears": 1,
+          "perfectResearchClears": 0,
+          "highestStageReached": 6,
+          "highestStageCleared": 5,
+          "stage1Clears": 0,
+          "stage2Clears": 0,
+          "stage3Clears": 0,
+          "stage4Clears": 0,
+          "stage5Clears": 1,
+          "stage6Clears": 1,
+          "stage7Clears": 1,
+          "stage8Clears": 1,
+          "stage9Clears": 1,
+          "stage10Clears": 1,
+          "stage1Defeats": 0,
+          "stage2Defeats": 0,
+          "stage3Defeats": 0,
+          "stage4Defeats": 0,
+          "stage5Defeats": 0,
+          "stage6Defeats": 0,
+          "stage7Defeats": 0,
+          "stage8Defeats": 0,
+          "stage9Defeats": 0,
+          "stage10Defeats": 0,
+          "mockExamsCompleted": 0,
+          "mockExamPerfects": 0
+        },
+        "stage10": {
+          "phase": "normal",
+          "phaseTimer": 0,
+          "contactStarted": false,
+          "contactComplete": false,
+          "contactTimer": 0,
+          "preparation": null,
+          "candidateKeys": [],
+          "stableSeconds": 0
+        },
+        "allies": [],
+        "enemies": [
+          {
+            "typeId": "nitrate",
+            "x": 809,
+            "y": 256,
+            "hp": 145,
+            "attackTimer": 0,
+            "waveIndex": 0,
+            "visualSerial": 0,
+            "firstStrikeReady": false,
+            "bossPhase": 1,
+            "bossSummonTimer": 0,
+            "bossSummonPending": false,
+            "bossSummonPendingTimer": 0,
+            "ambushIntroCompleted": true,
+            "stunTimer": null,
+            "multiHit": null,
+            "goldFoilTimer": 0,
+            "goldFoilPendingTimer": 0,
+            "goldCrushPendingTimer": 0,
+            "goldCrushTargetKey": "",
+            "stage10Hidden": false,
+            "stage10Protected": false,
+            "kind": "enemy",
+            "formula": "NO₃⁻",
+            "maxHp": 145,
+            "auBoss": false
+          }
+        ],
+        "projectiles": [],
+        "desiredBgmTrackKey": "normal",
+        "activeBgmTrackKey": "normal",
+        "enemyBaseHp": 950,
+        "allyBaseHp": 650
+      }
+    },
+    {
+      "name": "pwa-v5.95-cache-upgrade",
+      "passed": true,
+      "details": {
+        "names": [
+          "chemimon-quest-shell-v6.0"
+        ],
+        "bossCached": true
+      }
+    },
+    {
+      "name": "no-page-errors",
+      "passed": true,
+      "details": []
+    }
+  ],
+  "pageErrors": []
+}

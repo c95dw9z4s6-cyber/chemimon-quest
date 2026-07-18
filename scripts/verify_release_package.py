@@ -38,6 +38,7 @@ REQUIRED_SITE_FILES = {
     "site/icons/apple-touch-icon.png",
     "site/assets/audio/chemion-normal-bgm.mp3",
     "site/assets/audio/chemion-difficult-bgm.mp3",
+    "site/assets/audio/chemion-stage10-au-boss-v16-loop.mp3",
 }
 
 

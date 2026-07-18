@@ -214,5 +214,11 @@
     "introducedIn": "5.95",
     "title": "招待制ゲストアシスト・統計除外・ランキング送信停止",
     "required": true
+  },
+  {
+    "id": "stage10-aqua-regia-au",
+    "introducedIn": "6.0",
+    "title": "Stage 10・王水調製・Au低反応性・V16 loop",
+    "required": true
   }
 ]

@@ -15516,7 +15516,7 @@
     "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
   },
   {
-    "q": "王水を調製するときの濃塩酸と濃硝酸の体積比は通常どれか。",
+    "q": "王水の組成を抽象的な体積比で表すとき、濃塩酸と濃硝酸の比は通常どれか。",
     "options": [
       "1：3",
       "1：1",
@@ -15524,7 +15524,7 @@
       "2：3"
     ],
     "answer": 2,
-    "explanation": "王水は通常、濃塩酸3体積と濃硝酸1体積を混合して調製します。",
+    "explanation": "学習上は濃塩酸：濃硝酸＝3：1の体積比で表します。危険なので実物を混合しないでください。",
     "scope": "stage10-prep",
     "id": "basic-v58-0075",
     "category": "redox",
@@ -15672,21 +15672,21 @@
     "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
   },
   {
-    "q": "王水を作り置きせず必要時に調製する扱いが適切な理由はどれか。",
+    "q": "王水によるAu溶解で、酸化作用とCl⁻の錯体形成を組み合わせて考える理由はどれか。",
     "options": [
-      "反応性成分が時間とともに変化・分解し得るから",
-      "王水は純元素だから",
-      "混合後に必ず固体になるから",
-      "塩酸と硝酸は互いに反応しないから"
+      "Auの酸化と、生成したAuイオンの錯体としての安定化が協同するから",
+      "王水が純元素としてAuを置換するから",
+      "Auが酸化数を変えずに蒸発するから",
+      "Cl⁻がAuを単体へ還元するから"
     ],
     "answer": 0,
-    "explanation": "王水は混合後に活性な化学種を生じ、時間とともに組成・反応性が変化します。",
+    "explanation": "硝酸由来の酸化作用とCl⁻による錯体形成が協同し、Auの溶解方向を促します。",
     "scope": "stage10-prep",
     "id": "basic-v58-0081",
     "category": "redox",
     "difficultyLevel": 2,
     "cognitiveType": "reasoning",
-    "learningObjective": "Au・Ptと王水の反応を酸化還元と錯体形成から理解する",
+    "learningObjective": "王水によるAu溶解を酸化と錯体形成の協同から理解する",
     "estimatedSeconds": 40,
     "similarityGroup": "v58:redox:021",
     "optionFeedback": [
