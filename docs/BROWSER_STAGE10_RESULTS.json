@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-18T22:29:39.755254+00:00",
+  "generatedAt": "2026-07-18T23:15:24.815936+00:00",
   "browser": "Chromium",
   "passed": true,
   "tests": [
@@ -31,12 +31,12 @@
         "renderFps": 10,
         "wave": 1,
         "wavePhase": "spawning",
-        "gameTime": 0,
+        "gameTime": 0.1,
         "logicalScale": 1.3,
         "logicalEnemyX": 1093.2,
         "canvasEnemyX": 852,
         "coins": 5000,
-        "energy": 88,
+        "energy": 88.1,
         "level": 1,
         "experience": 0,
         "energyCapacityLevel": 6,
@@ -109,10 +109,39 @@
           "formationElapsed": 0,
           "formationPushX": null,
           "candidateKeys": [],
-          "stableSeconds": 0
+          "stableSeconds": 0.1
         },
         "allies": [],
-        "enemies": [],
+        "enemies": [
+          {
+            "typeId": "potassiumRunnerEnemy9",
+            "x": 1048,
+            "y": 256,
+            "hp": 184,
+            "attackTimer": 0,
+            "waveIndex": 0,
+            "visualSerial": 0,
+            "moveVelocity": 0,
+            "firstStrikeReady": true,
+            "bossPhase": 1,
+            "bossSummonTimer": 0,
+            "bossSummonPending": false,
+            "bossSummonPendingTimer": 0,
+            "ambushIntroCompleted": true,
+            "stunTimer": null,
+            "multiHit": null,
+            "goldFoilTimer": 0,
+            "goldFoilPendingTimer": 0,
+            "goldCrushPendingTimer": 0,
+            "goldCrushTargetKey": "",
+            "stage10Hidden": false,
+            "stage10Protected": false,
+            "kind": "enemy",
+            "formula": "K⁺",
+            "maxHp": 184,
+            "auBoss": false
+          }
+        ],
         "projectiles": [],
         "visualCounts": {
           "combatEffects": 0,
@@ -186,8 +215,8 @@
       "name": "preparation-no-extra-energy",
       "passed": true,
       "details": {
-        "before": 89.19999999999993,
-        "after": 89.19999999999993
+        "before": 89.29999999999993,
+        "after": 89.29999999999993
       }
     },
     {
@@ -338,17 +367,17 @@
           "formationElapsed": 4.449999999999992,
           "formationPushX": 497.43600000000004,
           "candidateKeys": [],
-          "stableSeconds": 0
+          "stableSeconds": 0.006299999809265501
         },
         "track": "au",
         "au": {
           "typeId": "goldBossEnemy10",
           "x": 1000,
-          "y": 256,
+          "y": 298,
           "hp": 10000,
           "attackTimer": 0,
           "waveIndex": 9,
-          "visualSerial": 0,
+          "visualSerial": 1,
           "moveVelocity": 0,
           "firstStrikeReady": false,
           "bossPhase": 1,
@@ -386,7 +415,7 @@
           "formationElapsed": 4.449999999999992,
           "formationPushX": 497.43600000000004,
           "candidateKeys": [],
-          "stableSeconds": 0.05
+          "stableSeconds": 0.056299999809265505
         },
         "track": "au"
       }
@@ -414,7 +443,7 @@
         "formationElapsed": 0,
         "formationPushX": null,
         "candidateKeys": [],
-        "stableSeconds": 0.05
+        "stableSeconds": 0.35330000009536705
       }
     },
     {
@@ -444,12 +473,12 @@
         "renderFps": 10,
         "wave": 1,
         "wavePhase": "spawning",
-        "gameTime": 0.05030000009536741,
+        "gameTime": 0.055000000095367346,
         "logicalScale": 1.3,
         "logicalEnemyX": 1093.2,
         "canvasEnemyX": 852,
         "coins": 5304,
-        "energy": 88.05030000009536,
+        "energy": 88.05500000009536,
         "level": 7,
         "experience": 2400,
         "energyCapacityLevel": 6,
@@ -522,7 +551,7 @@
           "formationElapsed": 0,
           "formationPushX": null,
           "candidateKeys": [],
-          "stableSeconds": 0.05030000009536741
+          "stableSeconds": 0.055000000095367346
         },
         "allies": [
           {
@@ -580,12 +609,12 @@
         "renderFps": 10,
         "wave": 1,
         "wavePhase": "spawning",
-        "gameTime": 0.05030000009536741,
+        "gameTime": 0.055000000095367346,
         "logicalScale": 1.3,
         "logicalEnemyX": 1093.2,
         "canvasEnemyX": 852,
         "coins": 5304,
-        "energy": 88.05030000009536,
+        "energy": 88.05500000009536,
         "level": 7,
         "experience": 2400,
         "energyCapacityLevel": 6,
@@ -658,7 +687,7 @@
           "formationElapsed": 0,
           "formationPushX": null,
           "candidateKeys": [],
-          "stableSeconds": 0.05030000009536741
+          "stableSeconds": 0.055000000095367346
         },
         "allies": [
           {
@@ -696,7 +725,7 @@
           "combatEffects": 0,
           "impactBursts": 0,
           "projectiles": 0,
-          "audioNodesActive": 9
+          "audioNodesActive": 15
         },
         "activeQuiz": null,
         "desiredBgmTrackKey": "au",
@@ -832,7 +861,7 @@
           "combatEffects": 0,
           "impactBursts": 0,
           "projectiles": 0,
-          "audioNodesActive": 1
+          "audioNodesActive": 3
         },
         "activeQuiz": null,
         "desiredBgmTrackKey": "normal",
@@ -852,12 +881,12 @@
         "renderFps": 45,
         "wave": 1,
         "wavePhase": "spawning",
-        "gameTime": 0.1384000000000001,
+        "gameTime": 0.23299999999999998,
         "logicalScale": 1,
         "logicalEnemyX": 852,
         "canvasEnemyX": 852,
         "coins": 432,
-        "energy": 88.15365224489797,
+        "energy": 88.25867755102041,
         "level": 7,
         "experience": 2400,
         "energyCapacityLevel": 6,
