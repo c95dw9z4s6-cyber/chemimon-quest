@@ -154,6 +154,10 @@ assert(html.includes('const SPACING_INCORRECT_DELAY_HOURS = 12;'), 'incorrect-an
 assert(/function selectSpacedQuestion\(pool, isHard = false, now = Date\.now\(\)\)/.test(html), 'spaced question selector is missing');
 assert(/updateQuestionSpacing\(data, question, correct, mode\)/.test(html), 'spacing result recording is missing');
 assert(html.includes('data-settings-view="mock"'), 'mock exam settings entry is missing');
+assert(['learning','display','save-account','support','data-management'].every((section) => html.includes(`data-settings-section="${section}"`)), 'v5.7 settings sections are incomplete');
+assert(html.includes('class="settings-section settings-danger-section"'), 'dangerous data operations are not separated');
+assert(html.includes('目的別に整理しました。項目名を押すと内容が開きます。'), 'settings organization guidance is missing');
+
 assert(/function renderMockExamView\(container\)/.test(html), 'mock exam list renderer is missing');
 assert(/function finishMockExam\(\)/.test(html), 'mock exam result flow is missing');
 assert(html.includes("id: 'initial_energy'") && html.includes("id: 'energy_regen'") && html.includes("id: 'coin_boost'"), 'next-battle mock rewards are incomplete');
@@ -198,6 +202,16 @@ for (const file of ['src/styles/core.css','src/styles/release.css','src/scripts/
   assert(stage8Boss?.wipeAlliesOnArrival === true && !stage8Boss?.phaseTwo, 'Stage 8 boss special arrival/no-phase rule missing');
   assert(stage8Boss?.hp <= 500 && stage8Boss?.speed > 48, 'Stage 8 boss HP/speed tuning is invalid');
   assert(sourceData.maxEnergyCapacityLevel === 12 && sourceData.maxEnergy + sourceData.energyCapacityPerLevel * 11 === 265, 'Energy capacity must reach Lv.12/max265');
+
+
+  const stage9 = sourceData.stage9;
+  const stage9Boss = stage9?.enemies?.find((enemy) => enemy.boss);
+  const stage9Ranged = stage9?.units?.find((unit) => unit.rangedAttack);
+  assert(stage9?.id === 9 && stage9?.waves?.length === 11, 'Stage 9 must have 11 waves');
+  assert(stage9?.rules?.disableRangedAllyAttacks === true, 'Stage 9 ranged-attack prohibition missing');
+  assert(stage9Ranged?.formula === 'Ag⁺', 'Stage 9 blocked ranged unit must be Ag+');
+  assert(stage9Boss?.formula === 'BaSO₄' && !stage9Boss?.phaseTwo && !stage9Boss?.bossSummonPool, 'Stage 9 boss must be simple BaSO4');
+  assert(html.includes('function stageBlocksRangedAlly') && html.includes('遠距離攻撃禁止：召喚不可'), 'Stage 9 ranged-block UI/runtime missing');
 
 for (const file of ['manifest.webmanifest', 'version.json', 'sw.js', 'icons/icon-192.png', 'icons/icon-512.png', 'icons/icon-maskable-512.png', 'icons/apple-touch-icon.png']) {
   assert(fs.existsSync(path.join(projectRoot, file)), `missing PWA asset: ${file}`);

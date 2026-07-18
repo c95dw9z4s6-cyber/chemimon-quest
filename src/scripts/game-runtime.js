@@ -20,6 +20,12 @@
   const FLYING_EXTRA_RENDER_OFFSET = 42;
   const SUMMON_READY_EPSILON = 0.05;
   const SUMMON_UI_REFRESH_INTERVAL = 0.1;
+  const NORMAL_RENDER_FPS = 45;
+  const LOW_POWER_RENDER_FPS = 30;
+  const NORMAL_IDLE_RENDER_FPS = 10;
+  const LOW_POWER_IDLE_RENDER_FPS = 5;
+  const NORMAL_UI_REFRESH_INTERVAL = 0.1;
+  const LOW_POWER_UI_REFRESH_INTERVAL = 0.2;
 
   const STAGE_LIBRARY = {
     1: {
@@ -45,11 +51,14 @@
     5: D.stage5,
     6: D.stage6,
     7: D.stage7,
-    8: D.stage8
+    8: D.stage8,
+    9: D.stage9
   };
 
   let currentStageId = 1;
   let stageProgress = {};
+  let activeStageGuideId = 1;
+  let activeStageGuideSource = 'stage-select';
 
   function currentStageDefinition() {
     return STAGE_LIBRARY[currentStageId] || STAGE_LIBRARY[1];
@@ -67,6 +76,8 @@
     D.startingEnergy = stage.startingEnergy;
     document.body.dataset.stage = String(currentStageId);
     if ($('stageButtonLabel')) $('stageButtonLabel').textContent = currentStageDefinition().milestone ? `STAGE ${currentStageId} ◆難関` : `STAGE ${currentStageId}`;
+    syncBgmTrack({ restart: true });
+    updateMusicControls();
   }
 
   let energy;
@@ -82,6 +93,8 @@
   let unlocked;
   let summonTimers;
   let summonUiRefreshTimer = 0;
+  let battleUiRefreshTimer = 0;
+  let lastRenderedTimestamp = 0;
   let gameTime;
   let autoSaveTimer;
   let lastTimestamp = performance.now();
@@ -100,6 +113,8 @@
   let lastQuizIndex = -1;
   let lastHardQuizIndex = -1;
   let messageTimeout = 0;
+  let guestAssistEnabled = false;
+  let guestAssistUsed = false;
 
   let currentWaveIndex;
   let nextWaveEnemyIndex;
@@ -141,6 +156,8 @@
   let achievementToastTimer = 0;
   let combatEffects = [];
   let recentQuestionHistory = [];
+  let learningResetReturnView = 'learning';
+  let learningResetCompleted = false;
   const EXACT_QUESTION_HISTORY_LIMIT = 30;
   const NEAR_QUESTION_HISTORY_LIMIT = 20;
   const FAMILY_QUESTION_HISTORY_LIMIT = 8;
@@ -160,6 +177,13 @@
   const REVIEW_KEY = "chemionQuestReviewV1";
   const LEARNING_KEY = "chemionQuestLearningV1";
   const SOUND_KEY = "chemionQuestSoundV1";
+  const BGM_KEY = "chemionQuestBgmV1";
+  const BGM_VOLUME_KEY = "chemionQuestBgmVolumeV1";
+  const BGM_TRACKS = Object.freeze({
+    normal: { src: "assets/audio/chemion-normal-bgm.mp3", label: "通常Stage BGM" },
+    difficult: { src: "assets/audio/chemion-difficult-bgm.mp3", label: "難関Stage BGM" }
+  });
+  const LOW_POWER_KEY = "chemionQuestLowPowerV1";
   const SPEED_TRIAL_RETRY_KEY = "chemionQuestSpeedTrialRetryV1";
   const TRANSFER_NICK_KEY = "chemionQuestNicknameV13";
   const TRANSFER_ONLINE_SEEN_KEY = "chemionQuestOnlinePromptV13";
@@ -170,9 +194,21 @@
     { id: 'coin_boost', name: '敵撃破コイン＋20%', description: '次のバトル中、敵撃破で得るコインが1.20倍になります。' }
   ];
   let soundEnabled = true;
+  let bgmEnabled = true;
+  let bgmVolume = 0.35;
+  let bgmUserActivated = false;
+  let activeBgmTrackKey = "";
+  let lowPowerMode = false;
   let audioContext = null;
   let lastAttackSoundAt = 0;
-  try { soundEnabled = localStorage.getItem(SOUND_KEY) !== 'off'; } catch (_) {}
+  try {
+    soundEnabled = localStorage.getItem(SOUND_KEY) !== 'off';
+    bgmEnabled = localStorage.getItem(BGM_KEY) !== 'off';
+    const storedBgmVolumeRaw = localStorage.getItem(BGM_VOLUME_KEY);
+    const storedBgmVolume = storedBgmVolumeRaw === null ? NaN : Number(storedBgmVolumeRaw);
+    if (Number.isFinite(storedBgmVolume)) bgmVolume = Math.max(0, Math.min(1, storedBgmVolume));
+    lowPowerMode = localStorage.getItem(LOW_POWER_KEY) === 'on';
+  } catch (_) {}
   const CATEGORY_LABELS = { mol:'mol・量的関係', acidBase:'酸・塩基', redox:'酸化還元', electrolysis:'電池・電気分解', crystal:'結晶', gas:'気体・溶液', thermo:'熱化学・反応速度', equilibrium:'化学平衡', matter:'物質の構成', other:'その他' };
 
   const unitButtons = new Map();
@@ -221,7 +257,7 @@
   function playSound(name) {
     if (!soundEnabled) return;
     const nowMs = performance.now();
-    if (name === 'attack' && nowMs - lastAttackSoundAt < 65) return;
+    if (name === 'attack' && nowMs - lastAttackSoundAt < (lowPowerMode ? 120 : 65)) return;
     if (name === 'attack') lastAttackSoundAt = nowMs;
     const patterns = {
       attack: [[390,.045,.012,'square',0],[620,.035,.008,'sine',.025]],
@@ -519,6 +555,144 @@
     if (soundEnabled) { ensureAudioContext(); playSound('resume'); }
   }
 
+
+  function bgmElement() {
+    return $('bgmAudio');
+  }
+
+  function desiredBgmTrackKey() {
+    return currentStageDefinition()?.milestone || currentStageId % 5 === 0 ? 'difficult' : 'normal';
+  }
+
+  function desiredBgmTrack() {
+    return BGM_TRACKS[desiredBgmTrackKey()] || BGM_TRACKS.normal;
+  }
+
+  function syncBgmTrack({ restart = false } = {}) {
+    const audio = bgmElement();
+    if (!audio) return;
+    const key = desiredBgmTrackKey();
+    const track = BGM_TRACKS[key] || BGM_TRACKS.normal;
+    const changed = activeBgmTrackKey !== key || audio.getAttribute('src') !== track.src;
+    if (!changed && !restart) return;
+    const wasPlaying = !audio.paused;
+    audio.pause();
+    if (changed) {
+      audio.src = track.src;
+      audio.dataset.track = key;
+      activeBgmTrackKey = key;
+      audio.load();
+    }
+    if (restart) {
+      try { audio.currentTime = 0; } catch (_) {}
+    }
+    if (wasPlaying && bgmEnabled && bgmUserActivated && !document.hidden) {
+      const attempt = audio.play();
+      if (attempt && typeof attempt.catch === 'function') attempt.catch(() => {});
+    }
+  }
+
+  function updateMusicControls() {
+    const percent = Math.round(bgmVolume * 100);
+    const trackLabel = desiredBgmTrack().label;
+    const stateText = bgmEnabled
+      ? `現在ON｜${trackLabel}・音量${percent}%`
+      : `現在OFF｜${trackLabel}を停止中・音量${percent}%`;
+    if ($('settingsMusicState')) $('settingsMusicState').textContent = stateText;
+    if ($('pauseMusicBtn')) $('pauseMusicBtn').textContent = bgmEnabled ? '🎵 BGM ON' : '🎵 BGM OFF';
+    if ($('musicVolume')) $('musicVolume').value = String(percent);
+    if ($('musicVolumeValue')) $('musicVolumeValue').textContent = `${percent}%`;
+    document.querySelector('.music-settings-card')?.classList.toggle('is-muted', !bgmEnabled);
+    const audio = bgmElement();
+    if (audio) audio.volume = bgmVolume;
+  }
+
+  function pauseBgm() {
+    const audio = bgmElement();
+    if (audio && !audio.paused) audio.pause();
+  }
+
+  function syncBgmPlayback() {
+    const audio = bgmElement();
+    if (!audio) return;
+    syncBgmTrack();
+    audio.volume = bgmVolume;
+    if (!bgmEnabled || !bgmUserActivated || document.hidden) {
+      pauseBgm();
+      return;
+    }
+    const attempt = audio.play();
+    if (attempt && typeof attempt.catch === 'function') attempt.catch(() => {});
+  }
+
+  function activateBgmFromUserGesture() {
+    bgmUserActivated = true;
+    syncBgmPlayback();
+  }
+
+  function toggleBgm() {
+    bgmEnabled = !bgmEnabled;
+    bgmUserActivated = true;
+    try { localStorage.setItem(BGM_KEY, bgmEnabled ? 'on' : 'off'); } catch (_) {}
+    updateMusicControls();
+    syncBgmPlayback();
+    if (bgmEnabled) playSound('resume');
+  }
+
+  function setBgmVolume(value) {
+    bgmVolume = clamp(finiteNumber(value, 35) / 100, 0, 1);
+    try { localStorage.setItem(BGM_VOLUME_KEY, String(bgmVolume)); } catch (_) {}
+    updateMusicControls();
+    syncBgmPlayback();
+  }
+
+  function currentRenderFps() {
+    if (document.hidden) return 0;
+    const idle = paused || gameStatus !== 'playing';
+    if (idle) return lowPowerMode ? LOW_POWER_IDLE_RENDER_FPS : NORMAL_IDLE_RENDER_FPS;
+    return lowPowerMode ? LOW_POWER_RENDER_FPS : NORMAL_RENDER_FPS;
+  }
+
+  function currentUiRefreshInterval() {
+    return lowPowerMode ? LOW_POWER_UI_REFRESH_INTERVAL : NORMAL_UI_REFRESH_INTERVAL;
+  }
+
+  function updatePowerControls() {
+    document.body.classList.toggle('low-power-mode', lowPowerMode);
+    document.body.dataset.powerMode = lowPowerMode ? 'low' : 'normal';
+    document.body.dataset.renderFps = String(currentRenderFps());
+    const state = lowPowerMode
+      ? '現在ON｜最大30fps・演出と画面効果を軽量化'
+      : '現在OFF｜通常モード最大45fps・標準演出';
+    if ($('settingsPowerState')) $('settingsPowerState').textContent = state;
+    if ($('settingsPowerBtn')) $('settingsPowerBtn').classList.toggle('active-power-mode', lowPowerMode);
+    if ($('pausePowerBtn')) $('pausePowerBtn').textContent = lowPowerMode ? '🔋 低電力 ON' : '🔋 低電力 OFF';
+  }
+
+  function setLowPowerMode(enabled, { persist = true, announce = true } = {}) {
+    lowPowerMode = Boolean(enabled);
+    if (persist) {
+      try { localStorage.setItem(LOW_POWER_KEY, lowPowerMode ? 'on' : 'off'); } catch (_) {}
+    }
+    if (lowPowerMode) {
+      for (const effect of combatEffects) effect.particles = [];
+      impactBursts = impactBursts.filter((burst) => Boolean(burst.heal));
+    }
+    lastTimestamp = performance.now();
+    lastRenderedTimestamp = 0;
+    battleUiRefreshTimer = currentUiRefreshInterval();
+    updatePowerControls();
+    updateHud();
+    renderUnitButtons();
+    renderUpgradePanel();
+    draw();
+    if (announce) showMessage(lowPowerMode ? '低電力モードON：戦闘判定はそのまま、描画と演出を軽量化します。' : '通常モードへ戻しました。', 3.8);
+  }
+
+  function toggleLowPowerMode() {
+    setLowPowerMode(!lowPowerMode);
+  }
+
   function refreshPauseSummary() {
     if ($('pauseStageStat')) $('pauseStageStat').textContent = String(currentStageId);
     if ($('pauseWaveStat')) $('pauseWaveStat').textContent = `${currentWaveIndex + 1} / ${D.waves.length}`;
@@ -555,6 +729,7 @@
     pauseReason = reason;
     paused = true;
     if (show) showPauseModal(reason);
+    updatePowerControls();
     if (save) saveGame({ silent: true });
     if (reason === 'manual') playSound('pause');
     updateHud(); renderUnitButtons(); renderUpgradePanel(); updatePauseButton();
@@ -569,6 +744,8 @@
     if ($('pauseModal')) $('pauseModal').hidden = true;
     syncPauseStateFromUi();
     lastTimestamp = performance.now();
+    lastRenderedTimestamp = 0;
+    updatePowerControls();
     playSound('resume');
     saveGame({ silent: true });
     updateHud(); renderUnitButtons(); renderUpgradePanel(); updatePauseButton();
@@ -652,6 +829,16 @@
       stage6Clears: 0,
       stage7Clears: 0,
       stage8Clears: 0,
+      stage9Clears: 0,
+      stage1Defeats: 0,
+      stage2Defeats: 0,
+      stage3Defeats: 0,
+      stage4Defeats: 0,
+      stage5Defeats: 0,
+      stage6Defeats: 0,
+      stage7Defeats: 0,
+      stage8Defeats: 0,
+      stage9Defeats: 0,
       mockExamsCompleted: 0,
       mockExamPerfects: 0
     };
@@ -975,6 +1162,7 @@
   }
 
   function evaluateAchievements({ notify = true } = {}) {
+    if (guestAssistEnabled) return [];
     const newlyUnlocked = [];
     for (const achievement of D.achievementDefinitions) {
       const state = achievementState[achievement.id];
@@ -1440,6 +1628,7 @@
     $('endModal').hidden = true;
     if ($('researchCardModal')) $('researchCardModal').hidden = true;
     if ($('stageModal')) $('stageModal').hidden = true;
+    if ($('stageGuideModal')) $('stageGuideModal').hidden = true;
     if ($('settingsModal')) $('settingsModal').hidden = true;
     if ($('infoModal')) $('infoModal').hidden = true;
     if ($('requestSubmitModal')) $('requestSubmitModal').hidden = true;
@@ -1450,7 +1639,118 @@
     renderUpgradePanel();
     evaluateAchievements({ notify: false });
     const rewardMessage = mockRewardDefinition() ? `｜実戦報酬：${mockRewardDefinition().name}` : '';
-    showMessage(`${currentStageDefinition().milestone ? '◆ 5の倍数・難関｜' : ''}Stage ${currentStageId}「${currentStageDefinition().name}」開始${rewardMessage}。30秒ごとに敵が追加されます。`, currentStageDefinition().milestone ? 5.4 : 4.2);
+    const stageRuleMessage = currentStageDefinition().rules?.disableRangedAllyAttacks ? '｜遠距離攻撃禁止・回復は使用可能' : '';
+    showMessage(`${currentStageDefinition().milestone ? '◆ 5の倍数・難関｜' : ''}Stage ${currentStageId}「${currentStageDefinition().name}」開始${rewardMessage}${stageRuleMessage}。30秒ごとに敵が追加されます。`, currentStageDefinition().milestone ? 5.4 : 4.8);
+  }
+
+  function escapeGuideText(value) {
+    return String(value ?? '').replace(/[&<>"']/g, (character) => ({
+      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+    })[character]);
+  }
+
+  function stageGuideDefinition(stageId) {
+    return D.stageGuides?.[String(stageId)] || null;
+  }
+
+  function stageDefeatCount(stageId) {
+    return Math.max(0, Math.floor(finiteNumber(cumulativeStats?.[`stage${stageId}Defeats`], 0)));
+  }
+
+  function stageGuideList(items) {
+    return `<ul>${(Array.isArray(items) ? items : []).map((item) => `<li>${escapeGuideText(item)}</li>`).join('')}</ul>`;
+  }
+
+  function stageDefeatAnalysis() {
+    const waveNumber = Math.max(1, currentWaveIndex + 1);
+    const allyLosses = Math.max(0, Math.floor(finiteNumber(runStats?.alliesDefeated, 0)));
+    const baseDamage = Math.max(0, Math.round(finiteNumber(runStats?.baseDamageTaken, 0)));
+    if (currentStageId === 8 && waveNumber >= 10) {
+      return `Wave ${waveNumber}で敗北しました。O₃出現後の再展開が間に合わなかった可能性が高いです。BOSS突入時のEnergyを125以上にし、演出終了直後は盾役を先に出してください。`;
+    }
+    if (currentStageId === 9) {
+      return `Wave ${waveNumber}で敗北しました。遠距離攻撃は禁止されています。Alで射手の攻撃を受け、Feを接近させ、H₂Oで前線を維持してください。`;
+    }
+    if (waveNumber <= 3) {
+      return `Wave ${waveNumber}で敗北しました。序盤の展開が遅いか、同じ役割へEnergyを使いすぎた可能性があります。最初は低コスト役を出し、盾または遠距離役の解放用コインを確保してください。`;
+    }
+    if (baseDamage >= D.allyBaseHp * 0.5) {
+      return `拠点が${baseDamage}ダメージを受けています。前線が崩れてから立て直せなかった可能性があります。攻撃役を増やす前に盾役と回復役を補充してください。`;
+    }
+    if (allyLosses >= 8) {
+      return `味方が${allyLosses}体倒されています。高コスト役が前へ出すぎたか、盾と回復が不足した可能性があります。召喚順を「盾→攻撃→回復」に整えてください。`;
+    }
+    if (waveNumber >= 9) {
+      return `終盤のWave ${waveNumber}まで到達しています。基本編成は機能しています。BOSS直前にEnergyを使い切らず、特殊行動または第二形態への追加召喚分を残してください。`;
+    }
+    return `Wave ${waveNumber}で敗北しました。味方撃破${allyLosses}体、拠点被害${baseDamage}です。攻略情報の推奨役割とEnergy目安を確認し、欠けている役割を1つずつ補ってください。`;
+  }
+
+  function renderStageGuide(stageId, { source = 'stage-select' } = {}) {
+    const id = STAGE_LIBRARY[stageId] ? stageId : currentStageId;
+    const stage = STAGE_LIBRARY[id];
+    const guide = stageGuideDefinition(id);
+    if (!stage || !guide) return false;
+    activeStageGuideId = id;
+    activeStageGuideSource = source;
+    const defeats = stageDefeatCount(id);
+    const hints = [...(guide.progressiveHints || [])].sort((a, b) => finiteNumber(a.minDefeats, 0) - finiteNumber(b.minDefeats, 0));
+    const hint = hints.filter((item) => defeats >= finiteNumber(item.minDefeats, 0)).at(-1) || hints[0] || { title: '攻略ヒント', body: '役割を分けて編成しましょう。' };
+    $('stageGuideTitle').textContent = `Stage ${id}「${stage.name}」攻略`;
+    $('stageGuideLead').textContent = guide.overview;
+    $('stageGuideContent').innerHTML = `
+      <section class="stage-guide-section wide"><h3>特殊ルール</h3><p>${escapeGuideText(guide.specialRule)}</p></section>
+      <section class="stage-guide-section"><h3>危険な敵・注意点</h3>${stageGuideList(guide.dangerousEnemies)}</section>
+      <section class="stage-guide-section"><h3>推奨する役割</h3>${stageGuideList(guide.recommendedRoles)}</section>
+      <section class="stage-guide-section"><h3>化学相性・学習ポイント</h3><p>${escapeGuideText(guide.chemistryTip)}</p></section>
+      <section class="stage-guide-section"><h3>BOSS対策</h3><p>${escapeGuideText(guide.bossStrategy)}</p></section>
+      <section class="stage-guide-section wide"><h3>Energy・強化目安</h3><p>${escapeGuideText(guide.energyGuide)}</p></section>`;
+    const fromDefeat = source === 'defeat' && id === currentStageId && gameStatus === 'defeat';
+    const analysis = $('stageGuideDefeatAnalysis');
+    analysis.hidden = !fromDefeat;
+    analysis.innerHTML = fromDefeat ? `<strong>直前の敗北分析：</strong>${escapeGuideText(stageDefeatAnalysis())}` : '';
+    $('stageGuideDefeatCount').textContent = `敗北 ${defeats}回`;
+    $('stageGuideHintTitle').textContent = hint.title;
+    $('stageGuideHintBody').textContent = hint.body;
+    const unlocked = id <= Math.max(1, cumulativeStats.highestStageReached || 1);
+    $('stageGuideSelectBtn').hidden = fromDefeat || id === currentStageId || !unlocked;
+    $('stageGuideSelectBtn').textContent = `Stage ${id}を開始`;
+    $('stageGuideRetryBtn').hidden = !fromDefeat;
+    $('stageGuideCloseBottomBtn').textContent = fromDefeat ? '敗北画面へ戻る' : '閉じる';
+    return true;
+  }
+
+  function openStageGuide(stageId, { source = 'stage-select' } = {}) {
+    if (!renderStageGuide(stageId, { source })) return;
+    $('stageGuideModal').hidden = false;
+    pauseForOverlay();
+    $('stageGuideCloseBtn').focus();
+  }
+
+  function closeStageGuide() {
+    if ($('stageGuideModal').hidden) return;
+    $('stageGuideModal').hidden = true;
+    resumeFromOverlay();
+  }
+
+  function selectStageFromGuide() {
+    const target = activeStageGuideId;
+    $('stageGuideModal').hidden = true;
+    if (target === currentStageId) {
+      if (!$('stageModal').hidden) closeStageModal();
+      else resumeFromOverlay();
+      return;
+    }
+    switchStage(target);
+  }
+
+  function retryStageFromGuide() {
+    if (activeStageGuideSource !== 'defeat' || activeStageGuideId !== currentStageId || gameStatus !== 'defeat') return;
+    $('stageGuideModal').hidden = true;
+    $('endModal').hidden = true;
+    resetStage({ keepProgress: true });
+    saveGame({ silent: true });
+    showMessage(`Stage ${currentStageId}を第1ウェーブから再挑戦します。攻略情報を参考に、役割とEnergy配分を調整しましょう。`, 4.5);
   }
 
   function renderStageOptions() {
@@ -1462,6 +1762,8 @@
       const current = stage.id === currentStageId;
       const cleared = (cumulativeStats.highestStageCleared || 0) >= stage.id;
       const saved = stageProgress[stage.id];
+      const wrapper = document.createElement('div');
+      wrapper.className = 'stage-card-wrap';
       const button = document.createElement('button');
       button.type = 'button';
       button.className = `stage-card${locked ? ' locked' : ''}${current ? ' current' : ''}${stage.milestone ? ' milestone' : ''}`;
@@ -1474,7 +1776,14 @@
         <p>${stage.description}</p>
         <div class="stage-card-meta"><span>ユニット ${stage.units.length}体</span><span>全${stage.waves.length}WAVE</span><span>${stage.difficultyLabel || '通常'}</span><span>${stage.enemyAttributeSummary || (saved ? `所持 ${saved.coins || 0} COIN` : '新規進行')}</span></div>`;
       button.addEventListener('click', () => switchStage(stage.id));
-      area.appendChild(button);
+      const guideButton = document.createElement('button');
+      guideButton.type = 'button';
+      guideButton.className = 'stage-guide-button';
+      guideButton.disabled = locked;
+      guideButton.textContent = locked ? '🔒 Stage解放後に攻略を見る' : '🧭 攻略情報を見る';
+      guideButton.addEventListener('click', () => openStageGuide(stage.id, { source: 'stage-select' }));
+      wrapper.append(button, guideButton);
+      area.appendChild(wrapper);
     }
   }
 
@@ -1849,6 +2158,81 @@
     localStorage.setItem(LEARNING_KEY, JSON.stringify(data));
   }
 
+  function setLearningResetStatus(message, tone = '') {
+    const status = $('learningResetStatus');
+    if (!status) return;
+    status.textContent = message || '';
+    status.className = `learning-reset-status${tone ? ` ${tone}` : ''}`;
+  }
+
+  function updateLearningResetConfirmation() {
+    const input = $('learningResetConfirmInput');
+    const execute = $('learningResetExecuteBtn');
+    if (!input || !execute) return;
+    execute.disabled = learningResetCompleted || input.value.trim() !== '初期化する';
+    if (!learningResetCompleted) {
+      setLearningResetStatus(execute.disabled ? 'この操作は取り消せません。' : '入力を確認しました。学習データだけを初期化できます。');
+    }
+  }
+
+  function openLearningResetModal(returnView = 'learning') {
+    learningResetReturnView = returnView === 'settings' ? 'settings' : 'learning';
+    learningResetCompleted = false;
+    $('settingsModal').hidden = true;
+    $('infoModal').hidden = true;
+    $('learningResetModal').hidden = false;
+    const input = $('learningResetConfirmInput');
+    input.value = '';
+    input.disabled = false;
+    $('learningResetExecuteBtn').disabled = true;
+    setLearningResetStatus('この操作は取り消せません。');
+    pauseForOverlay();
+    window.setTimeout(() => input.focus(), 40);
+  }
+
+  function closeLearningResetModal() {
+    if (learningResetCompleted) return;
+    $('learningResetModal').hidden = true;
+    if (learningResetReturnView === 'settings') {
+      $('settingsModal').hidden = false;
+      pauseForOverlay();
+    } else {
+      showInfoView('learning');
+      pauseForOverlay();
+    }
+  }
+
+  function resetLearningData() {
+    const input = $('learningResetConfirmInput');
+    if (input.value.trim() !== '初期化する') {
+      setLearningResetStatus('確認語が一致していません。「初期化する」と入力してください。', 'error');
+      return;
+    }
+    try {
+      localStorage.removeItem(LEARNING_KEY);
+      localStorage.removeItem(REVIEW_KEY);
+      recentQuestionHistory = [];
+      learningResetCompleted = true;
+      input.disabled = true;
+      $('learningResetExecuteBtn').disabled = true;
+      setSaveStatus('学習データを初期化しました');
+      setLearningResetStatus('初期化が完了しました。次の問題から新しい学習記録を開始します。', 'success');
+      showMessage('学習データを初期化しました。ゲーム進行は維持されています。', 4.5);
+      window.setTimeout(() => {
+        $('learningResetModal').hidden = true;
+        learningResetCompleted = false;
+        showInfoView('learning');
+        pauseForOverlay();
+      }, 700);
+    } catch (error) {
+      console.error(error);
+      learningResetCompleted = false;
+      input.disabled = false;
+      updateLearningResetConfirmation();
+      setLearningResetStatus('学習データを削除できませんでした。ブラウザーの保存設定を確認してください。', 'error');
+    }
+  }
+
   function updateQuestionSpacing(data, question, correct, mode, now = Date.now()) {
     data.spacing = normalizeSpacingData(data.spacing);
     const isHard = mode === 'hard' || mode === 'speed';
@@ -2177,6 +2561,22 @@
     question = prepareQuestionForDisplay(question);
     if (!allowOutsideGame && ((paused && !allowDuringTutorial) || gameStatus !== 'playing')) return;
 
+    if (guestAssistEnabled) {
+      const callback = typeof onComplete === 'function' ? onComplete : () => {};
+      const assistedQuiz = { question, isHard, mode, allowOutsideGame, hintsRevealed: 0, assisted: true };
+      queueMicrotask(() => {
+        applySpeedQuizResult(true, assistedQuiz);
+        callback(true, { assisted: true });
+        if (tutorialActive && mode === 'summon') showTutorialCompleteStep(true);
+        lastTimestamp = performance.now();
+        updateHud();
+        renderUnitButtons();
+        renderUpgradePanel();
+        saveGame({ silent: true });
+      });
+      return;
+    }
+
     paused = true;
     activeQuiz = { question, onComplete: typeof onComplete === 'function' ? onComplete : () => {}, answered: false, isHard, mode, allowOutsideGame, hintsRevealed: 0 };
     $('modalKicker').textContent = kicker || (isHard ? 'UNIVERSITY EXAM STYLE' : 'CHEMISTRY QUIZ');
@@ -2297,6 +2697,10 @@
     return remaining;
   }
 
+  function stageBlocksRangedAlly(unit) {
+    return Boolean(currentStageDefinition().rules?.disableRangedAllyAttacks && unit?.rangedAttack);
+  }
+
   function requestSummon(unit) {
     const tutorialAllowed = tutorialActive && tutorialStep === 1 && unit.id === tutorialTargetUnitId;
     if ((paused && !tutorialAllowed) || gameStatus !== 'playing') return;
@@ -2304,6 +2708,11 @@
 
     if (!unlocked.has(unit.id)) {
       requestUnlock(unit);
+      return;
+    }
+
+    if (stageBlocksRangedAlly(unit)) {
+      showMessage(currentStageDefinition().rules?.rangedAttackMessage || 'このStageでは遠距離攻撃が禁止されています。', 4.2);
       return;
     }
 
@@ -2520,6 +2929,7 @@
       baseAttackInterval: stats.attackInterval,
       attackTimer: 0,
       healer: Boolean(stats.healer),
+      rangedAttack: Boolean(stats.rangedAttack),
       healAmount: Math.max(0, Math.round((stats.healAmount || 0) * researchProduct('healMultiplier'))),
       baseHealAmount: stats.healAmount || 0,
       healRange: stats.healRange || stats.range,
@@ -2642,7 +3052,7 @@
     enemy.xpReward = Math.max(1, Math.round(finiteNumber(phase.xp, enemy.xpReward) * finiteNumber(wave?.rewardScale, 1)));
     if (announce) {
       focusBattleEntity(enemy, 10, true);
-      combatEffects.push({ x: enemy.x, y: entityVisualY(enemy) - enemy.radius - 30, text: '第二形態へ変化！', color: '#f3a8ff', kind: 'transform', life: 2.0, maxLife: 2.0, particles: Array.from({length:18},(_,i)=>({angle:Math.PI*2*i/18,speed:28+(i%5)*8})) });
+      combatEffects.push({ x: enemy.x, y: entityVisualY(enemy) - enemy.radius - 30, text: '第二形態へ変化！', color: '#f3a8ff', kind: 'transform', life: 2.0, maxLife: 2.0, particles: lowPowerMode ? [] : Array.from({length:18},(_,i)=>({angle:Math.PI*2*i/18,speed:28+(i%5)*8})) });
       showMessage(`⚠ ${phase.transformText || `${enemy.formula}へ変化`}｜属性：${enemy.chemistryLabel}`, 5.5);
       playSound('transform');
       $('waveBannerTitle').textContent = 'BOSS PHASE 2';
@@ -2835,7 +3245,7 @@
       kind: event.kind,
       life: liberation ? 1.35 : 1.05,
       maxLife: liberation ? 1.35 : 1.05,
-      particles: Array.from({length: event.kind === 'neutralize' ? 12 : 8}, (_,i)=>({
+      particles: lowPowerMode ? [] : Array.from({length: event.kind === 'neutralize' ? 12 : 8}, (_,i)=>({
         angle: Math.PI*2*i/(event.kind === 'neutralize' ? 12 : 8),
         speed: 18 + (i%4)*7
       }))
@@ -2856,7 +3266,7 @@
       ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
       ctx.fillStyle = effect.color;
       ctx.font = `900 ${effect.kind === 'transform' ? 20 : effect.kind === 'neutralize' ? 15 : 14}px "Segoe UI", "Noto Sans JP", sans-serif`;
-      ctx.shadowColor = effect.color; ctx.shadowBlur = 12;
+      ctx.shadowColor = effect.color; ctx.shadowBlur = lowPowerMode ? 0 : 12;
       ctx.fillText(effect.text, effect.x, effect.y - 12);
       ctx.shadowBlur = 0;
       if (effect.subtext) {
@@ -2963,7 +3373,7 @@
       ctx.strokeStyle = projectile.color;
       ctx.lineWidth = projectile.splash ? 4 : 2.5;
       ctx.shadowColor = projectile.glow;
-      ctx.shadowBlur = 14;
+      ctx.shadowBlur = lowPowerMode ? 0 : 14;
       ctx.beginPath();
       ctx.moveTo(projectile.x - projectile.direction * 18, projectile.y + 2);
       ctx.lineTo(projectile.x, projectile.y);
@@ -2985,10 +3395,10 @@
       ctx.save();
       ctx.globalAlpha = alpha;
       ctx.strokeStyle = burst.color; ctx.fillStyle = burst.color;
-      ctx.shadowColor = burst.color; ctx.shadowBlur = 12;
+      ctx.shadowColor = burst.color; ctx.shadowBlur = lowPowerMode ? 0 : 12;
       ctx.lineWidth = 2.2;
       ctx.beginPath(); ctx.arc(burst.x, burst.y, (8 + progress * 24) * burst.size, 0, Math.PI * 2); ctx.stroke();
-      for (let i = 0; i < 8; i += 1) {
+      for (let i = 0; i < (lowPowerMode ? 0 : 8); i += 1) {
         const angle = Math.PI * 2 * i / 8 + burst.seed;
         const radius = (6 + progress * 28) * burst.size;
         ctx.beginPath(); ctx.arc(burst.x + Math.cos(angle) * radius, burst.y + Math.sin(angle) * radius, 2.3 * burst.size, 0, Math.PI * 2); ctx.fill();
@@ -3048,6 +3458,10 @@
         ally.attackTimer = ally.attackInterval;
         return;
       }
+    }
+    if (stageBlocksRangedAlly(ally)) {
+      ally.x = Math.min(BASE.enemyX - BASE.radius - ally.radius, ally.x + ally.speed * dt);
+      return;
     }
     const { target, distance } = nearestEnemyFor(ally);
     const targetInRange = target && distance <= ally.range + ally.radius + target.radius;
@@ -3260,10 +3674,12 @@
       summonTimers[unit.id] = next <= SUMMON_READY_EPSILON ? 0 : next;
     }
     summonUiRefreshTimer += dt;
-    if (summonUiRefreshTimer >= SUMMON_UI_REFRESH_INTERVAL) {
-      summonUiRefreshTimer %= SUMMON_UI_REFRESH_INTERVAL;
+    const summonRefreshInterval = lowPowerMode ? LOW_POWER_UI_REFRESH_INTERVAL : SUMMON_UI_REFRESH_INTERVAL;
+    if (summonUiRefreshTimer >= summonRefreshInterval) {
+      summonUiRefreshTimer %= summonRefreshInterval;
       refreshUnitButtonAvailability();
     }
+    battleUiRefreshTimer += dt;
 
     if (endlessMode) updateEndlessMode(dt);
     else updateWaveSystem(dt);
@@ -3284,7 +3700,7 @@
     }
 
     autoSaveTimer += dt;
-    if (autoSaveTimer >= 5) {
+    if (autoSaveTimer >= (lowPowerMode ? 15 : 10)) {
       saveGame({ silent: true });
       autoSaveTimer = 0;
     }
@@ -3292,10 +3708,13 @@
     messageTimeout = Math.max(0, messageTimeout - dt);
     if (messageTimeout <= 0) $('battleMessage').classList.remove('show');
 
-    updateHud();
-    renderUnitButtons();
-    renderUpgradePanel();
-    updatePauseButton();
+    if (battleUiRefreshTimer >= currentUiRefreshInterval()) {
+      battleUiRefreshTimer %= currentUiRefreshInterval();
+      updateHud();
+      renderUnitButtons();
+      renderUpgradePanel();
+      updatePauseButton();
+    }
   }
 
   function finishGame(victory) {
@@ -3310,6 +3729,8 @@
     let defeatSupport = 0;
 
     if (!victory) {
+      const defeatKey = `stage${currentStageId}Defeats`;
+      cumulativeStats[defeatKey] = Math.max(0, Math.floor(finiteNumber(cumulativeStats[defeatKey], 0))) + 1;
       const reachedWave = currentWaveIndex + 1;
       defeatSupport = Math.min(
         D.defeatSupportMaxCoins,
@@ -3344,11 +3765,12 @@
       ? nextStage
         ? `Stage ${currentStageId}クリア！ Stage ${nextStage.id}「${nextStage.name}」が解放されました。化学レベル・実績・累計記録は持ち越し、次のステージのコイン・解放・研究レベルは新しく始まります。今回の撃破${runStats.enemiesDefeated}体、獲得${runStats.coinsEarned}コインです。`
         : `Stage ${currentStageId}クリア！ 現在実装されている全${Object.keys(STAGE_LIBRARY).length}研究区を制覇しました。今回の撃破${runStats.enemiesDefeated}体、獲得${runStats.coinsEarned}コインです。`
-      : `Stage ${currentStageId}の第${currentWaveIndex + 1}ウェーブ、化学レベル${level}で味方拠点が破壊されました。研究支援として${defeatSupport}コインを獲得しました。今回の合計獲得は${runStats.coinsEarned}コインです。解放・強化を保ったまま再挑戦できます。${currentStageId === 6 ? ' 攻略ヒント：敵はすべて弱酸由来です。第5ユニットの強酸と属性相性を確認してみましょう。' : currentStageId === 7 ? ' 攻略ヒント：敵はすべて弱塩基由来です。第5ユニットの強塩基と属性相性を確認してみましょう。' : currentStageId === 8 ? ' 攻略ヒント：Wave 10ではBOSS出現時に場の味方がすべて倒されます。Energy上限をLv.3以上へ拡張し、125以上を蓄えてからBOSSへ入り、直後に盾・攻撃役を再展開しましょう。' : ''}`;
+      : `Stage ${currentStageId}の第${currentWaveIndex + 1}ウェーブ、化学レベル${level}で味方拠点が破壊されました。研究支援として${defeatSupport}コインを獲得しました。今回の合計獲得は${runStats.coinsEarned}コインです。解放・強化を保ったまま再挑戦できます。${currentStageId === 6 ? ' 攻略ヒント：敵はすべて弱酸由来です。第5ユニットの強酸と属性相性を確認してみましょう。' : currentStageId === 7 ? ' 攻略ヒント：敵はすべて弱塩基由来です。第5ユニットの強塩基と属性相性を確認してみましょう。' : currentStageId === 8 ? ' 攻略ヒント：Wave 10ではBOSS出現時に場の味方がすべて倒されます。Energy上限をLv.3以上へ拡張し、125以上を蓄えてからBOSSへ入り、直後に盾・攻撃役を再展開しましょう。' : currentStageId === 9 ? ' 攻略ヒント：遠距離攻撃は禁止です。Alで敵射手へ接近し、Feの近接範囲攻撃とH₂Oの回復で前線を維持しましょう。' : ''}`;
     const hasNextStage = victory && Boolean(STAGE_LIBRARY[currentStageId + 1]);
     $('nextStageBtn').hidden = !hasNextStage;
     if (hasNextStage) $('nextStageBtn').textContent = `ステージ${currentStageId + 1}へ進む`;
     $('continuePlayBtn').hidden = !victory;
+    $('endStageGuideBtn').hidden = victory;
     $('retryBtn').hidden = victory;
     $('endAchievementLink').textContent = newlyUnlocked.length > 0
       ? `🏆 新規達成：${newlyUnlocked.map((achievement) => achievement.title).join('・')}`
@@ -3713,6 +4135,7 @@
 
   function drawBackground() {
     ctx.clearRect(0, 0, cv.width, cv.height);
+    const visualTime = lowPowerMode ? 0 : gameTime;
 
     const sky = ctx.createLinearGradient(0, 0, 0, cv.height);
     const stageTwo = currentStageId === 2;
@@ -3781,7 +4204,7 @@
       ctx.globalAlpha = .25;
       for (let i = 0; i < 22; i += 1) {
         const x = (i * 59 + 21) % cv.width;
-        const y = 58 + ((i * 43 + gameTime * (5 + i % 3)) % 235);
+        const y = 58 + ((i * 43 + visualTime * (5 + i % 3)) % 235);
         const r = 2 + (i % 4);
         ctx.strokeStyle = i % 3 ? '#9eeeff' : '#d6fbff';
         ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.stroke();
@@ -3796,16 +4219,16 @@
     }
     if (stageSeven) {
       ctx.globalAlpha=.25; ctx.strokeStyle='#e6c8ff'; ctx.fillStyle='#e6c8ff';
-      for(let i=0;i<18;i+=1){const x=(i*71-gameTime*(4+i%3))%(cv.width+80)-40;const y=62+((i*43)%210);ctx.beginPath();ctx.arc(x,y,3+(i%3),0,Math.PI*2);ctx.stroke();ctx.font='800 8px sans-serif';ctx.fillText(i%3===0?'OH⁻':'+',x+8,y-7);}
+      for(let i=0;i<18;i+=1){const x=(i*71-visualTime*(4+i%3))%(cv.width+80)-40;const y=62+((i*43)%210);ctx.beginPath();ctx.arc(x,y,3+(i%3),0,Math.PI*2);ctx.stroke();ctx.font='800 8px sans-serif';ctx.fillText(i%3===0?'OH⁻':'+',x+8,y-7);}
     }
     if (stageSix) {
       ctx.globalAlpha=.25; ctx.strokeStyle='#d9ff8b'; ctx.fillStyle='#d9ff8b';
-      for(let i=0;i<18;i+=1){const x=(i*71+gameTime*(4+i%3))%(cv.width+80)-40;const y=62+((i*43)%210);ctx.beginPath();ctx.arc(x,y,3+(i%3),0,Math.PI*2);ctx.stroke();ctx.font='800 8px sans-serif';ctx.fillText(i%3===0?'H⁺':'−',x+8,y-7);}
+      for(let i=0;i<18;i+=1){const x=(i*71+visualTime*(4+i%3))%(cv.width+80)-40;const y=62+((i*43)%210);ctx.beginPath();ctx.arc(x,y,3+(i%3),0,Math.PI*2);ctx.stroke();ctx.font='800 8px sans-serif';ctx.fillText(i%3===0?'H⁺':'−',x+8,y-7);}
     }
     if (stageFive) {
       ctx.globalAlpha = .28;
       for (let i = 0; i < 20; i += 1) {
-        const x = (i * 67 + gameTime * (10 + i % 4)) % (cv.width + 80) - 40;
+        const x = (i * 67 + visualTime * (10 + i % 4)) % (cv.width + 80) - 40;
         const y = 58 + ((i * 47) % 205);
         ctx.strokeStyle = i % 2 ? '#ffd779' : '#ff9b84';
         ctx.beginPath();ctx.moveTo(x-10,y+5);ctx.quadraticCurveTo(x,y-9,x+10,y+5);ctx.stroke();
@@ -3881,6 +4304,7 @@
   }
 
   function unitRoleDescription(unit) {
+    if (stageBlocksRangedAlly(unit)) return '遠距離攻撃禁止：このStageでは攻撃できず、召喚もできません。';
     if (unit.flying) return '飛行：通常の地上近接攻撃を受けず、対空攻撃に弱い。時間経過による自傷ダメージはありません。';
     if (unit.healer) return '高性能単体回復：傷の深い味方1体を大きく回復';
     if (unit.guard) return `盾役：敵の攻撃を引き受け、被ダメージ${Math.round((unit.damageReduction || 0) * 100)}%軽減`;
@@ -3896,16 +4320,21 @@
     const summonCost = effectiveUnitCost(unit);
     const canAfford = energy >= summonCost;
     const tutorialAllowed = tutorialActive && tutorialStep === 1 && unit.id === tutorialTargetUnitId;
-    const ready = isUnlocked && cooldown === 0 && canAfford && (!paused || tutorialAllowed) && gameStatus === 'playing';
+    const rangedBlocked = isUnlocked && stageBlocksRangedAlly(unit);
+    const ready = isUnlocked && !rangedBlocked && cooldown === 0 && canAfford && (!paused || tutorialAllowed) && gameStatus === 'playing';
 
     refs.button.classList.toggle('locked', !isUnlocked);
     refs.button.classList.toggle('ready', ready);
-    refs.button.disabled = (paused && !tutorialAllowed) || gameStatus !== 'playing';
+    refs.button.classList.toggle('ranged-blocked', rangedBlocked);
+    refs.button.disabled = (paused && !tutorialAllowed) || gameStatus !== 'playing' || rangedBlocked;
 
     if (!isUnlocked) {
       const prerequisiteLocked = unit.unlockAfter && !unlocked.has(unit.unlockAfter);
       const previous = D.units.find((candidate) => candidate.id === unit.unlockAfter);
       refs.state.textContent = prerequisiteLocked ? `🔒 先に${previous?.formula || '前のユニット'}を解放` : `🔒 ${unit.unlockCost} COINで難問に挑戦`;
+      refs.cover.style.height = '0%';
+    } else if (rangedBlocked) {
+      refs.state.textContent = '⛔ 遠距離攻撃禁止：召喚不可';
       refs.cover.style.height = '0%';
     } else if (cooldown > 0) {
       refs.state.textContent = `再召喚まで ${cooldown.toFixed(1)}秒`;
@@ -4142,7 +4571,9 @@
         achievementState: JSON.parse(JSON.stringify(achievementState)),
         onboardingSeen,
         tutorialSeen,
-        mockExamProgress: JSON.parse(JSON.stringify(mockExamProgress))
+        mockExamProgress: JSON.parse(JSON.stringify(mockExamProgress)),
+        guestAssistEnabled,
+        guestAssistUsed
       },
       battle: {
         energy,
@@ -4228,6 +4659,10 @@
     }
     if ((cumulativeStats.highestStageCleared || 0) >= 8) {
       cumulativeStats.stage8Clears = Math.max(1, cumulativeStats.stage8Clears || 0);
+      cumulativeStats.highestStageReached = Math.max(9, cumulativeStats.highestStageReached || 1);
+    }
+    if ((cumulativeStats.highestStageCleared || 0) >= 9) {
+      cumulativeStats.stage9Clears = Math.max(1, cumulativeStats.stage9Clears || 0);
     }
     if ((cumulativeStats.highestStageCleared || 0) === 0 && cumulativeStats.totalClears > 0) {
       cumulativeStats.highestStageCleared = 1;
@@ -4235,6 +4670,9 @@
       cumulativeStats.stage1Clears = Math.max(cumulativeStats.stage1Clears || 0, cumulativeStats.totalClears);
     }
     achievementState = normalizeAchievementState(parsed.progress.achievementState);
+    guestAssistEnabled = Boolean(parsed.progress.guestAssistEnabled);
+    guestAssistUsed = Boolean(parsed.progress.guestAssistUsed || guestAssistEnabled);
+    updateGuestAssistUi();
     onboardingSeen = Boolean(parsed.progress.onboardingSeen);
     tutorialSeen = parsed.progress.tutorialSeen === undefined ? onboardingSeen : Boolean(parsed.progress.tutorialSeen);
     mockExamProgress = normalizeMockExamProgress(parsed.progress.mockExamProgress);
@@ -4303,6 +4741,11 @@
     }
     if (finiteNumber(savedStats.highestStageCleared, 0) >= 8) {
       savedStats.stage8Clears = Math.max(1, finiteNumber(savedStats.stage8Clears, 0));
+      savedStats.highestStageReached = Math.max(9, finiteNumber(savedStats.highestStageReached, 1));
+      repaired = true;
+    }
+    if (finiteNumber(savedStats.highestStageCleared, 0) >= 9) {
+      savedStats.stage9Clears = Math.max(1, finiteNumber(savedStats.stage9Clears, 0));
       repaired = true;
     }
     parsed.progress.mockExamProgress = normalizeMockExamProgress(parsed.progress.mockExamProgress);
@@ -4459,6 +4902,7 @@
       $('nextStageBtn').hidden = !hasNextStage;
       if (hasNextStage) $('nextStageBtn').textContent = `ステージ${currentStageId + 1}へ進む`;
       $('continuePlayBtn').hidden = !victory;
+      $('endStageGuideBtn').hidden = victory;
       $('retryBtn').hidden = victory;
       $('endModal').hidden = false;
     }
@@ -4546,7 +4990,10 @@
       learning: localStorage.getItem(LEARNING_KEY),
       nickname: localStorage.getItem(TRANSFER_NICK_KEY),
       onlineSeen: localStorage.getItem(TRANSFER_ONLINE_SEEN_KEY),
-      sound: localStorage.getItem(SOUND_KEY)
+      sound: localStorage.getItem(SOUND_KEY),
+      bgm: localStorage.getItem(BGM_KEY),
+      bgmVolume: localStorage.getItem(BGM_VOLUME_KEY),
+      lowPower: localStorage.getItem(LOW_POWER_KEY)
     };
   }
 
@@ -4608,8 +5055,19 @@
       writeTransferValue(TRANSFER_NICK_KEY, bundle.storage.nickname);
       writeTransferValue(TRANSFER_ONLINE_SEEN_KEY, bundle.storage.onlineSeen);
       writeTransferValue(SOUND_KEY, bundle.storage.sound);
+      writeTransferValue(BGM_KEY, bundle.storage.bgm);
+      writeTransferValue(BGM_VOLUME_KEY, bundle.storage.bgmVolume);
+      writeTransferValue(LOW_POWER_KEY, bundle.storage.lowPower);
       soundEnabled = localStorage.getItem(SOUND_KEY) !== 'off';
+      bgmEnabled = localStorage.getItem(BGM_KEY) !== 'off';
+      const importedBgmVolumeRaw = localStorage.getItem(BGM_VOLUME_KEY);
+      const importedBgmVolume = importedBgmVolumeRaw === null ? NaN : Number(importedBgmVolumeRaw);
+      bgmVolume = Number.isFinite(importedBgmVolume) ? clamp(importedBgmVolume, 0, 1) : 0.35;
+      lowPowerMode = localStorage.getItem(LOW_POWER_KEY) === 'on';
       updateSoundButtons();
+      updateMusicControls();
+      updatePowerControls();
+      syncBgmPlayback();
       $('transferModal').hidden = true;
       $('settingsModal').hidden = true;
       const loaded = loadGame({ silent: false });
@@ -4650,6 +5108,9 @@
     localStorage.removeItem(REVIEW_KEY);
     localStorage.removeItem(LEARNING_KEY);
     localStorage.removeItem(SPEED_TRIAL_RETRY_KEY);
+    guestAssistEnabled = false;
+    guestAssistUsed = false;
+    updateGuestAssistUi();
     speedTrialRetryAt = 0;
     mockExamProgress = defaultMockExamProgress();
     activeMockReward = null;
@@ -4667,6 +5128,11 @@
 
   const updateNotices = [
     __CURRENT_UPDATE_NOTICE__,
+    {version:'v5.4',title:'Stage 9・遠距離攻撃禁止',body:'Stage 9「近接反応・射程封鎖区」を追加しました。遠距離攻撃ユニットは召喚不可となり、Mg・Al・Fe・H₂OでBOSS BaSO₄を攻略します。',isNew:false},
+    {version:'v5.3',title:'Stage攻略情報',body:'Stage選択画面と敗北画面へ攻略情報を追加し、敗北回数に応じて段階的に具体化するヒントと敗北分析を実装しました。',isNew:false},
+    {version:'v5.2',title:'安全な単一ZIP公開',body:'公開物を完全性検査付きchemion-release.zipへ統一し、破損や版不一致がある場合は公開を停止する方式へ移行しました。',isNew:false},
+    {version:'v5.1',title:'学習データを一から取り直す',body:'設定と学習記録画面に、ゲーム進行を維持したまま正誤履歴・習熟度・復習予定・間違い復習だけを初期化する機能を追加しました。確認語の入力で誤操作も防ぎます。',isNew:false},
+    {version:'v5.0',title:'Stage 8・蓄積急襲BOSS',body:'Stage 8「蓄積急襲区」を追加しました。Wave 10では味方が全消去され、通常BOSS級ではないHPとLv.MAX強襲型を上回る速度を持つO₃へ、蓄えたEnergyから再展開して挑みます。',isNew:false},
     {version:'v4.6',title:'Stage 7・弱塩基の遊離',body:'Stage 6の塩基版として、弱塩基由来陽イオン100％のStage 7を追加しました。第5ユニットKOHの強塩基が1.4倍になり、BOSSは予告後に増援を召集します。',isNew:false},
     {version:'v4.5',title:'半反応式・飛行型調整・Stage 6',body:'半反応式の基本40問・難問30問を追加し、飛行型の時間経過自傷を廃止しました。弱酸由来陰イオン100％のStage 6と、増援を召集するBOSSを追加しました。',isNew:false},
     {version:'v4.45',title:'全員で要望を管理',body:'v4.4の修正を統合し、管理者登録方式を廃止しました。ログイン済みの全ユーザーが、すべての要望を実装済み／検討中へ変更し、確認後に削除できます。',isNew:false},
@@ -4701,6 +5167,13 @@
   ];
   const updateHistory = [
     __CURRENT_UPDATE_HISTORY__,
+    ['v5.4','Stage 9「近接反応・射程封鎖区」を追加。遠距離攻撃を禁止し、近接・盾・回復でBaSO₄を突破する制限攻略を実装。'],
+    ['v5.3','Stage 1〜8の攻略情報、敗北原因分析、敗北回数に応じた段階式ヒントを追加。'],
+    ['v5.2','完全性検査付きの単一chemion-release.zip公開方式へ移行。'],
+    ['v5.1','学習データ初期化を追加。正誤回数、習熟度、復習予定、間違い復習、直近出題履歴だけを削除して未学習状態から記録を取り直せる。コイン、Stage進行、解放、強化、実績、実戦問題の初回報酬記録は維持。'],
+    ['v5.4','Stage 9「近接反応・射程封鎖区」を追加。遠距離攻撃ユニットは召喚不可、回復は使用可能。BOSS BaSO₄を近接編成で突破する制限攻略を実装。'],
+    ['v5.3','Stage 1〜8の攻略情報、敗北分析、段階式ヒントを追加。'],
+    ['v5.0','Stage 8「蓄積急襲区」を追加。Wave 10のO₃は第二形態なし・一般敵に近いHP・Lv.MAX強襲型より高い速度を持ち、出現時に全味方を消去。Energy上限をLv.12・最大265へ拡張し、125以上を蓄えて再展開する攻略を追加。'],
     ['v4.6','弱塩基由来陽イオン100％のStage 7「弱塩基遊離区」を追加。第5ユニットKOHの強塩基で弱塩基の遊離が発生し1.4倍。BOSSは予告後に増援を召集。'],
     ['v4.5','半反応式の基本40問・難問30問を追加。飛行型の時間経過自傷を廃止し、弱酸由来陰イオン100％のStage 6「弱酸遊離区」を追加。BOSSは予告後に弱酸由来イオンを召集。'],
     ['v4.45','v4.4の全修正を統合し、requestAdmins方式を廃止。匿名認証を含むログイン済みの全ユーザーが、すべての要望を実装済み／検討中へ変更し、削除できる方式へ変更。'],
@@ -4742,7 +5215,54 @@
 
   window.cqPauseOverlay = pauseForOverlay;
   window.cqResumeOverlay = resumeFromOverlay;
-  function openSettings() { pauseForOverlay(); $('settingsModal').hidden = false; }
+  function updateGuestAssistUi() {
+    if ($('guestAssistIndicator')) $('guestAssistIndicator').hidden = !guestAssistEnabled;
+    if ($('guestAssistDisableBtn')) $('guestAssistDisableBtn').hidden = !guestAssistEnabled;
+    if ($('guestAssistCodeBtn')) $('guestAssistCodeBtn').hidden = guestAssistEnabled;
+    if ($('guestAssistCode')) {
+      $('guestAssistCode').disabled = guestAssistEnabled;
+      if (guestAssistEnabled) $('guestAssistCode').value = '';
+    }
+    if ($('guestAssistCodeStatus') && guestAssistEnabled) $('guestAssistCodeStatus').textContent = 'ゲストアシスト中';
+  }
+
+  function requestGuestAssist() {
+    const code = String($('guestAssistCode')?.value || '').trim().toLowerCase();
+    if (code !== 'easy') {
+      $('guestAssistCodeStatus').textContent = 'コードを確認してください';
+      return;
+    }
+    $('guestAssistCodeStatus').textContent = '';
+    $('guestAssistConfirmModal').hidden = false;
+    pauseForOverlay();
+  }
+
+  function closeGuestAssistConfirmation() {
+    if ($('guestAssistConfirmModal').hidden) return;
+    $('guestAssistConfirmModal').hidden = true;
+    resumeFromOverlay();
+    $('guestAssistCode')?.focus();
+  }
+
+  function enableGuestAssist() {
+    guestAssistEnabled = true;
+    guestAssistUsed = true;
+    $('guestAssistConfirmModal').hidden = true;
+    resumeFromOverlay();
+    updateGuestAssistUi();
+    saveGame({ silent: true });
+    window.dispatchEvent(new CustomEvent('cq-guest-assist-changed', { detail: { enabled: true, used: true } }));
+  }
+
+  function disableGuestAssist() {
+    guestAssistEnabled = false;
+    updateGuestAssistUi();
+    $('guestAssistCodeStatus').textContent = '';
+    saveGame({ silent: true });
+    window.dispatchEvent(new CustomEvent('cq-guest-assist-changed', { detail: { enabled: false, used: guestAssistUsed } }));
+  }
+
+  function openSettings() { pauseForOverlay(); updateGuestAssistUi(); $('settingsModal').hidden = false; }
   function closeSettings() { if ($('settingsModal').hidden) return; $('settingsModal').hidden = true; resumeFromOverlay(); }
 
   function createPracticeButton(label, description, config) {
@@ -4805,8 +5325,9 @@
       isHard,
       mode: practiceSession.forceReviewMode ? 'review' : 'practice',
       allowOutsideGame: true,
-      onComplete: (correct) => {
-        if (correct) practiceSession.correct += 1;
+      onComplete: (correct, result = {}) => {
+        if (result.assisted) practiceSession.assisted = true;
+        else if (correct) practiceSession.correct += 1;
         practiceSession.index += 1;
         if (practiceSession.index < practiceSession.questions.length) launchPracticeQuestion();
         else finishPractice();
@@ -4820,6 +5341,10 @@
     $('infoModal').hidden = false;
     $('infoKicker').textContent = 'PRACTICE RESULT';
     $('infoTitle').textContent = `${result.label} 結果`;
+    if (result.assisted) {
+      $('infoContent').innerHTML = '<p class="modal-lead">ゲストアシスト中のため、練習結果は成績・学習記録に反映されません。</p>';
+      return;
+    }
     const rate = percent(result.correct, result.questions.length);
     $('infoContent').innerHTML = `<div class="learning-summary-grid"><article class="learning-card"><span>正解</span><strong>${result.correct} / ${result.questions.length}</strong></article><article class="learning-card"><span>正答率</span><strong>${rate}%</strong></article></div><p class="modal-lead">結果は学習記録に反映されました。練習モードでは戦闘報酬は発生しません。</p>`;
   }
@@ -4839,6 +5364,19 @@
       grid.append(card);
     }
     container.append(grid);
+    const resetPanel = document.createElement('section');
+    resetPanel.className = 'learning-reset-inline';
+    resetPanel.innerHTML = '<h3>学習データを取り直す</h3><p>正誤履歴、習熟度、復習間隔、間違い復習を削除し、すべて未学習から再開します。コインやStage進行などは残ります。</p>';
+    const resetActions = document.createElement('div');
+    resetActions.className = 'learning-reset-inline-actions';
+    const resetButton = document.createElement('button');
+    resetButton.type = 'button';
+    resetButton.className = 'small-button danger';
+    resetButton.textContent = '学習データを初期化';
+    resetButton.addEventListener('click', () => openLearningResetModal('learning'));
+    resetActions.append(resetButton);
+    resetPanel.append(resetActions);
+    container.append(resetPanel);
   }
 
   function renderReviewView(container) {
@@ -4942,9 +5480,12 @@
       title: exam.title,
       mode: 'mock',
       allowOutsideGame: true,
-      onComplete: (correct) => {
-        mockExamSession.results.push(Boolean(correct));
-        if (correct) mockExamSession.correct += 1;
+      onComplete: (correct, result = {}) => {
+        if (result.assisted) mockExamSession.assisted = true;
+        else {
+          mockExamSession.results.push(Boolean(correct));
+          if (correct) mockExamSession.correct += 1;
+        }
         mockExamSession.index += 1;
         if (mockExamSession.index < exam.questions.length) launchMockExamQuestion();
         else finishMockExam();
@@ -4965,6 +5506,14 @@
   function finishMockExam() {
     const session = mockExamSession;
     mockExamSession = null;
+    if (session.assisted) {
+      $('infoModal').hidden = false;
+      $('infoKicker').textContent = 'MOCK EXAM';
+      $('infoTitle').textContent = session.exam.title;
+      $('infoContent').innerHTML = '<p class="modal-lead">ゲストアシスト中のため、実戦問題の成績・報酬・学習記録には反映されません。</p>';
+      saveGame({ silent: true });
+      return;
+    }
     const { exam, correct, startedAt } = session;
     const elapsed = Date.now() - startedAt;
     const passed = correct >= Math.max(1, exam.passScore || 3);
@@ -5118,8 +5667,18 @@
     $('soundBtn').addEventListener('click', toggleSound);
     $('pauseSoundBtn').addEventListener('click', toggleSound);
     $('settingsSoundBtn').addEventListener('click', toggleSound);
+    $('settingsMusicBtn').addEventListener('click', toggleBgm);
+    $('pauseMusicBtn').addEventListener('click', toggleBgm);
+    $('settingsPowerBtn').addEventListener('click', toggleLowPowerMode);
+    $('pausePowerBtn').addEventListener('click', toggleLowPowerMode);
+    $('musicVolume').addEventListener('input', (event) => setBgmVolume(event.currentTarget.value));
     $('stageBtn').addEventListener('click', openStageModal);
     $('stageCloseBtn').addEventListener('click', closeStageModal);
+    $('stageGuideCloseBtn').addEventListener('click', closeStageGuide);
+    $('stageGuideCloseBottomBtn').addEventListener('click', closeStageGuide);
+    $('stageGuideSelectBtn').addEventListener('click', selectStageFromGuide);
+    $('stageGuideRetryBtn').addEventListener('click', retryStageFromGuide);
+    $('endStageGuideBtn').addEventListener('click', () => openStageGuide(currentStageId, { source: 'defeat' }));
     $('settingsBtn').addEventListener('click', openSettings);
     $('settingsCloseBtn').addEventListener('click', closeSettings);
     $('settingsGuideBtn').addEventListener('click', () => { closeSettings(); openGuide({ firstLaunch:false }); });
@@ -5131,6 +5690,12 @@
     $('settingsTransferBtn').addEventListener('click', openTransferModal);
     $('settingsSaveBtn').addEventListener('click', () => { saveGame(); closeSettings(); });
     $('settingsLoadBtn').addEventListener('click', () => { loadGame(); closeSettings(); });
+    $('guestAssistCodeBtn').addEventListener('click', requestGuestAssist);
+    $('guestAssistCode').addEventListener('keydown', (event) => { if (event.key === 'Enter') requestGuestAssist(); });
+    $('guestAssistEnableBtn').addEventListener('click', enableGuestAssist);
+    $('guestAssistCancelBtn').addEventListener('click', closeGuestAssistConfirmation);
+    $('guestAssistDisableBtn').addEventListener('click', disableGuestAssist);
+    $('settingsLearningResetBtn').addEventListener('click', () => openLearningResetModal('settings'));
     $('settingsDeleteBtn').addEventListener('click', () => { closeSettings(); deleteSave(); });
     $('settingsNicknameBtn').addEventListener('click', () => { closeSettings(); window.dispatchEvent(new CustomEvent('cq-open-profile')); });
     document.querySelectorAll('[data-settings-view]').forEach(btn=>btn.addEventListener('click',()=>{const v=btn.dataset.settingsView;if(['notice','history','review','learning','practice','mock','app'].includes(v))showInfoView(v);else if(v==='requests'){ $('settingsModal').hidden=true; window.dispatchEvent(new CustomEvent('cq-open-requests')); }else{ $('settingsModal').hidden=true; window.dispatchEvent(new CustomEvent('cq-submit-request')); }}));
@@ -5142,6 +5707,11 @@
     $('transferClearBtn').addEventListener('click', () => { $('transferCode').value = ''; setTransferStatus('入力欄を空にしました。'); });
     $('transferBackBtn').addEventListener('click', closeTransferToSettings);
     $('transferCloseBtn').addEventListener('click', closeTransferModal);
+    $('learningResetCloseBtn').addEventListener('click', closeLearningResetModal);
+    $('learningResetCancelBtn').addEventListener('click', closeLearningResetModal);
+    $('learningResetConfirmInput').addEventListener('input', updateLearningResetConfirmation);
+    $('learningResetConfirmInput').addEventListener('keydown', (event) => { if (event.key === 'Enter' && !$('learningResetExecuteBtn').disabled) resetLearningData(); });
+    $('learningResetExecuteBtn').addEventListener('click', resetLearningData);
     $('tutorialSkipBtn').addEventListener('click', () => finishTutorial(true));
     $('tutorialActionBtn').addEventListener('click', () => tutorialAction?.());
     document.addEventListener('pointerdown', guardTutorialPointer, true);
@@ -5167,12 +5737,14 @@
       if (event.key !== 'Escape') return;
       if (tutorialActive) finishTutorial(true);
       else if (!$('transferModal').hidden) closeTransferModal();
+      else if (!$('guestAssistConfirmModal').hidden) closeGuestAssistConfirmation();
       else if (!$('achievementModal').hidden) closeAchievements();
+      else if (!$('stageGuideModal').hidden) closeStageGuide();
       else if (!$('stageModal').hidden) closeStageModal();
       else if (!$('guideModal').hidden && $('guideModal').dataset.firstLaunch !== 'true') closeGuide();
       else if (!$('pauseModal').hidden) resumeBattle();
     });
-    document.addEventListener('pointerdown', () => ensureAudioContext(), { once: true, passive: true });
+    document.addEventListener('pointerdown', () => { ensureAudioContext(); activateBgmFromUserGesture(); }, { once: true, passive: true });
     cv.addEventListener('pointerdown', (event) => {
       const entity = entityAtCanvasPoint(canvasPointFromEvent(event));
       if (entity) {
@@ -5186,17 +5758,28 @@
       cv.style.cursor = entity ? 'pointer' : 'default';
     });
     document.addEventListener('visibilitychange', () => {
-      if (document.hidden) suspendForHiddenPage();
-      else if (manualPaused && gameStatus === 'playing') showPauseModal(pauseReason === 'background' ? 'background' : pauseReason);
+      updatePowerControls();
+      if (document.hidden) { pauseBgm(); suspendForHiddenPage(); }
+      else { lastTimestamp = performance.now(); lastRenderedTimestamp = 0; syncBgmPlayback(); if (manualPaused && gameStatus === 'playing') showPauseModal(pauseReason === 'background' ? 'background' : pauseReason); }
     });
-    window.addEventListener('pagehide', suspendForHiddenPage);
+    window.addEventListener('pagehide', () => { pauseBgm(); suspendForHiddenPage(); });
   }
 
   function animationLoop(timestamp) {
+    const targetFps = currentRenderFps();
+    const frameInterval = targetFps > 0 ? 1000 / targetFps : Infinity;
+    if (targetFps === 0 || (lastRenderedTimestamp > 0 && timestamp - lastRenderedTimestamp < frameInterval)) {
+      requestAnimationFrame(animationLoop);
+      return;
+    }
+    const elapsedSinceRender = lastRenderedTimestamp > 0 ? timestamp - lastRenderedTimestamp : frameInterval;
     const rawDt = Math.max(0, (timestamp - lastTimestamp) / 1000);
     const realDt = Math.min(0.25, rawDt);
     const dt = Math.min(0.1, realDt);
     lastTimestamp = timestamp;
+    lastRenderedTimestamp = lastRenderedTimestamp > 0
+      ? timestamp - (elapsedSinceRender % frameInterval)
+      : timestamp;
 
     if (!paused && gameStatus === 'playing') {
       const speed = activeBattleSpeed();
@@ -5231,6 +5814,8 @@
     tutorialSeen = false;
     tutorialPending = false;
     tutorialActive = false;
+    guestAssistEnabled = false;
+    guestAssistUsed = false;
 
     buildUnitButtons();
     buildFormulaGuide();
@@ -5240,14 +5825,18 @@
     renderInlineGuideVisuals();
     updateScopeButton();
     updateSoundButtons();
+    updateMusicControls();
+    updatePowerControls();
+    updateGuestAssistUi();
     updatePauseButton();
 
     const launchGate = $('mobileLaunchGate');
     const isMobileDevice = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
     if (launchGate) {
       if (!isMobileDevice) launchGate.hidden = true;
-      $('launchContinueBtn')?.addEventListener('click', () => { launchGate.hidden = true; syncPauseStateFromUi(); setTimeout(maybeStartPendingTutorial, 120); });
+      $('launchContinueBtn')?.addEventListener('click', () => { activateBgmFromUserGesture(); launchGate.hidden = true; syncPauseStateFromUi(); setTimeout(maybeStartPendingTutorial, 120); });
       $('launchHelpBtn')?.addEventListener('click', () => {
+        activateBgmFromUserGesture();
         launchGate.hidden = true;
         syncPauseStateFromUi();
         openGuide({ firstLaunch: true });

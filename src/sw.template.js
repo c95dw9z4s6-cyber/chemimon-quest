@@ -11,7 +11,9 @@ const APP_SHELL = [
   './icons/icon-192.png',
   './icons/icon-512.png',
   './icons/icon-maskable-512.png',
-  './icons/apple-touch-icon.png'
+  './icons/apple-touch-icon.png',
+  './assets/audio/chemion-normal-bgm.mp3',
+  './assets/audio/chemion-difficult-bgm.mp3'
 ];
 
 async function cacheShell() {

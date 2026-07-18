@@ -13580,5 +13580,2617 @@
       "正解です。原子数と電荷がそろっています。"
     ],
     "calculation": true
+  },
+  {
+    "q": "常温の水にNaを加えたときの主な生成物の組合せはどれか。",
+    "options": [
+      "NaOHとH₂",
+      "Na₂OとH₂",
+      "NaHとO₂",
+      "Na₂O₂とH₂O"
+    ],
+    "answer": 0,
+    "explanation": "2Na+2H₂O→2NaOH+H₂。Naは水を還元してH₂を発生させ、自身はNa⁺になります。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0001",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "金属・酸化還元反応を条件と生成物から判断する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:001",
+    "optionFeedback": [
+      "正解です。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "常温の水にCaを加えたときに生じる塩基はどれか。",
+    "options": [
+      "CaO",
+      "Ca(OH)₂",
+      "CaH₂",
+      "CaCO₃"
+    ],
+    "answer": 1,
+    "explanation": "Ca+2H₂O→Ca(OH)₂+H₂。冷水との反応では水酸化物が生じます。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0002",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "金属・酸化還元反応を条件と生成物から判断する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:001",
+    "optionFeedback": [
+      "反応条件・酸化数・電子配置を確認してください。",
+      "正解です。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "Mgと水の反応について最も適切な記述はどれか。",
+    "options": [
+      "冷水と激しく反応してMgOを生じる",
+      "水蒸気とは反応せず冷水とのみ反応する",
+      "冷水とは非常に遅く反応し、水蒸気とは反応してMgOとH₂を生じる",
+      "冷水・水蒸気のどちらとも全く反応しない"
+    ],
+    "answer": 2,
+    "explanation": "Mgは清浄な表面では冷水とわずかに反応しますが、表面皮膜のため遅いです。水蒸気とはMg+H₂O→MgO+H₂と反応します。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0003",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "金属・酸化還元反応を条件と生成物から判断する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:001",
+    "optionFeedback": [
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "正解です。",
+      "反応条件・酸化数・電子配置を確認してください。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "Mgを水蒸気中で加熱したときの固体生成物はどれか。",
+    "options": [
+      "Mg(OH)₂",
+      "MgH₂",
+      "Mg₂O₃",
+      "MgO"
+    ],
+    "answer": 3,
+    "explanation": "高温の水蒸気との反応では水酸化物ではなく酸化物MgOが生成します。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0004",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "金属・酸化還元反応を条件と生成物から判断する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:001",
+    "optionFeedback": [
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "正解です。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "Feを高温の水蒸気と反応させたとき、高校化学で代表的に扱う酸化物はどれか。",
+    "options": [
+      "Fe₃O₄",
+      "FeOのみ",
+      "Fe₂O₃のみ",
+      "Fe(OH)₃"
+    ],
+    "answer": 0,
+    "explanation": "3Fe+4H₂O→Fe₃O₄+4H₂。鉄は冷水とはほぼ反応しませんが、高温の水蒸気とは反応します。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0005",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "金属・酸化還元反応を条件と生成物から判断する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:002",
+    "optionFeedback": [
+      "正解です。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "Cuと水の反応について正しいものはどれか。",
+    "options": [
+      "冷水と激しく反応する",
+      "冷水にも水蒸気にも通常は反応しない",
+      "水蒸気と反応してCuOとH₂を生じる",
+      "冷水と反応してCu(OH)₂を生じる"
+    ],
+    "answer": 1,
+    "explanation": "Cuはイオン化傾向がHより小さく、水からH₂を発生させる反応は通常起こりません。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0006",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "金属・酸化還元反応を条件と生成物から判断する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:002",
+    "optionFeedback": [
+      "反応条件・酸化数・電子配置を確認してください。",
+      "正解です。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "Znを希塩酸に加えたとき発生する気体はどれか。",
+    "options": [
+      "Cl₂",
+      "O₂",
+      "H₂",
+      "CO₂"
+    ],
+    "answer": 2,
+    "explanation": "Zn+2HCl→ZnCl₂+H₂。ZnはHよりイオン化傾向が大きいため、希酸からH₂を発生させます。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0007",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "金属・酸化還元反応を条件と生成物から判断する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:002",
+    "optionFeedback": [
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "正解です。",
+      "反応条件・酸化数・電子配置を確認してください。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "Cuを希塩酸に入れたときの変化として適切なものはどれか。",
+    "options": [
+      "CuCl₂とH₂を生じる",
+      "CuOとH₂を生じる",
+      "Cl₂を発生して溶ける",
+      "通常は反応せずH₂も発生しない"
+    ],
+    "answer": 3,
+    "explanation": "CuはHよりイオン化傾向が小さいため、非酸化性の希塩酸からH₂を発生させません。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0008",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "金属・酸化還元反応を条件と生成物から判断する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:002",
+    "optionFeedback": [
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "正解です。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "Feを希硫酸に加えたとき主に生じる鉄イオンはどれか。",
+    "options": [
+      "Fe²⁺",
+      "Fe³⁺",
+      "Fe⁺",
+      "Fe⁶⁺"
+    ],
+    "answer": 0,
+    "explanation": "Fe+2H⁺→Fe²⁺+H₂。希硫酸との通常の反応ではFe(II)塩ができます。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0009",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "金属・酸化還元反応を条件と生成物から判断する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:003",
+    "optionFeedback": [
+      "正解です。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "Alがイオン化傾向の大きさの割に水と反応しにくい主因はどれか。",
+    "options": [
+      "Al原子が電子を失えないから",
+      "表面の緻密な酸化物皮膜",
+      "水がAlを完全に還元するから",
+      "Alが貴金属だから"
+    ],
+    "answer": 1,
+    "explanation": "Al表面の薄いAl₂O₃皮膜が内部を保護するため、熱力学的傾向だけから予想するほど反応しません。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0010",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "金属・酸化還元反応を条件と生成物から判断する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:003",
+    "optionFeedback": [
+      "反応条件・酸化数・電子配置を確認してください。",
+      "正解です。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "ZnをCuSO₄水溶液に入れたとき析出する金属はどれか。",
+    "options": [
+      "Zn",
+      "Fe",
+      "Cu",
+      "Ag"
+    ],
+    "answer": 2,
+    "explanation": "ZnはCuよりイオン化傾向が大きく、Zn→Zn²⁺、Cu²⁺→Cuの置換反応が起こります。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0011",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "金属・酸化還元反応を条件と生成物から判断する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:003",
+    "optionFeedback": [
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "正解です。",
+      "反応条件・酸化数・電子配置を確認してください。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "CuをAgNO₃水溶液に入れたとき析出する金属はどれか。",
+    "options": [
+      "Cu",
+      "Na",
+      "Zn",
+      "Ag"
+    ],
+    "answer": 3,
+    "explanation": "Cu+2Ag⁺→Cu²⁺+2Ag。Cuが酸化され、Ag⁺が還元されます。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0012",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "金属・酸化還元反応を条件と生成物から判断する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:003",
+    "optionFeedback": [
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "正解です。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "AgをCuSO₄水溶液に入れたときの変化はどれか。",
+    "options": [
+      "通常は置換反応が起こらない",
+      "Cuが析出してAg⁺が生じる",
+      "Ag₂Oが析出する",
+      "H₂が発生する"
+    ],
+    "answer": 0,
+    "explanation": "AgはCuよりイオン化傾向が小さく、Cu²⁺を還元してCuを析出させることはできません。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0013",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "金属・酸化還元反応を条件と生成物から判断する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:004",
+    "optionFeedback": [
+      "正解です。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "FeをCuSO₄水溶液に入れたときの正味イオン反応式はどれか。",
+    "options": [
+      "Cu+Fe²⁺→Cu²⁺+Fe",
+      "Fe+Cu²⁺→Fe²⁺+Cu",
+      "Fe²⁺+Cu²⁺→Fe³⁺+Cu",
+      "Fe+SO₄²⁻→FeSO₄"
+    ],
+    "answer": 1,
+    "explanation": "Feが酸化されてFe²⁺となり、Cu²⁺が還元されてCuとなります。SO₄²⁻は傍観イオンです。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0014",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "金属・酸化還元反応を条件と生成物から判断する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:004",
+    "optionFeedback": [
+      "反応条件・酸化数・電子配置を確認してください。",
+      "正解です。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "Mg、Zn、Cuのうち、希塩酸と最も速く反応しやすい金属はどれか。",
+    "options": [
+      "Zn",
+      "Cu",
+      "Mg",
+      "3つとも同程度"
+    ],
+    "answer": 2,
+    "explanation": "この3種ではイオン化傾向はMg>Zn>H>Cuで、Mgが最もH⁺を還元しやすいです。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0015",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "金属・酸化還元反応を条件と生成物から判断する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:004",
+    "optionFeedback": [
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "正解です。",
+      "反応条件・酸化数・電子配置を確認してください。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "金属MをCu²⁺水溶液に入れるとCuが析出した。この結果から確実にいえることはどれか。",
+    "options": [
+      "MはHより必ず小さい",
+      "MはAuである",
+      "Mは電子を受け取っている",
+      "MはCuよりイオン化傾向が大きい"
+    ],
+    "answer": 3,
+    "explanation": "Mが電子を放出し、その電子でCu²⁺がCuに還元されたため、MはCuより酸化されやすい金属です。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0016",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "金属・酸化還元反応を条件と生成物から判断する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:004",
+    "optionFeedback": [
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "正解です。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "金属Mを希酸に入れてH₂が発生した。この事実が直接示すことはどれか。",
+    "options": [
+      "MはHよりイオン化傾向が大きい",
+      "Mは必ずアルカリ金属である",
+      "MはHよりイオン化傾向が小さい",
+      "Mは酸化剤として働いた"
+    ],
+    "answer": 0,
+    "explanation": "Mが酸化され、H⁺が還元されてH₂となったことを示します。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0017",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "金属・酸化還元反応を条件と生成物から判断する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:005",
+    "optionFeedback": [
+      "正解です。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "金属が水からH₂を発生させる反応で、水中のHの酸化数はどう変化するか。",
+    "options": [
+      "0から+1へ上がる",
+      "+1から0へ下がる",
+      "−1から0へ上がる",
+      "+1のまま変化しない"
+    ],
+    "answer": 1,
+    "explanation": "H₂O中のHは+1、H₂中では0なので還元されています。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0018",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "金属・酸化還元反応を条件と生成物から判断する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:005",
+    "optionFeedback": [
+      "反応条件・酸化数・電子配置を確認してください。",
+      "正解です。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "Mg+2H⁺→Mg²⁺+H₂で還元剤として働く物質はどれか。",
+    "options": [
+      "H⁺",
+      "Mg²⁺",
+      "Mg",
+      "H₂"
+    ],
+    "answer": 2,
+    "explanation": "Mgは電子を放出してMg²⁺になるため、自身は酸化され、相手を還元する還元剤です。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0019",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "金属・酸化還元反応を条件と生成物から判断する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:005",
+    "optionFeedback": [
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "正解です。",
+      "反応条件・酸化数・電子配置を確認してください。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "反応Zn+Cu²⁺→Zn²⁺+Cuで、電子を受け取る酸化剤はどれか。",
+    "options": [
+      "Zn",
+      "Zn²⁺",
+      "Cu",
+      "Cu²⁺"
+    ],
+    "answer": 3,
+    "explanation": "Cu²⁺は電子を受け取ってCuに還元されるので酸化剤です。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0020",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "金属・酸化還元反応を条件と生成物から判断する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:005",
+    "optionFeedback": [
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "正解です。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "金属のイオン化傾向が大きいほど一般にどうなるか。",
+    "options": [
+      "陽イオンになりやすく、還元剤として働きやすい",
+      "電子を受け取りやすく酸化剤になりやすい",
+      "常に水と爆発的に反応する",
+      "必ず不動態になる"
+    ],
+    "answer": 0,
+    "explanation": "イオン化傾向は金属原子が電子を失って陽イオンになる傾向の目安です。実際の反応速度は皮膜などにも左右されます。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0021",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "金属・酸化還元反応を条件と生成物から判断する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:006",
+    "optionFeedback": [
+      "正解です。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "K、Ca、Zn、Cuをイオン化傾向の大きい順に並べたものはどれか。",
+    "options": [
+      "Cu>Zn>Ca>K",
+      "K>Ca>Zn>Cu",
+      "K>Zn>Ca>Cu",
+      "Ca>K>Cu>Zn"
+    ],
+    "answer": 1,
+    "explanation": "代表的な順序ではK、Caは非常に大きく、ZnはHより上、CuはHより下です。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0022",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "金属・酸化還元反応を条件と生成物から判断する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:006",
+    "optionFeedback": [
+      "反応条件・酸化数・電子配置を確認してください。",
+      "正解です。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "次のうち、冷水と反応して水酸化物とH₂を生じやすい金属はどれか。",
+    "options": [
+      "Cu",
+      "Ag",
+      "Ca",
+      "Au"
+    ],
+    "answer": 2,
+    "explanation": "Ca+2H₂O→Ca(OH)₂+H₂。Cu、Ag、Auは水とは通常反応しません。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0023",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "金属・酸化還元反応を条件と生成物から判断する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:006",
+    "optionFeedback": [
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "正解です。",
+      "反応条件・酸化数・電子配置を確認してください。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "次のうち、水蒸気と反応して酸化物とH₂を生じる代表例はどれか。",
+    "options": [
+      "Ag",
+      "Au",
+      "Cu",
+      "Zn"
+    ],
+    "answer": 3,
+    "explanation": "Zn+H₂O(g)→ZnO+H₂。Znは冷水とは反応しにくい一方、加熱した水蒸気とは反応します。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0024",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "金属・酸化還元反応を条件と生成物から判断する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:006",
+    "optionFeedback": [
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "正解です。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "Al粉末とFe₂O₃の反応でAlが果たす役割はどれか。",
+    "options": [
+      "還元剤",
+      "酸化剤",
+      "触媒",
+      "沈殿剤"
+    ],
+    "answer": 0,
+    "explanation": "Alが電子を放出してAl₂O₃となり、Fe₂O₃中のFeを単体Feへ還元します。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0025",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "金属・酸化還元反応を条件と生成物から判断する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:007",
+    "optionFeedback": [
+      "正解です。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "酸化銅(II)をH₂で加熱還元したときの生成物はどれか。",
+    "options": [
+      "Cu²⁺とOH⁻",
+      "CuとH₂O",
+      "CuH₂とO₂",
+      "CuO₂とH₂"
+    ],
+    "answer": 1,
+    "explanation": "CuO+H₂→Cu+H₂O。H₂が還元剤としてCuOから酸素を奪います。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0026",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "金属・酸化還元反応を条件と生成物から判断する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:007",
+    "optionFeedback": [
+      "反応条件・酸化数・電子配置を確認してください。",
+      "正解です。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "金属酸化物MOをCOで還元するとき、COの炭素の酸化数は一般にどう変化するか。",
+    "options": [
+      "+4から+2へ下がる",
+      "0から+2へ上がる",
+      "+2から+4へ上がる",
+      "−2から0へ上がる"
+    ],
+    "answer": 2,
+    "explanation": "CO中のCは+2、CO₂中のCは+4で、COは酸化されて還元剤として働きます。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0027",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "金属・酸化還元反応を条件と生成物から判断する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:007",
+    "optionFeedback": [
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "正解です。",
+      "反応条件・酸化数・電子配置を確認してください。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "次のうち、金属の反応性だけでは反応速度を正しく予測できない理由として最も適切なものはどれか。",
+    "options": [
+      "原子番号が常に同じだから",
+      "化学反応では電子移動が起こらないから",
+      "すべての金属は同じ電極電位をもつから",
+      "表面皮膜や温度などの速度論的要因があるから"
+    ],
+    "answer": 3,
+    "explanation": "イオン化傾向は反応の起こりやすさの一面ですが、保護皮膜や活性化エネルギー、温度も速度を左右します。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0028",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "金属・酸化還元反応を条件と生成物から判断する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:007",
+    "optionFeedback": [
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "正解です。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "「イオン化傾向が大きい金属ほど必ず冷水と激しく反応する」という説明が不十分な理由はどれか。",
+    "options": [
+      "Alのように保護皮膜で反応が抑えられる例があるから",
+      "金属は水と一切反応しないから",
+      "イオン化傾向は非金属にしか使わないから",
+      "冷水にはH原子が存在しないから"
+    ],
+    "answer": 0,
+    "explanation": "Alはイオン化傾向が大きい一方、酸化物皮膜により常温の水との反応が抑えられます。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0029",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "金属・酸化還元反応を条件と生成物から判断する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:008",
+    "optionFeedback": [
+      "正解です。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "次のうち、希硫酸からH₂を発生させない金属はどれか。",
+    "options": [
+      "Mg",
+      "Ag",
+      "Zn",
+      "Fe"
+    ],
+    "answer": 1,
+    "explanation": "AgはHよりイオン化傾向が小さいため、非酸化性の希硫酸からH₂を発生させません。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0030",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "金属・酸化還元反応を条件と生成物から判断する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:008",
+    "optionFeedback": [
+      "反応条件・酸化数・電子配置を確認してください。",
+      "正解です。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成",
+    "negativeQuestion": true,
+    "singleCorrectVerified": true
+  },
+  {
+    "q": "金属表面に緻密な皮膜が生じて反応が著しく進みにくくなる状態を何というか。",
+    "options": [
+      "中和",
+      "昇華",
+      "不動態",
+      "電離"
+    ],
+    "answer": 2,
+    "explanation": "不動態は表面の保護皮膜によって金属内部と溶液の接触が妨げられた状態です。用語として大学入試でも扱われます。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0031",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "金属・酸化還元反応を条件と生成物から判断する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:008",
+    "optionFeedback": [
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "正解です。",
+      "反応条件・酸化数・電子配置を確認してください。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "「不動態」の正しい漢字はどれか。",
+    "options": [
+      "不導態",
+      "不働体",
+      "不動体",
+      "不動態"
+    ],
+    "answer": 3,
+    "explanation": "正しくは「不動態」です。「動かない」の動を用います。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0032",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "金属・酸化還元反応を条件と生成物から判断する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:008",
+    "optionFeedback": [
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "正解です。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "濃硝酸中で不動態になりやすい代表的な金属の組合せはどれか。",
+    "options": [
+      "Fe、Al、Cr",
+      "Cu、Ag、Au",
+      "Na、K、Ca",
+      "Mg、Zn、Cu"
+    ],
+    "answer": 0,
+    "explanation": "高校化学ではFe、Al、Crが濃硝酸によって不動態を形成する代表例です。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0033",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "金属・酸化還元反応を条件と生成物から判断する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:009",
+    "optionFeedback": [
+      "正解です。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "不動態が生じる主因として最も適切なものはどれか。",
+    "options": [
+      "金属原子がすべて蒸発する",
+      "表面に連続した保護皮膜が形成される",
+      "溶液中のH⁺が完全になくなる",
+      "金属が非金属へ変化する"
+    ],
+    "answer": 1,
+    "explanation": "IUPACの定義でも、受動状態は金属と電解質を隔てる連続的な不動態皮膜で特徴付けられます。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0034",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "金属・酸化還元反応を条件と生成物から判断する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:009",
+    "optionFeedback": [
+      "反応条件・酸化数・電子配置を確認してください。",
+      "正解です。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "Alが空気中で比較的腐食しにくい理由はどれか。",
+    "options": [
+      "Alが酸素と全く反応しない",
+      "Alが水に溶けてなくなる",
+      "表面に薄いAl₂O₃皮膜をつくる",
+      "Alが常に陰極になる"
+    ],
+    "answer": 2,
+    "explanation": "Alは酸化されやすい金属ですが、生成した緻密な酸化物皮膜がそれ以上の腐食を抑えます。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0035",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "金属・酸化還元反応を条件と生成物から判断する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:009",
+    "optionFeedback": [
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "正解です。",
+      "反応条件・酸化数・電子配置を確認してください。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "鉄のさびとAlの保護皮膜の違いとして適切なものはどれか。",
+    "options": [
+      "どちらも完全に同じ構造である",
+      "鉄さびだけが金属内部を完全に遮断する",
+      "Al₂O₃皮膜は水に触れると必ず爆発する",
+      "鉄さびは一般に多孔質で保護性が低く、Al₂O₃皮膜は緻密で保護性が高い"
+    ],
+    "answer": 3,
+    "explanation": "皮膜が連続・緻密かどうかが、内部を保護できるかに重要です。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0036",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "金属・酸化還元反応を条件と生成物から判断する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:009",
+    "optionFeedback": [
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "正解です。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "不動態の金属に傷を付けて皮膜を破るとどうなり得るか。",
+    "options": [
+      "新しい金属表面が露出し、反応が再び進みやすくなる",
+      "金属が永久に反応不能になる",
+      "必ず中和反応だけが起こる",
+      "電子が存在しなくなる"
+    ],
+    "answer": 0,
+    "explanation": "皮膜が破れると溶液が金属本体へ接触できるため、再反応や再不動態化が起こり得ます。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0037",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "金属・酸化還元反応を条件と生成物から判断する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:010",
+    "optionFeedback": [
+      "正解です。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "不動態を「金属が化学的に全く反応できない状態」と説明するのが不正確な理由はどれか。",
+    "options": [
+      "不動態では金属が気体になるから",
+      "皮膜によって反応速度が抑えられているのであり、条件次第で皮膜が破壊・再形成されるから",
+      "不動態は酸塩基中和の別名だから",
+      "不動態は電子配置と無関係だから"
+    ],
+    "answer": 1,
+    "explanation": "不動態は絶対的な無反応ではなく、表面状態によって見かけの反応が抑制された状態です。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0038",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "金属・酸化還元反応を条件と生成物から判断する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:010",
+    "optionFeedback": [
+      "反応条件・酸化数・電子配置を確認してください。",
+      "正解です。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "濃硝酸がFeを溶かしにくくする場合、硝酸の役割として重要なのはどれか。",
+    "options": [
+      "Feを還元して単体Hを作ること",
+      "硝酸イオンが沈殿すること",
+      "強い酸化作用で保護皮膜形成を促すこと",
+      "溶液を完全に中性にすること"
+    ],
+    "answer": 2,
+    "explanation": "濃硝酸の酸化作用により表面が酸化され、緻密な皮膜が形成されて反応が進みにくくなります。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0039",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "金属・酸化還元反応を条件と生成物から判断する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:010",
+    "optionFeedback": [
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "正解です。",
+      "反応条件・酸化数・電子配置を確認してください。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "不動態の理解で区別すべき二つの観点はどれか。",
+    "options": [
+      "質量と体積は常に等しいか",
+      "酸と塩基は同一か",
+      "原子と分子は同一か",
+      "反応が熱力学的に可能かと、実際の速度が速いか"
+    ],
+    "answer": 3,
+    "explanation": "反応が可能でも、保護皮膜による大きな速度障壁があれば観察上はほとんど進みません。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0040",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "金属・酸化還元反応を条件と生成物から判断する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:010",
+    "optionFeedback": [
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "正解です。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "鉄の腐食を進めるために一般に必要なものの組合せはどれか。",
+    "options": [
+      "水と酸素",
+      "窒素とアルゴン",
+      "二酸化炭素だけ",
+      "真空と乾燥"
+    ],
+    "answer": 0,
+    "explanation": "通常の鉄さび形成には水と酸素が関与します。電解質があると腐食電池が働きやすくなります。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0041",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "金属・酸化還元反応を条件と生成物から判断する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:011",
+    "optionFeedback": [
+      "正解です。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "食塩水中で鉄が純水中より腐食しやすい主な理由はどれか。",
+    "options": [
+      "NaClが鉄を金へ変える",
+      "イオンにより溶液の電気伝導性が高まり、腐食電池が進みやすい",
+      "Cl⁻が必ず酸素を発生する",
+      "水が存在しなくなる"
+    ],
+    "answer": 1,
+    "explanation": "腐食は局部的な電池反応として進み、電解質は電荷移動を助けます。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0042",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "金属・酸化還元反応を条件と生成物から判断する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:011",
+    "optionFeedback": [
+      "反応条件・酸化数・電子配置を確認してください。",
+      "正解です。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "亜鉛めっきした鉄で、傷から鉄が露出してもZnが先に溶けやすい理由はどれか。",
+    "options": [
+      "Znの方がAuより貴だから",
+      "Feが電子を放出できないから",
+      "Znの方がFeよりイオン化傾向が大きい",
+      "Znが酸化剤として働くから"
+    ],
+    "answer": 2,
+    "explanation": "Znが犠牲陽極として酸化され、鉄の酸化を抑えます。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0043",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "金属・酸化還元反応を条件と生成物から判断する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:011",
+    "optionFeedback": [
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "正解です。",
+      "反応条件・酸化数・電子配置を確認してください。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "スズめっきした鉄で傷が付くと鉄の腐食が進みやすい場合がある理由はどれか。",
+    "options": [
+      "Snが必ず水を分解する",
+      "FeがSnを酸化する酸化剤になる",
+      "Snが不動態を完全に消す",
+      "SnよりFeの方がイオン化傾向が大きく、露出したFeが陽極になりやすい"
+    ],
+    "answer": 3,
+    "explanation": "SnはFeより貴なため、傷で両金属が電解質に触れるとFe側の酸化が促進されることがあります。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0044",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "金属・酸化還元反応を条件と生成物から判断する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:011",
+    "optionFeedback": [
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "正解です。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "次の記述のうち、不動態について「正しくない」ものはどれか。",
+    "options": [
+      "不動態になった金属は、どの条件でも永久に反応しない",
+      "保護皮膜が反応を抑える",
+      "Fe、Al、Crは代表例である",
+      "皮膜の性質が反応速度に影響する"
+    ],
+    "answer": 0,
+    "explanation": "不動態は永久・絶対的な無反応ではありません。条件や皮膜の損傷によって反応が再開します。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0045",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "金属・酸化還元反応を条件と生成物から判断する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:012",
+    "optionFeedback": [
+      "正解です。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成",
+    "negativeQuestion": true,
+    "singleCorrectVerified": true
+  },
+  {
+    "q": "不動態皮膜に最も求められる性質はどれか。",
+    "options": [
+      "必ず赤色であること",
+      "金属表面を連続的に覆い、物質移動を妨げる緻密さ",
+      "水より密度が小さいこと",
+      "電気を完全に発生すること"
+    ],
+    "answer": 1,
+    "explanation": "内部を保護するには、皮膜が緻密で連続し、溶液や酸素の到達を抑えることが重要です。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0046",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "金属・酸化還元反応を条件と生成物から判断する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:012",
+    "optionFeedback": [
+      "反応条件・酸化数・電子配置を確認してください。",
+      "正解です。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "H₂O₂中のOについて、Hの酸化数を+1としたときの値はどれか。",
+    "options": [
+      "−2",
+      "0",
+      "−1",
+      "+1"
+    ],
+    "answer": 2,
+    "explanation": "Hは通常+1なので、2(+1)+2x=0からx=−1です。−2と0の中間にあることが両方の働きにつながります。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0047",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "金属・酸化還元反応を条件と生成物から判断する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:012",
+    "optionFeedback": [
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "正解です。",
+      "反応条件・酸化数・電子配置を確認してください。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "H₂O₂が酸化剤として働くとき、H₂O₂中のOの酸化数は一般にどう変化するか。",
+    "options": [
+      "−1から0へ上がる",
+      "−2から−1へ上がる",
+      "0から−1へ下がる",
+      "−1から−2へ下がる"
+    ],
+    "answer": 3,
+    "explanation": "酸化剤は自身が還元されます。H₂O₂がH₂OになるとOは−1から−2へ下がります。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0048",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "金属・酸化還元反応を条件と生成物から判断する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:012",
+    "optionFeedback": [
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "正解です。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "H₂O₂が還元剤として働くとき、代表的に生じる物質はどれか。",
+    "options": [
+      "O₂",
+      "H₂のみ",
+      "O²⁻のみ",
+      "OH⁺"
+    ],
+    "answer": 0,
+    "explanation": "H₂O₂が酸化されるとOの酸化数が−1から0となり、O₂を生じます。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0049",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "金属・酸化還元反応を条件と生成物から判断する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:013",
+    "optionFeedback": [
+      "正解です。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "酸性条件でH₂O₂が酸化剤として働く半反応式はどれか。",
+    "options": [
+      "H₂O₂→O₂+2H⁺+2e⁻",
+      "H₂O₂+2H⁺+2e⁻→2H₂O",
+      "H₂O₂+2e⁻→O₂+2H⁺",
+      "2H₂O→H₂O₂+2H⁺+2e⁻"
+    ],
+    "answer": 1,
+    "explanation": "H₂O₂が電子を受け取りH₂Oへ還元される式です。原子数と電荷が保存されています。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0050",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "金属・酸化還元反応を条件と生成物から判断する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:013",
+    "optionFeedback": [
+      "反応条件・酸化数・電子配置を確認してください。",
+      "正解です。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "酸性条件でH₂O₂が還元剤として働く半反応式はどれか。",
+    "options": [
+      "H₂O₂+2H⁺+2e⁻→2H₂O",
+      "O₂+2H⁺+2e⁻→H₂O₂",
+      "H₂O₂→O₂+2H⁺+2e⁻",
+      "H₂O₂+2e⁻→2O⁻+2H⁺"
+    ],
+    "answer": 2,
+    "explanation": "H₂O₂が電子を放出してO₂へ酸化される式です。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0051",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "金属・酸化還元反応を条件と生成物から判断する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:013",
+    "optionFeedback": [
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "正解です。",
+      "反応条件・酸化数・電子配置を確認してください。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "酸性条件のH₂O₂の還元半反応式に「現れない」ものはどれか。",
+    "options": [
+      "H₂O₂",
+      "H⁺",
+      "H₂O",
+      "O₂"
+    ],
+    "answer": 3,
+    "explanation": "酸化剤としての還元半反応式はH₂O₂+2H⁺+2e⁻→2H₂Oであり、O₂は現れません。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0052",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "金属・酸化還元反応を条件と生成物から判断する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:013",
+    "optionFeedback": [
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "正解です。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成",
+    "negativeQuestion": true,
+    "singleCorrectVerified": true
+  },
+  {
+    "q": "酸性条件のH₂O₂の酸化半反応式に「現れない」ものはどれか。",
+    "options": [
+      "H₂O",
+      "H₂O₂",
+      "O₂",
+      "H⁺"
+    ],
+    "answer": 0,
+    "explanation": "還元剤としての酸化半反応式はH₂O₂→O₂+2H⁺+2e⁻であり、H₂Oは現れません。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0053",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "金属・酸化還元反応を条件と生成物から判断する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:014",
+    "optionFeedback": [
+      "正解です。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成",
+    "negativeQuestion": true,
+    "singleCorrectVerified": true
+  },
+  {
+    "q": "H₂O₂が酸化剤にも還元剤にもなれる根本的な理由はどれか。",
+    "options": [
+      "Hの酸化数が常に0だから",
+      "Oの酸化数−1が、安定な−2と0の中間にあるから",
+      "H₂O₂が電子をもたないから",
+      "Oが必ず+2になるから"
+    ],
+    "answer": 1,
+    "explanation": "H₂O₂中のOは、電子を受けて−2にも、電子を放出して0にも変化できます。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0054",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "金属・酸化還元反応を条件と生成物から判断する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:014",
+    "optionFeedback": [
+      "反応条件・酸化数・電子配置を確認してください。",
+      "正解です。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "H₂O₂がI⁻をI₂へ変えるとき、H₂O₂の役割はどれか。",
+    "options": [
+      "還元剤",
+      "触媒",
+      "酸化剤",
+      "塩基のみ"
+    ],
+    "answer": 2,
+    "explanation": "I⁻は−1から0へ酸化されるため、相手を酸化したH₂O₂は酸化剤です。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0055",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "金属・酸化還元反応を条件と生成物から判断する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:014",
+    "optionFeedback": [
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "正解です。",
+      "反応条件・酸化数・電子配置を確認してください。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "酸性KMnO₄水溶液がH₂O₂によって脱色されるとき、H₂O₂の役割はどれか。",
+    "options": [
+      "酸化剤",
+      "沈殿剤",
+      "指示薬",
+      "還元剤"
+    ],
+    "answer": 3,
+    "explanation": "MnO₄⁻がMn²⁺へ還元され、H₂O₂はO₂へ酸化されるため還元剤です。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0056",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "金属・酸化還元反応を条件と生成物から判断する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:014",
+    "optionFeedback": [
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "正解です。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "H₂O₂の分解反応2H₂O₂→2H₂O+O₂は何反応でもあるか。",
+    "options": [
+      "不均化反応",
+      "中和反応だけ",
+      "付加反応",
+      "置換反応だけ"
+    ],
+    "answer": 0,
+    "explanation": "同じH₂O₂中のOの一部が−2へ還元され、別の一部が0へ酸化されるため不均化です。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0057",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "金属・酸化還元反応を条件と生成物から判断する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:015",
+    "optionFeedback": [
+      "正解です。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "H₂O₂の分解を促進するMnO₂の役割はどれか。",
+    "options": [
+      "酸化剤として全量消費される",
+      "触媒",
+      "還元剤として全量消費される",
+      "生成物の一つ"
+    ],
+    "answer": 1,
+    "explanation": "MnO₂は反応速度を高めますが、反応式上は反応前後で再生されます。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0058",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "金属・酸化還元反応を条件と生成物から判断する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:015",
+    "optionFeedback": [
+      "反応条件・酸化数・電子配置を確認してください。",
+      "正解です。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "触媒を加えてH₂O₂の分解速度が上がる理由はどれか。",
+    "options": [
+      "反応熱を必ず正にする",
+      "平衡定数を変える",
+      "活性化エネルギーの小さい反応経路を与える",
+      "生成物の種類を変える"
+    ],
+    "answer": 2,
+    "explanation": "触媒は別経路を与えて速度を上げますが、反応の始状態・終状態や平衡定数は変えません。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0059",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "金属・酸化還元反応を条件と生成物から判断する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:015",
+    "optionFeedback": [
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "正解です。",
+      "反応条件・酸化数・電子配置を確認してください。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "H₂O₂を遮光びんに保存する主な理由はどれか。",
+    "options": [
+      "H₂O₂を凍結させる",
+      "Oの酸化数を+2にする",
+      "容器内を真空にする",
+      "光による分解を抑える"
+    ],
+    "answer": 3,
+    "explanation": "H₂O₂は光や金属イオンなどで分解が促進されるため、遮光して保存します。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0060",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "金属・酸化還元反応を条件と生成物から判断する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:015",
+    "optionFeedback": [
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "正解です。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "H₂O₂の分解で発生する気体を確認する方法として適切なものはどれか。",
+    "options": [
+      "火の消えかかった線香を入れると再び燃え出す",
+      "石灰水を白濁させる",
+      "湿らせた赤色リトマス紙を青変させる",
+      "塩化コバルト紙を赤変させる"
+    ],
+    "answer": 0,
+    "explanation": "生成気体はO₂で、助燃性を示します。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0061",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "金属・酸化還元反応を条件と生成物から判断する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:016",
+    "optionFeedback": [
+      "正解です。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "酸化数の観点から、H₂O₂→H₂Oはどの変化か。",
+    "options": [
+      "酸化",
+      "還元",
+      "中和のみ",
+      "酸化数不変"
+    ],
+    "answer": 1,
+    "explanation": "Oの酸化数が−1から−2へ下がるので還元です。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0062",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "金属・酸化還元反応を条件と生成物から判断する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:016",
+    "optionFeedback": [
+      "反応条件・酸化数・電子配置を確認してください。",
+      "正解です。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "酸化数の観点から、H₂O₂→O₂はどの変化か。",
+    "options": [
+      "還元",
+      "電離のみ",
+      "酸化",
+      "酸化数不変"
+    ],
+    "answer": 2,
+    "explanation": "Oの酸化数が−1から0へ上がるので酸化です。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0063",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "金属・酸化還元反応を条件と生成物から判断する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:016",
+    "optionFeedback": [
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "正解です。",
+      "反応条件・酸化数・電子配置を確認してください。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "酸性条件でI⁻を酸化するH₂O₂の反応生成物の組合せはどれか。",
+    "options": [
+      "IO₃⁻とH₂のみ",
+      "I⁺とO₂のみ",
+      "HIとOH⁻",
+      "I₂とH₂O"
+    ],
+    "answer": 3,
+    "explanation": "H₂O₂+2I⁻+2H⁺→I₂+2H₂Oです。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0064",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "金属・酸化還元反応を条件と生成物から判断する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:016",
+    "optionFeedback": [
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "正解です。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "酸性条件でMnO₄⁻とH₂O₂が反応するとき発生する気体はどれか。",
+    "options": [
+      "O₂",
+      "H₂",
+      "Cl₂",
+      "NH₃"
+    ],
+    "answer": 0,
+    "explanation": "H₂O₂が還元剤としてO₂へ酸化されます。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0065",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "金属・酸化還元反応を条件と生成物から判断する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:017",
+    "optionFeedback": [
+      "正解です。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "H₂O₂が酸化剤として働く場合、受け取る電子数はH₂O₂ 1 molあたり何molか。",
+    "options": [
+      "1 mol",
+      "2 mol",
+      "3 mol",
+      "4 mol"
+    ],
+    "answer": 1,
+    "explanation": "H₂O₂+2H⁺+2e⁻→2H₂Oより、1 molあたり2 molの電子を受け取ります。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0066",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "金属・酸化還元反応を条件と生成物から判断する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:017",
+    "optionFeedback": [
+      "反応条件・酸化数・電子配置を確認してください。",
+      "正解です。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "H₂O₂が還元剤として働く場合、放出する電子数はH₂O₂ 1 molあたり何molか。",
+    "options": [
+      "1 mol",
+      "3 mol",
+      "2 mol",
+      "4 mol"
+    ],
+    "answer": 2,
+    "explanation": "H₂O₂→O₂+2H⁺+2e⁻より、1 molあたり2 molの電子を放出します。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0067",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "金属・酸化還元反応を条件と生成物から判断する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:017",
+    "optionFeedback": [
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "正解です。",
+      "反応条件・酸化数・電子配置を確認してください。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "次のうちH₂O₂について「正しくない」ものはどれか。",
+    "options": [
+      "Oの酸化数は−1である",
+      "還元剤として働くとO₂を生じ得る",
+      "分解は不均化反応である",
+      "酸化剤として働くと必ずO₂になる"
+    ],
+    "answer": 3,
+    "explanation": "酸化剤として働くH₂O₂は自身が還元され、代表的にH₂Oになります。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0068",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "金属・酸化還元反応を条件と生成物から判断する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:017",
+    "optionFeedback": [
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "正解です。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成",
+    "negativeQuestion": true,
+    "singleCorrectVerified": true
+  },
+  {
+    "q": "H₂O₂を酸化数だけで分類するとき最も重要な比較対象はどれか。",
+    "options": [
+      "H₂O中の−2とO₂中の0",
+      "H₂中の0とH⁺中の+1だけ",
+      "Na中の0とNa⁺中の+1だけ",
+      "Cl₂中の0とCl⁻中の−1だけ"
+    ],
+    "answer": 0,
+    "explanation": "H₂O₂中のOが−1で、−2と0の中間にあることが両方向の反応を説明します。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0069",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "金属・酸化還元反応を条件と生成物から判断する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:018",
+    "optionFeedback": [
+      "正解です。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "H₂O₂の不均化で、H₂OになるO原子とO₂になるO原子の変化の組合せはどれか。",
+    "options": [
+      "酸化と酸化",
+      "還元と酸化",
+      "還元と還元",
+      "どちらも酸化数不変"
+    ],
+    "answer": 1,
+    "explanation": "同じ物質が同時に酸化・還元されるのが不均化です。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0070",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "金属・酸化還元反応を条件と生成物から判断する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:018",
+    "optionFeedback": [
+      "反応条件・酸化数・電子配置を確認してください。",
+      "正解です。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "塩基性条件でH₂O₂が電子を受け取る半反応式はどれか。",
+    "options": [
+      "H₂O₂→O₂+2H⁺+2e⁻",
+      "H₂O₂+2OH⁻→O₂+2H₂O+2e⁻",
+      "H₂O₂+2e⁻→2OH⁻",
+      "2OH⁻→H₂O₂+2e⁻"
+    ],
+    "answer": 2,
+    "explanation": "塩基性ではH₂O₂が還元されてOH⁻になります。原子数・電荷とも保存されています。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0071",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "金属・酸化還元反応を条件と生成物から判断する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:018",
+    "optionFeedback": [
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "正解です。",
+      "反応条件・酸化数・電子配置を確認してください。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "塩基性条件でH₂O₂が還元剤として働く半反応式はどれか。",
+    "options": [
+      "H₂O₂+2e⁻→2OH⁻",
+      "O₂+2H₂O+2e⁻→H₂O₂+2OH⁻",
+      "H₂O₂→2H⁺+O₂+2e⁻",
+      "H₂O₂+2OH⁻→O₂+2H₂O+2e⁻"
+    ],
+    "answer": 3,
+    "explanation": "塩基性条件でH₂O₂が酸化される式です。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0072",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "金属・酸化還元反応を条件と生成物から判断する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:018",
+    "optionFeedback": [
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "正解です。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "半反応式を作るとき最後に確認すべきものはどれか。",
+    "options": [
+      "元素数と全電荷の両方が左右で等しいこと",
+      "係数がすべて1であること",
+      "H₂Oが必ず左辺にあること",
+      "電子が必ず生成物側にあること"
+    ],
+    "answer": 0,
+    "explanation": "酸化・還元のどちらでも、原子数保存と電荷保存の両方が必要です。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0073",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "金属・酸化還元反応を条件と生成物から判断する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:019",
+    "optionFeedback": [
+      "正解です。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "H₂O₂が「酸化剤か還元剤か」は何で決まるか。",
+    "options": [
+      "H₂O₂は常に酸化剤だけである",
+      "反応相手と条件によって決まる",
+      "H₂O₂は常に還元剤だけである",
+      "容器の色だけで決まる"
+    ],
+    "answer": 1,
+    "explanation": "相手がより強い酸化剤ならH₂O₂は還元剤に、還元されやすい相手には酸化剤として働き得ます。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0074",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "金属・酸化還元反応を条件と生成物から判断する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:019",
+    "optionFeedback": [
+      "反応条件・酸化数・電子配置を確認してください。",
+      "正解です。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "王水を調製するときの濃塩酸と濃硝酸の体積比は通常どれか。",
+    "options": [
+      "1：3",
+      "1：1",
+      "濃塩酸：濃硝酸=3：1",
+      "2：3"
+    ],
+    "answer": 2,
+    "explanation": "王水は通常、濃塩酸3体積と濃硝酸1体積を混合して調製します。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0075",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "Au・Ptと王水の反応を酸化還元と錯体形成から理解する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:019",
+    "optionFeedback": [
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "正解です。",
+      "反応条件・酸化数・電子配置を確認してください。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "王水がAuを溶かせる理由として最も適切なものはどれか。",
+    "options": [
+      "塩酸だけでAuがH₂を発生するから",
+      "硝酸だけでAuが不動態になるから",
+      "水がAuを還元して蒸発させるから",
+      "硝酸成分がAuを酸化し、Cl⁻がAuのクロロ錯体を形成して平衡を進める"
+    ],
+    "answer": 3,
+    "explanation": "酸化と錯体形成が協同し、単独の酸では進みにくいAuの溶解を可能にします。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0076",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "Au・Ptと王水の反応を酸化還元と錯体形成から理解する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:019",
+    "optionFeedback": [
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "正解です。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "王水中でAuが形成する代表的な錯イオンはどれか。",
+    "options": [
+      "[AuCl₄]⁻",
+      "[AuOH₄]⁻",
+      "[AuH₄]⁺",
+      "[AuO₂]²⁻"
+    ],
+    "answer": 0,
+    "explanation": "塩化物イオンがAu(III)を安定なテトラクロロ金(III)酸イオンとして溶液中に保ちます。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0077",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "Au・Ptと王水の反応を酸化還元と錯体形成から理解する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:020",
+    "optionFeedback": [
+      "正解です。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "Auが希塩酸からH₂を発生させない主な理由はどれか。",
+    "options": [
+      "Auはアルカリ金属だから",
+      "AuはHよりイオン化傾向が小さい",
+      "Auは常に+1価だから",
+      "HClにHが含まれないから"
+    ],
+    "answer": 1,
+    "explanation": "Auは非常に酸化されにくい貴金属で、非酸化性の酸からH₂を発生させません。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0078",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "Au・Ptと王水の反応を酸化還元と錯体形成から理解する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:020",
+    "optionFeedback": [
+      "反応条件・酸化数・電子配置を確認してください。",
+      "正解です。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "濃塩酸単独と濃硝酸単独に対するAuの性質として適切なものはどれか。",
+    "options": [
+      "濃塩酸だけで激しくH₂を発生する",
+      "濃硝酸だけで必ず完全に溶ける",
+      "通常、どちら単独でも王水ほど有効には溶けない",
+      "どちらでもNaと同じ反応をする"
+    ],
+    "answer": 2,
+    "explanation": "王水では酸化力とCl⁻による錯体化が組み合わさることが重要です。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0079",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "Au・Ptと王水の反応を酸化還元と錯体形成から理解する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:020",
+    "optionFeedback": [
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "正解です。",
+      "反応条件・酸化数・電子配置を確認してください。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "Stage 10の王水調製で、濃硝酸1体に対して必要な濃塩酸は何体か。",
+    "options": [
+      "1体",
+      "2体",
+      "4体",
+      "3体"
+    ],
+    "answer": 3,
+    "explanation": "王水の体積比3：1をユニット比へ対応させています。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0080",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "Au・Ptと王水の反応を酸化還元と錯体形成から理解する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:020",
+    "optionFeedback": [
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "正解です。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "王水を作り置きせず必要時に調製する扱いが適切な理由はどれか。",
+    "options": [
+      "反応性成分が時間とともに変化・分解し得るから",
+      "王水は純元素だから",
+      "混合後に必ず固体になるから",
+      "塩酸と硝酸は互いに反応しないから"
+    ],
+    "answer": 0,
+    "explanation": "王水は混合後に活性な化学種を生じ、時間とともに組成・反応性が変化します。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0081",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "Au・Ptと王水の反応を酸化還元と錯体形成から理解する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:021",
+    "optionFeedback": [
+      "正解です。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "Ptと王水の関係として適切なものはどれか。",
+    "options": [
+      "Ptは水だけで直ちに溶ける",
+      "Ptも王水に溶解し得るが、Auより反応が遅い場合がある",
+      "Ptは王水でも絶対に反応しない",
+      "PtはHCl単独でH₂を激しく発生する"
+    ],
+    "answer": 1,
+    "explanation": "王水はPtにも作用しますが、貴金属ごとに速度や条件が異なります。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0082",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "Au・Ptと王水の反応を酸化還元と錯体形成から理解する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:021",
+    "optionFeedback": [
+      "反応条件・酸化数・電子配置を確認してください。",
+      "正解です。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "王水によるAu溶解でCl⁻が果たす重要な役割はどれか。",
+    "options": [
+      "Auを単体へ還元する",
+      "H₂を沈殿させる",
+      "酸化されたAuを錯イオンとして安定化する",
+      "硝酸を中和して水だけにする"
+    ],
+    "answer": 2,
+    "explanation": "生成したAuイオンを[AuCl₄]⁻として安定化し、溶解方向を促します。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0083",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "Au・Ptと王水の反応を酸化還元と錯体形成から理解する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:021",
+    "optionFeedback": [
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "正解です。",
+      "反応条件・酸化数・電子配置を確認してください。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "次のうち王水について「正しくない」ものはどれか。",
+    "options": [
+      "Auを溶かし得る",
+      "酸化と錯体形成が協同する",
+      "通常は濃塩酸：濃硝酸=3：1である",
+      "濃塩酸と濃硝酸を1：3で混合する"
+    ],
+    "answer": 3,
+    "explanation": "比は濃塩酸：濃硝酸=3：1です。逆にしないよう注意します。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0084",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "Au・Ptと王水の反応を酸化還元と錯体形成から理解する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:021",
+    "optionFeedback": [
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "正解です。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成",
+    "negativeQuestion": true,
+    "singleCorrectVerified": true
+  },
+  {
+    "q": "Auが王水で溶けることと、Auのイオン化傾向が小さいことは矛盾しない。その理由はどれか。",
+    "options": [
+      "強い酸化条件と錯体形成によって、通常の希酸とは異なる反応経路が開くから",
+      "イオン化傾向はAuだけ逆向きだから",
+      "王水中では電子が保存されないから",
+      "Auが非金属へ変わるから"
+    ],
+    "answer": 0,
+    "explanation": "イオン化傾向だけで全ての反応条件を表すことはできません。酸化剤と錯形成の効果を考える必要があります。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0085",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "Au・Ptと王水の反応を酸化還元と錯体形成から理解する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:022",
+    "optionFeedback": [
+      "正解です。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "王水中でAuが単体からAu(III)になるとき、Auはどう変化するか。",
+    "options": [
+      "還元される",
+      "酸化される",
+      "酸化数は変化しない",
+      "中和されるだけ"
+    ],
+    "answer": 1,
+    "explanation": "Auの酸化数は0から+3へ上がり、電子を放出します。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0086",
+    "category": "redox",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "Au・Ptと王水の反応を酸化還元と錯体形成から理解する",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:redox:022",
+    "optionFeedback": [
+      "反応条件・酸化数・電子配置を確認してください。",
+      "正解です。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "【前提】軌道は電子が存在する確率分布を表し、1つの軌道には最大2個の電子が入る。1つの2p軌道に入れる電子の最大数はどれか。",
+    "options": [
+      "1個",
+      "3個",
+      "2個",
+      "6個"
+    ],
+    "answer": 2,
+    "explanation": "p「副殻」全体には3軌道ありますが、1つの軌道だけなら最大2電子です。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0087",
+    "category": "matter",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "軌道と電子配置を前提説明から理解し、反応性へ結び付ける",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:matter:022",
+    "optionFeedback": [
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "正解です。",
+      "反応条件・酸化数・電子配置を確認してください。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "【前提】p副殻には互いに向きの異なる3つのp軌道がある。2p副殻全体に入れる電子の最大数はどれか。",
+    "options": [
+      "2個",
+      "3個",
+      "8個",
+      "6個"
+    ],
+    "answer": 3,
+    "explanation": "3軌道×各2電子=6電子です。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0088",
+    "category": "matter",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "軌道と電子配置を前提説明から理解し、反応性へ結び付ける",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:matter:022",
+    "optionFeedback": [
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "正解です。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "【前提】s副殻には軌道が1つある。3s副殻に入れる電子の最大数はどれか。",
+    "options": [
+      "2個",
+      "1個",
+      "6個",
+      "10個"
+    ],
+    "answer": 0,
+    "explanation": "s副殻は1軌道だけなので最大2電子です。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0089",
+    "category": "matter",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "軌道と電子配置を前提説明から理解し、反応性へ結び付ける",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:matter:023",
+    "optionFeedback": [
+      "正解です。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "【前提】同じエネルギーのp軌道には、まず電子が1個ずつ同じ向きに入り、その後対をつくる。この規則は何か。",
+    "options": [
+      "Pauliの排他原理だけ",
+      "Hundの規則",
+      "質量保存則",
+      "Le Chatelierの原理"
+    ],
+    "answer": 1,
+    "explanation": "縮退した軌道には、電子間反発を小さくするよう単独で平行スピンに配置されます。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0090",
+    "category": "matter",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "軌道と電子配置を前提説明から理解し、反応性へ結び付ける",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:matter:023",
+    "optionFeedback": [
+      "反応条件・酸化数・電子配置を確認してください。",
+      "正解です。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "【前提】1つの軌道に入る2電子は反対向きのスピンをもつ。これに最も直接関係する原理はどれか。",
+    "options": [
+      "Avogadroの法則",
+      "Hessの法則",
+      "Pauliの排他原理",
+      "電気的中性の原理"
+    ],
+    "answer": 2,
+    "explanation": "同一原子内で4つの量子数がすべて同じ電子は存在できません。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0091",
+    "category": "matter",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "軌道と電子配置を前提説明から理解し、反応性へ結び付ける",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:matter:023",
+    "optionFeedback": [
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "正解です。",
+      "反応条件・酸化数・電子配置を確認してください。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "Na原子の基底状態の電子配置として適切なものはどれか。",
+    "options": [
+      "1s²2s²2p⁵3s²",
+      "1s²2s²2p⁶3p¹",
+      "1s²2s²2p⁷",
+      "1s²2s²2p⁶3s¹"
+    ],
+    "answer": 3,
+    "explanation": "Naは11電子をもち、Ne型の10電子の外側に3s電子が1個あります。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0092",
+    "category": "matter",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "軌道と電子配置を前提説明から理解し、反応性へ結び付ける",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:matter:023",
+    "optionFeedback": [
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "正解です。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "Mg原子の最外殻電子数はどれか。",
+    "options": [
+      "2個",
+      "1個",
+      "3個",
+      "8個"
+    ],
+    "answer": 0,
+    "explanation": "Mgは[Ne]3s²で、最外殻n=3に2電子あります。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0093",
+    "category": "matter",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "軌道と電子配置を前提説明から理解し、反応性へ結び付ける",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:matter:024",
+    "optionFeedback": [
+      "正解です。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "Al原子がAl³⁺になりやすいことを電子配置から説明したものはどれか。",
+    "options": [
+      "電子を3個受け取るとHe配置になる",
+      "最外殻の3個の電子を失うとNeと同じ閉殻配置になる",
+      "3d軌道の電子を全て失うから",
+      "Alには価電子が存在しないから"
+    ],
+    "answer": 1,
+    "explanation": "Alは[Ne]3s²3p¹で、3電子を失うと安定な[Ne]になります。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0094",
+    "category": "matter",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "軌道と電子配置を前提説明から理解し、反応性へ結び付ける",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:matter:024",
+    "optionFeedback": [
+      "反応条件・酸化数・電子配置を確認してください。",
+      "正解です。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "Cl原子がCl⁻になりやすいことを電子配置から説明したものはどれか。",
+    "options": [
+      "電子を7個失うとHe配置になる",
+      "Clの最外殻は空だから",
+      "電子を1個受け取るとArと同じ閉殻配置になる",
+      "Cl⁻では電子数が減るから"
+    ],
+    "answer": 2,
+    "explanation": "Clは[Ne]3s²3p⁵で、1電子を受け取ると3p⁶となります。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0095",
+    "category": "matter",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "軌道と電子配置を前提説明から理解し、反応性へ結び付ける",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:matter:024",
+    "optionFeedback": [
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "正解です。",
+      "反応条件・酸化数・電子配置を確認してください。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "Na⁺とNeの関係として正しいものはどれか。",
+    "options": [
+      "陽子数も中性子数も必ず等しい",
+      "どちらも同じ元素である",
+      "Na⁺の方が電子を1個多くもつ",
+      "電子数が等しい等電子種である"
+    ],
+    "answer": 3,
+    "explanation": "Na⁺は10電子、Neも10電子ですが、原子核の陽子数は異なります。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0096",
+    "category": "matter",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "軌道と電子配置を前提説明から理解し、反応性へ結び付ける",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:matter:024",
+    "optionFeedback": [
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "正解です。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "O原子の2p電子配置で、不対電子の数は基底状態で何個か。",
+    "options": [
+      "2個",
+      "0個",
+      "1個",
+      "4個"
+    ],
+    "answer": 0,
+    "explanation": "Oは2p⁴です。3つのp軌道へまず1個ずつ入り、4個目が対をつくるため不対電子は2個です。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0097",
+    "category": "matter",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "軌道と電子配置を前提説明から理解し、反応性へ結び付ける",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:matter:025",
+    "optionFeedback": [
+      "正解です。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "N原子の2p電子配置で、不対電子の数は基底状態で何個か。",
+    "options": [
+      "0個",
+      "3個",
+      "1個",
+      "2個"
+    ],
+    "answer": 1,
+    "explanation": "Nは2p³で、3つのp軌道に1個ずつ入るため不対電子は3個です。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0098",
+    "category": "matter",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "軌道と電子配置を前提説明から理解し、反応性へ結び付ける",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:matter:025",
+    "optionFeedback": [
+      "反応条件・酸化数・電子配置を確認してください。",
+      "正解です。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "【前提】原子軌道は電子の決まった円軌道そのものではない。軌道を最も適切に説明したものはどれか。",
+    "options": [
+      "電子が必ず通る一本の輪",
+      "原子核の表面の固体膜",
+      "電子を見いだす確率分布を表す波動関数に基づく状態",
+      "電子を含まない空間だけ"
+    ],
+    "answer": 2,
+    "explanation": "高校範囲では、軌道を「電子の存在確率の分布」と捉えると、形や収容数を体系的に理解できます。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0099",
+    "category": "matter",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "軌道と電子配置を前提説明から理解し、反応性へ結び付ける",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:matter:025",
+    "optionFeedback": [
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "正解です。",
+      "反応条件・酸化数・電子配置を確認してください。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
+  },
+  {
+    "q": "【前提】第n殻に収容できる電子数の最大値は2n²である。第3殻の最大収容電子数はどれか。",
+    "options": [
+      "8個",
+      "10個",
+      "32個",
+      "18個"
+    ],
+    "answer": 3,
+    "explanation": "2×3²=18です。ただし基底状態の充填順序では4sが3dより先に入る点は別の規則です。",
+    "scope": "stage10-prep",
+    "id": "basic-v58-0100",
+    "category": "matter",
+    "difficultyLevel": 2,
+    "cognitiveType": "reasoning",
+    "learningObjective": "軌道と電子配置を前提説明から理解し、反応性へ結び付ける",
+    "estimatedSeconds": 40,
+    "similarityGroup": "v58:matter:025",
+    "optionFeedback": [
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "反応条件・酸化数・電子配置を確認してください。",
+      "正解です。"
+    ],
+    "referenceBasis": "文部科学省「高等学校学習指導要領解説 理科編・理数編」、IUPAC Gold Book、Royal Society of Chemistryの公開資料を参照したChemion Quest独自作成"
   }
 ]

@@ -44,6 +44,7 @@ function renderDocTemplate(relativePath, config) {
   let text = fs.readFileSync(path.join(projectRoot, relativePath), 'utf8');
   const replacements = {
     '__APP_VERSION__': config.version,
+    '__APP_VERSION_SLUG__': config.version.replaceAll('.', '_'),
     '__RELEASE_NAME__': config.releaseName,
     '__SAVE_VERSION__': config.saveVersion,
     '__BASIC_COUNT__': config.expectedCounts.basic,
@@ -52,7 +53,10 @@ function renderDocTemplate(relativePath, config) {
     '__MOCK_QUESTION_COUNT__': config.expectedCounts.mockQuestions,
     '__RELEASE_NOTES__': releaseNotesMarkdown(config)
   };
-  for (const [token, value] of Object.entries(replacements)) text = replaceAllRequired(text, token, value);
+  for (const [token, value] of Object.entries(replacements)) {
+    if (token === '__APP_VERSION_SLUG__' && !text.includes(token)) continue;
+    text = replaceAllRequired(text, token, value);
+  }
   return text;
 }
 

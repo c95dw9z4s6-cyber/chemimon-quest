@@ -42,6 +42,109 @@ const checks = {
   'stage7-weak-base-liberation': core.stage7?.id === 7 && core.stage7?.units?.[4]?.chemistryClass === 'strong_base' && core.stage7?.enemies?.every((enemy)=>enemy.affinityTarget === 'weak_base_conjugate_acid') && runtime.includes('Math.max(7, cumulativeStats.highestStageReached || 1)'),
   'stage8-energy-ambush': core.stage8?.id === 8 && core.stage8?.enemies?.find((enemy)=>enemy.boss)?.wipeAlliesOnArrival === true && runtime.includes('function beginBossAnnihilationSequence') && runtime.includes('allies = []'),
   'energy-capacity-lv12': core.maxEnergyCapacityLevel === 12 && core.maxEnergy + core.energyCapacityPerLevel * 11 === 265 && runtime.includes('function maxEnergyCapacityLevel()'),
+  'learning-data-reset': template.includes('id="learningResetModal"') && template.includes('id="settingsLearningResetBtn"') && runtime.includes('function resetLearningData()') && runtime.includes('localStorage.removeItem(LEARNING_KEY)') && runtime.includes('localStorage.removeItem(REVIEW_KEY)') && runtime.includes("input.value.trim() !== '初期化する'"),
+  'stage-strategy-guide': (() => {
+    const guides = core.stageGuides || {};
+    const complete = Array.from({ length: 9 }, (_, index) => String(index + 1)).every((id) => {
+      const guide = guides[id];
+      return guide
+        && typeof guide.specialRule === 'string'
+        && Array.isArray(guide.dangerousEnemies) && guide.dangerousEnemies.length >= 2
+        && Array.isArray(guide.recommendedRoles) && guide.recommendedRoles.length >= 3
+        && Array.isArray(guide.progressiveHints) && guide.progressiveHints.length >= 3;
+    });
+    return complete
+      && template.includes('id="stageGuideModal"')
+      && template.includes('id="endStageGuideBtn"')
+      && runtime.includes('function renderStageGuide')
+      && runtime.includes('function stageDefeatAnalysis')
+      && runtime.includes('stage${currentStageId}Defeats');
+  })(),
+  'stage9-ranged-lock': (() => {
+    const stage = core.stage9;
+    const boss = stage?.enemies?.find((enemy) => enemy.boss);
+    const blocked = stage?.units?.find((unit) => unit.rangedAttack);
+    return stage?.id === 9
+      && stage?.waves?.length === 11
+      && stage?.rules?.disableRangedAllyAttacks === true
+      && blocked?.formula === 'Ag⁺'
+      && boss?.formula === 'BaSO₄'
+      && !boss?.phaseTwo
+      && runtime.includes('function stageBlocksRangedAlly')
+      && runtime.includes("refs.state.textContent = '⛔ 遠距離攻撃禁止：召喚不可'");
+  })(),
+  'normal-bgm': (() => {
+    const audioPath = path.join(projectRoot, 'assets/audio/chemion-normal-bgm.mp3');
+    const difficultPath = path.join(projectRoot, 'assets/audio/chemion-difficult-bgm.mp3');
+    const sw = fs.readFileSync(path.join(projectRoot, 'src/sw.template.js'), 'utf8');
+    return fs.existsSync(audioPath)
+      && fs.statSync(audioPath).size > 1000000
+      && fs.existsSync(difficultPath)
+      && fs.statSync(difficultPath).size > 1000000
+      && template.includes('id="bgmAudio"')
+      && template.includes('id="settingsMusicBtn"')
+      && template.includes('id="musicVolume"')
+      && template.includes('id="pauseMusicBtn"')
+      && runtime.includes('function syncBgmPlayback()')
+      && runtime.includes('function desiredBgmTrackKey()')
+      && runtime.includes('function syncBgmTrack({ restart = false } = {})')
+      && runtime.includes("currentStageId % 5 === 0 ? 'difficult' : 'normal'")
+      && runtime.includes('function toggleBgm()')
+      && runtime.includes('chemionQuestBgmVolumeV1')
+      && runtime.includes('writeTransferValue(BGM_KEY, bundle.storage.bgm)')
+      && runtime.includes('if (document.hidden) { pauseBgm(); suspendForHiddenPage(); }')
+      && sw.includes('./assets/audio/chemion-normal-bgm.mp3')
+      && sw.includes('./assets/audio/chemion-difficult-bgm.mp3');
+  })(),
+  'low-power-mode': template.includes('id="settingsPowerBtn"')
+    && template.includes('id="pausePowerBtn"')
+    && runtime.includes('const NORMAL_RENDER_FPS = 45')
+    && runtime.includes('const LOW_POWER_RENDER_FPS = 30')
+    && runtime.includes('const LOW_POWER_KEY = "chemionQuestLowPowerV1"')
+    && runtime.includes('function toggleLowPowerMode()')
+    && runtime.includes("writeTransferValue(LOW_POWER_KEY, bundle.storage.lowPower)")
+    && runtime.includes("autoSaveTimer >= (lowPowerMode ? 15 : 10)")
+    && fs.readFileSync(path.join(projectRoot,'src/styles/core.css'),'utf8').includes('body.low-power-mode'),
+  'question-expansion-1000': (() => {
+    const basicQuestions = readJson('data/basic-questions.json');
+    const hardQuestions = readJson('data/hard-questions.json');
+    const exams = readJson('data/mock-exams.json');
+    const added = [...basicQuestions, ...hardQuestions].filter((q) => String(q.id || '').includes('v58-'));
+    const negatives = added.filter((q) => q.negativeQuestion);
+    const orbitals = added.filter((q) => q.category === 'matter');
+    return basicQuestions.length === 620
+      && hardQuestions.length === 340
+      && exams.flatMap((exam) => exam.questions || []).length === 40
+      && added.length === 160
+      && negatives.length >= 8
+      && negatives.every((q) => q.singleCorrectVerified === true)
+      && orbitals.length === 24
+      && added.every((q) => typeof q.referenceBasis === 'string' && q.referenceBasis.length > 20);
+  })(),
+  'organized-settings': ['learning','display','save-account','support','data-management'].every((section) => template.includes(`data-settings-section="${section}"`))
+    && template.includes('class="settings-section settings-danger-section"')
+    && template.includes('id="settingsLearningResetBtn"')
+    && template.includes('id="settingsDeleteBtn"')
+    && fs.readFileSync(path.join(projectRoot,'src/styles/core.css'),'utf8').includes('v5.7: purpose-based settings information architecture'),
+  'verified-single-package-deploy': (() => {
+    const workflow = fs.readFileSync(path.join(projectRoot,'.github/workflows/pages.yml'),'utf8');
+    const verifier = fs.readFileSync(path.join(projectRoot,'scripts/verify_release_package.py'),'utf8');
+    const builder = fs.readFileSync(path.join(projectRoot,'scripts/build_release_package.py'),'utf8');
+    return workflow.includes('chemion-release.zip --extract-to _site')
+      && workflow.includes('needs: verify')
+      && verifier.includes('SHA-256 mismatch')
+      && verifier.includes('archive contents do not exactly match the manifest')
+      && verifier.includes('version.json and release manifest versions differ')
+      && builder.includes('release-manifest.json');
+  })(),
+  'guest-assist': template.includes('id="guestAssistCode"')
+    && template.includes('id="guestAssistConfirmModal"')
+    && template.includes('ゲストアシストモードを有効にします。')
+    && runtime.includes("code !== 'easy'")
+    && runtime.includes('callback(true, { assisted: true })')
+    && runtime.includes('if (guestAssistEnabled) return [];')
+    && runtime.includes('guestAssistUsed = Boolean(parsed.progress.guestAssistUsed || guestAssistEnabled)')
+    && fs.readFileSync(path.join(projectRoot,'src/scripts/online-runtime.js'),'utf8').includes('function guestAssistWasUsed()'),
   'complete-update-history': ['v3.9','v3.95','v4.0','v4.1','v4.2','v4.3','v4.4','v4.45'].every((version)=>runtime.includes(`['${version}'`) && runtime.includes(`{version:'${version}'`))
 };
 
@@ -70,6 +173,12 @@ const lines = [
   '- v4.5では、半反応式70問、飛行型自傷廃止、Stage 6、欠落アップデート履歴を追加しました。',
   '- v4.6では、Stage 6の塩基版として弱塩基由来陽イオン100％のStage 7を追加しました。',
   '- v5.0では、全味方消去後にEnergyから再展開するStage 8と、Energy上限Lv.12を追加しました。',
+  '- v5.1では、ゲーム進行を維持したまま学習記録・復習間隔・間違い復習だけを初期化できる確認付き機能を追加しました。',
+  '- v5.2では、公開物を単一ZIPへ集約し、完全なファイル一覧・SHA-256・サイズ・版整合性の検査後に空の領域からPagesへ一括公開する方式へ変更しました。',
+  '- v5.3では、Stage選択・敗北画面から開ける攻略情報、直前の敗北分析、Stage別敗北回数に応じた段階式ヒントを追加しました。',
+  '- v5.4では、遠距離攻撃ユニットを召喚不可にし、回復だけを許可するStage 9とBOSS BaSO₄を追加しました。',
+  '- v5.5では通常BGMと独立ON/OFF・音量保存を追加し、v5.9では通常Stage曲を全面刷新して5の倍数Stage用難関曲との自動切替へ拡張しました。',
+  '- v5.6では、通常描画45fps上限・DOM更新間引き・保存間隔最適化と、30fps・演出軽量化の低電力モードを追加しました。',
   '',
   '## 注意',
   '',

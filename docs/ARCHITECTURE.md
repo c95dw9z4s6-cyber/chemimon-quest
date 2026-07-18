@@ -1,8 +1,8 @@
-# Chemion Quest 開発構成（v4.6）
+# Chemion Quest 開発構成（v5.5）
 
 ## 基本方針
 
-公開用`index.html`は自動生成物です。直接編集せず、`config/`、`data/`、`src/`を変更します。v4.0で開発元を分割し、v4.1でボス出現演出、v4.2で二段階BOSSの形態移行、v4.3で化学相性と反応表記の監査層を追加し、v4.4で要望管理・飛行表示・Stage 5実績・再生産クールタイムの回帰修正を追加し、v4.45で要望管理を全ユーザー方式へ変更し、v4.5で半反応式・飛行型調整・Stage 6を追加しました。
+公開用`index.html`は自動生成物です。直接編集せず、`config/`、`data/`、`src/`を変更します。v4.0で開発元を分割し、v4.1でボス出現演出、v4.2で二段階BOSSの形態移行、v4.3で化学相性と反応表記の監査層を追加し、v4.4で要望管理・飛行表示・Stage 5実績・再生産クールタイムの回帰修正を追加し、v4.45で要望管理を全ユーザー方式へ変更し、v4.5〜v5.0でStage 6〜8を追加し、v5.1で学習データ初期化、v5.2で単一公開ZIP方式、v5.3でStage攻略情報、v5.4でStage 9、v5.5で通常BGMを追加しました。
 
 ## 編集場所
 
@@ -15,6 +15,7 @@
 | HTML構造・遊び方 | `src/index.template.html` |
 | 戦闘・相性・反応演出 | `src/scripts/game-runtime.js` |
 | CSS | `src/styles/*.css` |
+| 通常BGM音源 | `assets/audio/chemion-normal-bgm.mp3` |
 | Firebase・ランキング | `src/scripts/online-runtime.js` |
 | PWA | `src/scripts/pwa-runtime.js` |
 | 総合検査 | `scripts/validate.mjs` |
@@ -64,7 +65,7 @@ npm run test:browser
 npm run release
 ```
 
-`npm run validate`は生成同期、JavaScript構文、770問、数値選択肢、出題分散、機能回帰、化学監査をまとめて実行します。
+`npm run validate`は生成同期、JavaScript構文、基本520問・難問280問・実戦40小問、数値選択肢、出題分散、機能回帰、化学監査をまとめて実行します。
 
 ## セーブ互換
 
@@ -72,7 +73,7 @@ npm run release
 
 ## 公開物
 
-GitHub Pagesで配信する主なファイルは`index.html`、`manifest.webmanifest`、`version.json`、`sw.js`、`.nojekyll`、`icons/*.png`です。開発用JSON・分割ソース・監査文書もリポジトリへ保存します。
+GitHub Pagesで配信する主なファイルは`index.html`、`manifest.webmanifest`、`version.json`、`sw.js`、`.nojekyll`、`icons/*.png`、`assets/audio/chemion-normal-bgm.mp3`です。開発用JSON・分割ソース・監査文書もリポジトリへ保存します。
 
 ## v4.45の要望管理
 
@@ -103,3 +104,20 @@ GitHub Pagesで配信する主なファイルは`index.html`、`manifest.webmani
 - Stage 7の全敵は`weak_base_conjugate_acid`を持ち、第5ユニットは`strong_base`です。
 - Stage 6とStage 7のBOSS召集表示を、敵の遊離対象に応じて弱酸／弱塩基へ切り替える共通処理にしました。
 - `highestStageCleared >= 6`の旧セーブは、Stage 7を自動解放します。
+
+
+## v5.3 Stage攻略情報
+
+- `data/game-core.json`の`stageGuides`へStage 1〜9の攻略データを保存します。
+- `src/scripts/game-runtime.js`がStage選択・敗北画面から攻略モーダルを開きます。
+- `cumulativeStats.stage1Defeats`〜`stage8Defeats`は旧セーブで自動的に0へ補完されるため、セーブバージョン31を維持します。
+- 攻略データは戦闘値と分離し、文言変更によってユニット性能や相性判定が変わらない構成です。
+
+
+## v5.5 通常BGM
+
+- 96秒のオリジナル音源を`HTMLAudioElement`でループ再生します。
+- ブラウザーの自動再生制限を避けるため、最初のpointerdownまたは起動ボタン操作後に再生します。
+- 効果音用Web Audioとは独立し、BGM ON/OFFと音量を別キーで保存します。
+- `visibilitychange`と`pagehide`で停止し、画面表示復帰後に再開します。
+- 公開ZIPのmanifest検査対象およびService WorkerのAPP_SHELLへ音源を追加しています。

@@ -268,6 +268,26 @@
       "metric": "highestStageCleared",
       "goal": 8,
       "unit": "Stage"
+    },
+    {
+      "id": "stage9_unlocked",
+      "icon": "⛓️",
+      "title": "射程封鎖区へ",
+      "category": "ステージ",
+      "description": "Stage 8をクリアし、Stage 9を解放する。",
+      "metric": "highestStageReached",
+      "goal": 9,
+      "unit": "Stage"
+    },
+    {
+      "id": "stage9_clear",
+      "icon": "⚔️",
+      "title": "九つの研究区を制覇",
+      "category": "難",
+      "description": "遠距離攻撃禁止の制限を近接編成で突破し、Stage 9をクリアする。",
+      "metric": "highestStageCleared",
+      "goal": 9,
+      "unit": "Stage"
     }
   ],
   "waves": [
@@ -4675,6 +4695,836 @@
         "rangeBonus": 6,
         "intervalScale": 0.85,
         "rewardScale": 1.72
+      }
+    ]
+  },
+  "stageGuides": {
+    "1": {
+      "overview": "歩兵・弓兵・盾兵・強襲・回復の基本的な役割を覚えるStageです。前線を盾で止め、後方から攻撃し、回復で維持する流れを作りましょう。",
+      "specialRule": "特別な強制ルールはありません。最初から解放されているNH₄⁺を起点に、コインを集めて役割の異なるユニットを順番に解放します。",
+      "dangerousEnemies": [
+        "最終BOSSのHCO₃⁻は弱酸H₂CO₃に由来する陰イオンです。",
+        "盾役がいない状態で敵が重なると、味方拠点まで一気に押し込まれます。"
+      ],
+      "recommendedRoles": [
+        "Na₃AlF₆で前線を止める",
+        "SO₄²⁻を盾の後ろから攻撃させる",
+        "HNO₃でBOSSへ大きな圧力をかける",
+        "NaOHで傷ついた盾役を回復する"
+      ],
+      "chemistryTip": "HNO₃は強酸です。弱酸由来のHCO₃⁻へ攻撃すると「弱酸の遊離」の相性で1.4倍になります。",
+      "bossStrategy": "HCO₃⁻が出る前に盾役を1〜2体維持し、HNO₃を召喚できるEnergyを残してください。弓兵だけを並べるより、盾・強襲・回復を混ぜる方が安定します。",
+      "energyGuide": "序盤はEnergyを使い切らず、盾役またはHNO₃を追加できる余裕を残します。解放後は盾役と攻撃役を同じ程度まで強化するのが安全です。",
+      "progressiveHints": [
+        {
+          "minDefeats": 0,
+          "title": "初回ヒント",
+          "body": "最初はNH₄⁺を出しすぎず、SO₄²⁻かNa₃AlF₆の解放用コインを確保しましょう。"
+        },
+        {
+          "minDefeats": 1,
+          "title": "前線安定ヒント",
+          "body": "拠点へ敵が届くなら、攻撃役を増やす前にNa₃AlF₆を置き、NaOHでその盾役を回復してください。"
+        },
+        {
+          "minDefeats": 3,
+          "title": "BOSS突破ヒント",
+          "body": "最終Wave直前はEnergyを温存し、HCO₃⁻出現後にHNO₃を追加してください。HNO₃の弱酸遊離1.4倍を主火力にします。"
+        }
+      ]
+    },
+    "2": {
+      "overview": "範囲攻撃と弱塩基の遊離を学ぶStageです。敵が密集したときにKOHの範囲攻撃が大きく働きます。",
+      "specialRule": "Stage 1の化学レベル・実績は共通ですが、コイン・解放・ユニット強化はStage 2専用として新しく始まります。",
+      "dangerousEnemies": [
+        "敵が重なった状態では単体攻撃だけでは処理が追いつきにくくなります。",
+        "BOSSのC₂H₅NH₃⁺は弱塩基C₂H₅NH₂に由来する陽イオンです。"
+      ],
+      "recommendedRoles": [
+        "SiO₂で密集敵を受け止める",
+        "KOHの範囲攻撃でまとめて削る",
+        "CH₃COO⁻を後方火力として置く",
+        "HBrを押し返し用の強襲役にする"
+      ],
+      "chemistryTip": "KOHは強塩基です。弱塩基由来のC₂H₅NH₃⁺へ攻撃すると「弱塩基の遊離」の相性で1.4倍になります。",
+      "bossStrategy": "BOSS前までにSiO₂を前線へ置き、KOHが安全に範囲攻撃できる形を作ります。KOHをBOSS対策として残しつつ、雑魚が重なった時にも投入してください。",
+      "energyGuide": "KOHとSiO₂を連続で出せるEnergyを意識します。単体火力だけを強化するより、盾と範囲攻撃を優先すると安定します。",
+      "progressiveHints": [
+        {
+          "minDefeats": 0,
+          "title": "初回ヒント",
+          "body": "敵が2体以上重なり始めたら、KOHの範囲攻撃を使う価値が高くなります。"
+        },
+        {
+          "minDefeats": 1,
+          "title": "密集対策ヒント",
+          "body": "KOHがすぐ倒される場合は、先にSiO₂を出して敵を同じ位置へ集めてからKOHを置いてください。"
+        },
+        {
+          "minDefeats": 3,
+          "title": "BOSS突破ヒント",
+          "body": "C₂H₅NH₃⁺にはKOHが1.4倍です。BOSS前にKOHを追加できるEnergyを残し、盾の後ろから攻撃させましょう。"
+        }
+      ]
+    },
+    "3": {
+      "overview": "研究カードと二段階BOSSが本格化するStageです。第1形態を倒した直後も戦闘が終わらない点に注意してください。",
+      "specialRule": "Wave 3・6・9終了後に研究カードを1枚選びます。選んだ効果はそのバトル中だけ有効で、同系統の効果も重なります。",
+      "dangerousEnemies": [
+        "BOSS ClO⁻は撃破後、Cl⁻の第二形態へ変化します。",
+        "第1形態へ全戦力を使い切ると、第二形態への対応が遅れます。"
+      ],
+      "recommendedRoles": [
+        "MnO₂で前線を維持する",
+        "I⁻の速射を盾の後ろから通す",
+        "H₂SO₄を突破役として追加する",
+        "Ca(OH)₂で高HPの味方を回復する"
+      ],
+      "chemistryTip": "ClO⁻からCl⁻への変化は還元です。Clの酸化数は+1から−1へ下がります。戦闘上の変身演出は、この電子受容を学ぶための表現です。",
+      "bossStrategy": "第1形態のHPが少なくなったらEnergyを使い切らず、第二形態の出現後に盾・攻撃役を追加できるようにします。研究カードは攻撃だけでなくHP・回復も有効です。",
+      "energyGuide": "二段階BOSS用に、終盤は主力1体分以上のEnergyを残します。盾役が落ちる場合はMnO₂とCa(OH)₂の強化を優先してください。",
+      "progressiveHints": [
+        {
+          "minDefeats": 0,
+          "title": "初回ヒント",
+          "body": "研究カードは現在の弱点を補うものを選びます。前線が崩れるならHP、処理が遅いなら攻撃を優先します。"
+        },
+        {
+          "minDefeats": 1,
+          "title": "第二形態ヒント",
+          "body": "ClO⁻を倒す直前にEnergyを残してください。Cl⁻へ変化した直後にMnO₂か攻撃役を追加すると崩れにくくなります。"
+        },
+        {
+          "minDefeats": 3,
+          "title": "継戦ヒント",
+          "body": "MnO₂を先頭、I⁻を後方、Ca(OH)₂を回復役にして三層に分けます。第1形態へ強襲役を出しすぎないことが重要です。"
+        }
+      ]
+    },
+    "4": {
+      "overview": "高密度の敵編成を、盾・範囲攻撃・回復で処理するStageです。出題範囲設定によって問題内容は変わりますが、戦闘構成は変わりません。",
+      "specialRule": "研究カードが引き続き登場します。「化学基礎中心」では気体法則や平衡を強制せず、「理論化学全範囲」を選んだ場合だけ予習問題が増えます。",
+      "dangerousEnemies": [
+        "敵が密集すると単体攻撃だけでは前線が下がりやすくなります。",
+        "範囲役NaOHが前へ出すぎると集中攻撃を受けます。"
+      ],
+      "recommendedRoles": [
+        "H₂SO₄を盾役として前へ置く",
+        "NaOHを盾の後ろから範囲攻撃させる",
+        "NH₃を遠距離火力として維持する",
+        "H₂Oで盾役を回復する"
+      ],
+      "chemistryTip": "このStageでは気体・溶液の学習テーマと戦闘役割を結び付けていますが、実際の反応速度や危険性をユニット性能として直接比較しているわけではありません。",
+      "bossStrategy": "最終WaveまでNaOHとH₂Oを維持し、H₂SO₄の前線が切れないようにします。攻撃役を増やすより、密集を止める盾と範囲処理を優先してください。",
+      "energyGuide": "H₂SO₄・NaOH・H₂Oは高コストなので、一度に出そうとせず、盾→範囲→回復の順に揃えます。",
+      "progressiveHints": [
+        {
+          "minDefeats": 0,
+          "title": "初回ヒント",
+          "body": "敵が多いWaveではNaOHを早めに置き、H₂SO₄に集まった敵をまとめて攻撃します。"
+        },
+        {
+          "minDefeats": 1,
+          "title": "高密度対策ヒント",
+          "body": "前線が押されるなら、NH₃などの火力追加よりH₂SO₄の補充を優先してください。"
+        },
+        {
+          "minDefeats": 3,
+          "title": "安定編成ヒント",
+          "body": "H₂SO₄を複数維持し、NaOHを中列、H₂Oを後列に置く流れを繰り返すと高密度Waveを安定させやすくなります。"
+        }
+      ]
+    },
+    "5": {
+      "overview": "飛行・地上・範囲・回復・二段階BOSSが同時に現れる最初の難関Stageです。対空攻撃を欠かさないことが最重要です。",
+      "specialRule": "飛行型は通常の地上近接攻撃を受けません。対空速射、対空範囲、弓兵、飛行型、BOSSの攻撃などで対処します。",
+      "dangerousEnemies": [
+        "飛行敵を放置すると地上盾を越えて攻撃が通ります。",
+        "BOSS H₂O₂は撃破後にO₂の第二形態へ移ります。",
+        "地上対策だけ、飛行対策だけに偏ると混成Waveで崩れます。"
+      ],
+      "recommendedRoles": [
+        "Cl⁻を対空速射の基礎火力にする",
+        "Al(OH)₃で地上前線を止める",
+        "Ba(OH)₂で飛行を含む密集敵を攻撃する",
+        "HNO₃を強襲役、SO₂を飛行役として使い分ける"
+      ],
+      "chemistryTip": "H₂O₂中のOの酸化数は−1で、O₂では0になります。H₂O₂からO₂への変化は酸化であり、BOSS第二形態の学習テーマになっています。",
+      "bossStrategy": "Cl⁻またはBa(OH)₂を残したままH₂O₂を倒し、O₂へ変化した後も対空火力を継続します。第1形態でEnergyを使い切らないでください。",
+      "energyGuide": "対空役を常に1体以上維持し、終盤は第二形態へ追加召喚できるEnergyを残します。強化はAl(OH)₃と対空役を優先します。",
+      "progressiveHints": [
+        {
+          "minDefeats": 0,
+          "title": "初回ヒント",
+          "body": "Stage 5ではCl⁻を早めに解放し、飛行敵が見えてから慌てて対空を用意する状況を避けましょう。"
+        },
+        {
+          "minDefeats": 1,
+          "title": "混成対策ヒント",
+          "body": "地上はAl(OH)₃、飛行はCl⁻とBa(OH)₂に任せます。HNO₃だけを増やすと飛行敵へ対応できません。"
+        },
+        {
+          "minDefeats": 3,
+          "title": "二段階BOSSヒント",
+          "body": "H₂O₂撃破前にCl⁻かBa(OH)₂を2体程度維持し、O₂出現後にもう1体追加できるEnergyを残してください。"
+        }
+      ]
+    },
+    "6": {
+      "overview": "敵100％が弱酸由来陰イオンで構成された相性攻略Stageです。第5ユニットHClの範囲攻撃が全敵へ1.4倍になります。",
+      "specialRule": "強酸HClによる攻撃だけが「弱酸の遊離」相性を得ます。相性は必須ではありませんが、利用すると大きく有利になります。",
+      "dangerousEnemies": [
+        "BOSS PO₄³⁻は予告後に弱酸由来イオンを2〜3体召集します。",
+        "HClが前へ出すぎて倒されると、相性火力と範囲処理を同時に失います。"
+      ],
+      "recommendedRoles": [
+        "CaCO₃で前線を止める",
+        "Cl⁻を対空・後方火力にする",
+        "NH₃でCaCO₃を回復する",
+        "HClを盾の後ろから範囲攻撃させる"
+      ],
+      "chemistryTip": "弱酸の遊離は、強酸が弱酸の塩に由来する陰イオンへH⁺を与えて弱酸を生じさせる反応です。弱酸そのものへの無条件倍率ではありません。",
+      "bossStrategy": "BOSSの召集予告が出たら、CaCO₃で敵を集め、HClの範囲攻撃でBOSSと召集敵をまとめて削ります。HClを単独で前へ出さないでください。",
+      "energyGuide": "HClは高コストなので、CaCO₃とNH₃で前線を作ってから召喚します。終盤はHClを補充できるEnergyを残してください。",
+      "progressiveHints": [
+        {
+          "minDefeats": 0,
+          "title": "初回ヒント",
+          "body": "第5ユニットHClを解放すると、このStageの全敵へ弱酸遊離1.4倍を使えます。"
+        },
+        {
+          "minDefeats": 1,
+          "title": "HCl保護ヒント",
+          "body": "HClを最初に出さず、CaCO₃を先頭、NH₃を回復役として揃えてからHClを置いてください。"
+        },
+        {
+          "minDefeats": 3,
+          "title": "召集対策ヒント",
+          "body": "PO₄³⁻の予告後は新しい単体役よりHClを優先します。召集された2〜3体をBOSSごと範囲攻撃で処理しましょう。"
+        }
+      ]
+    },
+    "7": {
+      "overview": "敵100％が弱塩基由来陽イオンで構成された相性攻略Stageです。第5ユニットKOHの範囲攻撃が全敵へ1.4倍になります。",
+      "specialRule": "強塩基KOHによる攻撃だけが「弱塩基の遊離」相性を得ます。Stage 6の酸・塩基を入れ替えた構造です。",
+      "dangerousEnemies": [
+        "BOSS N₂H₅⁺は予告後に弱塩基由来イオンを2〜3体召集します。",
+        "KOHが前線へ接触すると、相性火力を出す前に倒されやすくなります。"
+      ],
+      "recommendedRoles": [
+        "CaSO₄で前線を止める",
+        "NO₃⁻を対空・後方火力にする",
+        "CH₃COOHでCaSO₄を回復する",
+        "KOHを盾の後ろから範囲攻撃させる"
+      ],
+      "chemistryTip": "弱塩基の遊離は、強塩基が弱塩基の塩に由来する陽イオンへ作用して弱塩基を生じさせる反応です。例：NH₄⁺ + OH⁻ → NH₃ + H₂O。",
+      "bossStrategy": "BOSSの召集予告後、CaSO₄で敵をまとめ、KOHでBOSSと召集敵を同時に攻撃します。回復役CH₃COOHで盾を維持してください。",
+      "energyGuide": "CaSO₄・CH₃COOH・KOHを一度に出すには高いEnergyが必要です。盾→回復→KOHの順で展開し、KOHの補充余力を残します。",
+      "progressiveHints": [
+        {
+          "minDefeats": 0,
+          "title": "初回ヒント",
+          "body": "第5ユニットKOHを解放すると、このStageの全敵へ弱塩基遊離1.4倍を使えます。"
+        },
+        {
+          "minDefeats": 1,
+          "title": "KOH保護ヒント",
+          "body": "KOHの前にCaSO₄を置き、CH₃COOHで盾を回復してください。KOHを単独で出すと高コストを失いやすくなります。"
+        },
+        {
+          "minDefeats": 3,
+          "title": "召集対策ヒント",
+          "body": "N₂H₅⁺の予告を見たらKOHを追加し、召集敵が重なった瞬間に範囲攻撃が届く配置を維持しましょう。"
+        }
+      ]
+    },
+    "8": {
+      "overview": "高速敵と、全味方消去BOSSへの再展開を攻略する難関Stageです。Wave 10へ入る前のEnergy蓄積が勝敗を大きく左右します。",
+      "specialRule": "Wave 10でO₃が出現すると、場の味方がすべて倒され、味方・敵の弾も消去され、全ユニットの再生産クールタイムが解除されます。",
+      "dangerousEnemies": [
+        "O₃の速度60はLv.MAX強襲型の速度50より速く、出現後すぐ拠点へ迫ります。",
+        "BOSS直前にEnergyを使うと、全味方消去後に再展開できません。",
+        "一般Waveも高速なので、Energyをためる段階へ入る前に前線を安定させる必要があります。"
+      ],
+      "recommendedRoles": [
+        "ZnをBOSS直後の盾役にする",
+        "MnO₄⁻を再展開後の範囲火力にする",
+        "I⁻を後方・対空火力として置く",
+        "Sn²⁺でZnを回復する"
+      ],
+      "chemistryTip": "O₃の全味方消去や速度はゲーム上の特殊表現で、実際のオゾンの反応速度を数値化したものではありません。Stageの学習テーマは酸化還元と再展開判断です。",
+      "bossStrategy": "Energy上限をLv.3以上の130へ上げ、Wave 10直前に125以上を蓄えます。O₃の演出終了直後、Zn→MnO₄⁻など盾と攻撃役を即座に再展開してください。",
+      "energyGuide": "最重要目安はEnergy上限Lv.3以上、BOSS突入時125以上です。上限が足りない場合はユニット強化より先にEnergy上限を上げます。",
+      "progressiveHints": [
+        {
+          "minDefeats": 0,
+          "title": "初回ヒント",
+          "body": "Wave 10前は新しい味方の召喚を止め、Energy 125以上を目標に蓄積してください。"
+        },
+        {
+          "minDefeats": 1,
+          "title": "再展開ヒント",
+          "body": "O₃出現後は再生産クールタイムが解除されます。演出終了直後にZnを先に出し、その後にMnO₄⁻を出します。"
+        },
+        {
+          "minDefeats": 3,
+          "title": "最終調整ヒント",
+          "body": "Energy上限Lv.3未満なら先に上限を強化します。Wave 9終了時点で125未満なら、終盤の召喚数を減らして蓄積量を優先してください。"
+        }
+      ]
+    },
+    "9": {
+      "overview": "味方の遠距離攻撃が封じられる制限Stageです。Alで敵射手の攻撃を受け、MgとFeを接近させ、H₂Oで前線を維持します。",
+      "specialRule": "rangedAttackが設定された味方ユニットは攻撃できず、解放後の召喚ボタンも使用不可になります。回復は攻撃ではないためH₂Oの回復行動は使用できます。",
+      "dangerousEnemies": [
+        "Cu²⁺とCl₂は遠距離から攻撃するため、盾がないと接近前に近接役が削られます。",
+        "NO₃⁻が敵を回復している間は、単体攻撃だけでは前線を崩しにくくなります。",
+        "BOSS BaSO₄は高HPと被ダメージ軽減を持つ単純な重装型です。"
+      ],
+      "recommendedRoles": [
+        "Alを先頭にして敵の遠距離攻撃を受ける",
+        "Feの近接範囲攻撃で射手と回復役をまとめて削る",
+        "Mgを低コストの補助前線として足す",
+        "H₂OでAlを回復し、接近に必要な時間を確保する"
+      ],
+      "chemistryTip": "BaSO₄は水に溶けにくい難溶性塩です。このStageの高耐久BOSS表現は難溶性を学習テーマにしたもので、実際の物質の硬さや戦闘力を示すものではありません。",
+      "bossStrategy": "Alを1〜2体維持した状態でBaSO₄へ接近し、Feを複数重ねます。敵のNO₃⁻が残っている場合は、BOSSより先に近接範囲攻撃へ巻き込んで回復を止めてください。",
+      "energyGuide": "Al→Fe→H₂Oの順に展開できるEnergyを残します。Ag⁺は遠距離攻撃扱いで召喚できないため、Stage攻略用の強化対象から外してください。",
+      "progressiveHints": [
+        {
+          "minDefeats": 0,
+          "title": "初回ヒント",
+          "body": "Ag⁺はこのStageでは攻撃できません。まずMgでコインを集め、AlとFeを優先して解放してください。"
+        },
+        {
+          "minDefeats": 1,
+          "title": "接近ヒント",
+          "body": "敵射手へ届く前に倒される場合は、Alを先に2体置き、その後にFeとH₂Oを追加してください。"
+        },
+        {
+          "minDefeats": 3,
+          "title": "BOSS突破ヒント",
+          "body": "BaSO₄戦ではAlを切らさず、Feを2体以上維持します。NO₃⁻の回復を近接範囲へ巻き込み、BOSSへの回復を止めてください。"
+        }
+      ]
+    }
+  },
+  "stage9": {
+    "id": 9,
+    "name": "近接反応・射程封鎖区",
+    "subtitle": "遠距離攻撃禁止の制限研究区",
+    "description": "遠距離攻撃が封じられるStageです。近接歩兵・盾兵・近接範囲・回復を組み合わせ、敵の射手へ接近して突破します。回復は攻撃ではないため使用できます。",
+    "theme": "ranged-lockdown",
+    "allyBaseLabel": "CLOSE LAB",
+    "enemyBaseLabel": "RANGE LOCK CORE",
+    "allyBaseHp": 1700,
+    "enemyBaseHp": 2200,
+    "startingEnergy": 82,
+    "coinRewardMultiplier": 1.9,
+    "bossHint": "遠距離攻撃は使用不可。盾で敵射手へ接近し、近接範囲攻撃で押し切る",
+    "difficultyLabel": "制限攻略",
+    "enemyAttributeSummary": "特殊ルール：味方の遠距離攻撃禁止（回復は使用可能）",
+    "rules": {
+      "disableRangedAllyAttacks": true,
+      "rangedAttackMessage": "このStageでは遠距離攻撃が禁止されています。近接・盾・回復を編成してください。"
+    },
+    "units": [
+      {
+        "id": "magnesiumInfantryAlly9",
+        "formula": "Mg",
+        "name": "マグネシウム",
+        "role": "近接歩兵型",
+        "cost": 30,
+        "hp": 170,
+        "attack": 42,
+        "speed": 16.0,
+        "range": 30,
+        "radius": 17,
+        "attackInterval": 2.15,
+        "summonCooldown": 8.3,
+        "initiallyUnlocked": true,
+        "unlockCost": 0,
+        "upgradeBaseCost": 16,
+        "chemistryClass": "redox",
+        "chemistryLabel": "酸化還元",
+        "projectileLabel": "Mg"
+      },
+      {
+        "id": "aluminumGuardAlly9",
+        "formula": "Al",
+        "name": "アルミニウム",
+        "role": "近接盾兵型",
+        "cost": 54,
+        "hp": 720,
+        "attack": 25,
+        "speed": 7.2,
+        "range": 24,
+        "radius": 30,
+        "attackInterval": 3.55,
+        "summonCooldown": 18.8,
+        "initiallyUnlocked": false,
+        "unlockCost": 55,
+        "upgradeBaseCost": 24,
+        "unlockAfter": "magnesiumInfantryAlly9",
+        "chemistryClass": "redox",
+        "chemistryLabel": "酸化還元",
+        "guard": true,
+        "damageReduction": 0.24,
+        "projectileLabel": "Al"
+      },
+      {
+        "id": "ironSplashAlly9",
+        "formula": "Fe",
+        "name": "鉄",
+        "role": "近接範囲型",
+        "cost": 48,
+        "hp": 225,
+        "attack": 46,
+        "speed": 13.6,
+        "range": 34,
+        "radius": 20,
+        "attackInterval": 2.0,
+        "summonCooldown": 14.8,
+        "initiallyUnlocked": false,
+        "unlockCost": 95,
+        "upgradeBaseCost": 28,
+        "unlockAfter": "aluminumGuardAlly9",
+        "chemistryClass": "redox",
+        "chemistryLabel": "酸化還元",
+        "splashRadius": 56,
+        "splashFactor": 0.4,
+        "projectileLabel": "Fe"
+      },
+      {
+        "id": "waterHealerAlly9",
+        "formula": "H₂O",
+        "name": "水",
+        "role": "高性能単体回復型",
+        "cost": 52,
+        "hp": 148,
+        "attack": 10,
+        "speed": 10.4,
+        "range": 92,
+        "radius": 18,
+        "attackInterval": 3.75,
+        "summonCooldown": 17.6,
+        "initiallyUnlocked": false,
+        "unlockCost": 135,
+        "upgradeBaseCost": 31,
+        "unlockAfter": "ironSplashAlly9",
+        "chemistryClass": "neutral",
+        "chemistryLabel": "無属性",
+        "healer": true,
+        "healAmount": 52,
+        "healRange": 132,
+        "projectileLabel": "H₂O"
+      },
+      {
+        "id": "silverArcherAlly9",
+        "formula": "Ag⁺",
+        "name": "銀イオン",
+        "role": "遠距離型",
+        "cost": 44,
+        "hp": 122,
+        "attack": 70,
+        "speed": 10.8,
+        "range": 132,
+        "radius": 17,
+        "attackInterval": 2.35,
+        "summonCooldown": 14.2,
+        "initiallyUnlocked": false,
+        "unlockCost": 175,
+        "upgradeBaseCost": 34,
+        "unlockAfter": "waterHealerAlly9",
+        "chemistryClass": "redox",
+        "chemistryLabel": "酸化還元",
+        "rangedAttack": true,
+        "antiAir": true,
+        "projectileLabel": "Ag⁺"
+      }
+    ],
+    "enemies": [
+      {
+        "id": "sodiumInfantryEnemy9",
+        "formula": "Na⁺",
+        "name": "ナトリウムイオン",
+        "role": "歩兵型",
+        "hp": 255,
+        "attack": 42,
+        "speed": 12.4,
+        "range": 29,
+        "radius": 18,
+        "attackInterval": 2.55,
+        "reward": 6,
+        "baseWeight": 28,
+        "xp": 142,
+        "chemistryClass": "redox",
+        "chemistryLabel": "酸化還元",
+        "projectileLabel": "Na⁺"
+      },
+      {
+        "id": "potassiumRunnerEnemy9",
+        "formula": "K⁺",
+        "name": "カリウムイオン",
+        "role": "高速強襲型",
+        "hp": 184,
+        "attack": 62,
+        "speed": 22.0,
+        "range": 28,
+        "radius": 18,
+        "attackInterval": 2.45,
+        "reward": 7,
+        "baseWeight": 18,
+        "xp": 158,
+        "chemistryClass": "redox",
+        "chemistryLabel": "酸化還元",
+        "projectileLabel": "K⁺",
+        "firstStrikeMultiplier": 1.3,
+        "pushback": 10
+      },
+      {
+        "id": "copperArcherEnemy9",
+        "formula": "Cu²⁺",
+        "name": "銅(II)イオン",
+        "role": "遠距離型",
+        "hp": 190,
+        "attack": 59,
+        "speed": 9.2,
+        "range": 120,
+        "radius": 18,
+        "attackInterval": 2.7,
+        "reward": 7,
+        "baseWeight": 16,
+        "xp": 166,
+        "chemistryClass": "redox",
+        "chemistryLabel": "酸化還元",
+        "projectileLabel": "Cu²⁺"
+      },
+      {
+        "id": "aluminumOxideGuardEnemy9",
+        "formula": "Al₂O₃",
+        "name": "酸化アルミニウム",
+        "role": "盾兵型",
+        "hp": 575,
+        "attack": 30,
+        "speed": 6.3,
+        "range": 25,
+        "radius": 29,
+        "attackInterval": 3.5,
+        "reward": 9,
+        "baseWeight": 10,
+        "xp": 188,
+        "chemistryClass": "neutral",
+        "chemistryLabel": "無属性",
+        "projectileLabel": "Al₂O₃",
+        "guard": true,
+        "damageReduction": 0.22
+      },
+      {
+        "id": "ironThreeHeavyEnemy9",
+        "formula": "Fe³⁺",
+        "name": "鉄(III)イオン",
+        "role": "重装型",
+        "hp": 430,
+        "attack": 56,
+        "speed": 7.6,
+        "range": 31,
+        "radius": 25,
+        "attackInterval": 3.05,
+        "reward": 9,
+        "baseWeight": 9,
+        "xp": 190,
+        "chemistryClass": "redox",
+        "chemistryLabel": "酸化還元",
+        "projectileLabel": "Fe³⁺"
+      },
+      {
+        "id": "nitrateSupportEnemy9",
+        "formula": "NO₃⁻",
+        "name": "硝酸イオン",
+        "role": "回復型",
+        "hp": 222,
+        "attack": 14,
+        "speed": 8.2,
+        "range": 82,
+        "radius": 19,
+        "attackInterval": 4.0,
+        "reward": 8,
+        "baseWeight": 7,
+        "xp": 182,
+        "chemistryClass": "neutral",
+        "chemistryLabel": "無属性",
+        "projectileLabel": "NO₃⁻",
+        "healer": true,
+        "healAmount": 39,
+        "healRange": 128
+      },
+      {
+        "id": "chlorineSplashEnemy9",
+        "formula": "Cl₂",
+        "name": "塩素",
+        "role": "範囲反応型",
+        "hp": 268,
+        "attack": 54,
+        "speed": 8.7,
+        "range": 80,
+        "radius": 20,
+        "attackInterval": 3.15,
+        "reward": 8,
+        "baseWeight": 7,
+        "xp": 184,
+        "chemistryClass": "redox",
+        "chemistryLabel": "酸化還元",
+        "projectileLabel": "Cl₂",
+        "splashRadius": 72,
+        "splashFactor": 0.48,
+        "antiAir": true
+      },
+      {
+        "id": "hydrochloricAssaultEnemy9",
+        "formula": "HCl",
+        "name": "塩酸",
+        "role": "強襲型",
+        "hp": 218,
+        "attack": 78,
+        "speed": 18.4,
+        "range": 30,
+        "radius": 19,
+        "attackInterval": 2.55,
+        "reward": 8,
+        "baseWeight": 9,
+        "xp": 180,
+        "chemistryClass": "strong_acid",
+        "chemistryLabel": "強酸",
+        "projectileLabel": "H⁺",
+        "firstStrikeMultiplier": 1.35,
+        "pushback": 12
+      },
+      {
+        "id": "bariumSulfateBoss9",
+        "formula": "BaSO₄",
+        "name": "硫酸バリウム",
+        "role": "BOSS・難溶性重装型",
+        "hp": 1900,
+        "attack": 102,
+        "speed": 4.0,
+        "range": 36,
+        "radius": 38,
+        "attackInterval": 3.2,
+        "reward": 148,
+        "baseWeight": 0,
+        "xp": 270,
+        "chemistryClass": "neutral",
+        "chemistryLabel": "難溶性塩",
+        "projectileLabel": "BaSO₄",
+        "boss": true,
+        "guard": true,
+        "damageReduction": 0.25,
+        "bossIntro": "難溶性塩 BaSO₄ 硫酸バリウム｜近接突破試験"
+      }
+    ],
+    "waves": [
+      {
+        "name": "射程封鎖・接近訓練",
+        "enemies": [
+          "sodiumInfantryEnemy9",
+          "sodiumInfantryEnemy9",
+          "potassiumRunnerEnemy9"
+        ],
+        "spawnInterval": 5.6,
+        "hpScale": 1.04,
+        "attackScale": 1.02,
+        "speedScale": 1.0,
+        "rangeBonus": 0,
+        "intervalScale": 1.0,
+        "rewardScale": 1.06
+      },
+      {
+        "name": "遠距離圧力の観察",
+        "enemies": [
+          "copperArcherEnemy9",
+          "sodiumInfantryEnemy9",
+          "potassiumRunnerEnemy9",
+          "copperArcherEnemy9"
+        ],
+        "spawnInterval": 5.0,
+        "hpScale": 1.1,
+        "attackScale": 1.07,
+        "speedScale": 1.01,
+        "rangeBonus": 1,
+        "intervalScale": 0.99,
+        "rewardScale": 1.1
+      },
+      {
+        "name": "盾による接近戦",
+        "enemies": [
+          "aluminumOxideGuardEnemy9",
+          "copperArcherEnemy9",
+          "sodiumInfantryEnemy9",
+          "potassiumRunnerEnemy9"
+        ],
+        "spawnInterval": 4.6,
+        "hpScale": 1.17,
+        "attackScale": 1.13,
+        "speedScale": 1.02,
+        "rangeBonus": 1,
+        "intervalScale": 0.98,
+        "rewardScale": 1.14
+      },
+      {
+        "name": "重装・射手混成",
+        "enemies": [
+          "ironThreeHeavyEnemy9",
+          "copperArcherEnemy9",
+          "sodiumInfantryEnemy9",
+          "hydrochloricAssaultEnemy9",
+          "potassiumRunnerEnemy9"
+        ],
+        "spawnInterval": 4.1,
+        "hpScale": 1.25,
+        "attackScale": 1.2,
+        "speedScale": 1.03,
+        "rangeBonus": 2,
+        "intervalScale": 0.97,
+        "rewardScale": 1.18
+      },
+      {
+        "name": "回復支援線",
+        "enemies": [
+          "nitrateSupportEnemy9",
+          "aluminumOxideGuardEnemy9",
+          "copperArcherEnemy9",
+          "ironThreeHeavyEnemy9",
+          "sodiumInfantryEnemy9",
+          "potassiumRunnerEnemy9"
+        ],
+        "spawnInterval": 3.7,
+        "hpScale": 1.34,
+        "attackScale": 1.28,
+        "speedScale": 1.04,
+        "rangeBonus": 2,
+        "intervalScale": 0.96,
+        "rewardScale": 1.23
+      },
+      {
+        "name": "範囲射撃圧力",
+        "enemies": [
+          "chlorineSplashEnemy9",
+          "aluminumOxideGuardEnemy9",
+          "copperArcherEnemy9",
+          "nitrateSupportEnemy9",
+          "hydrochloricAssaultEnemy9",
+          "sodiumInfantryEnemy9"
+        ],
+        "spawnInterval": 3.35,
+        "hpScale": 1.43,
+        "attackScale": 1.36,
+        "speedScale": 1.05,
+        "rangeBonus": 3,
+        "intervalScale": 0.95,
+        "rewardScale": 1.28
+      },
+      {
+        "name": "近接突破総合判断",
+        "enemies": [
+          "potassiumRunnerEnemy9",
+          "copperArcherEnemy9",
+          "ironThreeHeavyEnemy9",
+          "chlorineSplashEnemy9",
+          "nitrateSupportEnemy9",
+          "aluminumOxideGuardEnemy9",
+          "hydrochloricAssaultEnemy9"
+        ],
+        "spawnInterval": 3.0,
+        "hpScale": 1.53,
+        "attackScale": 1.45,
+        "speedScale": 1.06,
+        "rangeBonus": 3,
+        "intervalScale": 0.94,
+        "rewardScale": 1.34
+      },
+      {
+        "name": "射手保護陣形",
+        "enemies": [
+          "aluminumOxideGuardEnemy9",
+          "copperArcherEnemy9",
+          "chlorineSplashEnemy9",
+          "nitrateSupportEnemy9",
+          "ironThreeHeavyEnemy9",
+          "potassiumRunnerEnemy9",
+          "hydrochloricAssaultEnemy9",
+          "copperArcherEnemy9"
+        ],
+        "spawnInterval": 2.65,
+        "hpScale": 1.64,
+        "attackScale": 1.55,
+        "speedScale": 1.08,
+        "rangeBonus": 4,
+        "intervalScale": 0.92,
+        "rewardScale": 1.4
+      },
+      {
+        "name": "射程封鎖区・臨界",
+        "enemies": [
+          "aluminumOxideGuardEnemy9",
+          "nitrateSupportEnemy9",
+          "chlorineSplashEnemy9",
+          "copperArcherEnemy9",
+          "ironThreeHeavyEnemy9",
+          "hydrochloricAssaultEnemy9",
+          "potassiumRunnerEnemy9",
+          "sodiumInfantryEnemy9",
+          "copperArcherEnemy9"
+        ],
+        "spawnInterval": 2.3,
+        "hpScale": 1.76,
+        "attackScale": 1.66,
+        "speedScale": 1.1,
+        "rangeBonus": 5,
+        "intervalScale": 0.9,
+        "rewardScale": 1.47
+      },
+      {
+        "name": "BOSS・硫酸バリウム",
+        "enemies": [
+          "aluminumOxideGuardEnemy9",
+          "copperArcherEnemy9",
+          "nitrateSupportEnemy9",
+          "bariumSulfateBoss9"
+        ],
+        "spawnInterval": 2.2,
+        "hpScale": 1.0,
+        "attackScale": 1.0,
+        "speedScale": 1.0,
+        "rangeBonus": 0,
+        "intervalScale": 1.0,
+        "rewardScale": 1.58
+      },
+      {
+        "name": "最終・近接反応総力戦",
+        "enemies": [
+          "potassiumRunnerEnemy9",
+          "copperArcherEnemy9",
+          "aluminumOxideGuardEnemy9",
+          "chlorineSplashEnemy9",
+          "nitrateSupportEnemy9",
+          "ironThreeHeavyEnemy9",
+          "hydrochloricAssaultEnemy9",
+          "sodiumInfantryEnemy9",
+          "copperArcherEnemy9",
+          "potassiumRunnerEnemy9",
+          "aluminumOxideGuardEnemy9",
+          "chlorineSplashEnemy9",
+          "ironThreeHeavyEnemy9",
+          "hydrochloricAssaultEnemy9"
+        ],
+        "spawnInterval": 1.42,
+        "hpScale": 2.03,
+        "attackScale": 1.92,
+        "speedScale": 1.13,
+        "rangeBonus": 6,
+        "intervalScale": 0.85,
+        "rewardScale": 1.75
       }
     ]
   }

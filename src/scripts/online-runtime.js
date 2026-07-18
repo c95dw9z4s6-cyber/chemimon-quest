@@ -44,6 +44,15 @@ function readLocalStats() {
   }
 }
 
+function guestAssistWasUsed() {
+  try {
+    const save = JSON.parse(localStorage.getItem(D.saveKey) || 'null');
+    return Boolean(save?.progress?.guestAssistUsed || save?.progress?.guestAssistEnabled);
+  } catch {
+    return false;
+  }
+}
+
 function rankingScore(x) {
   const cleared = Math.max(0, Math.min(5, Number(x.highestStageCleared) || 0));
   const reached = Math.max(1, Math.min(5, Number(x.highestStageReached) || 1));
@@ -134,6 +143,10 @@ async function initializeFirebase() {
 
 async function syncProfile() {
   if (syncing || !configured || !currentUser || !navigator.onLine) return;
+  if (guestAssistWasUsed()) {
+    setStatus('ランキング送信対象外');
+    return;
+  }
   const nickname = localStorage.getItem(NICK_KEY);
   if (!nickname) return;
   syncing = true;
@@ -383,6 +396,7 @@ async function sendRequest() {
 function wire() {
   window.addEventListener('cq-open-profile', () => openProfile(false));
   window.addEventListener('cq-save-imported', () => { setTimeout(syncProfile, 250); });
+  window.addEventListener('cq-guest-assist-changed', () => { if (guestAssistWasUsed()) setStatus('ランキング送信対象外'); });
   window.addEventListener('cq-open-requests', openRequests);
   window.addEventListener('cq-submit-request', openRequestSubmit);
   $('requestSubmitCloseBtn').addEventListener('click', () => {

@@ -2,15 +2,26 @@
 """Chromium smoke test using in-memory HTML; no network or local file navigation."""
 from pathlib import Path
 import json
+import os
 from playwright.sync_api import sync_playwright
 ROOT=Path(__file__).resolve().parents[1]
 
 def main():
     html=(ROOT/'index.html').read_text(encoding='utf-8')
-    version=json.loads((ROOT/'config/release.json').read_text(encoding='utf-8'))['version']
+    release=json.loads((ROOT/'config/release.json').read_text(encoding='utf-8'))
+    version=release['version']
+    expected=release['expectedCounts']
     with sync_playwright() as p:
-        browser=p.chromium.launch(headless=True,executable_path='/usr/bin/chromium',args=['--no-sandbox','--disable-dev-shm-usage'])
-        context=browser.new_context(reduced_motion='reduce')
+        browser_candidates=[
+            os.environ.get('CHROMIUM_PATH'),
+            '/usr/bin/chromium',
+            r'C:\Program Files\Google\Chrome\Application\chrome.exe',
+            r'C:\Program Files (x86)\Google\Chrome\Application\chrome.exe',
+            r'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe',
+        ]
+        executable=next((candidate for candidate in browser_candidates if candidate and Path(candidate).exists()),None)
+        browser=p.chromium.launch(headless=True,executable_path=executable,args=['--no-sandbox','--disable-dev-shm-usage'])
+        context=browser.new_context(reduced_motion='reduce',user_agent='Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/142.0.0.0 Safari/537.36')
         page=context.new_page()
         page.route('**/*',lambda route: route.abort() if route.request.url.startswith('https://') else route.continue_())
         page.goto('about:blank')
@@ -39,7 +50,19 @@ def main():
         page.wait_for_selector('header h1',timeout=15000)
         assert f'v{version}' in page.locator('header h1').inner_text()
         counts=page.evaluate("({basic:gameData.quiz.length,hard:gameData.hardQuiz.length,mock:gameData.mockExams.length,sub:gameData.mockExams.reduce((n,e)=>n+e.questions.length,0),save:gameData.version})")
-        assert counts=={'basic':520,'hard':280,'mock':8,'sub':40,'save':31},counts
+        assert counts=={'basic':expected['basic'],'hard':expected['hard'],'mock':expected['mockExams'],'sub':expected['mockQuestions'],'save':release['saveVersion']},counts
+        v58=page.evaluate("""
+          (() => {
+            const added=[...gameData.quiz,...gameData.hardQuiz].filter(q=>String(q.id||'').includes('v58-'));
+            return {
+              added:added.length,
+              negative:added.filter(q=>q.negativeQuestion===true&&q.singleCorrectVerified===true).length,
+              references:added.every(q=>typeof q.referenceBasis==='string'&&q.referenceBasis.length>20),
+              orbital:added.filter(q=>q.category==='matter').length
+            };
+          })()
+        """)
+        assert v58=={'added':160,'negative':8,'references':True,'orbital':24},v58
         chemistry=page.evaluate("""
           (() => {
             const acetate=gameData.enemies.find(x=>x.id==='aceticAcid');
@@ -97,16 +120,42 @@ def main():
           })()
         """)
         assert stage8=={'id':8,'waves':11,'bossHp':420,'bossSpeed':60,'wipe':True,'phase':False,'maxAssault':50,'maxEnergy':265},stage8
+        stage9=page.evaluate("""
+          (() => {
+            const stage=gameData.stage9;
+            const boss=stage?.enemies?.find(x=>x.boss);
+            const blocked=stage?.units?.find(x=>x.rangedAttack);
+            return {id:stage?.id,waves:stage?.waves?.length,rule:stage?.rules?.disableRangedAllyAttacks,blocked:blocked?.formula,boss:boss?.formula,phase:Boolean(boss?.phaseTwo)};
+          })()
+        """)
+        assert stage9=={'id':9,'waves':11,'rule':True,'blocked':'Ag⁺','boss':'BaSO₄','phase':False},stage9
         guide_text=page.locator('#guideModal').inner_text()
         assert '中和によるダメージ倍率の変化はありません' in guide_text
         assert '弱酸・弱塩基そのものには遊離補正なし' in guide_text
         if page.locator('#guideModal').is_visible(): page.locator('#guideStartBtn').click()
         if page.locator('#profileModal').is_visible(): page.locator('#profileCancelBtn').click()
         if page.locator('#tutorialOverlay').is_visible(): page.locator('#tutorialSkipBtn').click()
-        page.wait_for_timeout(100)
+        if page.locator('#mobileLaunchGate').is_visible():
+            page.locator('#launchContinueBtn').click(force=True)
+            page.wait_for_timeout(50)
+        if page.locator('#mobileLaunchGate').is_visible():
+            page.evaluate("document.querySelector('#mobileLaunchGate').hidden=true")
+        page.wait_for_timeout(150)
         page.locator('#pauseBtn').click()
         page.wait_for_selector('#pauseModal:not([hidden])',timeout=5000)
         assert page.locator('#pauseRestartBtn').is_visible()
+        assert page.locator('#pauseMusicBtn').is_visible()
+        assert page.locator('#pausePowerBtn').is_visible()
+        page.locator('#pauseMusicBtn').click()
+        assert page.evaluate("localStorage.getItem('chemionQuestBgmV1')") == 'off'
+        assert 'OFF' in page.locator('#pauseMusicBtn').inner_text()
+        page.locator('#pauseMusicBtn').click()
+        assert page.evaluate("localStorage.getItem('chemionQuestBgmV1')") == 'on'
+        page.locator('#pausePowerBtn').click()
+        assert page.evaluate("localStorage.getItem('chemionQuestLowPowerV1')") == 'on'
+        assert page.evaluate("document.body.classList.contains('low-power-mode')") is True
+        assert page.evaluate("document.body.dataset.renderFps") == '5'
+        assert 'ON' in page.locator('#pausePowerBtn').inner_text()
         assert page.locator('[data-settings-view="mock"]').count()==1
         assert page.locator('#pwaUpdateLaterBtn').count()==0
         assert page.locator('#bossArrivalFx').count()==1
@@ -115,8 +164,138 @@ def main():
         assert page.locator('#bossPhaseFrom').count()==1
         assert page.locator('#bossPhaseTo').count()==1
 
-        # Verify v4.45 old-save repair and cooldown/UI synchronization.
+        # Verify v5.1 learning-data reset clears only learning/review stores.
+        page.evaluate("""
+          (() => {
+            localStorage.setItem('chemionQuestLearningV1', JSON.stringify({version:2,totalAttempts:9,totalCorrect:8,currentStreak:4,bestStreak:6,byCategory:{mol:{attempts:4,correct:4,recent:[true,true,true,true]}},spacing:{version:1,items:{sample:{attempts:2,correct:2,correctStreak:2,dueAt:9999999999999}}}}));
+            localStorage.setItem('chemionQuestReviewV1', JSON.stringify([{q:'sample',wrongCount:1,reviewCorrectCount:0}]));
+          })();
+        """)
+        progress_before_reset=page.evaluate("""
+          (() => {
+            const save=JSON.parse(localStorage.getItem(gameData.saveKey));
+            return {
+              currentStageId:save.currentStageId,
+              coins:save.progress.coins,
+              unlocked:save.progress.unlocked,
+              energyCapacityLevel:save.progress.energyCapacityLevel,
+              unitUpgradeLevels:save.progress.unitUpgradeLevels,
+              cumulativeStats:save.progress.cumulativeStats,
+              achievementState:save.progress.achievementState,
+              mockExamProgress:save.progress.mockExamProgress
+            };
+          })()
+        """)
+        low_power_time_before=float(page.locator('#gameTime').inner_text())
         page.locator('#resumeBattleBtn').click()
+        assert page.evaluate("document.body.dataset.renderFps") == '30'
+        page.wait_for_timeout(1200)
+        low_power_time_after=float(page.locator('#gameTime').inner_text())
+        assert 0.8 <= low_power_time_after-low_power_time_before <= 1.6,(low_power_time_before,low_power_time_after)
+        page.locator('#settingsBtn').click()
+        page.wait_for_selector('#settingsModal:not([hidden])',timeout=3000)
+        assert page.locator('#settingsMusicBtn').is_visible()
+        bgm_boot=page.evaluate("({track:document.querySelector('#bgmAudio')?.dataset.track,src:document.querySelector('#bgmAudio')?.getAttribute('src')})")
+        assert bgm_boot=={'track':'normal','src':'assets/audio/chemion-normal-bgm.mp3'},bgm_boot
+        assert page.locator('#settingsPowerBtn').is_visible()
+        assert '現在ON' in page.locator('#settingsPowerState').inner_text()
+        page.locator('#settingsPowerBtn').click()
+        assert page.evaluate("localStorage.getItem('chemionQuestLowPowerV1')") == 'off'
+        assert page.evaluate("document.body.classList.contains('low-power-mode')") is False
+        page.locator('#musicVolume').fill('60')
+        assert page.evaluate("localStorage.getItem('chemionQuestBgmVolumeV1')") == '0.6'
+        assert page.locator('#musicVolumeValue').inner_text() == '60%'
+        assert page.locator('[data-settings-section="display"]').get_attribute('open') is not None
+
+        # Verify v5.95 guest assist access, internal success, persistence and sticky ranking exclusion.
+        page.locator('[data-settings-section="save-account"] > summary').click()
+        page.locator('#guestAssistCode').fill('wrong')
+        page.locator('#guestAssistCodeBtn').click()
+        assert page.locator('#guestAssistCodeStatus').inner_text() == 'コードを確認してください'
+        assert page.locator('#guestAssistConfirmModal').is_hidden()
+        page.locator('#guestAssistCode').fill('  EaSy  ')
+        page.locator('#guestAssistCodeBtn').click()
+        page.wait_for_selector('#guestAssistConfirmModal:not([hidden])',timeout=3000)
+        assert 'ランキング、実績、学習記録、正答率、連続正解記録には反映されません。' in page.locator('#guestAssistConfirmText').inner_text()
+        page.locator('#guestAssistCancelBtn').click()
+        assert page.locator('#guestAssistConfirmModal').is_hidden()
+        page.locator('#guestAssistCodeBtn').click()
+        page.locator('#guestAssistEnableBtn').click()
+        assert page.locator('#guestAssistIndicator').is_visible()
+        before_assist=page.evaluate("""
+          (() => {
+            const save=JSON.parse(localStorage.getItem(gameData.saveKey));
+            return {learning:localStorage.getItem('chemionQuestLearningV1'),achievements:JSON.stringify(save.progress.achievementState)};
+          })()
+        """)
+        page.locator('#settingsCloseBtn').click()
+        page.locator('.unit-button').first.click()
+        page.wait_for_function("document.getElementById('modal').hidden && document.getElementById('battleMessage').textContent.includes('召喚に成功')",timeout=3000)
+        after_assist=page.evaluate("""
+          (() => {
+            const save=JSON.parse(localStorage.getItem(gameData.saveKey));
+            return {enabled:save.progress.guestAssistEnabled,used:save.progress.guestAssistUsed,learning:localStorage.getItem('chemionQuestLearningV1'),achievements:JSON.stringify(save.progress.achievementState)};
+          })()
+        """)
+        assert after_assist['enabled'] is True and after_assist['used'] is True,after_assist
+        assert after_assist['learning']==before_assist['learning'],after_assist
+        assert after_assist['achievements']==before_assist['achievements'],after_assist
+        page.locator('#settingsBtn').click()
+        page.locator('#settingsLoadBtn').click()
+        assert page.locator('#guestAssistIndicator').is_visible()
+        page.locator('#settingsBtn').click()
+        page.locator('#guestAssistDisableBtn').click()
+        disabled_save=page.evaluate("JSON.parse(localStorage.getItem(gameData.saveKey)).progress")
+        assert disabled_save['guestAssistEnabled'] is False and disabled_save['guestAssistUsed'] is True,disabled_save
+        assert page.locator('#guestAssistIndicator').is_hidden()
+        page.locator('#settingsCloseBtn').click()
+        page.wait_for_timeout(7600)
+        page.locator('.unit-button').first.click()
+        page.wait_for_selector('#modal:not([hidden])',timeout=3000)
+        assert page.locator('#opts .option-button').count()==4
+        page.locator('#opts .option-button').first.click()
+        page.locator('#continueBtn').click()
+        page.locator('#rankingBtn').click()
+        page.wait_for_function("document.getElementById('onlineStatus').textContent === 'ランキング送信対象外'",timeout=3000)
+        page.locator('#rankingCloseBtn').click()
+        page.locator('#settingsBtn').click()
+
+        page.locator('[data-settings-section="data-management"] > summary').click()
+        assert page.locator('#settingsLearningResetBtn').is_visible()
+        page.locator('#settingsLearningResetBtn').click()
+        page.wait_for_selector('#learningResetModal:not([hidden])',timeout=3000)
+        assert page.locator('#learningResetExecuteBtn').is_disabled()
+        page.locator('#learningResetConfirmInput').fill('初期化する')
+        assert not page.locator('#learningResetExecuteBtn').is_disabled()
+        page.locator('#learningResetExecuteBtn').click()
+        page.wait_for_selector('#infoModal:not([hidden])',timeout=3000)
+        page.wait_for_timeout(50)
+        reset_result=page.evaluate("""
+          (() => ({
+            learning:localStorage.getItem('chemionQuestLearningV1'),
+            review:localStorage.getItem('chemionQuestReviewV1'),
+            progress:(() => {
+              const save=JSON.parse(localStorage.getItem(gameData.saveKey));
+              return {
+                currentStageId:save.currentStageId,
+                coins:save.progress.coins,
+                unlocked:save.progress.unlocked,
+                energyCapacityLevel:save.progress.energyCapacityLevel,
+                unitUpgradeLevels:save.progress.unitUpgradeLevels,
+                cumulativeStats:save.progress.cumulativeStats,
+                achievementState:save.progress.achievementState,
+                mockExamProgress:save.progress.mockExamProgress
+              };
+            })()
+          }))()
+        """)
+        assert reset_result['learning'] is None,reset_result
+        assert reset_result['review'] is None,reset_result
+        assert reset_result['progress']==progress_before_reset, 'permanent game progress changed during learning reset'
+        assert '0/0問' in page.locator('#infoContent').inner_text()
+        page.locator('#infoCloseBtn').click()
+
+        # Verify v4.45 old-save repair and cooldown/UI synchronization.
         v44_save = page.evaluate("""
           (() => {
             const save = JSON.parse(localStorage.getItem(gameData.saveKey));
@@ -190,7 +369,29 @@ def main():
         stage6_card=page.locator('.stage-card',has_text='STAGE 6')
         assert stage6_card.count()==1
         assert 'locked' not in (stage6_card.get_attribute('class') or '')
-        page.locator('#stageCloseBtn').click()
+        stage6_guide_button=stage6_card.locator('xpath=..').locator('.stage-guide-button')
+        assert stage6_guide_button.count()==1
+        stage6_guide_button.click()
+        page.wait_for_selector('#stageGuideModal:not([hidden])',timeout=3000)
+        assert 'Stage 6' in page.locator('#stageGuideTitle').inner_text()
+        assert '弱酸の遊離' in page.locator('#stageGuideContent').inner_text()
+        assert page.locator('#stageGuideHintTitle').inner_text() == '初回ヒント'
+        page.locator('#stageGuideCloseBtn').click()
+        page.wait_for_selector('#stageGuideModal',state='hidden',timeout=3000)
+        stage5_button=page.locator('.stage-card',has_text='STAGE 5')
+        assert stage5_button.count()==1
+        stage5_button.click()
+        page.wait_for_timeout(100)
+        difficult_track=page.evaluate("({track:document.querySelector('#bgmAudio')?.dataset.track,src:document.querySelector('#bgmAudio')?.getAttribute('src')})")
+        assert difficult_track=={'track':'difficult','src':'assets/audio/chemion-difficult-bgm.mp3'},difficult_track
+        page.locator('#stageBtn').click()
+        page.wait_for_selector('#stageModal:not([hidden])',timeout=3000)
+        stage6_button=page.locator('.stage-card',has_text='STAGE 6')
+        assert stage6_button.count()==1
+        stage6_button.click()
+        page.wait_for_timeout(100)
+        normal_track=page.evaluate("({track:document.querySelector('#bgmAudio')?.dataset.track,src:document.querySelector('#bgmAudio')?.getAttribute('src')})")
+        assert normal_track=={'track':'normal','src':'assets/audio/chemion-normal-bgm.mp3'},normal_track
 
         # Build a deterministic Stage 3 save with the first-form boss at 0 HP.
         # Use a fresh page so the previous page's requestAnimationFrame loop cannot
@@ -469,8 +670,52 @@ def main():
         assert ambush_result['done'] is True,ambush_result
         assert all(value==0 for value in ambush_result['cooldowns']),ambush_result
 
+        # Verify a v5.0/saveVersion 31 save with no guest fields migrates directly with guest assist OFF.
+        v50_save=page.evaluate("""
+          (() => {
+            const save=JSON.parse(localStorage.getItem(gameData.saveKey));
+            save.currentStageId=1;
+            delete save.progress.guestAssistEnabled;
+            delete save.progress.guestAssistUsed;
+            return JSON.stringify(save);
+          })()
+        """)
+        page.close()
+        page=context.new_page()
+        page.route('**/*',lambda route: route.abort() if route.request.url.startswith('https://') else route.continue_())
+        page.goto('about:blank')
+        page.evaluate("""
+          (seed) => {
+            const store=new Map([
+              ['chemionQuestNicknameV13','SmokeTester'],
+              ['chemionQuestOnlinePromptV13','1'],
+              ['chemionQuestSaveV4',seed]
+            ]);
+            Object.defineProperty(window,'localStorage',{value:{
+              getItem:key=>store.has(String(key))?store.get(String(key)):null,
+              setItem:(key,value)=>store.set(String(key),String(value)),
+              removeItem:key=>store.delete(String(key)),clear:()=>store.clear(),
+              key:index=>[...store.keys()][index]??null,get length(){return store.size;}
+            },configurable:true});
+            window.alert=()=>{}; window.confirm=()=>true;
+          }
+        """,v50_save)
+        page.set_content(html,wait_until='domcontentloaded',timeout=30000)
+        page.wait_for_selector('header h1',timeout=15000)
+        assert page.locator('#guestAssistIndicator').is_hidden()
+        page.locator('#settingsBtn').click()
+        page.locator('[data-settings-section="save-account"] > summary').click()
+        page.locator('#settingsSaveBtn').click()
+        migrated_guest=page.evaluate("""
+          (() => {
+            const progress=JSON.parse(localStorage.getItem(gameData.saveKey)).progress;
+            return {enabled:progress.guestAssistEnabled,used:progress.guestAssistUsed,stage:JSON.parse(localStorage.getItem(gameData.saveKey)).currentStageId};
+          })()
+        """)
+        assert migrated_guest=={'enabled':False,'used':False,'stage':1},migrated_guest
+
         fatal=[e for e in errors if 'Failed to fetch dynamically imported module' not in e and 'Importing a module script failed' not in e and 'ServiceWorker' not in e]
         if fatal: raise AssertionError(f'page errors: {fatal}')
         browser.close()
-    print('Browser smoke test passed (Chromium: boot, v5.0 counts, Stage 6・7 data/BOSS summon, Stage 8 ally-wipe cinematic and resume, Energy cap, no flying self-damage, guide, pause/restart UI, cooldown sync, Stage 5 repair, Stage 3 phase transition, mandatory-update UI).')
+    print('Browser smoke test passed (Chromium: boot, v5.95 guest assist, learning/stat suppression, persistence, disable and sticky ranking exclusion, v5.1 learning reset, v5.0 counts, Stage 6・7 data/BOSS summon, Stage 8 ally-wipe cinematic and resume, Energy cap, no flying self-damage, v5.3 Stage guide, v5.4 Stage 9 ranged lock, v5.5 BGM settings/volume, v5.6 low-power persistence/render caps, v5.7 grouped settings/danger section, v5.9 stage-routed BGM, pause/restart UI, cooldown sync, Stage 5 repair, Stage 3 phase transition, mandatory-update UI).')
 if __name__=='__main__': main()

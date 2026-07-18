@@ -9842,5 +9842,2169 @@
       "式の原子数・電荷・電子の位置を確認してください。",
       "式の原子数・電荷・電子の位置を確認してください。"
     ]
+  },
+  {
+    "q": "金属片A、B、Cについて、Aは冷水と反応してH₂を発生し、Bは冷水とは反応しないが水蒸気とは反応し、Cは水蒸気とも反応しない。候補がCa、Zn、Cuのとき、A、B、Cの組合せはどれか。",
+    "options": [
+      "A=Ca、B=Zn、C=Cu",
+      "A=Zn、B=Ca、C=Cu",
+      "A=Ca、B=Cu、C=Zn",
+      "A=Cu、B=Zn、C=Ca"
+    ],
+    "answer": 0,
+    "scope": "stage10-prep",
+    "stageTier": 6,
+    "category": "redox",
+    "difficulty": "入試標準・思考",
+    "source": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）",
+    "hints": [
+      "冷水と反応する金属を先に特定します。",
+      "Znは冷水ではなく水蒸気との代表反応を考えます。",
+      "CuはHより下で水からH₂を発生させません。"
+    ],
+    "explanation": "【着眼点】Caは冷水、Znは水蒸気と反応し、Cuは水蒸気とも通常反応しません。\n【結論】A=Ca、B=Zn、C=Cu。",
+    "calculation": false,
+    "visual": "none",
+    "id": "hard-v58-0001",
+    "difficultyLevel": 3,
+    "cognitiveType": "reasoning",
+    "learningObjective": "複数の化学概念を結び付けて反応を説明・計算する",
+    "estimatedSeconds": 90,
+    "similarityGroup": "v58-hard:redox:001",
+    "optionFeedback": [
+      "正解です。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。"
+    ],
+    "referenceBasis": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）"
+  },
+  {
+    "q": "Mg 2.40 gを十分な希塩酸と反応させた。Mg=24.0 g/mol、標準状態の気体1 mol=22.4 LとするとH₂は何Lか。",
+    "options": [
+      "1.12 L",
+      "2.24 L",
+      "3.36 L",
+      "4.48 L"
+    ],
+    "answer": 1,
+    "scope": "stage10-prep",
+    "stageTier": 6,
+    "category": "redox",
+    "difficulty": "入試標準・思考",
+    "source": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）",
+    "hints": [
+      "Mgの物質量を求めます。",
+      "反応式Mg+2H⁺→Mg²⁺+H₂の比は1:1です。",
+      "0.100 molに22.4 L/molを掛けます。"
+    ],
+    "explanation": "【着眼点】Mgは0.100 molで、Mg:H₂=1:1なのでH₂も0.100 mol、体積は2.24 Lです。\n【結論】2.24 L。",
+    "calculation": true,
+    "visual": "none",
+    "id": "hard-v58-0002",
+    "difficultyLevel": 3,
+    "cognitiveType": "calculation",
+    "learningObjective": "複数の化学概念を結び付けて反応を説明・計算する",
+    "estimatedSeconds": 90,
+    "similarityGroup": "v58-hard:redox:001",
+    "optionFeedback": [
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "正解です。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。"
+    ],
+    "referenceBasis": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）"
+  },
+  {
+    "q": "Fe 5.60 gを十分な希硫酸と反応させた。Fe=56.0 g/molのとき発生するH₂の物質量はどれか。",
+    "options": [
+      "0.050 mol",
+      "0.150 mol",
+      "0.100 mol",
+      "0.200 mol"
+    ],
+    "answer": 2,
+    "scope": "stage10-prep",
+    "stageTier": 6,
+    "category": "redox",
+    "difficulty": "入試標準・思考",
+    "source": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）",
+    "hints": [
+      "質量をモル質量で割ります。",
+      "Fe+2H⁺→Fe²⁺+H₂です。",
+      "係数比1:1を用います。"
+    ],
+    "explanation": "【着眼点】Feは0.100 molで、Fe:H₂=1:1です。\n【結論】0.100 mol。",
+    "calculation": true,
+    "visual": "none",
+    "id": "hard-v58-0003",
+    "difficultyLevel": 3,
+    "cognitiveType": "calculation",
+    "learningObjective": "複数の化学概念を結び付けて反応を説明・計算する",
+    "estimatedSeconds": 90,
+    "similarityGroup": "v58-hard:redox:001",
+    "optionFeedback": [
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "正解です。",
+      "電子の授受・量的関係・実験条件を確認してください。"
+    ],
+    "referenceBasis": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）"
+  },
+  {
+    "q": "Zn 6.50 gをCuSO₄水溶液に入れ、Znがすべて反応した。Zn=65.0、Cu=64.0 g/molとすると析出するCuは何gか。",
+    "options": [
+      "3.20 g",
+      "9.60 g",
+      "12.8 g",
+      "6.40 g"
+    ],
+    "answer": 3,
+    "scope": "stage10-prep",
+    "stageTier": 6,
+    "category": "redox",
+    "difficulty": "入試標準・思考",
+    "source": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）",
+    "hints": [
+      "Znの物質量を求めます。",
+      "ZnとCuの係数比は1:1です。",
+      "Cuのモル質量64.0を掛けます。"
+    ],
+    "explanation": "【着眼点】Znは0.100 mol。Zn+Cu²⁺→Zn²⁺+CuよりCuも0.100 molで6.40 gです。\n【結論】6.40 g。",
+    "calculation": true,
+    "visual": "none",
+    "id": "hard-v58-0004",
+    "difficultyLevel": 3,
+    "cognitiveType": "calculation",
+    "learningObjective": "複数の化学概念を結び付けて反応を説明・計算する",
+    "estimatedSeconds": 90,
+    "similarityGroup": "v58-hard:redox:002",
+    "optionFeedback": [
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "正解です。"
+    ],
+    "referenceBasis": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）"
+  },
+  {
+    "q": "Fe片をCuSO₄水溶液に入れたところ質量が0.80 g増加した。Fe=56、Cu=64として、反応したFeの物質量はどれか。",
+    "options": [
+      "0.100 mol",
+      "0.050 mol",
+      "0.200 mol",
+      "0.400 mol"
+    ],
+    "answer": 0,
+    "scope": "stage10-prep",
+    "stageTier": 6,
+    "category": "redox",
+    "difficulty": "入試標準・思考",
+    "source": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）",
+    "hints": [
+      "質量増加は析出Cuと溶解Feの差です。",
+      "1 mol反応あたり8 g増加します。",
+      "0.80 gを8 g/molで割ります。"
+    ],
+    "explanation": "【着眼点】Fe 1 molが溶けCu 1 molが析出すると質量は64−56=8 g増えます。0.80÷8=0.100 molです。\n【結論】0.100 mol。",
+    "calculation": true,
+    "visual": "none",
+    "id": "hard-v58-0005",
+    "difficultyLevel": 3,
+    "cognitiveType": "calculation",
+    "learningObjective": "複数の化学概念を結び付けて反応を説明・計算する",
+    "estimatedSeconds": 90,
+    "similarityGroup": "v58-hard:redox:002",
+    "optionFeedback": [
+      "正解です。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。"
+    ],
+    "referenceBasis": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）"
+  },
+  {
+    "q": "Cu片をAgNO₃水溶液に入れ、Cuが0.0100 mol溶けた。析出するAgの物質量はどれか。",
+    "options": [
+      "0.0050 mol",
+      "0.0200 mol",
+      "0.0100 mol",
+      "0.0300 mol"
+    ],
+    "answer": 1,
+    "scope": "stage10-prep",
+    "stageTier": 6,
+    "category": "redox",
+    "difficulty": "入試標準・思考",
+    "source": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）",
+    "hints": [
+      "正味イオン反応式を書きます。",
+      "Cu 1 molに対しAg 2 molです。",
+      "0.0100×2を計算します。"
+    ],
+    "explanation": "【着眼点】Cu+2Ag⁺→Cu²⁺+2Agより、AgはCuの2倍です。\n【結論】0.0200 mol。",
+    "calculation": true,
+    "visual": "none",
+    "id": "hard-v58-0006",
+    "difficultyLevel": 3,
+    "cognitiveType": "calculation",
+    "learningObjective": "複数の化学概念を結び付けて反応を説明・計算する",
+    "estimatedSeconds": 90,
+    "similarityGroup": "v58-hard:redox:002",
+    "optionFeedback": [
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "正解です。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。"
+    ],
+    "referenceBasis": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）"
+  },
+  {
+    "q": "同質量のMg、Zn、Cuをそれぞれ十分な希塩酸へ加えた。発生H₂の物質量について正しいものはどれか。",
+    "options": [
+      "3種とも同じ",
+      "ZnがMgより多くCuも発生する",
+      "Cuは0で、MgはZnより多い",
+      "Cuが最も多い"
+    ],
+    "answer": 2,
+    "scope": "stage10-prep",
+    "stageTier": 6,
+    "category": "redox",
+    "difficulty": "入試標準・思考",
+    "source": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）",
+    "hints": [
+      "希塩酸と反応するかを判断します。",
+      "MgとZnは係数比1:1です。",
+      "同質量ではモル質量が小さい方がmol数が多いです。"
+    ],
+    "explanation": "【着眼点】MgとZnはいずれも1 molからH₂ 1 molを生じます。同質量ならモル質量の小さいMgの物質量が多く、Cuは反応しません。\n【結論】Cuは0で、MgはZnより多い。",
+    "calculation": false,
+    "visual": "none",
+    "id": "hard-v58-0007",
+    "difficultyLevel": 3,
+    "cognitiveType": "reasoning",
+    "learningObjective": "複数の化学概念を結び付けて反応を説明・計算する",
+    "estimatedSeconds": 90,
+    "similarityGroup": "v58-hard:redox:003",
+    "optionFeedback": [
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "正解です。",
+      "電子の授受・量的関係・実験条件を確認してください。"
+    ],
+    "referenceBasis": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）"
+  },
+  {
+    "q": "Al片の酸化物皮膜を除去した直後に反応性が高く見える理由はどれか。",
+    "options": [
+      "Alの陽子数が減るから",
+      "Alが貴金属へ変わるから",
+      "水の酸化数が変化しなくなるから",
+      "溶液が金属Al表面へ直接接触できるから"
+    ],
+    "answer": 3,
+    "scope": "stage10-prep",
+    "stageTier": 6,
+    "category": "redox",
+    "difficulty": "入試標準・思考",
+    "source": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）",
+    "hints": [
+      "熱力学より表面状態に注目します。",
+      "皮膜が何を妨げるか考えます。",
+      "金属本体の電子配置が変わったわけではありません。"
+    ],
+    "explanation": "【着眼点】皮膜は反応物の移動を妨げています。除去すると新鮮な金属面が露出します。\n【結論】溶液が金属Al表面へ直接接触できるから。",
+    "calculation": false,
+    "visual": "none",
+    "id": "hard-v58-0008",
+    "difficultyLevel": 3,
+    "cognitiveType": "reasoning",
+    "learningObjective": "複数の化学概念を結び付けて反応を説明・計算する",
+    "estimatedSeconds": 90,
+    "similarityGroup": "v58-hard:redox:003",
+    "optionFeedback": [
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "正解です。"
+    ],
+    "referenceBasis": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）"
+  },
+  {
+    "q": "Zn、Fe、Cuの各片を同濃度のAgNO₃水溶液へ入れた。十分時間後にAgを析出できる金属の組合せはどれか。",
+    "options": [
+      "Zn、Fe、Cuのすべて",
+      "Znだけ",
+      "Cuだけ",
+      "ZnとFeだけ"
+    ],
+    "answer": 0,
+    "scope": "stage10-prep",
+    "stageTier": 6,
+    "category": "redox",
+    "difficulty": "入試標準・思考",
+    "source": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）",
+    "hints": [
+      "Agはイオン化傾向が小さい金属です。",
+      "Agより上の金属はAg⁺を還元できます。",
+      "CuもAgより上に位置します。"
+    ],
+    "explanation": "【着眼点】Zn、Fe、CuはいずれもAgよりイオン化傾向が大きく、Ag⁺をAgへ還元できます。\n【結論】Zn、Fe、Cuのすべて。",
+    "calculation": false,
+    "visual": "none",
+    "id": "hard-v58-0009",
+    "difficultyLevel": 3,
+    "cognitiveType": "reasoning",
+    "learningObjective": "複数の化学概念を結び付けて反応を説明・計算する",
+    "estimatedSeconds": 90,
+    "similarityGroup": "v58-hard:redox:003",
+    "optionFeedback": [
+      "正解です。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。"
+    ],
+    "referenceBasis": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）"
+  },
+  {
+    "q": "金属Mを希塩酸に入れても変化せず、AgNO₃水溶液ではAgが析出した。Mの候補として最も適切なのはどれか。",
+    "options": [
+      "Mg",
+      "Cu",
+      "Zn",
+      "Na"
+    ],
+    "answer": 1,
+    "scope": "stage10-prep",
+    "stageTier": 6,
+    "category": "redox",
+    "difficulty": "入試標準・思考",
+    "source": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）",
+    "hints": [
+      "希塩酸との結果からHとの位置を考えます。",
+      "Ag析出からAgとの位置を考えます。",
+      "HとAgの間にある金属を選びます。"
+    ],
+    "explanation": "【着眼点】MはHより下だがAgより上です。代表例はCuです。\n【結論】Cu。",
+    "calculation": false,
+    "visual": "none",
+    "id": "hard-v58-0010",
+    "difficultyLevel": 3,
+    "cognitiveType": "reasoning",
+    "learningObjective": "複数の化学概念を結び付けて反応を説明・計算する",
+    "estimatedSeconds": 90,
+    "similarityGroup": "v58-hard:redox:004",
+    "optionFeedback": [
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "正解です。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。"
+    ],
+    "referenceBasis": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）"
+  },
+  {
+    "q": "FeとCuを食塩水中で接触させたとき、主に酸化されやすい金属はどれか。",
+    "options": [
+      "Cu",
+      "両方が必ず同量",
+      "Fe",
+      "どちらも酸化されない"
+    ],
+    "answer": 2,
+    "scope": "stage10-prep",
+    "stageTier": 6,
+    "category": "redox",
+    "difficulty": "入試標準・思考",
+    "source": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）",
+    "hints": [
+      "接触した異種金属を電池として考えます。",
+      "イオン化傾向の大きい方が陽極です。",
+      "陽極で酸化が進みます。"
+    ],
+    "explanation": "【着眼点】FeはCuよりイオン化傾向が大きく、局部電池の陽極となって酸化されやすいです。\n【結論】Fe。",
+    "calculation": false,
+    "visual": "none",
+    "id": "hard-v58-0011",
+    "difficultyLevel": 3,
+    "cognitiveType": "reasoning",
+    "learningObjective": "複数の化学概念を結び付けて反応を説明・計算する",
+    "estimatedSeconds": 90,
+    "similarityGroup": "v58-hard:redox:004",
+    "optionFeedback": [
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "正解です。",
+      "電子の授受・量的関係・実験条件を確認してください。"
+    ],
+    "referenceBasis": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）"
+  },
+  {
+    "q": "FeをZnでめっきする防食と、FeをSnでめっきする防食の違いとして適切なものはどれか。",
+    "options": [
+      "傷があっても両者は完全に同じ",
+      "SnがFeより先に必ず溶ける",
+      "ZnめっきではFeが犠牲陽極になる",
+      "傷が付いたときZnは犠牲陽極になり得るが、Snめっきでは露出Feの腐食が促進され得る"
+    ],
+    "answer": 3,
+    "scope": "stage10-prep",
+    "stageTier": 6,
+    "category": "redox",
+    "difficulty": "入試標準・思考",
+    "source": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）",
+    "hints": [
+      "イオン化傾向Zn>Fe>Snを使います。",
+      "傷で二金属が電解質に触れる場合を考えます。",
+      "卑な金属が陽極として溶けます。"
+    ],
+    "explanation": "【着眼点】ZnはFeより卑、SnはFeより貴です。傷が付いた場合の電池作用が逆になります。\n【結論】傷が付いたときZnは犠牲陽極になり得るが、Snめっきでは露出Feの腐食が促進され得る。",
+    "calculation": false,
+    "visual": "none",
+    "id": "hard-v58-0012",
+    "difficultyLevel": 3,
+    "cognitiveType": "reasoning",
+    "learningObjective": "複数の化学概念を結び付けて反応を説明・計算する",
+    "estimatedSeconds": 90,
+    "similarityGroup": "v58-hard:redox:004",
+    "optionFeedback": [
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "正解です。"
+    ],
+    "referenceBasis": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）"
+  },
+  {
+    "q": "Fe₃O₄をCOで還元する反応Fe₃O₄+4CO→3Fe+4CO₂で、CO 2.00 molが完全反応したとき得られるFeは何molか。",
+    "options": [
+      "1.50 mol",
+      "0.500 mol",
+      "1.00 mol",
+      "2.00 mol"
+    ],
+    "answer": 0,
+    "scope": "stage10-prep",
+    "stageTier": 6,
+    "category": "redox",
+    "difficulty": "入試標準・思考",
+    "source": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）",
+    "hints": [
+      "係数比CO:Fe=4:3です。",
+      "CO量に3/4を掛けます。",
+      "酸化数計算をしなくても係数から求められます。"
+    ],
+    "explanation": "【着眼点】CO:Fe=4:3なので、2.00×3/4=1.50 molです。\n【結論】1.50 mol。",
+    "calculation": true,
+    "visual": "none",
+    "id": "hard-v58-0013",
+    "difficultyLevel": 3,
+    "cognitiveType": "calculation",
+    "learningObjective": "複数の化学概念を結び付けて反応を説明・計算する",
+    "estimatedSeconds": 90,
+    "similarityGroup": "v58-hard:redox:005",
+    "optionFeedback": [
+      "正解です。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。"
+    ],
+    "referenceBasis": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）"
+  },
+  {
+    "q": "MgとZnの混合物6.10 gを十分な希塩酸と反応させるとH₂が0.200 mol生じた。Mg=24.0、Zn=65.0としてMgの物質量はどれか。",
+    "options": [
+      "0.050 mol",
+      "0.100 mol",
+      "0.150 mol",
+      "0.200 mol"
+    ],
+    "answer": 1,
+    "scope": "stage10-prep",
+    "stageTier": 6,
+    "category": "redox",
+    "difficulty": "入試標準・思考",
+    "source": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）",
+    "hints": [
+      "両金属とも1 molからH₂ 1 molです。",
+      "物質量の和は0.200 molです。",
+      "質量式24x+65(0.200−x)=6.10を解きます。"
+    ],
+    "explanation": "【着眼点】Mgをx mol、Znを0.200−x molとすると24x+65(0.200−x)=6.10。解いてx=0.100 molです。\n【結論】0.100 mol。",
+    "calculation": true,
+    "visual": "none",
+    "id": "hard-v58-0014",
+    "difficultyLevel": 3,
+    "cognitiveType": "calculation",
+    "learningObjective": "複数の化学概念を結び付けて反応を説明・計算する",
+    "estimatedSeconds": 90,
+    "similarityGroup": "v58-hard:redox:005",
+    "optionFeedback": [
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "正解です。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。"
+    ],
+    "referenceBasis": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）"
+  },
+  {
+    "q": "金属M 2.70 gが希酸と反応して0.150 molの電子を放出した。Mが3価イオンになるとき、Mのモル質量はどれか。",
+    "options": [
+      "18.0 g/mol",
+      "27.0 g/mol",
+      "54.0 g/mol",
+      "81.0 g/mol"
+    ],
+    "answer": 2,
+    "scope": "stage10-prep",
+    "stageTier": 6,
+    "category": "redox",
+    "difficulty": "入試標準・思考",
+    "source": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）",
+    "hints": [
+      "Mの物質量と電子量の関係を立てます。",
+      "3価なので電子量はMの3倍です。",
+      "質量÷物質量でモル質量を求めます。"
+    ],
+    "explanation": "【着眼点】M 1 molは3 molの電子を放出するのでMは0.150/3=0.0500 mol。2.70/0.0500=54.0 g/molです。\n【結論】54.0 g/mol。",
+    "calculation": true,
+    "visual": "none",
+    "id": "hard-v58-0015",
+    "difficultyLevel": 3,
+    "cognitiveType": "calculation",
+    "learningObjective": "複数の化学概念を結び付けて反応を説明・計算する",
+    "estimatedSeconds": 90,
+    "similarityGroup": "v58-hard:redox:005",
+    "optionFeedback": [
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "正解です。",
+      "電子の授受・量的関係・実験条件を確認してください。"
+    ],
+    "referenceBasis": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）"
+  },
+  {
+    "q": "酸性条件でMnO₄⁻とH₂O₂の反応式を完成すると、MnO₄⁻:H₂O₂の係数比はどれか。",
+    "options": [
+      "1:1",
+      "2:3",
+      "5:2",
+      "2:5"
+    ],
+    "answer": 3,
+    "scope": "stage10-prep",
+    "stageTier": 6,
+    "category": "redox",
+    "difficulty": "入試標準・思考",
+    "source": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）",
+    "hints": [
+      "MnO₄⁻→Mn²⁺は5電子を受け取ります。",
+      "H₂O₂→O₂は2電子を放出します。",
+      "電子数の最小公倍数10を用います。"
+    ],
+    "explanation": "【着眼点】2MnO₄⁻+5H₂O₂+6H⁺→2Mn²⁺+5O₂+8H₂Oです。\n【答え】2:5。",
+    "calculation": false,
+    "visual": "none",
+    "id": "hard-v58-0016",
+    "difficultyLevel": 3,
+    "cognitiveType": "reasoning",
+    "learningObjective": "複数の化学概念を結び付けて反応を説明・計算する",
+    "estimatedSeconds": 90,
+    "similarityGroup": "v58-hard:redox:006",
+    "optionFeedback": [
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "正解です。"
+    ],
+    "referenceBasis": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）"
+  },
+  {
+    "q": "0.0200 molのMnO₄⁻を酸性条件で完全に還元するH₂O₂は何molか。",
+    "options": [
+      "0.0500 mol",
+      "0.0080 mol",
+      "0.0200 mol",
+      "0.0800 mol"
+    ],
+    "answer": 0,
+    "scope": "stage10-prep",
+    "stageTier": 6,
+    "category": "redox",
+    "difficulty": "入試標準・思考",
+    "source": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）",
+    "hints": [
+      "反応係数比2:5を使います。",
+      "MnO₄⁻量に5/2を掛けます。",
+      "酸性条件であることを確認します。"
+    ],
+    "explanation": "【着眼点】係数比MnO₄⁻:H₂O₂=2:5なので0.0200×5/2=0.0500 molです。\n【答え】0.0500 mol。",
+    "calculation": true,
+    "visual": "none",
+    "id": "hard-v58-0017",
+    "difficultyLevel": 3,
+    "cognitiveType": "calculation",
+    "learningObjective": "複数の化学概念を結び付けて反応を説明・計算する",
+    "estimatedSeconds": 90,
+    "similarityGroup": "v58-hard:redox:006",
+    "optionFeedback": [
+      "正解です。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。"
+    ],
+    "referenceBasis": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）"
+  },
+  {
+    "q": "酸性条件でH₂O₂ 0.100 molがすべて還元剤として反応した。発生O₂の物質量はどれか。",
+    "options": [
+      "0.050 mol",
+      "0.100 mol",
+      "0.150 mol",
+      "0.200 mol"
+    ],
+    "answer": 1,
+    "scope": "stage10-prep",
+    "stageTier": 6,
+    "category": "redox",
+    "difficulty": "入試標準・思考",
+    "source": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）",
+    "hints": [
+      "還元剤としての半反応式を書きます。",
+      "H₂O₂とO₂の係数比を確認します。",
+      "1:1です。"
+    ],
+    "explanation": "【着眼点】H₂O₂→O₂+2H⁺+2e⁻よりH₂O₂:O₂=1:1です。\n【答え】0.100 mol。",
+    "calculation": true,
+    "visual": "none",
+    "id": "hard-v58-0018",
+    "difficultyLevel": 3,
+    "cognitiveType": "calculation",
+    "learningObjective": "複数の化学概念を結び付けて反応を説明・計算する",
+    "estimatedSeconds": 90,
+    "similarityGroup": "v58-hard:redox:006",
+    "optionFeedback": [
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "正解です。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。"
+    ],
+    "referenceBasis": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）"
+  },
+  {
+    "q": "H₂O₂ 0.200 molが完全に不均化した。生じるO₂は何molか。",
+    "options": [
+      "0.050 mol",
+      "0.200 mol",
+      "0.100 mol",
+      "0.400 mol"
+    ],
+    "answer": 2,
+    "scope": "stage10-prep",
+    "stageTier": 6,
+    "category": "redox",
+    "difficulty": "入試標準・思考",
+    "source": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）",
+    "hints": [
+      "分解反応式を使います。",
+      "H₂O₂:O₂=2:1です。",
+      "0.200÷2を計算します。"
+    ],
+    "explanation": "【着眼点】2H₂O₂→2H₂O+O₂より、O₂はH₂O₂の1/2です。\n【答え】0.100 mol。",
+    "calculation": true,
+    "visual": "none",
+    "id": "hard-v58-0019",
+    "difficultyLevel": 3,
+    "cognitiveType": "calculation",
+    "learningObjective": "複数の化学概念を結び付けて反応を説明・計算する",
+    "estimatedSeconds": 90,
+    "similarityGroup": "v58-hard:redox:007",
+    "optionFeedback": [
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "正解です。",
+      "電子の授受・量的関係・実験条件を確認してください。"
+    ],
+    "referenceBasis": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）"
+  },
+  {
+    "q": "標準状態でO₂ 2.24 Lを得るために完全分解させるH₂O₂は何molか。気体1 mol=22.4 Lとする。",
+    "options": [
+      "0.050 mol",
+      "0.100 mol",
+      "0.300 mol",
+      "0.200 mol"
+    ],
+    "answer": 3,
+    "scope": "stage10-prep",
+    "stageTier": 6,
+    "category": "redox",
+    "difficulty": "入試標準・思考",
+    "source": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）",
+    "hints": [
+      "O₂体積をmolへ変換します。",
+      "H₂O₂:O₂=2:1です。",
+      "0.100×2を計算します。"
+    ],
+    "explanation": "【着眼点】O₂は0.100 mol。2H₂O₂→O₂よりH₂O₂は0.200 mol必要です。\n【答え】0.200 mol。",
+    "calculation": true,
+    "visual": "none",
+    "id": "hard-v58-0020",
+    "difficultyLevel": 3,
+    "cognitiveType": "calculation",
+    "learningObjective": "複数の化学概念を結び付けて反応を説明・計算する",
+    "estimatedSeconds": 90,
+    "similarityGroup": "v58-hard:redox:007",
+    "optionFeedback": [
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "正解です。"
+    ],
+    "referenceBasis": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）"
+  },
+  {
+    "q": "酸性条件でH₂O₂とI⁻の反応において、I⁻ 0.0400 molを全てI₂にするH₂O₂は何molか。",
+    "options": [
+      "0.0200 mol",
+      "0.0100 mol",
+      "0.0400 mol",
+      "0.0800 mol"
+    ],
+    "answer": 0,
+    "scope": "stage10-prep",
+    "stageTier": 6,
+    "category": "redox",
+    "difficulty": "入試標準・思考",
+    "source": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）",
+    "hints": [
+      "反応式を書きます。",
+      "H₂O₂ 1 molにI⁻ 2 molです。",
+      "0.0400÷2です。"
+    ],
+    "explanation": "【着眼点】H₂O₂+2I⁻+2H⁺→I₂+2H₂OよりH₂O₂:I⁻=1:2です。\n【答え】0.0200 mol。",
+    "calculation": true,
+    "visual": "none",
+    "id": "hard-v58-0021",
+    "difficultyLevel": 3,
+    "cognitiveType": "calculation",
+    "learningObjective": "複数の化学概念を結び付けて反応を説明・計算する",
+    "estimatedSeconds": 90,
+    "similarityGroup": "v58-hard:redox:007",
+    "optionFeedback": [
+      "正解です。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。"
+    ],
+    "referenceBasis": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）"
+  },
+  {
+    "q": "酸性条件でH₂O₂ 0.0300 molがI⁻を酸化した。生成I₂は何molか。",
+    "options": [
+      "0.0150 mol",
+      "0.0300 mol",
+      "0.0600 mol",
+      "0.0900 mol"
+    ],
+    "answer": 1,
+    "scope": "stage10-prep",
+    "stageTier": 6,
+    "category": "redox",
+    "difficulty": "入試標準・思考",
+    "source": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）",
+    "hints": [
+      "H₂O₂+2I⁻+2H⁺→I₂+2H₂Oです。",
+      "H₂O₂とI₂の係数は同じです。",
+      "物質量も同じです。"
+    ],
+    "explanation": "【着眼点】H₂O₂:I₂=1:1なので0.0300 molです。\n【答え】0.0300 mol。",
+    "calculation": true,
+    "visual": "none",
+    "id": "hard-v58-0022",
+    "difficultyLevel": 3,
+    "cognitiveType": "calculation",
+    "learningObjective": "複数の化学概念を結び付けて反応を説明・計算する",
+    "estimatedSeconds": 90,
+    "similarityGroup": "v58-hard:redox:008",
+    "optionFeedback": [
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "正解です。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。"
+    ],
+    "referenceBasis": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）"
+  },
+  {
+    "q": "H₂O₂が酸化剤として働く反応と還元剤として働く反応を比較した記述として適切なものはどれか。",
+    "options": [
+      "酸化剤時は1電子、還元剤時は4電子",
+      "どちらも電子を放出する",
+      "どちらもH₂O₂ 1 molあたり2 molの電子授受だが、電子を受け取るか放出するかが逆である",
+      "どちらも電子を受け取る"
+    ],
+    "answer": 2,
+    "scope": "stage10-prep",
+    "stageTier": 6,
+    "category": "redox",
+    "difficulty": "入試標準・思考",
+    "source": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）",
+    "hints": [
+      "2つの半反応式を並べます。",
+      "電子の係数を比較します。",
+      "電子が左辺か右辺かも確認します。"
+    ],
+    "explanation": "【着眼点】酸性条件の半反応式では、酸化剤時に2e⁻を受け取り、還元剤時に2e⁻を放出します。\n【答え】どちらもH₂O₂ 1 molあたり2 molの電子授受だが、電子を受け取るか放出するかが逆である。",
+    "calculation": false,
+    "visual": "none",
+    "id": "hard-v58-0023",
+    "difficultyLevel": 3,
+    "cognitiveType": "reasoning",
+    "learningObjective": "複数の化学概念を結び付けて反応を説明・計算する",
+    "estimatedSeconds": 90,
+    "similarityGroup": "v58-hard:redox:008",
+    "optionFeedback": [
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "正解です。",
+      "電子の授受・量的関係・実験条件を確認してください。"
+    ],
+    "referenceBasis": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）"
+  },
+  {
+    "q": "H₂O₂の分解反応で、全O原子の半分がH₂Oへ、半分がO₂へ移る。このときO原子1 molあたりの酸化数変化の総和はどうなるか。",
+    "options": [
+      "+1になる",
+      "−1になる",
+      "+2になる",
+      "0になる"
+    ],
+    "answer": 3,
+    "scope": "stage10-prep",
+    "stageTier": 6,
+    "category": "redox",
+    "difficulty": "入試標準・思考",
+    "source": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）",
+    "hints": [
+      "不均化では同一物質内で酸化と還元が同時進行します。",
+      "各Oの変化量は−1と+1です。",
+      "同数なら和は0です。"
+    ],
+    "explanation": "【着眼点】半分は−1→−2で−1、半分は−1→0で+1。平均すると0で、電子の授受が内部でつり合います。\n【答え】0になる。",
+    "calculation": false,
+    "visual": "none",
+    "id": "hard-v58-0024",
+    "difficultyLevel": 3,
+    "cognitiveType": "reasoning",
+    "learningObjective": "複数の化学概念を結び付けて反応を説明・計算する",
+    "estimatedSeconds": 90,
+    "similarityGroup": "v58-hard:redox:008",
+    "optionFeedback": [
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "正解です。"
+    ],
+    "referenceBasis": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）"
+  },
+  {
+    "q": "酸性条件でH₂O₂+2H⁺+2e⁻→2H₂Oを塩基性条件へ変換する手順として適切なものはどれか。",
+    "options": [
+      "両辺に2OH⁻を加え、左辺の2H⁺と中和して整理する",
+      "電子をすべて消す",
+      "H₂OをO₂に置き換える",
+      "両辺の電荷を無視する"
+    ],
+    "answer": 0,
+    "scope": "stage10-prep",
+    "stageTier": 6,
+    "category": "redox",
+    "difficulty": "入試標準・思考",
+    "source": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）",
+    "hints": [
+      "H⁺をOH⁻で中和します。",
+      "両辺へ同じ量を加えます。",
+      "水を約分して整理します。"
+    ],
+    "explanation": "【着眼点】酸性式の両辺にH⁺と同数のOH⁻を加え、H⁺+OH⁻→H₂Oとして約分するとH₂O₂+2e⁻→2OH⁻です。\n【答え】両辺に2OH⁻を加え、左辺の2H⁺と中和して整理する。",
+    "calculation": false,
+    "visual": "none",
+    "id": "hard-v58-0025",
+    "difficultyLevel": 3,
+    "cognitiveType": "reasoning",
+    "learningObjective": "複数の化学概念を結び付けて反応を説明・計算する",
+    "estimatedSeconds": 90,
+    "similarityGroup": "v58-hard:redox:009",
+    "optionFeedback": [
+      "正解です。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。"
+    ],
+    "referenceBasis": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）"
+  },
+  {
+    "q": "H₂O₂水溶液10.0 mLを完全分解したところ、標準状態でO₂ 0.224 Lを得た。H₂O₂のモル濃度はどれか。",
+    "options": [
+      "0.500 mol/L",
+      "2.00 mol/L",
+      "1.00 mol/L",
+      "4.00 mol/L"
+    ],
+    "answer": 1,
+    "scope": "stage10-prep",
+    "stageTier": 6,
+    "category": "redox",
+    "difficulty": "入試標準・思考",
+    "source": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）",
+    "hints": [
+      "O₂をmolへ変換します。",
+      "H₂O₂はO₂の2倍です。",
+      "H₂O₂物質量を0.0100 Lで割ります。"
+    ],
+    "explanation": "【着眼点】O₂=0.0100 mol、H₂O₂=0.0200 mol。体積0.0100 Lなので2.00 mol/Lです。\n【答え】2.00 mol/L。",
+    "calculation": true,
+    "visual": "none",
+    "id": "hard-v58-0026",
+    "difficultyLevel": 3,
+    "cognitiveType": "calculation",
+    "learningObjective": "複数の化学概念を結び付けて反応を説明・計算する",
+    "estimatedSeconds": 90,
+    "similarityGroup": "v58-hard:redox:009",
+    "optionFeedback": [
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "正解です。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。"
+    ],
+    "referenceBasis": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）"
+  },
+  {
+    "q": "H₂O₂水溶液20.0 mLを酸性KMnO₄ 0.0200 mol/Lで滴定し、25.0 mL要した。H₂O₂濃度はどれか。",
+    "options": [
+      "0.0250 mol/L",
+      "0.0400 mol/L",
+      "0.0625 mol/L",
+      "0.100 mol/L"
+    ],
+    "answer": 2,
+    "scope": "stage10-prep",
+    "stageTier": 6,
+    "category": "redox",
+    "difficulty": "入試標準・思考",
+    "source": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）",
+    "hints": [
+      "MnO₄⁻の物質量を求めます。",
+      "係数比2:5でH₂O₂量へ変換します。",
+      "試料体積0.0200 Lで割ります。"
+    ],
+    "explanation": "【着眼点】MnO₄⁻=0.000500 mol、H₂O₂=0.000500×5/2=0.00125 mol。0.00125/0.0200=0.0625 mol/Lです。\n【答え】0.0625 mol/L。",
+    "calculation": true,
+    "visual": "none",
+    "id": "hard-v58-0027",
+    "difficultyLevel": 3,
+    "cognitiveType": "calculation",
+    "learningObjective": "複数の化学概念を結び付けて反応を説明・計算する",
+    "estimatedSeconds": 90,
+    "similarityGroup": "v58-hard:redox:009",
+    "optionFeedback": [
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "正解です。",
+      "電子の授受・量的関係・実験条件を確認してください。"
+    ],
+    "referenceBasis": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）"
+  },
+  {
+    "q": "H₂O₂がI⁻を酸化する反応で、生成したI₂をS₂O₃²⁻で滴定する。I₂+2S₂O₃²⁻→2I⁻+S₄O₆²⁻より、H₂O₂とS₂O₃²⁻の物質量比はどれか。",
+    "options": [
+      "1:1",
+      "2:1",
+      "2:3",
+      "1:2"
+    ],
+    "answer": 3,
+    "scope": "stage10-prep",
+    "stageTier": 6,
+    "category": "redox",
+    "difficulty": "入試標準・思考",
+    "source": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）",
+    "hints": [
+      "H₂O₂:I₂=1:1です。",
+      "I₂:S₂O₃²⁻=1:2です。",
+      "二段階の比をつなぎます。"
+    ],
+    "explanation": "【着眼点】H₂O₂ 1 molからI₂ 1 mol、I₂ 1 molにS₂O₃²⁻ 2 molなので1:2です。\n【答え】1:2。",
+    "calculation": false,
+    "visual": "none",
+    "id": "hard-v58-0028",
+    "difficultyLevel": 3,
+    "cognitiveType": "reasoning",
+    "learningObjective": "複数の化学概念を結び付けて反応を説明・計算する",
+    "estimatedSeconds": 90,
+    "similarityGroup": "v58-hard:redox:010",
+    "optionFeedback": [
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "正解です。"
+    ],
+    "referenceBasis": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）"
+  },
+  {
+    "q": "H₂O₂の分解実験でMnO₂を加える前後を比較した。正しい予測はどれか。",
+    "options": [
+      "初期反応速度は増えるが、同量のH₂O₂から得られる最終O₂量は変わらない",
+      "速度も最終O₂量も必ず2倍",
+      "速度は変わらず最終量だけ増える",
+      "平衡定数が変わりO₂が消える"
+    ],
+    "answer": 0,
+    "scope": "stage10-prep",
+    "stageTier": 6,
+    "category": "redox",
+    "difficulty": "入試標準・思考",
+    "source": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）",
+    "hints": [
+      "触媒の役割を考えます。",
+      "反応式の係数は変わりません。",
+      "完全分解するなら最終量は初期H₂O₂量で決まります。"
+    ],
+    "explanation": "【着眼点】触媒は反応経路と速度を変えますが、反応量の化学量論や平衡を変えません。\n【答え】初期反応速度は増えるが、同量のH₂O₂から得られる最終O₂量は変わらない。",
+    "calculation": false,
+    "visual": "none",
+    "id": "hard-v58-0029",
+    "difficultyLevel": 3,
+    "cognitiveType": "reasoning",
+    "learningObjective": "複数の化学概念を結び付けて反応を説明・計算する",
+    "estimatedSeconds": 90,
+    "similarityGroup": "v58-hard:redox:010",
+    "optionFeedback": [
+      "正解です。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。"
+    ],
+    "referenceBasis": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）"
+  },
+  {
+    "q": "同濃度・同体積のH₂O₂を、25℃と40℃でMnO₂と反応させた。通常40℃で速い理由として適切なものはどれか。",
+    "options": [
+      "H₂O₂の酸化数が温度で−1から0へ自動変化する",
+      "活性化エネルギー以上のエネルギーをもつ分子の割合が増える",
+      "触媒量が自然に増える",
+      "物質量保存が破れる"
+    ],
+    "answer": 1,
+    "scope": "stage10-prep",
+    "stageTier": 6,
+    "category": "redox",
+    "difficulty": "入試標準・思考",
+    "source": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）",
+    "hints": [
+      "温度と分子運動を結び付けます。",
+      "活性化エネルギーを越える割合を考えます。",
+      "酸化数は反応が起こるまで変わりません。"
+    ],
+    "explanation": "【着眼点】温度上昇により有効衝突の割合が増えます。\n【答え】活性化エネルギー以上のエネルギーをもつ分子の割合が増える。",
+    "calculation": false,
+    "visual": "none",
+    "id": "hard-v58-0030",
+    "difficultyLevel": 3,
+    "cognitiveType": "reasoning",
+    "learningObjective": "複数の化学概念を結び付けて反応を説明・計算する",
+    "estimatedSeconds": 90,
+    "similarityGroup": "v58-hard:redox:010",
+    "optionFeedback": [
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "正解です。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。"
+    ],
+    "referenceBasis": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）"
+  },
+  {
+    "q": "H₂O₂とMnO₄⁻の酸性反応で、H⁺が不足した場合に単純な係数比2:5をそのまま使えない可能性がある理由はどれか。",
+    "options": [
+      "電子数が保存されなくなるから",
+      "H₂O₂が元素でなくなるから",
+      "MnO₄⁻の還元生成物がMn²⁺以外になるなど、反応条件で経路が変わり得るから",
+      "Mnの原子番号が変わるから"
+    ],
+    "answer": 2,
+    "scope": "stage10-prep",
+    "stageTier": 6,
+    "category": "redox",
+    "difficulty": "入試標準・思考",
+    "source": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）",
+    "hints": [
+      "反応式の条件を確認します。",
+      "MnO₄⁻の生成物はpHで変化します。",
+      "係数比は特定の反応式に対応します。"
+    ],
+    "explanation": "【着眼点】過マンガン酸イオンの還元生成物はpH条件に依存します。酸性条件の明示が重要です。\n【答え】MnO₄⁻の還元生成物がMn²⁺以外になるなど、反応条件で経路が変わり得るから。",
+    "calculation": false,
+    "visual": "none",
+    "id": "hard-v58-0031",
+    "difficultyLevel": 3,
+    "cognitiveType": "reasoning",
+    "learningObjective": "複数の化学概念を結び付けて反応を説明・計算する",
+    "estimatedSeconds": 90,
+    "similarityGroup": "v58-hard:redox:011",
+    "optionFeedback": [
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "正解です。",
+      "電子の授受・量的関係・実験条件を確認してください。"
+    ],
+    "referenceBasis": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）"
+  },
+  {
+    "q": "酸性条件でH₂O₂がCr₂O₇²⁻をCr³⁺へ還元するとき、H₂O₂は何へ酸化されると考えるのが自然か。",
+    "options": [
+      "H₂O",
+      "H₂",
+      "OH⁻のみ",
+      "O₂"
+    ],
+    "answer": 3,
+    "scope": "stage10-prep",
+    "stageTier": 6,
+    "category": "redox",
+    "difficulty": "入試標準・思考",
+    "source": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）",
+    "hints": [
+      "相手のCrの酸化数が下がります。",
+      "相手を還元するH₂O₂は自身が酸化されます。",
+      "H₂O₂の酸化生成物はO₂です。"
+    ],
+    "explanation": "【着眼点】強い酸化剤Cr₂O₇²⁻に対しH₂O₂は還元剤として働き、O₂へ酸化されます。\n【答え】O₂。",
+    "calculation": false,
+    "visual": "none",
+    "id": "hard-v58-0032",
+    "difficultyLevel": 3,
+    "cognitiveType": "reasoning",
+    "learningObjective": "複数の化学概念を結び付けて反応を説明・計算する",
+    "estimatedSeconds": 90,
+    "similarityGroup": "v58-hard:redox:011",
+    "optionFeedback": [
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "正解です。"
+    ],
+    "referenceBasis": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）"
+  },
+  {
+    "q": "H₂O₂が酸化剤としてSO₃²⁻をSO₄²⁻へ酸化する場合、H₂O₂の主な還元生成物はどれか。",
+    "options": [
+      "H₂O",
+      "O₂",
+      "H₂",
+      "S"
+    ],
+    "answer": 0,
+    "scope": "stage10-prep",
+    "stageTier": 6,
+    "category": "redox",
+    "difficulty": "入試標準・思考",
+    "source": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）",
+    "hints": [
+      "SO₃²⁻のSは+4から+6へ上がります。",
+      "H₂O₂は酸化剤です。",
+      "酸化剤としての半反応式を用います。"
+    ],
+    "explanation": "【着眼点】相手が酸化されるのでH₂O₂は電子を受け取り、酸性条件ではH₂Oへ還元されます。\n【答え】H₂O。",
+    "calculation": false,
+    "visual": "none",
+    "id": "hard-v58-0033",
+    "difficultyLevel": 3,
+    "cognitiveType": "reasoning",
+    "learningObjective": "複数の化学概念を結び付けて反応を説明・計算する",
+    "estimatedSeconds": 90,
+    "similarityGroup": "v58-hard:redox:011",
+    "optionFeedback": [
+      "正解です。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。"
+    ],
+    "referenceBasis": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）"
+  },
+  {
+    "q": "H₂O₂の酸化剤・還元剤両方の性質を、電子配置ではなく酸化数で説明する利点はどれか。",
+    "options": [
+      "分子軌道を必ず計算できる",
+      "生成物H₂OとO₂への変化を電子授受として直接整理できる",
+      "反応速度を数値で必ず予測できる",
+      "触媒の表面積を求められる"
+    ],
+    "answer": 1,
+    "scope": "stage10-prep",
+    "stageTier": 6,
+    "category": "redox",
+    "difficulty": "入試標準・思考",
+    "source": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）",
+    "hints": [
+      "−1から−2、−1から0を比較します。",
+      "電子を受ける・放出する方向を整理します。",
+      "酸化数は反応量の係数にもつながります。"
+    ],
+    "explanation": "【着眼点】高校化学では酸化数が、電子授受と半反応式を体系的に扱う有効な道具です。\n【答え】生成物H₂OとO₂への変化を電子授受として直接整理できる。",
+    "calculation": false,
+    "visual": "none",
+    "id": "hard-v58-0034",
+    "difficultyLevel": 3,
+    "cognitiveType": "reasoning",
+    "learningObjective": "複数の化学概念を結び付けて反応を説明・計算する",
+    "estimatedSeconds": 90,
+    "similarityGroup": "v58-hard:redox:012",
+    "optionFeedback": [
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "正解です。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。"
+    ],
+    "referenceBasis": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）"
+  },
+  {
+    "q": "次のうち、酸性条件でH₂O₂が還元剤として働く半反応式に「現れない」ものはどれか。",
+    "options": [
+      "H₂O₂",
+      "O₂",
+      "H₂O",
+      "e⁻"
+    ],
+    "answer": 2,
+    "scope": "stage10-prep",
+    "stageTier": 6,
+    "category": "redox",
+    "difficulty": "入試標準・思考",
+    "source": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）",
+    "hints": [
+      "還元剤なので電子は生成物側です。",
+      "H₂O₂はO₂になります。",
+      "式を原子数・電荷で確認します。"
+    ],
+    "explanation": "【着眼点】H₂O₂→O₂+2H⁺+2e⁻であり、H₂Oは現れません。\n【答え】H₂O。",
+    "calculation": false,
+    "visual": "none",
+    "id": "hard-v58-0035",
+    "difficultyLevel": 3,
+    "cognitiveType": "reasoning",
+    "learningObjective": "複数の化学概念を結び付けて反応を説明・計算する",
+    "estimatedSeconds": 90,
+    "similarityGroup": "v58-hard:redox:012",
+    "optionFeedback": [
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "正解です。",
+      "電子の授受・量的関係・実験条件を確認してください。"
+    ],
+    "referenceBasis": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）",
+    "negativeQuestion": true,
+    "singleCorrectVerified": true
+  },
+  {
+    "q": "同じFe片を希硝酸と濃硝酸へ入れた。希硝酸では反応したが濃硝酸では反応が目立たなかった。最も適切な説明はどれか。",
+    "options": [
+      "濃硝酸にはN原子が存在しない",
+      "希硝酸ではFeが貴金属になる",
+      "濃硝酸では電子が保存されない",
+      "濃硝酸では表面に不動態皮膜が形成され、反応速度が大きく低下した"
+    ],
+    "answer": 3,
+    "scope": "stage10-prep",
+    "stageTier": 6,
+    "category": "redox",
+    "difficulty": "入試標準・思考",
+    "source": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）",
+    "hints": [
+      "酸の濃さと単なるH⁺濃度だけで考えないでください。",
+      "Feの表面状態に注目します。",
+      "不動態は速度論的抑制です。"
+    ],
+    "explanation": "【考察】濃硝酸の強い酸化作用が保護皮膜形成を促し、内部Feと溶液の接触を抑えます。\n【結論】濃硝酸では表面に不動態皮膜が形成され、反応速度が大きく低下した。",
+    "calculation": false,
+    "visual": "none",
+    "id": "hard-v58-0036",
+    "difficultyLevel": 3,
+    "cognitiveType": "reasoning",
+    "learningObjective": "不動態と腐食を表面皮膜・局部電池・速度論から説明する",
+    "estimatedSeconds": 90,
+    "similarityGroup": "v58-hard:redox:012",
+    "optionFeedback": [
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "正解です。"
+    ],
+    "referenceBasis": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）"
+  },
+  {
+    "q": "Al板の一部を研磨して酸化皮膜を除き、すぐに同じ溶液へ入れた。研磨部で反応が先に始まりやすい理由はどれか。",
+    "options": [
+      "新鮮なAl表面が露出して反応物が直接接触できる",
+      "研磨でAlの原子番号が変わる",
+      "研磨部だけ温度が絶対零度になる",
+      "皮膜が厚くなるから"
+    ],
+    "answer": 0,
+    "scope": "stage10-prep",
+    "stageTier": 6,
+    "category": "redox",
+    "difficulty": "入試標準・思考",
+    "source": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）",
+    "hints": [
+      "研磨で変わるのは表面です。",
+      "電子配置や元素種は変わりません。",
+      "皮膜の障壁を考えます。"
+    ],
+    "explanation": "【考察】表面皮膜が物質移動を妨げていたため、除去直後の部分は反応しやすくなります。\n【結論】新鮮なAl表面が露出して反応物が直接接触できる。",
+    "calculation": false,
+    "visual": "none",
+    "id": "hard-v58-0037",
+    "difficultyLevel": 3,
+    "cognitiveType": "reasoning",
+    "learningObjective": "不動態と腐食を表面皮膜・局部電池・速度論から説明する",
+    "estimatedSeconds": 90,
+    "similarityGroup": "v58-hard:redox:013",
+    "optionFeedback": [
+      "正解です。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。"
+    ],
+    "referenceBasis": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）"
+  },
+  {
+    "q": "鉄くぎを①乾燥空気、②煮沸して油を浮かべた水、③空気に触れる食塩水へ置いた。最もさびやすいものはどれか。",
+    "options": [
+      "①",
+      "③",
+      "②",
+      "①と②が同程度で最大"
+    ],
+    "answer": 1,
+    "scope": "stage10-prep",
+    "stageTier": 6,
+    "category": "redox",
+    "difficulty": "入試標準・思考",
+    "source": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）",
+    "hints": [
+      "水と酸素の有無を確認します。",
+      "食塩の効果も考えます。",
+      "両方があり電解質もある③です。"
+    ],
+    "explanation": "【考察】さびには水と酸素が必要で、食塩水は電気伝導性も高く腐食電池を促進します。\n【結論】③。",
+    "calculation": false,
+    "visual": "none",
+    "id": "hard-v58-0038",
+    "difficultyLevel": 3,
+    "cognitiveType": "reasoning",
+    "learningObjective": "不動態と腐食を表面皮膜・局部電池・速度論から説明する",
+    "estimatedSeconds": 90,
+    "similarityGroup": "v58-hard:redox:013",
+    "optionFeedback": [
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "正解です。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。"
+    ],
+    "referenceBasis": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）"
+  },
+  {
+    "q": "Znめっき鉄板とSnめっき鉄板に同程度の傷を付け、食塩水に浸した。鉄をより保護しやすいのはどれか。",
+    "options": [
+      "Snめっき鉄板",
+      "両方必ず同じ",
+      "Znめっき鉄板",
+      "めっきなし鉄板だけ"
+    ],
+    "answer": 2,
+    "scope": "stage10-prep",
+    "stageTier": 6,
+    "category": "redox",
+    "difficulty": "入試標準・思考",
+    "source": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）",
+    "hints": [
+      "Zn、Fe、Snのイオン化傾向を比較します。",
+      "傷があるので金属同士の接触を考えます。",
+      "卑なZnが先に酸化されます。"
+    ],
+    "explanation": "【考察】ZnはFeより先に酸化され犠牲陽極となります。SnはFeより貴なので傷部Feが陽極になり得ます。\n【結論】Znめっき鉄板。",
+    "calculation": false,
+    "visual": "none",
+    "id": "hard-v58-0039",
+    "difficultyLevel": 3,
+    "cognitiveType": "reasoning",
+    "learningObjective": "不動態と腐食を表面皮膜・局部電池・速度論から説明する",
+    "estimatedSeconds": 90,
+    "similarityGroup": "v58-hard:redox:013",
+    "optionFeedback": [
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "正解です。",
+      "電子の授受・量的関係・実験条件を確認してください。"
+    ],
+    "referenceBasis": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）"
+  },
+  {
+    "q": "不動態皮膜が保護性をもつ条件として「正しくない」ものはどれか。",
+    "options": [
+      "表面を連続的に覆うこと",
+      "金属に密着すること",
+      "反応物の移動を抑えること",
+      "多孔質で溶液を容易に通すこと"
+    ],
+    "answer": 3,
+    "scope": "stage10-prep",
+    "stageTier": 6,
+    "category": "redox",
+    "difficulty": "入試標準・思考",
+    "source": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）",
+    "hints": [
+      "保護の目的は金属と溶液を隔てることです。",
+      "連続性と緻密さが重要です。",
+      "透過しやすい性質は逆効果です。"
+    ],
+    "explanation": "【考察】多孔質で溶液を通す皮膜は内部を十分保護できません。\n【結論】多孔質で溶液を容易に通すこと。",
+    "calculation": false,
+    "visual": "none",
+    "id": "hard-v58-0040",
+    "difficultyLevel": 3,
+    "cognitiveType": "reasoning",
+    "learningObjective": "不動態と腐食を表面皮膜・局部電池・速度論から説明する",
+    "estimatedSeconds": 90,
+    "similarityGroup": "v58-hard:redox:014",
+    "optionFeedback": [
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "正解です。"
+    ],
+    "referenceBasis": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）",
+    "negativeQuestion": true,
+    "singleCorrectVerified": true
+  },
+  {
+    "q": "不動態になったFeについて電位を変える、皮膜を化学的に溶かすなどの操作で反応が再開し得る。この事実が示すものはどれか。",
+    "options": [
+      "不動態は金属本体が永久に不活性化したのではなく、表面皮膜に依存する状態である",
+      "Feの陽子数が可逆的に変化する",
+      "質量保存則が成立しない",
+      "不動態は気体の名称である"
+    ],
+    "answer": 0,
+    "scope": "stage10-prep",
+    "stageTier": 6,
+    "category": "redox",
+    "difficulty": "入試標準・思考",
+    "source": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）",
+    "hints": [
+      "何が変わると反応が再開するか考えます。",
+      "金属元素そのものは同じです。",
+      "表面状態に依存します。"
+    ],
+    "explanation": "【考察】IUPACでも不動態は表面の連続した皮膜によって特徴付けられる状態です。\n【結論】不動態は金属本体が永久に不活性化したのではなく、表面皮膜に依存する状態である。",
+    "calculation": false,
+    "visual": "none",
+    "id": "hard-v58-0041",
+    "difficultyLevel": 3,
+    "cognitiveType": "reasoning",
+    "learningObjective": "不動態と腐食を表面皮膜・局部電池・速度論から説明する",
+    "estimatedSeconds": 90,
+    "similarityGroup": "v58-hard:redox:014",
+    "optionFeedback": [
+      "正解です。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。"
+    ],
+    "referenceBasis": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）"
+  },
+  {
+    "q": "FeとCuを接触させた腐食電池でFeが陽極となるとき、陽極反応はどれか。",
+    "options": [
+      "Cu²⁺+2e⁻→Cu",
+      "Fe→Fe²⁺+2e⁻",
+      "O₂+4H⁺+4e⁻→2H₂O",
+      "2H⁺+2e⁻→H₂"
+    ],
+    "answer": 1,
+    "scope": "stage10-prep",
+    "stageTier": 6,
+    "category": "redox",
+    "difficulty": "入試標準・思考",
+    "source": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）",
+    "hints": [
+      "陽極=酸化を使います。",
+      "Feが溶ける式を選びます。",
+      "電子は生成物側です。"
+    ],
+    "explanation": "【考察】陽極では酸化が起こり、Feが電子を放出します。\n【結論】Fe→Fe²⁺+2e⁻。",
+    "calculation": false,
+    "visual": "none",
+    "id": "hard-v58-0042",
+    "difficultyLevel": 3,
+    "cognitiveType": "reasoning",
+    "learningObjective": "不動態と腐食を表面皮膜・局部電池・速度論から説明する",
+    "estimatedSeconds": 90,
+    "similarityGroup": "v58-hard:redox:014",
+    "optionFeedback": [
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "正解です。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。"
+    ],
+    "referenceBasis": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）"
+  },
+  {
+    "q": "腐食防止法を「皮膜による遮断」と「犠牲陽極」に分類したとき、塗装とZnめっきの違いとして適切なものはどれか。",
+    "options": [
+      "どちらも全く同じ電気化学機構だけ",
+      "塗装はFeをAuへ変える",
+      "塗装は主に水・酸素を遮断し、Znめっきは傷があってもZnの優先酸化で保護し得る",
+      "Znめっきは酸素を全て消す"
+    ],
+    "answer": 2,
+    "scope": "stage10-prep",
+    "stageTier": 6,
+    "category": "redox",
+    "difficulty": "入試標準・思考",
+    "source": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）",
+    "hints": [
+      "塗膜が何を遮るか考えます。",
+      "ZnとFeのイオン化傾向を比較します。",
+      "傷が付いた場合の差が重要です。"
+    ],
+    "explanation": "【考察】防食には物理的遮断と電気化学的保護という異なる考え方があります。\n【結論】塗装は主に水・酸素を遮断し、Znめっきは傷があってもZnの優先酸化で保護し得る。",
+    "calculation": false,
+    "visual": "none",
+    "id": "hard-v58-0043",
+    "difficultyLevel": 3,
+    "cognitiveType": "reasoning",
+    "learningObjective": "不動態と腐食を表面皮膜・局部電池・速度論から説明する",
+    "estimatedSeconds": 90,
+    "similarityGroup": "v58-hard:redox:015",
+    "optionFeedback": [
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "正解です。",
+      "電子の授受・量的関係・実験条件を確認してください。"
+    ],
+    "referenceBasis": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）"
+  },
+  {
+    "q": "王水がAuを溶解する過程を、二つの役割に分けた説明として最も適切なものはどれか。",
+    "options": [
+      "HClがAuを還元し、HNO₃がCl⁻を沈殿させる",
+      "H₂OがAuを気化し、H⁺が電子を生成する",
+      "両方の酸が単にH⁺濃度を2倍にするだけ",
+      "硝酸由来の酸化作用がAuを酸化し、Cl⁻が[AuCl₄]⁻として安定化する"
+    ],
+    "answer": 3,
+    "scope": "stage10-prep",
+    "stageTier": 6,
+    "category": "redox",
+    "difficulty": "入試標準・思考",
+    "source": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）",
+    "hints": [
+      "酸化剤の役割を考えます。",
+      "Cl⁻は錯体を作ります。",
+      "平衡から生成物を除く効果を考えます。"
+    ],
+    "explanation": "【原理】Auの酸化と生成Au(III)の錯体化が協同するため、単独酸とは異なる溶解が進みます。\n【結論】硝酸由来の酸化作用がAuを酸化し、Cl⁻が[AuCl₄]⁻として安定化する。",
+    "calculation": false,
+    "visual": "none",
+    "id": "hard-v58-0044",
+    "difficultyLevel": 3,
+    "cognitiveType": "reasoning",
+    "learningObjective": "王水によるAu・Ptの溶解を酸化と錯体形成から説明する",
+    "estimatedSeconds": 90,
+    "similarityGroup": "v58-hard:redox:015",
+    "optionFeedback": [
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "正解です。"
+    ],
+    "referenceBasis": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）"
+  },
+  {
+    "q": "濃HCl 30 mLと濃HNO₃を混合して体積比3:1の王水を作る。必要な濃HNO₃は何mLか。",
+    "options": [
+      "10 mL",
+      "5 mL",
+      "15 mL",
+      "20 mL"
+    ],
+    "answer": 0,
+    "scope": "stage10-prep",
+    "stageTier": 6,
+    "category": "redox",
+    "difficulty": "入試標準・思考",
+    "source": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）",
+    "hints": [
+      "HCl側が3に対応します。",
+      "30÷3で1単位を求めます。",
+      "その1単位がHNO₃量です。"
+    ],
+    "explanation": "【原理】HCl:HNO₃=3:1なので、30 mLに対して10 mLです。\n【結論】10 mL。",
+    "calculation": true,
+    "visual": "none",
+    "id": "hard-v58-0045",
+    "difficultyLevel": 3,
+    "cognitiveType": "calculation",
+    "learningObjective": "王水によるAu・Ptの溶解を酸化と錯体形成から説明する",
+    "estimatedSeconds": 90,
+    "similarityGroup": "v58-hard:redox:015",
+    "optionFeedback": [
+      "正解です。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。"
+    ],
+    "referenceBasis": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）"
+  },
+  {
+    "q": "濃HCl 45 mLと濃HNO₃ 20 mLがある。比3:1で作れる王水の最大体積はどれか。",
+    "options": [
+      "45 mL",
+      "60 mL",
+      "65 mL",
+      "80 mL"
+    ],
+    "answer": 1,
+    "scope": "stage10-prep",
+    "stageTier": 6,
+    "category": "redox",
+    "difficulty": "入試標準・思考",
+    "source": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）",
+    "hints": [
+      "各酸が制限試薬のようにどちらで不足するか調べます。",
+      "HCl 45に必要なHNO₃は15です。",
+      "45+15を求めます。"
+    ],
+    "explanation": "【原理】HCl 45 mLにはHNO₃ 15 mLが必要で、HClが使い切られます。合計60 mLです。\n【結論】60 mL。",
+    "calculation": true,
+    "visual": "none",
+    "id": "hard-v58-0046",
+    "difficultyLevel": 3,
+    "cognitiveType": "calculation",
+    "learningObjective": "王水によるAu・Ptの溶解を酸化と錯体形成から説明する",
+    "estimatedSeconds": 90,
+    "similarityGroup": "v58-hard:redox:016",
+    "optionFeedback": [
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "正解です。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。"
+    ],
+    "referenceBasis": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）"
+  },
+  {
+    "q": "Au→Au³⁺の酸化でAu 0.0200 molが放出する電子は何molか。",
+    "options": [
+      "0.0100 mol",
+      "0.0200 mol",
+      "0.0600 mol",
+      "0.0400 mol"
+    ],
+    "answer": 2,
+    "scope": "stage10-prep",
+    "stageTier": 6,
+    "category": "redox",
+    "difficulty": "入試標準・思考",
+    "source": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）",
+    "hints": [
+      "酸化数0から+3です。",
+      "1原子あたり3電子です。",
+      "物質量を3倍します。"
+    ],
+    "explanation": "【原理】Au 1 molあたり3 molの電子を放出するので0.0200×3=0.0600 molです。\n【結論】0.0600 mol。",
+    "calculation": true,
+    "visual": "none",
+    "id": "hard-v58-0047",
+    "difficultyLevel": 3,
+    "cognitiveType": "calculation",
+    "learningObjective": "王水によるAu・Ptの溶解を酸化と錯体形成から説明する",
+    "estimatedSeconds": 90,
+    "similarityGroup": "v58-hard:redox:016",
+    "optionFeedback": [
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "正解です。",
+      "電子の授受・量的関係・実験条件を確認してください。"
+    ],
+    "referenceBasis": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）"
+  },
+  {
+    "q": "王水中のCl⁻濃度を極端に下げるとAu溶解が進みにくくなると予想される理由はどれか。",
+    "options": [
+      "Auの原子番号が小さくなるから",
+      "硝酸が全て塩基になるから",
+      "電子の電荷が0になるから",
+      "[AuCl₄]⁻形成によるAu(III)の安定化が弱くなるから"
+    ],
+    "answer": 3,
+    "scope": "stage10-prep",
+    "stageTier": 6,
+    "category": "redox",
+    "difficulty": "入試標準・思考",
+    "source": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）",
+    "hints": [
+      "Cl⁻の役割は酸化剤ではありません。",
+      "錯体形成に注目します。",
+      "生成物安定化が平衡へ与える影響を考えます。"
+    ],
+    "explanation": "【原理】Cl⁻による錯形成は生成物側を安定化し、Auの酸化溶解を促します。\n【結論】[AuCl₄]⁻形成によるAu(III)の安定化が弱くなるから。",
+    "calculation": false,
+    "visual": "none",
+    "id": "hard-v58-0048",
+    "difficultyLevel": 3,
+    "cognitiveType": "reasoning",
+    "learningObjective": "王水によるAu・Ptの溶解を酸化と錯体形成から説明する",
+    "estimatedSeconds": 90,
+    "similarityGroup": "v58-hard:redox:016",
+    "optionFeedback": [
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "正解です。"
+    ],
+    "referenceBasis": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）"
+  },
+  {
+    "q": "Stage 10で王水攻撃がAuへ有効でも、一撃で倒せない長期戦とする化学的説明として最も自然なのはどれか。",
+    "options": [
+      "王水はAuを溶解できるが、溶解速度と供給量には限りがあり、反応を継続させる必要がある",
+      "王水はAuと一切反応しない",
+      "Auは王水中で必ず瞬間蒸発する",
+      "Auの酸化数は変化しない"
+    ],
+    "answer": 0,
+    "scope": "stage10-prep",
+    "stageTier": 6,
+    "category": "redox",
+    "difficulty": "入試標準・思考",
+    "source": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）",
+    "hints": [
+      "熱力学的可能性と速度を区別します。",
+      "固体表面で進む反応です。",
+      "一度の攻撃量を有限と考えます。"
+    ],
+    "explanation": "【原理】溶解可能であることと瞬時に全量反応することは別です。速度・表面積・王水供給をゲーム上の長期戦へ対応できます。\n【結論】王水はAuを溶解できるが、溶解速度と供給量には限りがあり、反応を継続させる必要がある。",
+    "calculation": false,
+    "visual": "none",
+    "id": "hard-v58-0049",
+    "difficultyLevel": 3,
+    "cognitiveType": "reasoning",
+    "learningObjective": "王水によるAu・Ptの溶解を酸化と錯体形成から説明する",
+    "estimatedSeconds": 90,
+    "similarityGroup": "v58-hard:redox:017",
+    "optionFeedback": [
+      "正解です。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。"
+    ],
+    "referenceBasis": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）"
+  },
+  {
+    "q": "Pt希少敵に王水だけ通常ダメージが通る設定を化学に対応させる説明として適切なものはどれか。",
+    "options": [
+      "Ptは水に触れると爆発するから",
+      "Ptは通常の酸に強いが王水には溶解し得るため、王水を耐性突破手段にする",
+      "PtはHCl単独からH₂を大量発生するから",
+      "Ptはアルカリ金属だから"
+    ],
+    "answer": 1,
+    "scope": "stage10-prep",
+    "stageTier": 6,
+    "category": "redox",
+    "difficulty": "入試標準・思考",
+    "source": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）",
+    "hints": [
+      "Ptの貴金属性を考えます。",
+      "HCl・HNO₃単独と王水を区別します。",
+      "ゲーム上は王水のみ1ダメージ制限を解除します。"
+    ],
+    "explanation": "【原理】Ptは貴金属として反応しにくい一方、王水はPtにも作用し得ます。\n【結論】Ptは通常の酸に強いが王水には溶解し得るため、王水を耐性突破手段にする。",
+    "calculation": false,
+    "visual": "none",
+    "id": "hard-v58-0050",
+    "difficultyLevel": 3,
+    "cognitiveType": "reasoning",
+    "learningObjective": "王水によるAu・Ptの溶解を酸化と錯体形成から説明する",
+    "estimatedSeconds": 90,
+    "similarityGroup": "v58-hard:redox:017",
+    "optionFeedback": [
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "正解です。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。"
+    ],
+    "referenceBasis": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）"
+  },
+  {
+    "q": "【前提】p副殻は3軌道からなり、Hundの規則に従う。基底状態のC原子(1s²2s²2p²)の不対電子数はどれか。",
+    "options": [
+      "0個",
+      "1個",
+      "2個",
+      "4個"
+    ],
+    "answer": 2,
+    "scope": "stage10-prep",
+    "stageTier": 6,
+    "category": "matter",
+    "difficulty": "入試標準・思考",
+    "source": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）",
+    "hints": [
+      "2pに電子が2個あります。",
+      "同じエネルギーの3軌道へまず1個ずつ入ります。",
+      "電子対はまだできません。"
+    ],
+    "explanation": "【前提からの推論】2pの2電子は別々のp軌道へ平行スピンで入るため、不対電子は2個です。\n【答え】2個。",
+    "calculation": false,
+    "visual": "orbitals",
+    "id": "hard-v58-0051",
+    "difficultyLevel": 3,
+    "cognitiveType": "reasoning",
+    "learningObjective": "電子配置・軌道の規則を反応性・周期性へ結び付ける",
+    "estimatedSeconds": 90,
+    "similarityGroup": "v58-hard:matter:017",
+    "optionFeedback": [
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "正解です。",
+      "電子の授受・量的関係・実験条件を確認してください。"
+    ],
+    "referenceBasis": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）"
+  },
+  {
+    "q": "【前提】p副殻は3軌道からなり、Hundの規則に従う。基底状態のF原子(2p⁵)の不対電子数はどれか。",
+    "options": [
+      "0個",
+      "2個",
+      "3個",
+      "1個"
+    ],
+    "answer": 3,
+    "scope": "stage10-prep",
+    "stageTier": 6,
+    "category": "matter",
+    "difficulty": "入試標準・思考",
+    "source": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）",
+    "hints": [
+      "3軌道にまず1個ずつ入れます。",
+      "残り2電子が対を作ります。",
+      "単独で残る軌道は1つです。"
+    ],
+    "explanation": "【前提からの推論】2p⁵では2軌道が電子対、1軌道が単独電子をもちます。\n【答え】1個。",
+    "calculation": false,
+    "visual": "orbitals",
+    "id": "hard-v58-0052",
+    "difficultyLevel": 3,
+    "cognitiveType": "reasoning",
+    "learningObjective": "電子配置・軌道の規則を反応性・周期性へ結び付ける",
+    "estimatedSeconds": 90,
+    "similarityGroup": "v58-hard:matter:018",
+    "optionFeedback": [
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "正解です。"
+    ],
+    "referenceBasis": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）"
+  },
+  {
+    "q": "Na、Mg、Alの第1イオン化エネルギーは一般に増加傾向だが、MgからAlで小さくなる理由として適切なものはどれか。",
+    "options": [
+      "Alで取り去られる電子が、Mgの3sより高エネルギーの3p電子だから",
+      "Alの電子数がMgより少ないから",
+      "Alでは原子核が存在しないから",
+      "Mgの3s電子が内殻電子だから"
+    ],
+    "answer": 0,
+    "scope": "stage10-prep",
+    "stageTier": 6,
+    "category": "matter",
+    "difficulty": "入試標準・思考",
+    "source": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）",
+    "hints": [
+      "電子配置を書きます。",
+      "Mgの最外電子は3s、Alでは3pです。",
+      "副殻エネルギー差を考えます。"
+    ],
+    "explanation": "【前提からの推論】Mgは[Ne]3s²、Alは[Ne]3s²3p¹で、Alの3p電子は3sより取り去りやすいです。\n【答え】Alで取り去られる電子が、Mgの3sより高エネルギーの3p電子だから。",
+    "calculation": false,
+    "visual": "orbitals",
+    "id": "hard-v58-0053",
+    "difficultyLevel": 3,
+    "cognitiveType": "reasoning",
+    "learningObjective": "電子配置・軌道の規則を反応性・周期性へ結び付ける",
+    "estimatedSeconds": 90,
+    "similarityGroup": "v58-hard:matter:018",
+    "optionFeedback": [
+      "正解です。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。"
+    ],
+    "referenceBasis": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）"
+  },
+  {
+    "q": "OとNの第1イオン化エネルギーを比較すると、一般にOがNより小さい理由として適切なものはどれか。",
+    "options": [
+      "Oの原子核電荷がNより小さい",
+      "Nには2p電子がない",
+      "Oの2p軌道では電子対が1組でき、電子間反発で1電子を取り去りやすい",
+      "Oは閉殻配置だから"
+    ],
+    "answer": 2,
+    "scope": "stage10-prep",
+    "stageTier": 6,
+    "category": "matter",
+    "difficulty": "入試標準・思考",
+    "source": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）",
+    "hints": [
+      "NとOの2p配置を箱で考えます。",
+      "Nは3軌道に1個ずつです。",
+      "Oでは1軌道が対になります。"
+    ],
+    "explanation": "【前提からの推論】Nは2p³の半充填で比較的安定、Oは2p⁴で一つの軌道に電子対があり反発が増えます。\n【答え】Oの2p軌道では電子対が1組でき、電子間反発で1電子を取り去りやすい。",
+    "calculation": false,
+    "visual": "orbitals",
+    "id": "hard-v58-0054",
+    "difficultyLevel": 3,
+    "cognitiveType": "reasoning",
+    "learningObjective": "電子配置・軌道の規則を反応性・周期性へ結び付ける",
+    "estimatedSeconds": 90,
+    "similarityGroup": "v58-hard:matter:018",
+    "optionFeedback": [
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "正解です。",
+      "電子の授受・量的関係・実験条件を確認してください。"
+    ],
+    "referenceBasis": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）"
+  },
+  {
+    "q": "Na⁺、Mg²⁺、Al³⁺はすべて10電子をもつ。イオン半径が大きい順として適切なものはどれか。",
+    "options": [
+      "Al³⁺>Mg²⁺>Na⁺",
+      "Mg²⁺>Na⁺>Al³⁺",
+      "3種は同じ",
+      "Na⁺>Mg²⁺>Al³⁺"
+    ],
+    "answer": 3,
+    "scope": "stage10-prep",
+    "stageTier": 6,
+    "category": "matter",
+    "difficulty": "入試標準・思考",
+    "source": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）",
+    "hints": [
+      "電子数は同じです。",
+      "原子番号Na11、Mg12、Al13を比較します。",
+      "核電荷が大きいほど半径は小さいです。"
+    ],
+    "explanation": "【前提からの推論】等電子種では陽子数が多いほど電子を強く引き付け、半径が小さくなります。\n【答え】Na⁺>Mg²⁺>Al³⁺。",
+    "calculation": false,
+    "visual": "orbitals",
+    "id": "hard-v58-0055",
+    "difficultyLevel": 3,
+    "cognitiveType": "reasoning",
+    "learningObjective": "電子配置・軌道の規則を反応性・周期性へ結び付ける",
+    "estimatedSeconds": 90,
+    "similarityGroup": "v58-hard:matter:019",
+    "optionFeedback": [
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "正解です。"
+    ],
+    "referenceBasis": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）"
+  },
+  {
+    "q": "Cl⁻、Ar、K⁺、Ca²⁺はいずれも18電子である。最も半径が小さいものはどれか。",
+    "options": [
+      "Cl⁻",
+      "Ar",
+      "Ca²⁺",
+      "K⁺"
+    ],
+    "answer": 2,
+    "scope": "stage10-prep",
+    "stageTier": 6,
+    "category": "matter",
+    "difficulty": "入試標準・思考",
+    "source": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）",
+    "hints": [
+      "4種の電子数は同じです。",
+      "陽子数を比較します。",
+      "Caが最大です。"
+    ],
+    "explanation": "【前提からの推論】等電子種で核電荷が最大のCa²⁺が電子雲を最も強く引き付けます。\n【答え】Ca²⁺。",
+    "calculation": false,
+    "visual": "orbitals",
+    "id": "hard-v58-0056",
+    "difficultyLevel": 3,
+    "cognitiveType": "reasoning",
+    "learningObjective": "電子配置・軌道の規則を反応性・周期性へ結び付ける",
+    "estimatedSeconds": 90,
+    "similarityGroup": "v58-hard:matter:019",
+    "optionFeedback": [
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "正解です。",
+      "電子の授受・量的関係・実験条件を確認してください。"
+    ],
+    "referenceBasis": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）"
+  },
+  {
+    "q": "【前提】1つの軌道には最大2電子で、2電子のスピンは反対向きである。次の配置のうちPauliの排他原理に反するものはどれか。",
+    "options": [
+      "2pの異なる軌道に同方向スピンを1個ずつ入れる",
+      "1s軌道に反対向きスピンを2個入れる",
+      "2s軌道に電子を1個入れる",
+      "同じ1s軌道に同じ向きのスピンをもつ2電子を入れる"
+    ],
+    "answer": 3,
+    "scope": "stage10-prep",
+    "stageTier": 6,
+    "category": "matter",
+    "difficulty": "入試標準・思考",
+    "source": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）",
+    "hints": [
+      "同じ軌道か異なる軌道か確認します。",
+      "同じ軌道では2電子までです。",
+      "2電子ならスピンは逆向きです。"
+    ],
+    "explanation": "【前提からの推論】同一軌道の2電子は他の量子数が同じなので、スピン量子数は反対でなければなりません。\n【答え】同じ1s軌道に同じ向きのスピンをもつ2電子を入れる。",
+    "calculation": false,
+    "visual": "orbitals",
+    "id": "hard-v58-0057",
+    "difficultyLevel": 3,
+    "cognitiveType": "reasoning",
+    "learningObjective": "電子配置・軌道の規則を反応性・周期性へ結び付ける",
+    "estimatedSeconds": 90,
+    "similarityGroup": "v58-hard:matter:019",
+    "optionFeedback": [
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "正解です。"
+    ],
+    "referenceBasis": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）"
+  },
+  {
+    "q": "【前提】軌道は確率分布であり、電子が古典的な円軌道を走る図ではない。この理解が化学結合の説明に役立つ理由はどれか。",
+    "options": [
+      "電子の位置と速度を同時に完全決定できるから",
+      "原子核が存在しないと証明できるから",
+      "原子間で電子密度がどのように分布・重なり合うかを考えられるから",
+      "全ての結合を質量だけで説明できるから"
+    ],
+    "answer": 2,
+    "scope": "stage10-prep",
+    "stageTier": 6,
+    "category": "matter",
+    "difficulty": "入試標準・思考",
+    "source": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）",
+    "hints": [
+      "軌道を空間分布として考えます。",
+      "結合では原子間の電子密度が重要です。",
+      "古典的な一本の経路ではありません。"
+    ],
+    "explanation": "【前提からの推論】軌道の重なりと電子密度は共有結合の方向性や結合形成を理解する基礎になります。\n【答え】原子間で電子密度がどのように分布・重なり合うかを考えられるから。",
+    "calculation": false,
+    "visual": "orbitals",
+    "id": "hard-v58-0058",
+    "difficultyLevel": 3,
+    "cognitiveType": "reasoning",
+    "learningObjective": "電子配置・軌道の規則を反応性・周期性へ結び付ける",
+    "estimatedSeconds": 90,
+    "similarityGroup": "v58-hard:matter:020",
+    "optionFeedback": [
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "正解です。",
+      "電子の授受・量的関係・実験条件を確認してください。"
+    ],
+    "referenceBasis": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）"
+  },
+  {
+    "q": "Fe原子の基底状態を[Ar]3d⁶4s²と表す。Fe²⁺生成時に先に失われる電子として高校〜入試で通常扱うものはどれか。",
+    "options": [
+      "1s電子",
+      "2p電子",
+      "3d電子だけが必ず先",
+      "4s電子"
+    ],
+    "answer": 3,
+    "scope": "stage10-prep",
+    "stageTier": 6,
+    "category": "matter",
+    "difficulty": "入試標準・思考",
+    "source": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）",
+    "hints": [
+      "中性原子の充填順とイオン化順は同一とは限りません。",
+      "最外側の4s電子に注目します。",
+      "Fe²⁺は[Ar]3d⁶です。"
+    ],
+    "explanation": "【前提からの推論】遷移金属イオン形成では、原子で先に充填された4s電子が3d電子より先に失われるとして扱います。\n【答え】4s電子。",
+    "calculation": false,
+    "visual": "orbitals",
+    "id": "hard-v58-0059",
+    "difficultyLevel": 3,
+    "cognitiveType": "reasoning",
+    "learningObjective": "電子配置・軌道の規則を反応性・周期性へ結び付ける",
+    "estimatedSeconds": 90,
+    "similarityGroup": "v58-hard:matter:020",
+    "optionFeedback": [
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "正解です。"
+    ],
+    "referenceBasis": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）"
+  },
+  {
+    "q": "Fe³⁺の電子配置を[Ar]を用いて表したものはどれか。",
+    "options": [
+      "[Ar]3d⁸",
+      "[Ar]4s²3d³",
+      "[Ne]3s²3p⁶4s³",
+      "[Ar]3d⁵"
+    ],
+    "answer": 3,
+    "scope": "stage10-prep",
+    "stageTier": 6,
+    "category": "matter",
+    "difficulty": "入試標準・思考",
+    "source": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）",
+    "hints": [
+      "中性Feの配置から始めます。",
+      "4sの2電子を先に除きます。",
+      "さらに3dから1電子除きます。"
+    ],
+    "explanation": "【前提からの推論】Feは[Ar]3d⁶4s²。まず4sから2電子、次に3dから1電子失い[Ar]3d⁵です。\n【答え】[Ar]3d⁵。",
+    "calculation": false,
+    "visual": "orbitals",
+    "id": "hard-v58-0060",
+    "difficultyLevel": 3,
+    "cognitiveType": "reasoning",
+    "learningObjective": "電子配置・軌道の規則を反応性・周期性へ結び付ける",
+    "estimatedSeconds": 90,
+    "similarityGroup": "v58-hard:matter:020",
+    "optionFeedback": [
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "電子の授受・量的関係・実験条件を確認してください。",
+      "正解です。"
+    ],
+    "referenceBasis": "Chemion Quest独自作成（文部科学省の高校化学範囲、大学入試センターの問題作成・評価方針、IUPAC・RSC公開資料に基づく。過去問の転載なし）"
   }
 ]

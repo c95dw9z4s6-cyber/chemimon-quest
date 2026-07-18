@@ -160,5 +160,59 @@
     "introducedIn": "5.0",
     "title": "Energy上限Lv.12・最大265への拡張",
     "required": true
+  },
+  {
+    "id": "learning-data-reset",
+    "introducedIn": "5.1",
+    "title": "学習記録・復習間隔だけを初期化する再スタート機能",
+    "required": true
+  },
+  {
+    "id": "verified-single-package-deploy",
+    "introducedIn": "5.2",
+    "title": "単一ZIPの完全性検査・空領域展開・一括Pages公開",
+    "required": true
+  },
+  {
+    "id": "stage-strategy-guide",
+    "introducedIn": "5.3",
+    "title": "Stage攻略情報・敗北分析・段階式ヒント",
+    "required": true
+  },
+  {
+    "id": "stage9-ranged-lock",
+    "introducedIn": "5.4",
+    "title": "Stage 9の遠距離攻撃禁止・近接突破ルール",
+    "required": true
+  },
+  {
+    "id": "normal-bgm",
+    "introducedIn": "5.5",
+    "title": "Stage 1〜9共通の通常BGM・独立音量設定・非表示時自動停止",
+    "required": true
+  },
+  {
+    "id": "low-power-mode",
+    "introducedIn": "5.6",
+    "title": "通常描画最適化・低電力モード・設定移行",
+    "required": true
+  },
+  {
+    "id": "organized-settings",
+    "introducedIn": "5.7",
+    "title": "目的別5分類の設定画面・危険操作分離",
+    "required": true
+  },
+  {
+    "id": "question-expansion-1000",
+    "introducedIn": "5.8",
+    "title": "総問題数1000・Stage 10準備問題・否定形／軌道監査",
+    "required": true
+  },
+  {
+    "id": "guest-assist",
+    "introducedIn": "5.95",
+    "title": "招待制ゲストアシスト・統計除外・ランキング送信停止",
+    "required": true
   }
 ]
